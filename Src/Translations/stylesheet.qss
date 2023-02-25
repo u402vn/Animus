@@ -1,0 +1,254 @@
+QWidget
+{
+    color: #eff0f1;
+    background-color: #31363b;
+    selection-background-color:#3daee9;
+    selection-color: #eff0f1;
+    background-clip: border;
+    border-image: none;
+    outline: 0;
+    font-size: 14px;
+}
+
+QPushButton
+{
+    color: #000000;
+    background-color: #9aa9b9;
+    border-width: 1px;
+    border-color: #76797C;
+    border-style: solid;
+    padding: 5px;
+    border-radius: 10px;
+    outline: none;
+}
+
+QPushButton:disabled, QAbstractSpinBox:disabled
+{
+    color: #757575;
+    background-color: #31363b;
+    border-color: #454545;
+    border-style: solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+QPushButton:focus
+{
+    background-color: #3daee9;
+    color: white;
+}
+
+QPushButton:pressed, QPushButton:checked
+{
+    background-color: #3daee9;
+    padding-top: -15px;
+    padding-bottom: -17px;
+}
+
+QPushButton::menu-indicator  {
+    subcontrol-origin: padding;
+    subcontrol-position: bottom right;
+    left: 8px;
+}
+
+QTabWidget{
+    border: 0px transparent black;
+}
+
+QTabWidget::pane {
+    border: 1px solid #76797C;
+    padding: 5px;
+    margin: 1px;
+}
+
+QLineEdit:disabled, QComboBox:disabled {
+    color: 707070;
+    border: 1px solid #454545;
+}
+
+QLabel:disabled {
+    color: 707070;
+}
+
+QComboBox:hover, QPushButton:hover, QAbstractSpinBox:hover, QLineEdit:hover, QTextEdit:hover, QPlainTextEdit:hover, QAbstractView:hover, QTreeView:hover
+{
+    border: 1px solid #3daee9;
+    color: #eff0f1;
+}
+
+QSlider::groove:horizontal {
+    border: 1px solid #565a5e;
+    height: 4px;
+    background: #565a5e;
+    margin: 0px;
+    border-radius: 2px;
+}
+
+QSlider::handle:horizontal {
+    background: #232629;
+    border: 1px solid #565a5e;
+    width: 10px;
+    height: 16px;
+    margin: -8px 0;
+    border-radius: 3px;
+}
+
+QTabBar
+{
+    qproperty-drawBase: 0;
+    left: 5px; /* move to the right by 5px */
+    border-radius: 3px;
+    icon-size: 40px;
+}
+
+QTabBar:focus
+{
+    border: 0px transparent black;
+}
+
+QTabBar::tab:top {
+    color: #eff0f1;
+    border: 1px solid #76797C;
+    border-bottom: 1px transparent black;
+    background-color: #31363b;
+    padding: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 40px;
+    width: 47px;
+}
+
+QTabBar::tab:top#ApplicationSettingsTab {
+    width: 80px;
+}
+
+QTabBar::tab:top:!selected
+{
+    color: #eff0f1;
+    background-color: #54575B;
+    border: 1px solid #76797C;
+    border-bottom: 1px transparent black;
+}
+
+QTabBar::tab:top:!selected:hover {
+    background-color: #3daee9;
+}
+
+QTabWidget:focus, QCheckBox:focus, QRadioButton:focus, QSlider:focus
+{
+    border: none;
+}
+
+QToolButton {
+    background-color: transparent;
+    border: 1px solid #76797C;
+    border-radius: 2px;
+    margin: 3px;
+    padding: 5px;
+}
+
+QToolButton:hover, QToolButton::menu-button:hover {
+    background-color: transparent;
+    border: 1px solid #3daee9;
+    padding: 5px;
+}
+
+QToolButton:checked, QToolButton:pressed, QToolButton::menu-button:pressed {
+    background-color: #3daee9;
+    border: 1px solid #3daee9;
+    padding: 5px;
+}
+
+QAbstractSpinBox {
+    font-family: "LCDMono2";
+}
+
+QDialEx {
+    font-family: "LCDMono2";
+    font-size: 16px;
+}
+
+QTableWidget QHeaderView::section, QTableWidget QTableCornerButton::section  {
+    color: #eff0f1;
+    background-color: #54575B;
+    border: 1px solid #76797C;
+    border-bottom: 1px transparent black;
+    padding: 4px;
+}
+
+
+QMenu {
+    margin: 0px;
+    border: 1px solid #3daee9;
+}
+
+QMenu::item {
+    height: 42px;
+    padding: 2px 25px 2px 20px;
+}
+
+
+CheckableMenu::item {
+    height: 22px;
+    padding: 2px 25px 2px 20px;
+}
+
+QMenu::icon:checked {
+    background: gray;
+    border: 1px inset lightblue;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+}
+
+QMenu::separator {
+    height: 2px;
+    background: lightblue;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+QMenu::indicator {
+    width: 13px;
+    height: 13px;
+}
+
+
+VideoImageTuner {
+        border: 1px solid #3daee9;
+}
+
+QLabel#VideoImageTunerIcon {
+    color: #000000;
+    background-color: #9aa9b9;
+    border-width: 1px;
+    border-color: #76797C;
+    border-style: solid;
+    padding: 5px;
+    border-radius: 20px;
+    outline: none;
+}
+
+QLabel#HIDSettingsEditorComment {
+    font-weight: bold;
+    font-size: 12px;
+    margin-left: 30px;
+}
+
+QPushButton#FilePathSelectorButton {
+    border: none;
+    padding: 0px;
+    border-radius: 0px;
+}
+
+QPushButton#KeySequenceEditButton {
+    border: none;
+    padding: 0px;
+    border-radius: 0px;
+}
+
+

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/TestFiles/">
+        <file>rawudpdata8.bin</file>
+        <file>2013_03_25_15_31_001_Busel-M-A003.csv</file>
+    </qresource>
+</RCC>

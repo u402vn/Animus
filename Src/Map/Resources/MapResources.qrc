@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>unknown_marker.png</file>
+        <file>target_marker.png</file>
+        <file>highlighted_target_marker.png</file>
+        <file>plane_black.png</file>
+        <file>plane_white.png</file>
+        <file>plane_red.png</file>
+        <file>plane_green.png</file>
+        <file>plane_blue.png</file>
+        <file>tracked_object.png</file>
+        <file>wind_arrow.png</file>
+    </qresource>
+</RCC>

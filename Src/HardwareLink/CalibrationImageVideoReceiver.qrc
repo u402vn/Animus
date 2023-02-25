@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/CalibrationImages/">
+        <file>Mira1.png</file>
+        <file>WorldMap1.jpg</file>
+    </qresource>
+</RCC>

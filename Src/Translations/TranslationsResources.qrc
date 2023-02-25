@@ -1,0 +1,61 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>ru.qm</file>
+        <file>qtbase_ru.qm</file>
+
+        <file>en.qm</file>
+
+        <file>by.qm</file>
+
+        <file>ar.qm</file>
+        <file>qt_ar.qm</file>
+
+        <file>stylesheet.qss</file>
+        <file>LCDMono2 Ultra.ttf</file>
+        <file>AnimusLogo.jpg</file>
+
+        <file>tab_cam.png</file>
+        <file>tab_bomb.png</file>
+        <file>tab_instr.png</file>
+        <file>tab_marker.png</file>
+        <file>tab_patrol.png</file>
+
+        <file>targetsizeselector.png</file>
+        <file>targetunlock.png</file>
+        <file>camrecord.png</file>
+        <file>automatictracer.png</file>
+
+        <file>camdriversoff.png</file>
+        <file>camalignlanding.png</file>
+        <file>camalignbegin.png</file>
+        <file>camalignvertical.png</file>
+
+        <file>laseractivate.png</file>
+
+        <file>stabilization.png</file>
+        <file>liveviewsettings.png</file>
+
+        <file>settings_brightness.png</file>
+        <file>settings_contrast.png</file>
+        <file>settings_color.png</file>
+
+        <file>screenshot.png</file>
+        <file>snapshot.png</file>
+        <file>snapshotseries.png</file>
+        <file>camera1.png</file>
+        <file>camera2.png</file>
+
+        <file>newtargetmarker_L.png</file>
+        <file>newtargetmarker_B.png</file>
+        <file>newtargetmarker_T.png</file>
+
+        <file>plane_left.png</file>
+        <file>plane_top.png</file>
+
+        <file>MovingTarget.png</file>
+        <file>StaticTarget.png</file>
+        <file>ManualFlight.png</file>
+        <file>NormalFlight.png</file>
+
+    </qresource>
+</RCC>

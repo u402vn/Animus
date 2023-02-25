@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/VoiceInformant/">
+        <file>AnumusActivated.wav</file>
+        <file>DropBomb.wav</file>
+        <file>TurnLeft.wav</file>
+        <file>TurnRight.wav</file>
+        <file>Lapel.wav</file>
+        <file>TargetLocked.wav</file>
+        <file>TargetDropped.wav</file>
+        <file>ZoomChange.wav</file>
+    </qresource>
+</RCC>
