@@ -63,7 +63,7 @@ struct WeatherCommonData
     int16_t zeroPointAltitude;
 };
 
-struct WeatherItemData
+struct PackedWeatherDataItem
 {    
     int16_t altitude;
     double windDirection;
@@ -110,65 +110,21 @@ void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
     _socket.write(messageContent.toByteArray());
 }
 
-void ArtillerySpotter::sendWeather(const QVector<TelemetryDataFrame> &telemetryDataFrames)
+void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> weatherDataCollection)
 {
     if (_socket.state() != QAbstractSocket::ConnectedState)
         return;
 
-    int frameCount = telemetryDataFrames.count();
-    if (frameCount == 0)
+    //int frameCount = telemetryDataFrames.count();
+    //if (frameCount == 0)
+    //    return;
+
+//WeatherDataItemPack
+
+    int weatherDataCount = weatherDataCollection.count();
+
+    if (weatherDataCount == 0)
         return;
-
-    const int WEATHER_ITEMS_ALTITUDE_STEP = 200; //m
-    const int WEATHER_ITEMS_MAX_COUNT = 100; //range 0..20000 m
-
-    int measureCount[WEATHER_ITEMS_MAX_COUNT] = { 0 };
-    double windDirectionSum[WEATHER_ITEMS_MAX_COUNT] = { 0 };
-    double windSpeedSum[WEATHER_ITEMS_MAX_COUNT] = { 0 };
-    double atmospherePressureSum[WEATHER_ITEMS_MAX_COUNT] = { 0 };
-    double atmosphereTemperatureSum[WEATHER_ITEMS_MAX_COUNT] = { 0 };
-
-    quint32 endTime = telemetryDataFrames.at(frameCount - 1).SessionTimeMs;
-    quint32 prevTelemetryFrameNumber = 0;
-
-    TelemetryDataFrame telemetryFrame;
-    for (int i = frameCount - 1; i > 0; i--)
-    {
-        telemetryFrame = telemetryDataFrames.at(i);
-
-        if (prevTelemetryFrameNumber == telemetryFrame.TelemetryFrameNumber)
-            continue;
-        if (endTime - telemetryFrame.SessionTimeMs > 1800000) // 30 minutes
-            break;
-
-        prevTelemetryFrameNumber = telemetryFrame.TelemetryFrameNumber;
-        double altitide = telemetryFrame.UavAltitude_GPS; //??? UavAltitude_Barometric;
-        quint32 index = altitide < 0 ? 0 : round(altitide / WEATHER_ITEMS_ALTITUDE_STEP);
-
-        measureCount[index] += 1;
-        windDirectionSum[index] += telemetryFrame.WindDirection;
-        windSpeedSum[index] += telemetryFrame.WindSpeed;
-        atmospherePressureSum[index] += telemetryFrame.AtmospherePressure;
-        atmosphereTemperatureSum[index] += telemetryFrame.AtmosphereTemperature;
-    }
-
-    QVector<WeatherItemData> weatherDataColl;
-    WeatherItemData weatherData;
-    for (int index = 0; index < WEATHER_ITEMS_MAX_COUNT; index++)
-    {
-        int count = measureCount[index];
-        if (count > 0)
-        {
-            weatherData.altitude = index * WEATHER_ITEMS_ALTITUDE_STEP;
-            weatherData.windDirection = windDirectionSum[index] / count;
-            weatherData.windSpeed = windSpeedSum[index] / count;
-            weatherData.atmospherePressure = atmospherePressureSum[index] / count;
-            weatherData.atmosphereTemperature = atmosphereTemperatureSum[index] / count;
-            weatherDataColl.append(weatherData);
-        }
-    }
-
-    int weatherDataCount = weatherDataColl.count();
 
     qDebug() << weatherDataCount;
 
@@ -180,7 +136,7 @@ void ArtillerySpotter::sendWeather(const QVector<TelemetryDataFrame> &telemetryD
     commonData.zeroPointAltitude = 0; //???
     commonData.dateTime = GetCurrentDateTimeFrom1970Secs();
 
-    header.lenData = sizeof(HeaderData) + sizeof(WeatherCommonData) + sizeof(WeatherItemData) * weatherDataCount;
+    header.lenData = sizeof(HeaderData) + sizeof(WeatherCommonData) + sizeof(PackedWeatherDataItem) * weatherDataCount;
 
     BinaryContent messageContent;
     messageContent.appendData((const char *)&header, sizeof(header));
@@ -188,8 +144,16 @@ void ArtillerySpotter::sendWeather(const QVector<TelemetryDataFrame> &telemetryD
 
     for (int i = 0; i < weatherDataCount; i++)
     {
-        weatherData = weatherDataColl.at(i);
-        messageContent.appendData((const char *)&weatherData, sizeof(WeatherItemData));
+        auto weatherData = weatherDataCollection.at(i);
+
+        PackedWeatherDataItem packedWeatherData;
+        packedWeatherData.altitude = weatherData.Altitude;
+        packedWeatherData.windDirection = weatherData.WindDirection;
+        packedWeatherData.windSpeed = weatherData.WindSpeed;
+        packedWeatherData.atmospherePressure = weatherData.AtmospherePressure;
+        packedWeatherData.atmosphereTemperature = weatherData.AtmosphereTemperature;
+
+        messageContent.appendData((const char *)&packedWeatherData, sizeof(PackedWeatherDataItem));
     }
 
     _socket.write(messageContent.toByteArray());

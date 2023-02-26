@@ -270,9 +270,9 @@ void MarkerStorage::sendMarkersToArtillerySpotter()
     _artillerySpotter.sendMarkers(&_mapMarkers);
 }
 
-void MarkerStorage::sendWeatherToArtillerySpotter(const QVector<TelemetryDataFrame> &telemetryDataFrames)
+void MarkerStorage::sendWeatherToArtillerySpotter(const QVector<WeatherDataItem> weatherDataCollection)
 {
-    _artillerySpotter.sendWeather(telemetryDataFrames);
+    _artillerySpotter.sendWeather(weatherDataCollection);
 }
 
 void MarkerStorage::cleanupObsoleteMapMarkers()

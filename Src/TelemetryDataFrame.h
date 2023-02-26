@@ -120,6 +120,19 @@ struct ClientCommand final
     }
 };
 
+struct WeatherDataItem final
+{
+    qint16 Altitude;
+    double WindDirection;
+    double WindSpeed;
+    double AtmospherePressure;
+    double AtmosphereTemperature;
+
+    WeatherDataItem()
+    {
+        memset(this, 0, sizeof(WeatherDataItem));
+    }
+};
 
 struct EmulatorTelemetryDataFrame final
 {
@@ -165,6 +178,7 @@ struct CameraTelemetryDataFrame final
 
     void applyToTelemetryDataFrame(TelemetryDataFrame &telemetryDataFrame);
 };
+
 
 double encoderAngleDegree(qint32 camEncoderValue);
 

@@ -46,7 +46,7 @@ public:
     MapMarker *getMapMarkerByGUID(const QString &markerGUID);
 
     void sendMarkersToArtillerySpotter();
-    void sendWeatherToArtillerySpotter(const QVector<TelemetryDataFrame> &telemetryDataFrames);
+    void sendWeatherToArtillerySpotter(const QVector<WeatherDataItem> weatherDataCollection);
 signals:
     void onMapMarkerDeleted(const QString &markerGUID);
     void onMapMarkerCreated(const QString &markerGUID);

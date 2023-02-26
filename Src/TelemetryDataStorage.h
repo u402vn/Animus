@@ -50,6 +50,8 @@ public:
 
     const TelemetryDataFrame getTelemetryDataFrameByIndex(int frameIndex);
 
+    const QVector<WeatherDataItem> getWeatherData(quint32 lastMSeconds = 1800000);
+
     const QString getTelemetryFrameTimeAsString(const TelemetryDataFrame &telemetryFrame) const;
     const QString getLastTelemetryFrameTimeAsString() const;
 

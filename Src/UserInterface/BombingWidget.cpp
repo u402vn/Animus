@@ -8,6 +8,7 @@
 #include "EnterProc.h"
 #include <Common/CommonWidgets.h>
 
+
 void BombingWidget::initWidgets()
 {
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
@@ -98,6 +99,7 @@ BombingWidget::BombingWidget(QWidget *parent, HardwareLink *hardwareLink, Teleme
 
     _hardwareLink = hardwareLink;
     _telemetryDataStorage = telemetryDataStorage;
+    _weatherView = nullptr;
 
     MarkerStorage& markerStorage = MarkerStorage::Instance();
 
@@ -111,6 +113,12 @@ BombingWidget::BombingWidget(QWidget *parent, HardwareLink *hardwareLink, Teleme
     loadTargetMapMarkers();
 
     CommonWidgetUtils::installEventFilterToApplication(this);
+}
+
+BombingWidget::~BombingWidget()
+{
+    if (_weatherView != nullptr)
+        delete _weatherView;
 }
 
 void BombingWidget::addNewMarker(const WorldGPSCoord &coord, bool showEditor)
@@ -162,8 +170,10 @@ void BombingWidget::onSendHitCoordinatesClicked()
 
 void BombingWidget::onSendWeatherClicked()
 {
-    MarkerStorage& markerStorage = MarkerStorage::Instance();
-    markerStorage.sendWeatherToArtillerySpotter(_telemetryDataStorage->getTelemetryDataFrames());
+    if (_weatherView == nullptr)
+        _weatherView = new WeatherView(nullptr, _telemetryDataStorage);
+    _weatherView->reinit();
+    _weatherView->showNormal();
 }
 
 void BombingWidget::processTelemetry(const TelemetryDataFrame &telemetryDataFrame)

@@ -539,6 +539,61 @@ const TelemetryDataFrame TelemetryDataStorage::getTelemetryDataFrameByIndex(int 
     return _telemetryFrames[frameIndex];
 }
 
+const QVector<WeatherDataItem> TelemetryDataStorage::getWeatherData(quint32 lastMSeconds)
+{
+    const int WEATHER_ITEMS_ALTITUDE_STEP = 200; //m
+    const int WEATHER_ITEMS_MAX_COUNT = 100; //range 0..20000 m
+
+    int measureCount[WEATHER_ITEMS_MAX_COUNT] = { 0 };
+    double windDirectionSum[WEATHER_ITEMS_MAX_COUNT] = { 0 };
+    double windSpeedSum[WEATHER_ITEMS_MAX_COUNT] = { 0 };
+    double atmospherePressureSum[WEATHER_ITEMS_MAX_COUNT] = { 0 };
+    double atmosphereTemperatureSum[WEATHER_ITEMS_MAX_COUNT] = { 0 };
+
+    quint32 frameCount = _telemetryFrames.count();
+    quint32 endTime = _telemetryFrames.at(frameCount - 1).SessionTimeMs;
+    quint32 prevTelemetryFrameNumber = 0;
+
+    TelemetryDataFrame telemetryFrame;
+    for (int i = frameCount - 1; i > 0; i--)
+    {
+        telemetryFrame = _telemetryFrames.at(i);
+
+        if (prevTelemetryFrameNumber == telemetryFrame.TelemetryFrameNumber)
+            continue;
+        if (endTime - telemetryFrame.SessionTimeMs > lastMSeconds) // 1800000 ms = 30 minutes
+            break;
+
+        prevTelemetryFrameNumber = telemetryFrame.TelemetryFrameNumber;
+        double altitide = telemetryFrame.UavAltitude_GPS; //??? UavAltitude_Barometric;
+        quint32 index = altitide < 0 ? 0 : round(altitide / WEATHER_ITEMS_ALTITUDE_STEP);
+
+        measureCount[index] += 1;
+        windDirectionSum[index] += telemetryFrame.WindDirection;
+        windSpeedSum[index] += telemetryFrame.WindSpeed;
+        atmospherePressureSum[index] += telemetryFrame.AtmospherePressure;
+        atmosphereTemperatureSum[index] += telemetryFrame.AtmosphereTemperature;
+    }
+
+    QVector<WeatherDataItem> weatherDataColl;
+    WeatherDataItem weatherItem;
+    for (int index = 0; index < WEATHER_ITEMS_MAX_COUNT; index++)
+    {
+        int count = measureCount[index];
+        if (count > 0)
+        {
+            weatherItem.Altitude = index * WEATHER_ITEMS_ALTITUDE_STEP;
+            weatherItem.WindDirection = windDirectionSum[index] / count;
+            weatherItem.WindSpeed = windSpeedSum[index] / count;
+            weatherItem.AtmospherePressure = atmospherePressureSum[index] / count;
+            weatherItem.AtmosphereTemperature = atmosphereTemperatureSum[index] / count;
+            weatherDataColl.append(weatherItem);
+        }
+    }
+
+    return weatherDataColl;
+}
+
 const QString TelemetryDataStorage::getTelemetryFrameTimeAsString(const TelemetryDataFrame &telemetryFrame) const
 {
     quint32 timeFromStart = telemetryFrame.SessionTimeMs;

@@ -10,6 +10,7 @@
 #include "UserInterface/GPSCoordSelector.h"
 #include "Map/MarkerStorage.h"
 #include "TelemetryDataStorage.h"
+#include "Forms/WeatherView.h"
 
 class QMarkerListWidgetItem;
 
@@ -62,6 +63,7 @@ class BombingWidget final : public QWidget
     PFD *_PFD;
 
     QMarkerListWidget *_lwTargetMapMarkers;
+    WeatherView *_weatherView;
 
     HardwareLink *_hardwareLink;
 
@@ -77,6 +79,7 @@ class BombingWidget final : public QWidget
     void addNewMarker(const WorldGPSCoord &coord, bool showEditor);
 public:
     explicit BombingWidget(QWidget *parent, HardwareLink *hardwareLink, TelemetryDataStorage *telemetryDataStorage);
+    ~BombingWidget();
     void processTelemetry(const TelemetryDataFrame &telemetryDataFrame);
 private slots:
     void onMapMarkerDeleted(const QString &markerGUID);

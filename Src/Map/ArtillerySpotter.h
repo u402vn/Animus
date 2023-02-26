@@ -25,7 +25,7 @@ public:
     void openSocket(const QHostAddress address, const quint16 port);
 
     void sendMarkers(const QList<MapMarker *> *markers);
-    void sendWeather(const QVector<TelemetryDataFrame> &telemetryDataFrames);
+    void sendWeather(const QVector<WeatherDataItem> weatherDataCollection);
 };
 
 #endif // ARTILLERYSPOTTER_H
