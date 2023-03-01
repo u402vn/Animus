@@ -1855,6 +1855,25 @@ Are you sure you want to update it?</source>
     </message>
 </context>
 <context>
+    <name>GlobalStringConstants</name>
+    <message>
+        <source>Unspecified</source>
+        <translation type="vanished">Не определено</translation>
+    </message>
+    <message>
+        <source>Defeat Required</source>
+        <translation type="vanished">Ожидается поражение</translation>
+    </message>
+    <message>
+        <source>Trial Shot</source>
+        <translation type="vanished">Пристрелочный выстрел</translation>
+    </message>
+    <message>
+        <source>Real Shot</source>
+        <translation type="vanished">Реальное попадание</translation>
+    </message>
+</context>
+<context>
     <name>HIDSettingsEditor</name>
     <message>
         <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="50"/>
@@ -2361,6 +2380,25 @@ Are you sure you want to update it?</source>
     </message>
 </context>
 <context>
+    <name>MapArtillerySpotterStateCaptions</name>
+    <message>
+        <source>Unspecified</source>
+        <translation type="obsolete">Не определено</translation>
+    </message>
+    <message>
+        <source>Defeat Required</source>
+        <translation type="obsolete">Ожидается поражение</translation>
+    </message>
+    <message>
+        <source>Trial Shot</source>
+        <translation type="obsolete">Пристрелочный выстрел</translation>
+    </message>
+    <message>
+        <source>Real Shot</source>
+        <translation type="obsolete">Реальное попадание</translation>
+    </message>
+</context>
+<context>
     <name>MapGraphicsScene</name>
     <message>
         <location filename="../Map/MapGraphicsScene.cpp" line="33"/>
@@ -2473,19 +2511,33 @@ Are you sure you want to update it?</source>
 <context>
     <name>MapMarker</name>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="79"/>
         <source>%1
 %2
 %3
 Height: %4
 X:%5
 Y:%6</source>
-        <translation>%1
+        <translation type="vanished">%1
 %2
 %3
 Высота: %4
 X:%5
 Y:%6</translation>
+    </message>
+    <message>
+        <location filename="../Map/MarkerStorageItems.cpp" line="88"/>
+        <source>%1
+%2
+%3
+Height: %4
+X:%5
+Y:%6%7</source>
+        <translation>%1
+%2
+%3
+Высота: %4
+X:%5
+Y:%6%7</translation>
     </message>
 </context>
 <context>
@@ -2839,44 +2891,40 @@ Y:%6</translation>
 <context>
     <name>QMarkerListWidget</name>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="423"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="410"/>
         <source>Deactivate</source>
         <translation>Деактивировать</translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="423"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="410"/>
         <source>Activate</source>
         <translation>Активировать</translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="424"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="411"/>
         <source>Change</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="425"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="412"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="429"/>
         <source>Unspecified</source>
-        <translation>Не определено</translation>
+        <translation type="vanished">Не определено</translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="430"/>
         <source>Defeat Required</source>
-        <translation>Ожидается поражение</translation>
+        <translation type="vanished">Ожидается поражение</translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="431"/>
         <source>Trial Shot</source>
-        <translation>Пристрелочный выстрел</translation>
+        <translation type="vanished">Пристрелочный выстрел</translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="432"/>
         <source>Real Shot</source>
-        <translation>Реальное попадание</translation>
+        <translation type="vanished">Реальное попадание</translation>
     </message>
 </context>
 <context>
@@ -2919,6 +2967,26 @@ Y:%6</translation>
     <message>
         <source>Zoom Out</source>
         <translation type="vanished">Отдалить</translation>
+    </message>
+    <message>
+        <location filename="../Map/MarkerStorageItems.cpp" line="278"/>
+        <source>Unspecified</source>
+        <translation>Не определено</translation>
+    </message>
+    <message>
+        <location filename="../Map/MarkerStorageItems.cpp" line="279"/>
+        <source>Defeat Required</source>
+        <translation>Ожидается поражение</translation>
+    </message>
+    <message>
+        <location filename="../Map/MarkerStorageItems.cpp" line="280"/>
+        <source>Trial Shot</source>
+        <translation>Пристрелочный выстрел</translation>
+    </message>
+    <message>
+        <location filename="../Map/MarkerStorageItems.cpp" line="281"/>
+        <source>Real Shot</source>
+        <translation>Реальное попадание</translation>
     </message>
 </context>
 <context>
@@ -3410,52 +3478,52 @@ Are you sure you want to deleted it?</source>
     <message>
         <location filename="../UserInterface/VideoImageTuner.cpp" line="38"/>
         <source>Whitehot</source>
-        <translation type="unfinished"></translation>
+        <translation>Whitehot</translation>
     </message>
     <message>
         <location filename="../UserInterface/VideoImageTuner.cpp" line="39"/>
         <source>Blackhot</source>
-        <translation type="unfinished"></translation>
+        <translation>Blackhot</translation>
     </message>
     <message>
         <location filename="../UserInterface/VideoImageTuner.cpp" line="40"/>
         <source>Ranbow</source>
-        <translation type="unfinished"></translation>
+        <translation>Ranbow</translation>
     </message>
     <message>
         <location filename="../UserInterface/VideoImageTuner.cpp" line="41"/>
         <source>Three-primary colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Three-primary colors</translation>
     </message>
     <message>
         <location filename="../UserInterface/VideoImageTuner.cpp" line="42"/>
         <source>Blue-red-yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Blue-red-yellow</translation>
     </message>
     <message>
         <location filename="../UserInterface/VideoImageTuner.cpp" line="43"/>
         <source>Blue-purple-red</source>
-        <translation type="unfinished"></translation>
+        <translation>Blue-purple-red</translation>
     </message>
     <message>
         <location filename="../UserInterface/VideoImageTuner.cpp" line="44"/>
         <source>Mixed colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Mixed colors</translation>
     </message>
     <message>
         <location filename="../UserInterface/VideoImageTuner.cpp" line="45"/>
         <source>Blue-green-red</source>
-        <translation type="unfinished"></translation>
+        <translation>Blue-green-red</translation>
     </message>
     <message>
         <location filename="../UserInterface/VideoImageTuner.cpp" line="46"/>
         <source>Blackish green-red</source>
-        <translation type="unfinished"></translation>
+        <translation>Blackish green-red</translation>
     </message>
     <message>
         <location filename="../UserInterface/VideoImageTuner.cpp" line="47"/>
         <source>Lava</source>
-        <translation type="unfinished"></translation>
+        <translation>Lava</translation>
     </message>
     <message>
         <source>Color Mode %1</source>
@@ -3476,37 +3544,37 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>WeatherView</name>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="13"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="15"/>
         <source>Weather</source>
         <translation>Погода</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="18"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="20"/>
         <source>Altitude</source>
         <translation>Высота</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="18"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="20"/>
         <source>Wind (Direction)</source>
         <translation>Ветер (Направление)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="18"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="20"/>
         <source>Wind (Speed)</source>
         <translation>Ветер (Скорость)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="18"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="20"/>
         <source>Pressure</source>
         <translation>Давление</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="18"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="20"/>
         <source>Temperature</source>
         <translation>Температура</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="35"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="41"/>
         <source>Send</source>
         <translation>Отправить</translation>
     </message>
@@ -3528,6 +3596,13 @@ Are you sure you want to deleted it?</source>
     <message>
         <source>E</source>
         <translation type="vanished">ВД</translation>
+    </message>
+</context>
+<context>
+    <name>mapArtillerySpotterStateCaption</name>
+    <message>
+        <source>Unspecified</source>
+        <translation type="obsolete">Не определено</translation>
     </message>
 </context>
 </TS>

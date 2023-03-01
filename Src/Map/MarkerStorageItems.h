@@ -8,6 +8,17 @@
 
 enum ArtillerySpotterState {Unspecified = 0, DefeatRequired = 1, TrialShot = 2, RealShot = 3, EllipseCenter = 10};
 
+const QMap <int, QColor> MapArtillerySpotterStateColors {
+    { ArtillerySpotterState::Unspecified,       QColor("#31363b") },
+    { ArtillerySpotterState::DefeatRequired,    QColor("#991111") },
+    { ArtillerySpotterState::TrialShot,         QColor("#111199") },
+    { ArtillerySpotterState::RealShot,          QColor("#119911") } };
+
+
+const QMap<int, QString> MapArtillerySpotterStateCaptions();
+
+
+
 class MapMarker : public QObject
 {
     Q_OBJECT
@@ -15,6 +26,9 @@ class MapMarker : public QObject
     QString _GUID;
     WorldGPSCoord _gpsCoord;
 protected:
+    QPixmap _image;
+    bool _needImageUpdate;
+
     bool _dirty; //marker will be saved by timer
     int _tag;
     QString _description;
@@ -54,7 +68,6 @@ class PartyMapMarker: public MapMarker
 private:
     Q_OBJECT
 
-    QPixmap _image;
     MarkerParty _party;
 public:
     explicit PartyMapMarker(QObject *parent, const QString &guid, const WorldGPSCoord &gpsCoord, MarkerTemplate *mapMarkerTemplate,
@@ -85,9 +98,6 @@ class TargetMapMarker final: public MapMarker
     static int _lastTargetNumber;
 
     bool _isHighlighted;
-    QPixmap _image;
-    QPixmap _highlightedImage;
-    void initImageWithTag();
 public:
     explicit TargetMapMarker(QObject *parent, const QString &guid, const WorldGPSCoord &gpsCoord, MarkerTemplate *mapMarkerTemplate,
                              int tag, const QString &description, ArtillerySpotterState artillerySpotterState);

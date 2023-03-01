@@ -14,7 +14,6 @@ WeatherView::WeatherView(QWidget *parent, TelemetryDataStorage *telemetryDataSto
 
     this->setWindowTitle(tr("Weather"));
     this->setModal(true);
-    //this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint | Qt::WindowMinMaxButtonsHint);
 
     CommonWidgetUtils::updateWidgetGeometry(this, WEATHER_VIEW_WIDTH, WEATHER_VIEW_WIDTH * 0.5);
 

@@ -159,6 +159,7 @@ void GSICommonObject::onCoodChanged()
 
 void GSICommonObject::onDisplayedImageChanged()
 {
+    updateToolTip();
     updateImage();
 }
 

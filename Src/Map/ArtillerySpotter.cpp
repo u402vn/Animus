@@ -12,8 +12,6 @@ void ArtillerySpotter::timerEvent(QTimerEvent *event)
     {
         _socket.connectToHost(_address, _port);
     }
-    //else if ( (_socket.state() == QAbstractSocket::ConnectedState) && _needResendMarkerList )
-    //    emit onNeedResendMarkerList();
 }
 
 ArtillerySpotter::ArtillerySpotter(QObject *parent) : QObject(parent)
@@ -79,19 +77,28 @@ void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
     if (_socket.state() != QAbstractSocket::ConnectedState)
         return;
 
-    uint32_t markersCount = markers->count();
+    QList<TargetMapMarker *> _targetMarkers;
+
+    foreach(MapMarker * marker, *markers)
+    {
+        auto targetMapMarker = dynamic_cast<TargetMapMarker*>(marker);
+        if (targetMapMarker != nullptr)
+            _targetMarkers.append(targetMapMarker);
+    }
+
+    uint32_t targetCount = _targetMarkers.count();
+    auto lenData = sizeof(HeaderData) + targetCount * sizeof(PointItemData);
 
     HeaderData header;
     header.codeMessage = 1;
     header.protocolVersion = 1;
-    header.lenData = markersCount * sizeof(PointItemData) + sizeof(HeaderData);
+    header.lenData = lenData;
 
     BinaryContent messageContent;
     messageContent.appendData((const char *)&header, sizeof(header));
 
-    for (uint32_t i = 0; i < markersCount; i++)
+    foreach(auto marker, _targetMarkers)
     {
-        auto marker = markers->at(i);
         auto gpsCoord = marker->gpsCoord();
 
         PointItemData pointData;
@@ -115,11 +122,6 @@ void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> weatherDataCol
     if (_socket.state() != QAbstractSocket::ConnectedState)
         return;
 
-    //int frameCount = telemetryDataFrames.count();
-    //if (frameCount == 0)
-    //    return;
-
-//WeatherDataItemPack
 
     int weatherDataCount = weatherDataCollection.count();
 

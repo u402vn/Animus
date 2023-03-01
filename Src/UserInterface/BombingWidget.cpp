@@ -49,7 +49,7 @@ void BombingWidget::initWidgets()
     connect(btnSendHitCoordinates, &QPushButton::clicked, this, &BombingWidget::onSendHitCoordinatesClicked);
 
     auto btnSendWeather = CommonWidgetUtils::createButton(this, applicationSettings.hidCaption(hidbtnSendWeather), applicationSettings.hidUIHint(hidbtnSendWeather),
-                                                                 false,  QWIDGETSIZE_MAX, DEFAULT_BUTTON_HEIGHT, NO_ICON);
+                                                          false,  QWIDGETSIZE_MAX, DEFAULT_BUTTON_HEIGHT, NO_ICON);
     connect(btnSendWeather, &QPushButton::clicked, this, &BombingWidget::onSendWeatherClicked);
 
     auto mainLayout = new QGridLayout(this);
@@ -270,15 +270,8 @@ void QMarkerListWidgetItem::updateToolTip()
 void QMarkerListWidgetItem::updateImage()
 {
     setIcon(_mapMarker->displayedImage());
-
-    const QMap <int, QColor> mapArtillerySpotterStateColors {
-        { ArtillerySpotterState::Unspecified,       QColor("#31363b") },
-        { ArtillerySpotterState::DefeatRequired,    QColor("#991111") },
-        { ArtillerySpotterState::TrialShot,         QColor("#111199") },
-        { ArtillerySpotterState::RealShot,          QColor("#119911") } };
-
-
-    this->setBackgroundColor(mapArtillerySpotterStateColors.value(_mapMarker->artillerySpotterState()));
+    setToolTip(_mapMarker->hint());
+    setBackgroundColor(MapArtillerySpotterStateColors[_mapMarker->artillerySpotterState()]);
 }
 
 QMarkerListWidgetItem::~QMarkerListWidgetItem()
@@ -419,18 +412,17 @@ void QMarkerListWidget::mousePressEvent(QMouseEvent *event)
         auto acDelete = menu.addAction(tr("Delete"));
         menu.addSeparator();
 
-        const QMap <int, QString> mapArtillerySpotterState {
-            { ArtillerySpotterState::Unspecified,       tr("Unspecified") },
-            { ArtillerySpotterState::DefeatRequired,    tr("Defeat Required") },
-            { ArtillerySpotterState::TrialShot,         tr("Trial Shot") },
-            { ArtillerySpotterState::RealShot,          tr("Real Shot") } };
-
         QActionGroup artillerySpotterStateGroup(this);
-        auto i = mapArtillerySpotterState.begin();
-        while (i != mapArtillerySpotterState.end())
+
+        auto captions = MapArtillerySpotterStateCaptions();
+
+        auto i = captions.begin();
+        while (i != captions.end())
+
         {
             int state = i.key();
-            QString description = i.value();
+            QString description = captions[ArtillerySpotterState(state)];
+
             bool isChecked = markerItem->_mapMarker->artillerySpotterState() == state;
             CommonWidgetUtils::createCheckableMenuGroupAction(description, isChecked, &artillerySpotterStateGroup, &menu, state);
             ++i;

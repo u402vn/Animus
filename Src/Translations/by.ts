@@ -1796,13 +1796,13 @@ Speed Multiplier</source>
 <context>
     <name>MapMarker</name>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="79"/>
+        <location filename="../Map/MarkerStorageItems.cpp" line="88"/>
         <source>%1
 %2
 %3
 Height: %4
 X:%5
-Y:%6</source>
+Y:%6%7</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2130,43 +2130,23 @@ Y:%6</source>
 <context>
     <name>QMarkerListWidget</name>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="423"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="410"/>
         <source>Deactivate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="423"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="410"/>
         <source>Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="424"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="411"/>
         <source>Change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="425"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="412"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="429"/>
-        <source>Unspecified</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="430"/>
-        <source>Defeat Required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="431"/>
-        <source>Trial Shot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="432"/>
-        <source>Real Shot</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2205,6 +2185,26 @@ Y:%6</source>
     <message>
         <location filename="../Common/CommonUtils.cpp" line="404"/>
         <source>Animus has unlimited license.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Map/MarkerStorageItems.cpp" line="278"/>
+        <source>Unspecified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Map/MarkerStorageItems.cpp" line="279"/>
+        <source>Defeat Required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Map/MarkerStorageItems.cpp" line="280"/>
+        <source>Trial Shot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Map/MarkerStorageItems.cpp" line="281"/>
+        <source>Real Shot</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2690,37 +2690,37 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>WeatherView</name>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="13"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="15"/>
         <source>Weather</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="18"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="20"/>
         <source>Altitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="18"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="20"/>
         <source>Wind (Direction)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="18"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="20"/>
         <source>Wind (Speed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="18"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="20"/>
         <source>Pressure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="18"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="20"/>
         <source>Temperature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="35"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="41"/>
         <source>Send</source>
         <translation type="unfinished"></translation>
     </message>

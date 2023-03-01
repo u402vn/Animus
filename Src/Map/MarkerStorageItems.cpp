@@ -21,6 +21,7 @@ void MapMarker::setArtillerySpotterState(const ArtillerySpotterState &artilleryS
     {
         _artillerySpotterState = artillerySpotterState;
         _dirty = true;
+        _needImageUpdate = true;
         emit onDisplayedImageChanged();
     }
 }
@@ -28,6 +29,7 @@ void MapMarker::setArtillerySpotterState(const ArtillerySpotterState &artilleryS
 MapMarker::MapMarker(QObject *parent, const QString &guid, const WorldGPSCoord &gpsCoord, MarkerTemplate *mapMarkerTemplate,
                      int tag, const QString &description, ArtillerySpotterState artillerySpotterState) : QObject(parent)
 {
+    _needImageUpdate = true;
     _dirty = false;
     _GUID = guid;
     _gpsCoord = gpsCoord;
@@ -76,12 +78,17 @@ const QString MapMarker::hint() const
 {
     QPointF sk42coord = _gpsCoord.getSK42();
 
-    QString hint = QString(tr("%1\n%2\n%3\nHeight: %4\nX:%5\nY:%6"))
+    QString spotterStateCaption = _artillerySpotterState == ArtillerySpotterState::Unspecified ?
+                QString("") :
+                QString("\n%1").arg(MapArtillerySpotterStateCaptions()[_artillerySpotterState]);
+
+    QString hint = QString(tr("%1\n%2\n%3\nHeight: %4\nX:%5\nY:%6%7"))
             .arg(_description)
             .arg(_gpsCoord.EncodeLatitude(DegreeMinutesSeconds))
             .arg(_gpsCoord.EncodeLongitude(DegreeMinutesSeconds))
             .arg(_gpsCoord.hmsl)
-            .arg(sk42coord.x(), 0, 'f', 2, '0').arg(sk42coord.y(), 0, 'f', 2, '0');
+            .arg(sk42coord.x(), 0, 'f', 2, '0').arg(sk42coord.y(), 0, 'f', 2, '0')
+            .arg(spotterStateCaption);
     return hint;
 }
 
@@ -112,34 +119,6 @@ const QPixmap MapMarker::displayedImage()
 
 // ----------------------------------------------------------------------------------------
 
-void TargetMapMarker::initImageWithTag()
-{
-    _image = _mapMarkerTemplate->image().copy();
-    {
-        QPainter painter(&_image);
-        QFont font = painter.font();
-        font.setPointSize(12);
-        font.setBold(true);
-        painter.setFont(font);
-        QPen pen = painter.pen();
-        pen.setColor(qRgb(0, 255, 255));
-        painter.setPen(pen);
-        painter.drawText(_image.rect(), QString::number(_tag), Qt::AlignLeft | Qt::AlignTop);
-    }
-    _highlightedImage = _mapMarkerTemplate->highlightedImage().copy();
-    {
-        QPainter painter(&_highlightedImage);
-        QFont font = painter.font();
-        font.setPointSize(12);
-        font.setBold(true);
-        painter.setFont(font);
-        QPen pen = painter.pen();
-        pen.setColor(qRgb(255, 0, 0));
-        painter.setPen(pen);
-        painter.drawText(_highlightedImage.rect(), QString::number(_tag), Qt::AlignLeft | Qt::AlignTop);
-    }
-}
-
 TargetMapMarker::TargetMapMarker(QObject *parent, const QString &guid, const WorldGPSCoord &gpsCoord, MarkerTemplate *mapMarkerTemplate,
                                  int tag, const QString &description, ArtillerySpotterState artillerySpotterState) :
     MapMarker(parent, guid, gpsCoord, mapMarkerTemplate, tag, description, artillerySpotterState)
@@ -148,8 +127,6 @@ TargetMapMarker::TargetMapMarker(QObject *parent, const QString &guid, const Wor
         _tag = ++TargetMapMarker::_lastTargetNumber;
     else
         TargetMapMarker::_lastTargetNumber = qMax(tag, TargetMapMarker::_lastTargetNumber);
-
-    initImageWithTag();
 
     _isHighlighted = false;
     const QString tamplateDescription = mapMarkerTemplate->description();
@@ -160,10 +137,37 @@ TargetMapMarker::TargetMapMarker(QObject *parent, const QString &guid, const Wor
 
 const QPixmap TargetMapMarker::displayedImage()
 {
-    if (_isHighlighted)
-        return _highlightedImage;
-    else
-        return _image;
+    if (_needImageUpdate)
+    {
+        _image = _isHighlighted ? _mapMarkerTemplate->highlightedImage().copy() :
+                                  _mapMarkerTemplate->image().copy();
+        auto color = _isHighlighted ?  qRgb(255, 0, 0) : qRgb(0, 255, 255);
+
+        QPainter painter(&_image);
+
+        //Draw Artillery Spotter State Indicator
+        if (_artillerySpotterState != ArtillerySpotterState::Unspecified)
+        {
+            QPen pen = painter.pen();
+            pen.setColor(MapArtillerySpotterStateColors[_artillerySpotterState]);
+            pen.setWidth(4);
+            painter.setPen(pen);
+            painter.drawEllipse(_image.rect());
+        }
+
+        //Draw Target Number
+        QFont font = painter.font();
+        font.setPointSize(12);
+        font.setBold(true);
+        painter.setFont(font);
+        QPen pen = painter.pen();
+        pen.setColor(color);
+        painter.setPen(pen);
+        painter.drawText(_image.rect(), QString::number(_tag), Qt::AlignLeft | Qt::AlignTop);
+
+        _needImageUpdate = false;
+    }
+    return _image;
 }
 
 bool TargetMapMarker::isHighlighted()
@@ -176,6 +180,7 @@ void TargetMapMarker::setHighlighted(bool value)
     if (_isHighlighted != value)
     {
         _isHighlighted = value;
+        _needImageUpdate = true;
         emit onDisplayedImageChanged();
     }
 }
@@ -191,16 +196,22 @@ PartyMapMarker::PartyMapMarker(QObject *parent, const QString &guid, const World
 
 const QPixmap PartyMapMarker::displayedImage()
 {
-    if (_party == MarkerParty::Neutral)
-        return MapMarker::displayedImage();
+    if (_needImageUpdate)
+    {
+        if (_party == MarkerParty::Neutral)
+            _image = MapMarker::displayedImage();
 
-    QColor color = Qt::black;
-    if (_party == MarkerParty::Allies)
-        color = Qt::blue;
-    else if (_party == MarkerParty::Enemies)
-        color = Qt::red;
+        QColor color = Qt::black;
+        if (_party == MarkerParty::Allies)
+            color = Qt::blue;
+        else if (_party == MarkerParty::Enemies)
+            color = Qt::red;
 
-    return changeImageColor(_mapMarkerTemplate->image(), color);
+        _image =  changeImageColor(_mapMarkerTemplate->image(), color);
+        _needImageUpdate = false;
+    }
+
+    return _image;
 }
 
 MarkerParty PartyMapMarker::getParty()
@@ -214,6 +225,7 @@ void PartyMapMarker::setParty(MarkerParty value)
     {
         _party = value;
         _dirty = true;
+        _needImageUpdate = true;
         emit onDisplayedImageChanged();
     }
 }
@@ -228,7 +240,7 @@ void PartyMapMarker::setNextParty()
     case MarkerParty::Allies:
         setParty(MarkerParty::Enemies);
         break;
-    case Enemies:
+    case MarkerParty::Enemies:
         setParty(MarkerParty::Neutral);
         break;
     default:
@@ -254,3 +266,15 @@ SAMInfo SAMMapMarker::getSAMinfo(double height)
     return _mapMarkerTemplate->getSAMinfo(height);
 }
 
+
+
+const QMap<int, QString> MapArtillerySpotterStateCaptions()
+{
+    static const QMap <int, QString> MapArtillerySpotterStateCaptions {
+        { ArtillerySpotterState::Unspecified,       QObject::tr("Unspecified") },
+        { ArtillerySpotterState::DefeatRequired,    QObject::tr("Defeat Required") },
+        { ArtillerySpotterState::TrialShot,         QObject::tr("Trial Shot") },
+        { ArtillerySpotterState::RealShot,          QObject::tr("Real Shot") } };
+
+    return MapArtillerySpotterStateCaptions;
+}
