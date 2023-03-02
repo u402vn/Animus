@@ -106,8 +106,8 @@ void MapGraphicsView::dropEvent(QDropEvent *event)
         QDataStream dataStream(&itemData, QIODevice::ReadOnly);
         QString markerTemplateGUID;
         dataStream >> markerTemplateGUID;
-
-        mapScene()->addNewMarker(posOnScene, markerTemplateGUID);
+        if (markerTemplateGUID != ArtillerySalvoCenterMarkerTemplateGUID)
+            mapScene()->addNewMarker(posOnScene, markerTemplateGUID);
     }
     QGraphicsView::dropEvent(event);
 }

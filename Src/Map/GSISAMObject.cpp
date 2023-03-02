@@ -79,6 +79,8 @@ void SAMMarkerSceneItem::updateSAMRings()
 
     auto centerPos = this->pos();
 
+    //todo update only if prev size differs with new size more than 5pix, f.e.
+    //store max value of (range * sizeM2PixRatio) and compare with current value
     updateSAMRing(_circleMinKillingRange, centerPos, samInfo.minKillingRange() * sizeM2PixRatio);
     updateSAMRing(_circleMaxKillingRange, centerPos, samInfo.maxKillingRange() * sizeM2PixRatio);
     updateSAMRing(_circleVisibleRange, centerPos, samInfo.visibleRange() * sizeM2PixRatio);
@@ -87,6 +89,7 @@ void SAMMarkerSceneItem::updateSAMRings()
 void SAMMarkerSceneItem::updateForTelemetry(const TelemetryDataFrame &telemetryFrame)
 {
     _uavCoords = getUavCoordsFromTelemetry(telemetryFrame);
+    updateSAMRings();
 }
 
 SAMMarkerSceneItem::SAMMarkerSceneItem(SAMMapMarker *mapMarker, QGraphicsItem *parent) :
@@ -108,7 +111,7 @@ QVariant SAMMarkerSceneItem::itemChange(QGraphicsItem::GraphicsItemChange change
 {
     if (change == ItemSceneHasChanged)
     {
-        Q_ASSERT(_circleMinKillingRange == nullptr && _circleMaxKillingRange == nullptr && _circleVisibleRange == nullptr);
+        //Q_ASSERT(_circleMinKillingRange == nullptr && _circleMaxKillingRange == nullptr && _circleVisibleRange == nullptr);
         createSAMRings();
     }
     return GSICommonObject::itemChange(change, value);

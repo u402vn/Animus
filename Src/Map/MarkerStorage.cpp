@@ -126,7 +126,8 @@ MapMarker *MarkerStorage::addMapMarkerToList(const QString &templateGUID, const 
     }
     else if (mapMarkerTemplate->GUID() == ArtillerySalvoCenterMarkerTemplateGUID)
     {
-        _salvoCenterMarker = new ArtillerySalvoCenterMarker(this, markerGUID, gpsCoord, mapMarkerTemplate);
+        if (_salvoCenterMarker == nullptr)
+            _salvoCenterMarker = new ArtillerySalvoCenterMarker(this, markerGUID, gpsCoord, mapMarkerTemplate);
         mapMarker = _salvoCenterMarker;
     }
     else if (mapMarkerTemplate->samInfoList().count() > 0)

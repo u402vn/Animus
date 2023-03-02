@@ -53,7 +53,10 @@ void MarkerListWidget::LoadMarkerThesaurus()
     auto markerTemplates = *(markerThesaurus.getMarkerTemplates());
 
     foreach (auto markerTemplate, markerTemplates)
-        AddMarkerTemplateToList(markerTemplate, nullptr);
+    {
+        if (markerTemplate->GUID() != ArtillerySalvoCenterMarkerTemplateGUID)
+            AddMarkerTemplateToList(markerTemplate, nullptr);
+    }
 }
 
 void QMarkerTemplateTreeWidget::mousePressEvent(QMouseEvent *event)
