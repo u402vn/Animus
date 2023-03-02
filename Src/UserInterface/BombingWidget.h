@@ -30,7 +30,7 @@ class QMarkerListWidget final : public QListWidget
 public:
     explicit QMarkerListWidget(QWidget * parent);
     QMarkerListWidgetItem *findMarkerItemByGUID(const QString &markerGUID);
-    QMarkerListWidgetItem *addMapMarker(TargetMapMarker *marker);
+    QMarkerListWidgetItem *addMapMarker(MapMarker *marker);
     void removeMarker(const QString &markerGUID);
     void showCoordEditor();
 private slots:
@@ -42,14 +42,14 @@ class QMarkerListWidgetItem final : public QObject, public QListWidgetItem
     Q_OBJECT
     friend class QMarkerListWidget;
 
-    TargetMapMarker *_mapMarker;
-    explicit QMarkerListWidgetItem(TargetMapMarker *markerItem, QListWidget *parent);
+    MapMarker *_mapMarker;
+    explicit QMarkerListWidgetItem(MapMarker *markerItem, QListWidget *parent);
 
     void updateToolTip();
     void updateImage();
 public:
     ~QMarkerListWidgetItem();
-    TargetMapMarker *mapMarker();
+    MapMarker *mapMarker();
 private slots:
     void onCoodChanged();
     void onDisplayedImageChanged();

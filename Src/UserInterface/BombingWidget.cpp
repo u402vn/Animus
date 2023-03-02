@@ -188,6 +188,11 @@ void BombingWidget::loadTargetMapMarkers()
 {
     EnterProcStart("BombingWidget::loadTargetMapMarkers");
     MarkerStorage& markerStorage = MarkerStorage::Instance();
+
+    auto salvoCenterMarker = markerStorage.getSalvoCenterMarker();
+    if (salvoCenterMarker != nullptr)
+        _lwTargetMapMarkers->addMapMarker(salvoCenterMarker);
+
     auto mapMarkers = markerStorage.getTargetMapMarkers();
     foreach (auto marker, *mapMarkers)
     {
@@ -218,6 +223,12 @@ void BombingWidget::onMapMarkerCreated(const QString &markerGUID)
     auto targetMarker = dynamic_cast<TargetMapMarker*>(marker);
     if (targetMarker != nullptr)
         _lwTargetMapMarkers->addMapMarker(targetMarker);
+    auto salvoCenterMarker = dynamic_cast<ArtillerySalvoCenterMarker*>(marker);
+    if (salvoCenterMarker != nullptr)
+    {
+        auto markerItem = _lwTargetMapMarkers->addMapMarker(salvoCenterMarker);
+        _lwTargetMapMarkers->insertItem(0, markerItem);
+    }
 }
 
 void BombingWidget::onMapMarkerHighlightedChanged(const QString &markerGUID, bool isHighlighted)
@@ -250,7 +261,7 @@ void BombingWidget::onMapMarkerCoordChanged(const QString &markerGUID, const Wor
     }
 }
 
-QMarkerListWidgetItem::QMarkerListWidgetItem(TargetMapMarker *markerItem, QListWidget *parent) : QListWidgetItem(parent)
+QMarkerListWidgetItem::QMarkerListWidgetItem(MapMarker *markerItem, QListWidget *parent) : QListWidgetItem(parent)
 {
     _mapMarker = markerItem;
     connect(_mapMarker, &MapMarker::onCoodChanged, this, &QMarkerListWidgetItem::onCoodChanged);
@@ -279,7 +290,7 @@ QMarkerListWidgetItem::~QMarkerListWidgetItem()
 
 }
 
-TargetMapMarker *QMarkerListWidgetItem::mapMarker()
+MapMarker *QMarkerListWidgetItem::mapMarker()
 {
     return _mapMarker;
 }
@@ -334,8 +345,12 @@ void QMarkerListWidget::deleteSelectedMarkers()
     auto markerItem = selectedItem();
     if (markerItem != nullptr)
     {
-        MarkerStorage& markerStorage = MarkerStorage::Instance();
-        markerStorage.deleteMarker(markerItem->_mapMarker);
+        auto targetMapMarker = dynamic_cast<TargetMapMarker*> (markerItem->_mapMarker);
+        if (targetMapMarker != nullptr)
+        {
+            MarkerStorage& markerStorage = MarkerStorage::Instance();
+            markerStorage.deleteMarker(targetMapMarker);
+        }
     }
 }
 
@@ -343,7 +358,11 @@ void QMarkerListWidget::highlightMarker()
 {
     auto markerItem = selectedItem();
     if (markerItem != nullptr)
-        markerItem->_mapMarker->setHighlighted(!markerItem->_mapMarker->isHighlighted());
+    {
+        auto targetMapMarker = dynamic_cast<TargetMapMarker*> (markerItem->_mapMarker);
+        if (targetMapMarker != nullptr)
+            targetMapMarker->setHighlighted(!targetMapMarker->isHighlighted());
+    }
 }
 
 QMarkerListWidget::QMarkerListWidget(QWidget *parent) : QListWidget(parent)
@@ -365,7 +384,7 @@ QMarkerListWidgetItem *QMarkerListWidget::findMarkerItemByGUID(const QString &ma
     return nullptr;
 }
 
-QMarkerListWidgetItem *QMarkerListWidget::addMapMarker(TargetMapMarker *marker)
+QMarkerListWidgetItem *QMarkerListWidget::addMapMarker(MapMarker *marker)
 {
     auto result = new QMarkerListWidgetItem(marker, this);
     return result;
@@ -406,8 +425,13 @@ void QMarkerListWidget::mousePressEvent(QMouseEvent *event)
     auto markerItem = selectedItem();
     if ((event->button() == Qt::RightButton) && (markerItem != nullptr))
     {
+        auto targetMapMarker = dynamic_cast<TargetMapMarker*> (markerItem->_mapMarker);
+        if (targetMapMarker == nullptr)
+            return;
+
         QMenu menu;
-        auto acActivateStatus = menu.addAction(markerItem->_mapMarker->isHighlighted() ? tr("Deactivate") : tr("Activate"));
+
+        auto acActivateStatus = menu.addAction(targetMapMarker->isHighlighted() ? tr("Deactivate") : tr("Activate"));
         auto acChange = menu.addAction(tr("Change"));
         auto acDelete = menu.addAction(tr("Delete"));
         menu.addSeparator();
@@ -418,7 +442,6 @@ void QMarkerListWidget::mousePressEvent(QMouseEvent *event)
 
         auto i = captions.begin();
         while (i != captions.end())
-
         {
             int state = i.key();
             QString description = captions[ArtillerySpotterState(state)];

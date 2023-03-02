@@ -8,6 +8,7 @@
 
 constexpr qreal DefaultMarkerSize = 40.0;
 const QString MarkerTemplateMIMEFormat = "application/x-dnditemdata";
+
 const QString TargetMarkerTemplateGUID = "{400FB8F9-3AC9-454E-8277-E1675FA2C138}";
 const QString UnknownMarkerTemplateGUID = "{7D702CAD-1554-4484-942A-F78835F0CD5E}";
 const QString ArtillerySalvoCenterMarkerTemplateGUID = "{803696e6-cc44-43a7-93a9-90c61e70c358}";

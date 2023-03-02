@@ -300,6 +300,11 @@ const QList<TargetMapMarker *> *MarkerStorage::getTargetMapMarkers()
     return &_targetMapMarkers;
 }
 
+ArtillerySalvoCenterMarker *MarkerStorage::getSalvoCenterMarker()
+{
+    return _salvoCenterMarker;
+}
+
 MapMarker *MarkerStorage::getMapMarkerByGUID(const QString &markerGUID)
 {
     EnterProc("MarkerStorage::getMapMarkerByGUID");

@@ -45,6 +45,7 @@ public:
     void deleteMarker(MapMarker *mapMarker);
     const QList<MapMarker*> *getMapMarkers();
     const QList<TargetMapMarker*> *getTargetMapMarkers();
+    ArtillerySalvoCenterMarker *getSalvoCenterMarker();
     MapMarker *getMapMarkerByGUID(const QString &markerGUID);
 
     void sendMarkersToArtillerySpotter();

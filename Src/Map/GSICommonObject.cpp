@@ -9,7 +9,10 @@ void GSICommonObject::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     {
         if (cursor().shape() != Qt::ClosedHandCursor)
             setCursor(QCursor(Qt::ClosedHandCursor));
-        QGraphicsPixmapItem::mouseMoveEvent(event);
+        if (_mapMarker->templateGUID() != ArtillerySalvoCenterMarkerTemplateGUID)
+            QGraphicsPixmapItem::mouseMoveEvent(event);
+        else
+            event->ignore();
     }
     else
         event->ignore();

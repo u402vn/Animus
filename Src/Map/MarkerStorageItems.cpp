@@ -3,15 +3,14 @@
 
 int TargetMapMarker::_lastTargetNumber = 0;
 
-static const QMap <int, QString> mapArtillerySpotterStateCaptions {
-    { ArtillerySpotterState::Unspecified,       QObject::tr("Unspecified") },
-    { ArtillerySpotterState::DefeatRequired,    QObject::tr("Defeat Required") },
-    { ArtillerySpotterState::TrialShot,         QObject::tr("Trial Shot") },
-    { ArtillerySpotterState::RealShot,          QObject::tr("Real Shot") } };
-
-
 const QMap<int, QString> MapArtillerySpotterStateCaptions()
 {
+    static const QMap <int, QString> mapArtillerySpotterStateCaptions {
+        { ArtillerySpotterState::Unspecified,       QObject::tr("Unspecified") },
+        { ArtillerySpotterState::DefeatRequired,    QObject::tr("Defeat Required") },
+        { ArtillerySpotterState::TrialShot,         QObject::tr("Trial Shot") },
+        { ArtillerySpotterState::RealShot,          QObject::tr("Real Shot") } };
+
     return mapArtillerySpotterStateCaptions;
 }
 
@@ -93,7 +92,7 @@ const QString MapMarker::hint() const
 
     QString spotterStateCaption = _artillerySpotterState == ArtillerySpotterState::Unspecified ?
                 QString("") :
-                QString("\n%1").arg(mapArtillerySpotterStateCaptions[_artillerySpotterState]);
+                QString("\n%1").arg(MapArtillerySpotterStateCaptions()[_artillerySpotterState]);
 
     QString hint = QString(tr("%1\n%2\n%3\nHeight: %4\nX:%5\nY:%6%7"))
             .arg(_description)
@@ -286,7 +285,7 @@ SAMInfo SAMMapMarker::getSAMinfo(double height)
 // ----------------------------------------------------------------------------------------
 
 ArtillerySalvoCenterMarker::ArtillerySalvoCenterMarker(QObject *parent, const QString &guid, const WorldGPSCoord &gpsCoord, MarkerTemplate *mapMarkerTemplate) :
-    MapMarker(parent, guid, gpsCoord, mapMarkerTemplate, 0, "", ArtillerySpotterState::EllipseCenter)
+    MapMarker(parent, guid, gpsCoord, mapMarkerTemplate, 0, tr("Ellipse Center"), ArtillerySpotterState::EllipseCenter)
 {
 
 }

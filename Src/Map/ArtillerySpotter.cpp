@@ -77,16 +77,20 @@ void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
     if (_socket.state() != QAbstractSocket::ConnectedState)
         return;
 
-    QList<TargetMapMarker *> _targetMarkers;
+    QList<MapMarker *> _messageMarkers;
 
-    foreach(MapMarker * marker, *markers)
+    foreach(auto marker, *markers)
     {
         auto targetMapMarker = dynamic_cast<TargetMapMarker*>(marker);
         if (targetMapMarker != nullptr)
-            _targetMarkers.append(targetMapMarker);
+            _messageMarkers.append(targetMapMarker);
+
+        auto salvoCenterMarke = dynamic_cast<ArtillerySalvoCenterMarker*>(marker);
+        if (salvoCenterMarke != nullptr)
+            _messageMarkers.append(salvoCenterMarke);
     }
 
-    uint32_t targetCount = _targetMarkers.count();
+    uint32_t targetCount = _messageMarkers.count();
     auto lenData = sizeof(HeaderData) + targetCount * sizeof(PointItemData);
 
     HeaderData header;
@@ -97,7 +101,7 @@ void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
     BinaryContent messageContent;
     messageContent.appendData((const char *)&header, sizeof(header));
 
-    foreach(auto marker, _targetMarkers)
+    foreach(auto marker, _messageMarkers)
     {
         auto gpsCoord = marker->gpsCoord();
 

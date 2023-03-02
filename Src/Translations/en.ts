@@ -413,6 +413,14 @@ Are you sure you want to deleted it?</source>
     </message>
 </context>
 <context>
+    <name>ArtillerySalvoCenterMarker</name>
+    <message>
+        <location filename="../Map/MarkerStorageItems.cpp" line="288"/>
+        <source>Ellipse Center</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BallisticSettingsEditor</name>
     <message>
         <location filename="../UserInterface/ApplicationSettingsEditor/BallisticSettingsEditor.cpp" line="33"/>
@@ -1946,7 +1954,7 @@ Speed Multiplier</source>
 <context>
     <name>MapMarker</name>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="98"/>
+        <location filename="../Map/MarkerStorageItems.cpp" line="97"/>
         <source>%1
 %2
 %3
@@ -2273,22 +2281,22 @@ Y:%6%7</source>
 <context>
     <name>QMarkerListWidget</name>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="410"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="434"/>
         <source>Deactivate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="410"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="434"/>
         <source>Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="411"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="435"/>
         <source>Change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="412"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="436"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2331,22 +2339,22 @@ Y:%6%7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="7"/>
+        <location filename="../Map/MarkerStorageItems.cpp" line="9"/>
         <source>Unspecified</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="8"/>
+        <location filename="../Map/MarkerStorageItems.cpp" line="10"/>
         <source>Defeat Required</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="9"/>
+        <location filename="../Map/MarkerStorageItems.cpp" line="11"/>
         <source>Trial Shot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="10"/>
+        <location filename="../Map/MarkerStorageItems.cpp" line="12"/>
         <source>Real Shot</source>
         <translation type="unfinished"></translation>
     </message>

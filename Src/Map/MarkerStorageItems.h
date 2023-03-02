@@ -17,8 +17,6 @@ const QMap <int, QColor> MapArtillerySpotterStateColors {
 
 const QMap<int, QString> MapArtillerySpotterStateCaptions();
 
-
-
 class MapMarker : public QObject
 {
     Q_OBJECT

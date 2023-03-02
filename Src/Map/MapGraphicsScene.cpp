@@ -530,7 +530,11 @@ void MapGraphicsScene::deleteSelectedMarkers()
     {
         auto markerItem = dynamic_cast<GSICommonObject*>(item);
         if (markerItem != nullptr)
-            markerStorage.deleteMarker(markerItem->getMapMarker());
+        {
+            auto mapMarker = markerItem->getMapMarker();
+            if (mapMarker->templateGUID() != ArtillerySalvoCenterMarkerTemplateGUID)
+                markerStorage.deleteMarker(markerItem->getMapMarker());
+        }
     }
 }
 
