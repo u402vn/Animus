@@ -1796,7 +1796,7 @@ Speed Multiplier</source>
 <context>
     <name>MapMarker</name>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="88"/>
+        <location filename="../Map/MarkerStorageItems.cpp" line="98"/>
         <source>%1
 %2
 %3
@@ -2031,6 +2031,7 @@ Y:%6%7</source>
     </message>
     <message>
         <location filename="../Map/MarkerThesaurus.cpp" line="284"/>
+        <location filename="../Map/MarkerThesaurus.cpp" line="288"/>
         <source>Target</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2188,22 +2189,22 @@ Y:%6%7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="278"/>
+        <location filename="../Map/MarkerStorageItems.cpp" line="7"/>
         <source>Unspecified</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="279"/>
+        <location filename="../Map/MarkerStorageItems.cpp" line="8"/>
         <source>Defeat Required</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="280"/>
+        <location filename="../Map/MarkerStorageItems.cpp" line="9"/>
         <source>Trial Shot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="281"/>
+        <location filename="../Map/MarkerStorageItems.cpp" line="10"/>
         <source>Real Shot</source>
         <translation type="unfinished"></translation>
     </message>

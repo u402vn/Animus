@@ -3,6 +3,19 @@
 
 int TargetMapMarker::_lastTargetNumber = 0;
 
+static const QMap <int, QString> mapArtillerySpotterStateCaptions {
+    { ArtillerySpotterState::Unspecified,       QObject::tr("Unspecified") },
+    { ArtillerySpotterState::DefeatRequired,    QObject::tr("Defeat Required") },
+    { ArtillerySpotterState::TrialShot,         QObject::tr("Trial Shot") },
+    { ArtillerySpotterState::RealShot,          QObject::tr("Real Shot") } };
+
+
+const QMap<int, QString> MapArtillerySpotterStateCaptions()
+{
+    return mapArtillerySpotterStateCaptions;
+}
+
+
 // ----------------------------------------------------------------------------------------
 
 bool MapMarker::dirty() const
@@ -80,7 +93,7 @@ const QString MapMarker::hint() const
 
     QString spotterStateCaption = _artillerySpotterState == ArtillerySpotterState::Unspecified ?
                 QString("") :
-                QString("\n%1").arg(MapArtillerySpotterStateCaptions()[_artillerySpotterState]);
+                QString("\n%1").arg(mapArtillerySpotterStateCaptions[_artillerySpotterState]);
 
     QString hint = QString(tr("%1\n%2\n%3\nHeight: %4\nX:%5\nY:%6%7"))
             .arg(_description)
@@ -127,6 +140,8 @@ TargetMapMarker::TargetMapMarker(QObject *parent, const QString &guid, const Wor
         _tag = ++TargetMapMarker::_lastTargetNumber;
     else
         TargetMapMarker::_lastTargetNumber = qMax(tag, TargetMapMarker::_lastTargetNumber);
+
+    //initImageWithTag();
 
     _isHighlighted = false;
     const QString tamplateDescription = mapMarkerTemplate->description();
@@ -249,6 +264,8 @@ void PartyMapMarker::setNextParty()
     }
 }
 
+// ----------------------------------------------------------------------------------------
+
 const QList<SAMInfo *> SAMMapMarker::samInfoList()
 {
     return _mapMarkerTemplate->samInfoList();
@@ -266,15 +283,15 @@ SAMInfo SAMMapMarker::getSAMinfo(double height)
     return _mapMarkerTemplate->getSAMinfo(height);
 }
 
+// ----------------------------------------------------------------------------------------
 
-
-const QMap<int, QString> MapArtillerySpotterStateCaptions()
+ArtillerySalvoCenterMarker::ArtillerySalvoCenterMarker(QObject *parent, const QString &guid, const WorldGPSCoord &gpsCoord, MarkerTemplate *mapMarkerTemplate) :
+    MapMarker(parent, guid, gpsCoord, mapMarkerTemplate, 0, "", ArtillerySpotterState::EllipseCenter)
 {
-    static const QMap <int, QString> MapArtillerySpotterStateCaptions {
-        { ArtillerySpotterState::Unspecified,       QObject::tr("Unspecified") },
-        { ArtillerySpotterState::DefeatRequired,    QObject::tr("Defeat Required") },
-        { ArtillerySpotterState::TrialShot,         QObject::tr("Trial Shot") },
-        { ArtillerySpotterState::RealShot,          QObject::tr("Real Shot") } };
 
-    return MapArtillerySpotterStateCaptions;
 }
+
+
+
+
+

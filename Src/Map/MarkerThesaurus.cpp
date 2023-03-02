@@ -284,6 +284,10 @@ const QList<MarkerTemplate *> *MarkerThesaurus::getMarkerTemplates()
                                tr("Target"), QPixmap(":/target_marker.png"), QPixmap(":/highlighted_target_marker.png"), false,
                                QByteArray());
 
+    appendMarkerTemplateToHash(ArtillerySalvoCenterMarkerTemplateGUID, ArtillerySalvoCenterMarkerTemplateGUID, \
+                               tr("Target"), QPixmap(":/highlighted_target_marker.png"), QPixmap(":/highlighted_target_marker.png"), false,
+                               QByteArray());
+
     QSqlQuery selectQuery = EXEC_SQL(_markerThesaurusDatabase,
                                      "SELECT GUID, ParentGUID, Description, MarkerImage, UseParty, SAMData FROM "
                                      "MarkerThesaurus WHERE DeletedDT IS NULL ORDER BY OrderNo");

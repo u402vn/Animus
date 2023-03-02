@@ -16,9 +16,11 @@ class MarkerStorage final : public QObject
     QSqlDatabase _mapMarkerDatabase;
     QList<MapMarker *> _mapMarkers;
     QList<TargetMapMarker *> _targetMapMarkers;
+    ArtillerySalvoCenterMarker *_salvoCenterMarker;
     bool _mapMarkersLoaded;
     ArtillerySpotter _artillerySpotter;
 
+    void updateArtillerySalvoCenterMarker();
     void loadMarkerList();
     MapMarker *addMapMarkerToList(const QString &templateGUID, const QString &markerGUID, const WorldGPSCoord &gpsCoord,
                                   int markerTag, const QString &description, MarkerParty party, ArtillerySpotterState artillerySpotterState);
@@ -55,7 +57,7 @@ signals:
     void onMarkerListUpdated(const QList<MapMarker *> *markers);
 private slots:
     void onTargetMapMarkerHighlightedChanged_Internal();
-    void onMapMarkerCoodChanged_Internal();
+    void onTargetMapMarkerCoodChanged_Internal();
 };
 
 #endif // MARKERSTORAGE_H

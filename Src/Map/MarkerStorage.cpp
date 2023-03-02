@@ -39,6 +39,7 @@ MarkerStorage::MarkerStorage(QObject *parent) : QObject(parent),
     EXEC_SQL(_mapMarkerDatabase, "ALTER TABLE MapMarker ADD COLUMN ArtillerySpotterState INTEGER");
 
     _mapMarkersLoaded = false;
+    _salvoCenterMarker = nullptr;
     startTimer(1000); //save dirty markers
 
     if (applicationSettings.EnableArtilleryMountNotification)
@@ -117,9 +118,16 @@ MapMarker *MarkerStorage::addMapMarkerToList(const QString &templateGUID, const 
     {
         auto targetMapMarker = new TargetMapMarker(this, markerGUID, gpsCoord, mapMarkerTemplate, markerTag, description, artillerySpotterState);
         connect(targetMapMarker, &MapMarker::onDisplayedImageChanged, this, &MarkerStorage::onTargetMapMarkerHighlightedChanged_Internal);
-        connect(targetMapMarker, &MapMarker::onCoodChanged, this, &MarkerStorage::onMapMarkerCoodChanged_Internal);
+        connect(targetMapMarker, &MapMarker::onCoodChanged, this, &MarkerStorage::onTargetMapMarkerCoodChanged_Internal);
         _targetMapMarkers.append(targetMapMarker);
         mapMarker = targetMapMarker;
+
+        updateArtillerySalvoCenterMarker();
+    }
+    else if (mapMarkerTemplate->GUID() == ArtillerySalvoCenterMarkerTemplateGUID)
+    {
+        _salvoCenterMarker = new ArtillerySalvoCenterMarker(this, markerGUID, gpsCoord, mapMarkerTemplate);
+        mapMarker = _salvoCenterMarker;
     }
     else if (mapMarkerTemplate->samInfoList().count() > 0)
     {
@@ -194,7 +202,10 @@ void MarkerStorage::deleteMarker(MapMarker *mapMarker)
     _mapMarkers.removeOne(mapMarker);
 
     if (mapMarker->templateGUID() == TargetMarkerTemplateGUID)
+    {
         _targetMapMarkers.removeOne(dynamic_cast<TargetMapMarker*>(mapMarker));
+        updateArtillerySalvoCenterMarker();
+    }
 
     //???    TargetMapMarker::_lastTargetNumber = 0;
     //???    foreach (auto marker, _targetMapMarkers)
@@ -207,14 +218,44 @@ void MarkerStorage::deleteMarker(MapMarker *mapMarker)
     //todo remove mapMarker from memory
 }
 
+void MarkerStorage::updateArtillerySalvoCenterMarker()
+{
+    if (!_mapMarkersLoaded)
+        return; //loading in progress
+
+    if (_targetMapMarkers.count() > 1)
+    {
+        double lat = 0, lon = 0, hmsl = 0;
+
+        foreach (auto targetMarker, _targetMapMarkers)
+        {
+            lat += targetMarker->gpsCoord().lat;
+            lon += targetMarker->gpsCoord().lon;
+            hmsl += targetMarker->gpsCoord().hmsl;
+        }
+
+        int i = _targetMapMarkers.count();
+
+        WorldGPSCoord gpsCoord(lat / i, lon / i, hmsl / i);
+
+        if (_salvoCenterMarker == nullptr)
+            createNewMarker(ArtillerySalvoCenterMarkerTemplateGUID, gpsCoord);
+        else
+            _salvoCenterMarker->setGPSCoord(gpsCoord);
+    }
+    else if (_salvoCenterMarker != nullptr)
+    {
+        deleteMarker(_salvoCenterMarker);
+        _salvoCenterMarker = nullptr;
+    }
+}
+
 void MarkerStorage::loadMarkerList()
 {
     if (_mapMarkersLoaded)
         return;
 
     EnterProc("MarkerStorage::loadMarkerList");
-
-    _mapMarkersLoaded = true;
 
     QSqlQuery selectQuery = EXEC_SQL(_mapMarkerDatabase,
                                      "SELECT GUID, TemplateGUID, Latitude, Longitude, Hmsl, "
@@ -235,6 +276,11 @@ void MarkerStorage::loadMarkerList()
 
         addMapMarkerToList(templateGUID, markerGUID, gpsCoord, markerTag, description, markerParty, artillerySpotterState);
     }
+
+    _mapMarkersLoaded = true;
+
+    updateArtillerySalvoCenterMarker();
+
     emit onMarkerListUpdated(&_mapMarkers);
 }
 
@@ -295,9 +341,10 @@ void MarkerStorage::onTargetMapMarkerHighlightedChanged_Internal()
     emit onMarkerListUpdated(&_mapMarkers);
 }
 
-void MarkerStorage::onMapMarkerCoodChanged_Internal()
+void MarkerStorage::onTargetMapMarkerCoodChanged_Internal()
 {
     auto targetMarker = qobject_cast<TargetMapMarker *>(sender());
+    updateArtillerySalvoCenterMarker();
     emit onMapMarkerCoordChanged(targetMarker->GUID(), targetMarker->gpsCoord());
     emit onMarkerListUpdated(&_mapMarkers);
 }

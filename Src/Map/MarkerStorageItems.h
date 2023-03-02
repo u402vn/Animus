@@ -82,7 +82,6 @@ class SAMMapMarker final: public PartyMapMarker
 {
 private:
     Q_OBJECT
-
 protected:
     const QList<SAMInfo*> samInfoList();
 public:
@@ -104,6 +103,15 @@ public:
     const QPixmap displayedImage();
     bool isHighlighted();
     void setHighlighted(bool value);
+};
+
+
+class ArtillerySalvoCenterMarker: public MapMarker
+{
+private:
+    Q_OBJECT
+public:
+    explicit ArtillerySalvoCenterMarker(QObject *parent, const QString &guid, const WorldGPSCoord &gpsCoord, MarkerTemplate *mapMarkerTemplate );
 };
 
 #endif // MARKERSTORAGEITEMS_H
