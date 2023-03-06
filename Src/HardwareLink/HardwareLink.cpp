@@ -2,6 +2,7 @@
 #include <QtGlobal>
 #include <QTimer>
 #include <QtMath>
+#include <QRegExp>
 #include "HardwareLink/MUSVPhotoCommandBuilder.h"
 #include "HardwareLink/OtusCommonCommandBuilder.h"
 #include "EnterProc.h"
@@ -688,9 +689,32 @@ void HardwareLink::processCamTelemetryPendingDatagrams()
 
 void HardwareLink::processExtTelemetryPendingDatagrams()
 {
+    QByteArray datagram;
+    qint64 messageSize = 0;
+
     while (_udpExtTelemetrySocket.hasPendingDatagrams())
     {
+        messageSize = _udpExtTelemetrySocket.pendingDatagramSize();
+        datagram.resize(messageSize);
+        _udpExtTelemetrySocket.readDatagram(datagram.data(), messageSize);
 
+        QString datagramAsString = QString(datagram);
+        QRegExp rx("Temp = (.+) C");
+        rx.setMinimal(true);
+
+        int i = rx.indexIn(datagramAsString);
+
+        while(i != -1)
+        {
+            //qDebug() << rx.capturedTexts() << rx.cap(1);
+            QString strValue = rx.cap(1);
+            bool ok = false;
+            double value = strValue.toDouble(&ok);
+            if (ok)
+                _extendedTelemetryDataFrame.AtmosphereTemperature = value;
+            i = rx.indexIn(datagramAsString, i) + rx.cap(0).length();
+        }
+        //qDebug() << datagramAsString;
     }
 }
 
