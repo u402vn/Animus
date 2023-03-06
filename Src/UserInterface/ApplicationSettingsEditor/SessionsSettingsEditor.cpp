@@ -133,6 +133,8 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
 
     auto edUAVTelemetryUDPPort = CommonWidgetUtils::makePortEditor(this);
 
+    auto chkExtTelemetryUDP = new QCheckBox(tr("Extended Telemetry UDP"), this);
+    auto edExtTelemetryUDPPort = CommonWidgetUtils::makePortEditor(this);
 
     auto chkCamTelemetryUDP = new QCheckBox(tr("Camera Telemetry UDP"), this);
     auto edCamTelemetryUDPPort = CommonWidgetUtils::makePortEditor(this);
@@ -160,6 +162,10 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     row++;
 
     dataReceptionLayout->addWidget(CommonWidgetUtils::createSeparator(this),     row, 0, 1, 4);
+    row++;
+
+    dataReceptionLayout->addWidget(chkExtTelemetryUDP,              row, 0, 1, 1);
+    dataReceptionLayout->addWidget(edExtTelemetryUDPPort,           row, 2, 1, 1);
     row++;
 
     dataReceptionLayout->addWidget(chkCamTelemetryUDP,              row, 0, 1, 1);
@@ -375,11 +381,12 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     _association.addBinding(&applicationSettings.OVRDisplayTelemetry,               chkOVRDisplayTelemetry);
     _association.addBinding(&applicationSettings.OVRDisplayTargetRectangle,         chkOVRDisplayTargetRectangle);
     _association.addBinding(&applicationSettings.OVRGimbalIndicatorType,            cbOVRGimbalIndicatorType);
-    _association.addBinding(&applicationSettings.OVRGimbalIndicatorSize,            sbOVRGimbalIndicatorSize);    
-
+    _association.addBinding(&applicationSettings.OVRGimbalIndicatorSize,            sbOVRGimbalIndicatorSize);
     _association.addBinding(&applicationSettings.UAVTelemetrySourceType,            gbUAVTelemetrySourceType);
     _association.addBinding(&applicationSettings.TelemetryDataFormat,               cbUAVTelemetryFormat);
     _association.addBinding(&applicationSettings.UAVTelemetryUDPPort,               edUAVTelemetryUDPPort);
+    _association.addBinding(&applicationSettings.UseExtTelemetryUDP,                chkExtTelemetryUDP);
+    _association.addBinding(&applicationSettings.ExtTelemetryUDPPort,               edExtTelemetryUDPPort);
     _association.addBinding(&applicationSettings.UseCamTelemetryUDP,                chkCamTelemetryUDP);
     _association.addBinding(&applicationSettings.CamTelemetryUDPPort,               edCamTelemetryUDPPort);
 

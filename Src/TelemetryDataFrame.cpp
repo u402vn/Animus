@@ -70,3 +70,8 @@ void CameraTelemetryDataFrame::applyToTelemetryDataFrame(TelemetryDataFrame &tel
     telemetryDataFrame.RangefinderDistance = RangefinderDistance;
     telemetryDataFrame.RangefinderTemperature = RangefinderTemperature;
 }
+
+void ExtendedTelemetryDataFrame::applyToTelemetryDataFrame(TelemetryDataFrame &telemetryDataFrame)
+{
+        telemetryDataFrame.AtmosphereTemperature = AtmosphereTemperature;
+}

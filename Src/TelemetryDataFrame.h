@@ -180,6 +180,24 @@ struct CameraTelemetryDataFrame final
 };
 
 
+struct ExtendedTelemetryDataFrame final
+{
+    double AtmosphereTemperature;
+
+    void clear()
+    {
+        memset(this, 0, sizeof(ExtendedTelemetryDataFrame));
+    }
+
+    ExtendedTelemetryDataFrame()
+    {
+        clear();
+    }
+
+    void applyToTelemetryDataFrame(TelemetryDataFrame &telemetryDataFrame);
+};
+
+
 double encoderAngleDegree(qint32 camEncoderValue);
 
 #endif // TELEMETRYDATAFRAME_H

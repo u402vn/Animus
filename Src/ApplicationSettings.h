@@ -206,7 +206,9 @@ public:
     ApplicationPreferenceEnum<UAVTelemetryDataFormats> TelemetryDataFormat;
     ApplicationPreferenceInt UAVTelemetryUDPPort;
     ApplicationPreferenceBool UseCamTelemetryUDP;
-    ApplicationPreferenceInt CamTelemetryUDPPort;
+    ApplicationPreferenceInt CamTelemetryUDPPort;    
+    ApplicationPreferenceBool UseExtTelemetryUDP;
+    ApplicationPreferenceInt ExtTelemetryUDPPort;
     ApplicationPreferenceInt VideoLagFromTelemetry;
     ApplicationPreferenceBool EnableForwarding;
     ApplicationPreferenceString VideoForwardingAddress;

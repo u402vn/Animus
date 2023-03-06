@@ -30,6 +30,7 @@ private:
 
     QUdpSocket _udpUAVTelemetrySocket;
     QUdpSocket _udpCamTelemetrySocket;
+    QUdpSocket _udpExtTelemetrySocket;
     QUdpSocket _udpCommandSocket;
     QSerialPort _serialCommandPort;
 
@@ -48,6 +49,8 @@ private:
     quint32 _udpUAVTelemetryPort;
     bool _useCamTelemetryUDP;
     quint32 _udpCamTelemetryPort;
+    bool _useExtTelemetryUDP;
+    quint32 _udpExtTelemetryPort;
 
     QHostAddress _udpCommandAddress;
     quint32 _udpCommandPort;
@@ -70,6 +73,7 @@ private:
 
     CameraTelemetryDataFrame _cameraTelemetryDataFrame;
     EmulatorTelemetryDataFrame _emulatorTelemetryDataFrame;
+    ExtendedTelemetryDataFrame _extendedTelemetryDataFrame;
 
     quint32 _telemetryFrameNumber;
     quint32 _videoFrameNumber;
@@ -161,6 +165,7 @@ public slots:
 private slots:
     void processUAVTelemetryPendingDatagrams();
     void processCamTelemetryPendingDatagrams();
+    void processExtTelemetryPendingDatagrams();
     void readSerialPortMUSVData();
     virtual void videoFrameReceivedInternal(const QImage &frame);
     void doActivateCatapult();

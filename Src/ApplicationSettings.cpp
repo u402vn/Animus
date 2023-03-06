@@ -75,6 +75,10 @@ ApplicationSettings::ApplicationSettings() : ApplicationSettingsRoot(),
     UAVTelemetryUDPPort(this, "Sessions/TelemetryUDPPort", 45560),
     UseCamTelemetryUDP(this, "Sessions/UseCamTelemetryUDP", false),
     CamTelemetryUDPPort(this, "Sessions/CamTelemetryUDPPort", 50011),
+
+    UseExtTelemetryUDP(this, "Sessions/UseExtTelemetryUDP", false),
+    ExtTelemetryUDPPort(this, "Sessions/ExtTelemetryUDPPort", 1122),
+
     VideoLagFromTelemetry(this, "Sessions/VideoLagFromTelemetry", 0),
     EnableForwarding(this, "Sessions/EnableForwarding", false),
     VideoForwardingAddress(this, "Sessions/VideoForwardingAddress", "192.168.1.100"),

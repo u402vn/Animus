@@ -61,6 +61,9 @@ HardwareLink::HardwareLink(QObject *parent) : VideoLink(parent)
     _useCamTelemetryUDP = applicationSettings.UseCamTelemetryUDP;
     _udpCamTelemetryPort = applicationSettings.CamTelemetryUDPPort;
 
+    _useExtTelemetryUDP = applicationSettings.UseExtTelemetryUDP;
+    _udpExtTelemetryPort = applicationSettings.ExtTelemetryUDPPort;
+
     _videoLagFromTelemetry = applicationSettings.VideoLagFromTelemetry;
 
     _commandTransports = applicationSettings.CommandTransport;
@@ -91,6 +94,9 @@ HardwareLink::HardwareLink(QObject *parent) : VideoLink(parent)
     connect(&_udpUAVTelemetrySocket, &QUdpSocket::readyRead, this, &HardwareLink::processUAVTelemetryPendingDatagrams, Qt::ANIMUS_CONNECTION_TYPE);
 
     connect(&_udpCamTelemetrySocket, &QUdpSocket::readyRead, this, &HardwareLink::processCamTelemetryPendingDatagrams, Qt::ANIMUS_CONNECTION_TYPE);
+
+    connect(&_udpExtTelemetrySocket, &QUdpSocket::readyRead, this, &HardwareLink::processExtTelemetryPendingDatagrams, Qt::ANIMUS_CONNECTION_TYPE);
+
 
     connect(&_serialCommandPort, &QSerialPort::readyRead, this, &HardwareLink::readSerialPortMUSVData);
 
@@ -345,6 +351,9 @@ void HardwareLink::updateTelemetryValues(TelemetryDataFrame &telemetryDataFrame)
     if (_useCamTelemetryUDP || (_commandTransports == CommandTransports::Serial)) //???todo refactor
         _cameraTelemetryDataFrame.applyToTelemetryDataFrame(telemetryDataFrame);
 
+    if (_useExtTelemetryUDP)
+        _extendedTelemetryDataFrame.applyToTelemetryDataFrame(telemetryDataFrame);
+
     //??? Update active optical system
     telemetryDataFrame.OpticalSystemId = _opticalSystemId;
 
@@ -410,6 +419,12 @@ void HardwareLink::open()
         {
             _udpCamTelemetrySocket.bind(_udpCamTelemetryPort, QUdpSocket::DefaultForPlatform);
             _udpCamTelemetrySocket.setSocketOption(QAbstractSocket::ReceiveBufferSizeSocketOption, 10000); // -1 == Unlimited ???
+        }
+
+        if (_useExtTelemetryUDP)
+        {
+            _udpExtTelemetrySocket.bind(_udpExtTelemetryPort, QUdpSocket::DefaultForPlatform);
+            _udpExtTelemetrySocket.setSocketOption(QAbstractSocket::ReceiveBufferSizeSocketOption, 10000); // -1 == Unlimited ???
         }
 
         if (_uavTelemetrySourceTypes == UAVTelemetrySourceTypes::UDPChannel)
@@ -668,6 +683,14 @@ void HardwareLink::processCamTelemetryPendingDatagrams()
         _emulatorTelemetryDataFrame.applyToTelemetryDataFrame(telemetryDataFrame);
         updateTelemetryValues(telemetryDataFrame);
         delayedTelemetryDataFrameProcessing(telemetryDataFrame);
+    }
+}
+
+void HardwareLink::processExtTelemetryPendingDatagrams()
+{
+    while (_udpExtTelemetrySocket.hasPendingDatagrams())
+    {
+
     }
 }
 

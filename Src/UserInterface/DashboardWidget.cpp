@@ -77,6 +77,8 @@ DashboardWidget::DashboardWidget(QWidget *parent) : QWidget(parent)
     }
     _paramNames[RowWindDirection] = tr("Wind Direction");
     _paramNames[RowWindSpeed] = tr("Wind Speed");
+    _paramNames[RowAtmosphereTemperature] = tr("Atmosphere Temperature");
+    _paramNames[RowAtmospherePressure] = tr("Atmosphere Pressure");
     _paramNames[RowStabilizedCenterX] = tr("Stabilized Center X");
     _paramNames[RowStabilizedCenterY] = tr("Stabilized Center Y");
     _paramNames[RowStabilizedRotationAngle] = tr("Stabilized Rotation Angle");
@@ -222,6 +224,8 @@ void DashboardWidget::processTelemetry(const TelemetryDataFrame &telemetryDataFr
     setTelemetryTableRowDouble(RowRangefinderTemperature, telemetryDataFrame.RangefinderTemperature, 1);
     setTelemetryTableRowDouble(RowWindDirection, constrainAngle360(telemetryDataFrame.WindDirection), 0);
     setTelemetryTableRowDouble(RowWindSpeed, telemetryDataFrame.WindSpeed, 1);
+    setTelemetryTableRowDouble(RowAtmosphereTemperature, telemetryDataFrame.AtmosphereTemperature, 1);
+    setTelemetryTableRowDouble(RowAtmospherePressure, telemetryDataFrame.AtmospherePressure, 1);
     setTelemetryTableRowDouble(RowStabilizedCenterX, telemetryDataFrame.StabilizedCenterX, 1);
     setTelemetryTableRowDouble(RowStabilizedCenterY, telemetryDataFrame.StabilizedCenterY, 1);
     setTelemetryTableRowDouble(RowStabilizedRotationAngle, telemetryDataFrame.StabilizedRotationAngle, 1);
