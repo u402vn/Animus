@@ -3,8 +3,6 @@
 #include "lz4.h"
 #include "EnterProc.h"
 
-const int FPS_PERIOD = 60;
-
 XPlaneVideoReceiver::XPlaneVideoReceiver(QObject *parent, bool verticalMirror, QHostAddress addr, quint16 udpPort) : QObject(parent)
 {
     EnterProcStart("XPlaneVideoReceiver::XPlaneVideoReceiver");
@@ -69,23 +67,17 @@ void XPlaneVideoReceiverWorker::startProcessing()
     connect(_tcpSocket, &QTcpSocket::disconnected, this, &XPlaneVideoReceiverWorker::socketDisconnected);
 
     _reconnectionTimer = new QTimer(this);
-    _fpsTimer = new QTimer(this);
-
-    connect(_fpsTimer, &QTimer::timeout, [&](){
-        qDebug() << "Frames received per second: " << static_cast<float>(_receivedFrameCount) / FPS_PERIOD;
-        _receivedFrameCount = 0;
-    });
 
     _tcpSocket->connectToHost(_address, _port, QIODevice::ReadOnly);
 }
 
 #pragma pack(1)
-    struct XPLANE_PACKET {
-        quint32 frameId;
-        quint32 frameTotalSize;
-        quint16 framePartNo;
-        quint8  frameData[XPLANE_PACKET_CHUNKSIZE];
-    };
+struct XPLANE_PACKET {
+    quint32 frameId;
+    quint32 frameTotalSize;
+    quint16 framePartNo;
+    quint8  frameData[XPLANE_PACKET_CHUNKSIZE];
+};
 #pragma pack()
 
 void XPlaneVideoReceiverWorker::readVideoData()
@@ -120,7 +112,6 @@ void XPlaneVideoReceiverWorker::readVideoData()
                     rgb32Image = rgb32Image.mirrored(false, true);
 
                 emit frameAvailable(rgb32Image);
-                ++_receivedFrameCount;
             };
 
             _tcpBuffer.remove(0, sizeof(XPLANE_PACKET));
@@ -146,13 +137,10 @@ void XPlaneVideoReceiverWorker::socketError(QAbstractSocket::SocketError socketE
 void XPlaneVideoReceiverWorker::socketConnected()
 {
     qDebug() << "XPlane Video Socket connected";
-    _receivedFrameCount = 0;
-    _fpsTimer->start(FPS_PERIOD * 1000);
 }
 
 void XPlaneVideoReceiverWorker::socketDisconnected()
 {
     qDebug() << "XPlane Video Socket disconnected";
-    _fpsTimer->stop();
     _tcpBuffer.clear();
 }

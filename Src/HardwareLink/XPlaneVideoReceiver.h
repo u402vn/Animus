@@ -24,9 +24,6 @@ class XPlaneVideoReceiverWorker final : public QObject
     QByteArray _tcpBuffer;
     QTimer * _reconnectionTimer;
 
-    QTimer * _fpsTimer;
-    int _receivedFrameCount;
-
     quint8 * _compressedData;
     qint32 _compressedDataLength;
     quint8 * _imageData;

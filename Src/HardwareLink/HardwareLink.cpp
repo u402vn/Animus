@@ -98,8 +98,15 @@ HardwareLink::HardwareLink(QObject *parent) : VideoLink(parent)
 
     connect(&_udpExtTelemetrySocket, &QUdpSocket::readyRead, this, &HardwareLink::processExtTelemetryPendingDatagrams, Qt::ANIMUS_CONNECTION_TYPE);
 
-
     connect(&_serialCommandPort, &QSerialPort::readyRead, this, &HardwareLink::readSerialPortMUSVData);
+
+    _fpsTimer = new QTimer(this);
+    connect(_fpsTimer, &QTimer::timeout, [&]()
+    {
+        _receivedFrameCountPrevSec = _videoFrameNumber - _videoFrameNumberPrevSec;
+        _videoFrameNumberPrevSec = _videoFrameNumber;
+    });
+    _fpsTimer->start(1000);
 
     _camConnectionOn = false;
     _telemetryConnectionOn = false;
@@ -316,6 +323,7 @@ void HardwareLink::notifyDataReceived()
 {
     _currentTelemetryDataFrame.VideoFrameNumber = _videoFrameNumber;
     _currentTelemetryDataFrame.SessionTimeMs = getSessionTimeMs();
+    _currentTelemetryDataFrame.VideoFPS = _receivedFrameCountPrevSec;
 
     updateTrackerValues(_currentTelemetryDataFrame);
 
@@ -405,6 +413,9 @@ void HardwareLink::open()
     _telemetryFrameNumber = 0;
     _currentTelemetryDataFrame.clear();
     _cameraTelemetryDataFrame.clear();
+
+    _videoFrameNumberPrevSec = 0;
+    _receivedFrameCountPrevSec = 0;
 
     _emulatorTelemetryDataFrame.applyToTelemetryDataFrame(_currentTelemetryDataFrame);
     updateTelemetryValues(_currentTelemetryDataFrame);
@@ -706,7 +717,6 @@ void HardwareLink::processExtTelemetryPendingDatagrams()
 
         while(i != -1)
         {
-            //qDebug() << rx.capturedTexts() << rx.cap(1);
             QString strValue = rx.cap(1);
             bool ok = false;
             double value = strValue.toDouble(&ok);
@@ -714,7 +724,6 @@ void HardwareLink::processExtTelemetryPendingDatagrams()
                 _extendedTelemetryDataFrame.AtmosphereTemperature = value;
             i = rx.indexIn(datagramAsString, i) + rx.cap(0).length();
         }
-        //qDebug() << datagramAsString;
     }
 }
 

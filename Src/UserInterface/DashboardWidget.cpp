@@ -85,6 +85,7 @@ DashboardWidget::DashboardWidget(QWidget *parent) : QWidget(parent)
     _paramNames[RowTelemetryFrameNumber] = tr("Telemetry Frame");
     _paramNames[RowVideoFrameNumber] = tr("Video Frame");
     _paramNames[RowSessionTime] = tr("Session Time");
+    _paramNames[RowVideoFPS] = tr("Video FPS");
     _paramNames[RowCalculatedGroundLevel] = tr("Ground Level");
     _paramNames[RowOpticalSystem] = tr("Optical System");
 
@@ -232,6 +233,7 @@ void DashboardWidget::processTelemetry(const TelemetryDataFrame &telemetryDataFr
     setTelemetryTableRowDouble(RowTelemetryFrameNumber, telemetryDataFrame.TelemetryFrameNumber, 0);
     setTelemetryTableRowDouble(RowVideoFrameNumber, telemetryDataFrame.VideoFrameNumber, 0);
     setTelemetryTableRowDouble(RowSessionTime, 0.001 * telemetryDataFrame.SessionTimeMs, 3);
+    setTelemetryTableRowDouble(RowVideoFPS, telemetryDataFrame.VideoFPS, 0);
     setTelemetryTableRowDoubleOrIncorrect(RowCalculatedRangefinderGPSLat, telemetryDataFrame.CalculatedRangefinderGPSLat, 6, INCORRECT_COORDINATE);
     setTelemetryTableRowDoubleOrIncorrect(RowCalculatedRangefinderGPSLon, telemetryDataFrame.CalculatedRangefinderGPSLon, 6, INCORRECT_COORDINATE);
     setTelemetryTableRowDoubleOrIncorrect(RowCalculatedRangefinderGPSHmsl, telemetryDataFrame.CalculatedRangefinderGPSHmsl, 1, INCORRECT_COORDINATE);

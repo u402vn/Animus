@@ -54,6 +54,8 @@ struct TelemetryDataFrame final
     double CalculatedTrackedTargetGPSLon;
     double CalculatedTrackedTargetGPSHmsl;
 
+    qint32 VideoFPS;
+
     static bool UseGimbalTelemetryOnlyForCalculation;
 
     float RangefinderDistance;      // Значение дистанции от дальномера

@@ -8,6 +8,7 @@
 #include <QTime>
 #include <QQueue>
 #include <QByteArray>
+#include <QTimer>
 #include <QTimerEvent>
 #include "TelemetryDataFrame.h"
 #include "HardwareLink/ExternalDataConsoleNotificator.h"
@@ -79,6 +80,10 @@ private:
     quint32 _videoFrameNumber;
 
     quint32 _videoLagFromTelemetry;
+
+    QTimer *_fpsTimer;
+    quint32 _videoFrameNumberPrevSec;
+    quint32 _receivedFrameCountPrevSec;
 
     bool _isCameraFixed;
     double _fixedCamPitch, _fixedCamRoll, _fixedCamYaw;
