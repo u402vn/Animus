@@ -710,18 +710,25 @@ void HardwareLink::processExtTelemetryPendingDatagrams()
         _udpExtTelemetrySocket.readDatagram(datagram.data(), messageSize);
 
         QString datagramAsString = QString(datagram);
-        QRegExp rx("Temp = (.+) C");
+        QRegExp rx("Temperature = (.+) C; Pressure = (.+) hPa");
         rx.setMinimal(true);
 
         int i = rx.indexIn(datagramAsString);
 
         while(i != -1)
         {
-            QString strValue = rx.cap(1);
             bool ok = false;
+
+            QString strValue = rx.cap(1);            
             double value = strValue.toDouble(&ok);
             if (ok)
                 _extendedTelemetryDataFrame.AtmosphereTemperature = value;
+
+            strValue = rx.cap(2);
+            value = strValue.toDouble(&ok);
+            if (ok)
+                _extendedTelemetryDataFrame.AtmospherePressure = value * 0.75006157584566; //convert hPa 2 mmHg
+
             i = rx.indexIn(datagramAsString, i) + rx.cap(0).length();
         }
     }

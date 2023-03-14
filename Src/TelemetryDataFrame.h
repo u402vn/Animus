@@ -185,6 +185,7 @@ struct CameraTelemetryDataFrame final
 struct ExtendedTelemetryDataFrame final
 {
     double AtmosphereTemperature;
+    double AtmospherePressure;
 
     void clear()
     {

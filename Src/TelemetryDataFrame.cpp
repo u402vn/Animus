@@ -74,4 +74,5 @@ void CameraTelemetryDataFrame::applyToTelemetryDataFrame(TelemetryDataFrame &tel
 void ExtendedTelemetryDataFrame::applyToTelemetryDataFrame(TelemetryDataFrame &telemetryDataFrame)
 {
         telemetryDataFrame.AtmosphereTemperature = AtmosphereTemperature;
+        telemetryDataFrame.AtmospherePressure = AtmospherePressure;
 }
