@@ -125,4 +125,14 @@ enum OSDTelemetryTimeFormat
     SessionTime
 };
 
+
+enum ArtillerySpotterState
+{
+    Unspecified = 0,
+    DefeatRequired = 1,
+    TrialShot = 2,
+    RealShot = 3,
+    EllipseCenter = 10
+};
+
 #endif // CONSTANTS

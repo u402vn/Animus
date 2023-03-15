@@ -3,10 +3,8 @@
 
 #include <QObject>
 #include "Common/CommonData.h"
-#include "MarkerStorageItems.h"
 #include "MarkerThesaurus.h"
-
-enum ArtillerySpotterState {Unspecified = 0, DefeatRequired = 1, TrialShot = 2, RealShot = 3, EllipseCenter = 10};
+#include "Constants.h"
 
 const QMap <int, QColor> MapArtillerySpotterStateColors {
     { ArtillerySpotterState::Unspecified,       QColor("#31363b") },

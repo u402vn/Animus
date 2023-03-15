@@ -160,7 +160,10 @@ MapMarker *MarkerStorage::createNewMarker(const QString &markerTemplateGUID, con
 {
     EnterProc("MarkerStorage::createNewMarker");
 
-    auto mapMarker = addMapMarkerToList(markerTemplateGUID, QUuid::createUuid().toString(), gpsCoord, 0, "", MarkerParty::Neutral, ArtillerySpotterState::Unspecified);
+    ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
+
+    auto mapMarker = addMapMarkerToList(markerTemplateGUID, QUuid::createUuid().toString(), gpsCoord, 0, "",
+                                        MarkerParty::Neutral, applicationSettings.LastTargetArtillerySpotterState.value());
 
     auto partyMapMarker = dynamic_cast<PartyMapMarker*>(mapMarker);
     MarkerParty markerParty = (partyMapMarker == nullptr ? MarkerParty::Neutral : partyMapMarker->getParty());
@@ -224,20 +227,21 @@ void MarkerStorage::updateArtillerySalvoCenterMarker()
     if (!_mapMarkersLoaded)
         return; //loading in progress
 
-    if (_targetMapMarkers.count() > 1)
-    {
-        double lat = 0, lon = 0, hmsl = 0;
+    int usedPointsCount = 0;
+    double lat = 0, lon = 0, hmsl = 0;
 
-        foreach (auto targetMarker, _targetMapMarkers)
+    foreach (auto targetMarker, _targetMapMarkers)
+        if (targetMarker->artillerySpotterState() == ArtillerySpotterState::TrialShot)
         {
             lat += targetMarker->gpsCoord().lat;
             lon += targetMarker->gpsCoord().lon;
             hmsl += targetMarker->gpsCoord().hmsl;
+            usedPointsCount++;
         }
 
-        int i = _targetMapMarkers.count();
-
-        WorldGPSCoord gpsCoord(lat / i, lon / i, hmsl / i);
+    if (usedPointsCount > 1)
+    {
+        WorldGPSCoord gpsCoord(lat / usedPointsCount, lon / usedPointsCount, hmsl / usedPointsCount);
 
         if (_salvoCenterMarker == nullptr)
             createNewMarker(ArtillerySalvoCenterMarkerTemplateGUID, gpsCoord);
@@ -343,6 +347,7 @@ void MarkerStorage::onTargetMapMarkerHighlightedChanged_Internal()
             if (marker != targetMarker)
                 marker->setHighlighted(false);
     }
+    updateArtillerySalvoCenterMarker();
     emit onTargetMapMarkerHighlightedChanged(targetMarker->GUID(), targetMarker->isHighlighted());
     emit onMarkerListUpdated(&_mapMarkers);
 }

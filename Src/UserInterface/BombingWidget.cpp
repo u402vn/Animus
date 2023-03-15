@@ -460,7 +460,12 @@ void QMarkerListWidget::mousePressEvent(QMouseEvent *event)
         else if (selectedAction == acChange)
             showCoordEditor();
         else if (artillerySpotterStateGroup.actions().contains(selectedAction))
-            markerItem->_mapMarker->setArtillerySpotterState(ArtillerySpotterState(selectedAction->data().toInt()));
+        {
+            auto state = ArtillerySpotterState(selectedAction->data().toInt());
+            markerItem->_mapMarker->setArtillerySpotterState(state);
+            ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
+            applicationSettings.LastTargetArtillerySpotterState = state;
+        }
     }
 }
 

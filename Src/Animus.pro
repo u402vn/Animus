@@ -8,7 +8,7 @@ QT       += core gui widgets svg multimedia multimediawidgets sql network concur
 
 TARGET = ANIMUS
 TEMPLATE = app
-VERSION = 1.4.5.9
+VERSION = 1.4.5.21
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 CONFIG   += precompile_header
@@ -26,6 +26,7 @@ SOURCES += main.cpp \
         UserInterface/Forms/HelpViewer.cpp \
 	UserInterface/Forms/DataConsole.cpp \
         UserInterface/Forms/EmulatorConsole.cpp \
+        UserInterface/Forms/WeatherView.cpp \
         UserInterface/Instruments/qfi_PFD.cpp\
         UserInterface/ApplicationSettingsEditor/CameraListSettingsEditor.cpp \
         UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp \
@@ -123,6 +124,7 @@ HEADERS  += stable.h \
         UserInterface/Forms/HelpViewer.h \
         UserInterface/Forms/DataConsole.h \
         UserInterface/Forms/EmulatorConsole.h \
+        UserInterface/Forms/WeatherView.h \
         UserInterface/Instruments/qfi_PFD.h\
         UserInterface/ApplicationSettingsEditor/CameraListSettingsEditor.h \
         UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.h \

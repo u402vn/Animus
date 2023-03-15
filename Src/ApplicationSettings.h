@@ -245,6 +245,7 @@ public:
     ApplicationPreferenceBool OSDShowCenterMark;
     ApplicationPreferenceBool OSDShowTelemetry;
     ApplicationPreferenceBool SoftwareStabilizationEnabled;
+    ApplicationPreferenceEnum<ArtillerySpotterState> LastTargetArtillerySpotterState;
 
     ApplicationPreferenceBool AskAboutQuitOnSaveSettings;
     ApplicationPreferenceBool AskAboutQuitOnCloseApp;
