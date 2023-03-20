@@ -3,9 +3,9 @@
 #include "EnterProc.h"
 #include "Common/CommonUtils.h"
 
-void SAMMarkerSceneItem::resizeToSceneScale(unsigned int sceneScale)
+void SAMMarkerSceneItem::resizeToSceneScale(quint8 sceneScale, const QList<double> &targetSizesForScales)
 {
-    GSICommonObject::resizeToSceneScale(sceneScale);
+    GSICommonObject::resizeToSceneScale(sceneScale, targetSizesForScales);
 }
 
 void SAMMarkerSceneItem::updatePosOnScene()

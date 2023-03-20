@@ -127,6 +127,7 @@ ApplicationSettings::ApplicationSettings() : ApplicationSettingsRoot(),
 
     LastUsedMapBaseSourceId(this, "Interface/LastUsedMapBaseSourceId", 3), // GoogleSatellite
     LastUsedMapHybridSourceId(this, "Interface/MapHybridSourceId", 8), // GoogleHybrid
+    TargetMarkerSizes(this, "TargetMarkerSizes",                         tr("Target Marker Sizes")),
     ViewFieldLineColor(this, "Interface/ViewFieldLineColor", QColor(Qt::red)),
     ViewFieldLineWidth(this, "Interface/ViewFieldLineWidth", 3),
     TrajectoryPathLineColor(this, "Interface/TrajectoryPathLineColor", QColor(Qt::blue)),

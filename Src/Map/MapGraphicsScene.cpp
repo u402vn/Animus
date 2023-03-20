@@ -15,6 +15,9 @@
 #include "EnterProc.h"
 #include "ApplicationSettings.h"
 
+const quint8 MINIMAL_MAP_ZOOM = 2;
+const quint8 MAXIMAL_MAP_ZOOM = 19;
+
 const QPointF coordAsScenePoint(const WorldGPSCoord &coords)
 {
     return ConvertGPS2GoogleXY(coords, DEFAULT_GOOGLE_SCALE_FOR_SCENE);
@@ -32,6 +35,10 @@ void MapGraphicsScene::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     _acBaseLayers->setText(tr("Map %1").arg(_mapTileContainer->getTileSourceName(_mapTileContainer->getMapBaseSourceId())));
     _acHybridLayers->setText(tr("Labels %1").arg(_mapTileContainer->getTileSourceName(_mapTileContainer->getMapHybridSourceId())));
+
+    double markerSize = _targetSizesForScales.at(_scale);
+    foreach (auto action, _groupMapTargetSize->actions())
+        action->setChecked(qFuzzyCompare(action->data().toDouble(), markerSize));
 
     _mainMenu->exec(event->screenPos());
 
@@ -77,20 +84,26 @@ GSICommonObject *MapGraphicsScene::findMarkerItemByGUID(const QString &markerGUI
     return nullptr;
 }
 
+void MapGraphicsScene::resizeMrkersForScale()
+{
+    foreach (auto item, _allMarkerItems)
+        item->resizeToSceneScale(_scale, _targetSizesForScales);
+}
+
 bool MapGraphicsScene::changeScaneScale(int delta)
 {
     int newScale = _scale + delta;
-    if (newScale > 19)
-        newScale = 19;
-    else if (newScale < 2)
-        newScale = 2;
+    if (newScale > MAXIMAL_MAP_ZOOM)
+        newScale = MAXIMAL_MAP_ZOOM;
+    else if (newScale < MINIMAL_MAP_ZOOM)
+        newScale = MINIMAL_MAP_ZOOM;
 
     if (newScale == _scale)
         return false;
     _scale = newScale;
 
-    foreach (auto item, _allMarkerItems)
-        item->resizeToSceneScale(_scale);
+    resizeMrkersForScale();
+
     return true;
 }
 
@@ -234,6 +247,32 @@ void MapGraphicsScene::initMainMenu()
 
     submenuLegend->addSeparator();
 
+    auto submenuMapTargetSizes = new QMenu(parentWidget);
+    auto acMapTargetSizes = CommonWidgetUtils::createMenuAction(tr("Target Sizes"), submenuLegend);
+    acMapTargetSizes->setMenu(submenuMapTargetSizes);
+
+    _groupMapTargetSize = new QActionGroup(this);
+    for (int i = 100; i > 20; i -= 5)
+    {
+        QString caption = QString("%1 %").arg(i);
+        double value = 0.01 * i;
+        auto action = CommonWidgetUtils::createCheckableMenuGroupAction(caption, false,
+                                                                        _groupMapTargetSize, acMapTargetSizes->menu(), value);
+
+        connect(action, &QAction::triggered, this, [action, this](bool checked)
+        {
+            if (checked)
+            {
+                ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
+                _targetSizesForScales[_scale] = action->data().toDouble();
+                applicationSettings.TargetMarkerSizes.setValue(_targetSizesForScales);
+                resizeMrkersForScale();
+            }
+        });
+    }
+
+    submenuLegend->addSeparator();
+
     _acShowUAVPath = CommonWidgetUtils::createCheckableMenuSingleAction(tr("Show UAV Path"), true, submenuLegend);
     connect(_acShowUAVPath, &QAction::triggered, this, [=](bool checked)
     {
@@ -319,7 +358,13 @@ MapGraphicsScene::MapGraphicsScene(QObject *parent) :
     // init map area on graphics scene
     this->addRect(0, 0, 262143, 262143); //magic numbers of tile count, next (524287, 524287)
 
-    //init popup menu
+    // init Target Marker Sizes
+    _targetSizesForScales = applicationSettings.TargetMarkerSizes;
+    if (_targetSizesForScales.size() < MAXIMAL_MAP_ZOOM)
+        for (quint8 i = _targetSizesForScales.size(); i <= MAXIMAL_MAP_ZOOM; i++)
+            _targetSizesForScales.append(0);
+
+    // init popup menu
     initMainMenu();
 }
 
@@ -470,7 +515,7 @@ void MapGraphicsScene::addMapMarkerToScene(MapMarker *mapMarker)
                 new GSICommonObject(mapMarker, nullptr) :
                 new SAMMarkerSceneItem(samMapMarker, nullptr);
     this->addItem(newMarkerItem);
-    newMarkerItem->resizeToSceneScale(_scale);
+    newMarkerItem->resizeToSceneScale(_scale, _targetSizesForScales);
     _allMarkerItems.append(newMarkerItem);
 
     //newMarkerItem->setZValue(i);

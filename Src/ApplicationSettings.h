@@ -259,6 +259,7 @@ public:
 
     ApplicationPreferenceInt LastUsedMapBaseSourceId;
     ApplicationPreferenceInt LastUsedMapHybridSourceId;
+    ApplicationPreferenceDoubleList TargetMarkerSizes;
     ApplicationPreferenceColor ViewFieldLineColor;
     ApplicationPreferenceInt ViewFieldLineWidth;
     ApplicationPreferenceColor TrajectoryPathLineColor;

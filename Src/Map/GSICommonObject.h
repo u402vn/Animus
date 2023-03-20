@@ -18,7 +18,7 @@ class GSICommonObject : public QObject, public QGraphicsPixmapItem
     void updateImage();
 protected:
     MapMarker *_mapMarker;
-    virtual void resizeToSceneScale(unsigned int sceneScale);
+    virtual void resizeToSceneScale(quint8 sceneScale, const QList<double> &targetSizesForScales);
     virtual void updatePosOnScene();
     virtual void updateForTelemetry(const TelemetryDataFrame &telemetryFrame);
 

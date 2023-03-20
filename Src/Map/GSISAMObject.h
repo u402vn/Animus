@@ -16,7 +16,7 @@ class SAMMarkerSceneItem final: public GSICommonObject
     QGraphicsEllipseItem *_circleVisibleRange;
     WorldGPSCoord _uavCoords;
 
-    void resizeToSceneScale(unsigned int sceneScale);
+    void resizeToSceneScale(quint8 sceneScale, const QList<double> &targetSizesForScales);
     void updatePosOnScene();
 
     void createSAMRings();

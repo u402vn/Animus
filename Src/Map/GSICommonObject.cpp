@@ -117,12 +117,15 @@ void GSICommonObject::updateForTelemetry(const TelemetryDataFrame &telemetryFram
     //todo implement this method when it will be requested by customer
 }
 
-void GSICommonObject::resizeToSceneScale(unsigned int sceneScale)
+void GSICommonObject::resizeToSceneScale(quint8 sceneScale, const QList<double> &targetSizesForScales)
 {
-    qreal itemScale = 1.0;
-
-    if (DEFAULT_GOOGLE_SCALE_FOR_SCENE > sceneScale)
-        itemScale = 1.0 / (DEFAULT_GOOGLE_SCALE_FOR_SCENE - sceneScale);
+    qreal itemScale = targetSizesForScales[sceneScale];
+    if (itemScale == 0)
+    {
+        itemScale = 1.0;
+        if (DEFAULT_GOOGLE_SCALE_FOR_SCENE > sceneScale)
+            itemScale = 1.0 / (DEFAULT_GOOGLE_SCALE_FOR_SCENE - sceneScale);
+    }
 
     const QPixmap pixmap = this->pixmap();
     const qreal maxSide = qMax(pixmap.width(), pixmap.height());

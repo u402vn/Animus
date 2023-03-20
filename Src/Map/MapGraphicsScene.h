@@ -47,17 +47,20 @@ private:
     GSIUAVMarker *_uavMarker;
     GSITrackedObject *_trackedObjectMarker;
 
+    QList<double> _targetSizesForScales;
+
     QMenu *_mainMenu;
 
     QList<QAction *> _mapActions;
     QAction *_acBaseLayers;
-    QAction *_acHybridLayers;
+    QAction *_acHybridLayers;    
 
     QAction *_acLegend;
+    //QAction *_acMapTargetSizes;
+    QActionGroup *_groupMapTargetSize;
     QAction *_acShowTileNumber;
     QAction *_acShowParallelsMeridians;
     QAction *_acShowUAVPath;
-
     QAction *_acFollowThePlane;
     QAction *_acShowArealObjects;
 
@@ -73,6 +76,7 @@ private:
 
     void showArealObjects(bool visible);
     GSICommonObject *findMarkerItemByGUID(const QString &markerGUID);
+    void resizeMrkersForScale();
     bool changeScaneScale(int delta);
     void addMapMarkerToScene(MapMarker *mapMarker);
 
