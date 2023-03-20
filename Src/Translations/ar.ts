@@ -425,6 +425,29 @@ Are you sure you want to deleted it?</source>
     </message>
 </context>
 <context>
+    <name>ArtillerySpotter</name>
+    <message>
+        <location filename="../Map/ArtillerySpotter.cpp" line="139"/>
+        <source>Targets information sent successfully (# %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Map/ArtillerySpotter.cpp" line="187"/>
+        <source>Weather information sent successfully (# %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Map/ArtillerySpotter.cpp" line="202"/>
+        <source>Information received successfully (# %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Map/ArtillerySpotter.cpp" line="204"/>
+        <source>Information received unsuccessfully (# %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BallisticSettingsEditor</name>
     <message>
         <location filename="../UserInterface/ApplicationSettingsEditor/BallisticSettingsEditor.cpp" line="33"/>
@@ -2323,22 +2346,22 @@ Y:%6%7</source>
 <context>
     <name>QMarkerListWidget</name>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="434"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="442"/>
         <source>Deactivate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="434"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="442"/>
         <source>Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="435"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="443"/>
         <source>Change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="436"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="444"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>

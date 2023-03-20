@@ -86,6 +86,7 @@ private slots:
     void onMapMarkerCreated(const QString &markerGUID);
     void onMapMarkerHighlightedChanged(const QString &markerGUID, bool isHighlighted);
     void onMapMarkerCoordChanged(const QString &markerGUID, const WorldGPSCoord &coord);
+    void onMessageExchangeInformation(const QString &information);
 public slots:
     void onDropBombClicked();
     void onSendHitCoordinatesClicked();

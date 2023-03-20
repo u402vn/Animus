@@ -419,6 +419,14 @@ void CommonWidgetUtils::showInfoDialog(const QString &text)
     QMessageBox::information(nullptr,  qApp->applicationName(), text, QMessageBox::Ok);
 }
 
+void CommonWidgetUtils::showInfoDialogAutoclose(const QString &text, quint32 timeout)
+{
+    QMessageBox msgBox(QMessageBox::Information, qApp->applicationName(), text, QMessageBox::Ok, nullptr, Qt::Dialog);
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.button(QMessageBox::Ok)->animateClick(timeout);
+    msgBox.exec();
+}
+
 QLineEdit *CommonWidgetUtils::makePortEditor(QWidget *parent)
 {
     static QRegExp portRegex("^(?:[0-9]?[0-9]?[0-9]?[0-9]?[0-9])$");

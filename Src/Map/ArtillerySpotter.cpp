@@ -8,9 +8,9 @@ void ArtillerySpotter::timerEvent(QTimerEvent *event)
     Q_UNUSED(event)
     if (!_enabled)
         return;
-    if (_socket.state() == QAbstractSocket::UnconnectedState)
+    if (_tcpSocket.state() == QAbstractSocket::UnconnectedState)
     {
-        _socket.connectToHost(_address, _port);
+        _tcpSocket.connectToHost(_address, _port);
     }
 }
 
@@ -19,7 +19,7 @@ ArtillerySpotter::ArtillerySpotter(QObject *parent) : QObject(parent)
     _enabled = false;
     _messageId = 0;
 
-    connect(&_socket, &QTcpSocket::readyRead, this, &ArtillerySpotter::readData, Qt::ANIMUS_CONNECTION_TYPE);
+    connect(&_tcpSocket, &QTcpSocket::readyRead, this, &ArtillerySpotter::readData, Qt::ANIMUS_CONNECTION_TYPE);
 
     _reconnectTimerId = startTimer(2000); // reconnect to socket
 }
@@ -34,7 +34,7 @@ void ArtillerySpotter::openSocket(const QHostAddress address, const quint16 port
     _enabled = true;
     _address = address;
     _port = port;
-    _socket.close();
+    _tcpSocket.close();
 }
 
 
@@ -75,11 +75,19 @@ struct PackedWeatherDataItem
     double atmosphereTemperature;
 };
 
+struct ReceiptData
+{
+    uint8_t codeMessage;
+    uint8_t protocolVersion;
+    uint32_t messageId;
+    uint8_t errorCode;
+};
+
 #pragma pack(pop)
 
 void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
 {
-    if (_socket.state() != QAbstractSocket::ConnectedState)
+    if (_tcpSocket.state() != QAbstractSocket::ConnectedState)
         return;
 
     QList<MapMarker *> _messageMarkers;
@@ -124,16 +132,19 @@ void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
         messageContent.appendData((const char *)&pointData, sizeof(pointData));
     }
 
-    _socket.write(messageContent.toByteArray());
+    _tcpSocket.write(messageContent.toByteArray());
+
+    _sentMessages.insert(header.messageId, header.codeMessage);
+
+    emit onMessageExchangeInformation(tr("Targets information sent successfully (# %1)").arg(header.messageId));
 }
 
-void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> weatherDataCollection)
+void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> *weatherDataCollection)
 {
-    if (_socket.state() != QAbstractSocket::ConnectedState)
+    if (_tcpSocket.state() != QAbstractSocket::ConnectedState)
         return;
 
-
-    int weatherDataCount = weatherDataCollection.count();
+    int weatherDataCount = weatherDataCollection->count();
 
     if (weatherDataCount == 0)
         return;
@@ -157,7 +168,7 @@ void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> weatherDataCol
 
     for (int i = 0; i < weatherDataCount; i++)
     {
-        auto weatherData = weatherDataCollection.at(i);
+        auto weatherData = weatherDataCollection->at(i);
 
         PackedWeatherDataItem packedWeatherData;
         packedWeatherData.altitude = weatherData.Altitude;
@@ -169,10 +180,30 @@ void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> weatherDataCol
         messageContent.appendData((const char *)&packedWeatherData, sizeof(PackedWeatherDataItem));
     }
 
-    _socket.write(messageContent.toByteArray());
+    _tcpSocket.write(messageContent.toByteArray());
+
+    _sentMessages.insert(header.messageId, header.codeMessage);
+
+    emit onMessageExchangeInformation(tr("Weather information sent successfully (# %1)").arg(header.messageId));
 }
 
 void ArtillerySpotter::readData()
 {
+    ReceiptData* receiptData;
 
+    do {
+        _tcpBuffer.append(_tcpSocket.readAll());
+
+        while (static_cast<quint32>(_tcpBuffer.size()) >= sizeof(ReceiptData))
+        {
+
+            receiptData = reinterpret_cast<ReceiptData*>(_tcpBuffer.data());
+            if (receiptData->errorCode == 0)
+                emit onMessageExchangeInformation(tr("Information received successfully (# %1)").arg(receiptData->messageId));
+            else
+                emit onMessageExchangeInformation(tr("Information received unsuccessfully (# %1)").arg(receiptData->messageId));
+            _tcpBuffer.remove(0, sizeof(ReceiptData));
+        }
+
+    } while (_tcpSocket.bytesAvailable() > 0);
 }

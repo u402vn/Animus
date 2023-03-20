@@ -180,6 +180,7 @@ public:
     static QWidget *createScrolledWidget(QWidget *parent);
 
     static void showInfoDialog(const QString &text);
+    static void showInfoDialogAutoclose(const QString &text, quint32 timeout);
     static bool showConfirmDialog(const QString &text, bool defaultValue);
     static const QString showOpenFileDialog(const QString &caption, const QString &dir, const QString &filter);
     static const QString showSaveFileDialog(const QString &caption, const QString &dir, const QString &filter);

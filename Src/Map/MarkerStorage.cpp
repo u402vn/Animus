@@ -321,14 +321,9 @@ MapMarker *MarkerStorage::getMapMarkerByGUID(const QString &markerGUID)
     return nullptr;
 }
 
-void MarkerStorage::sendMarkersToArtillerySpotter()
+ArtillerySpotter *MarkerStorage::artillerySpotter()
 {
-    _artillerySpotter.sendMarkers(&_mapMarkers);
-}
-
-void MarkerStorage::sendWeatherToArtillerySpotter(const QVector<WeatherDataItem> weatherDataCollection)
-{
-    _artillerySpotter.sendWeather(weatherDataCollection);
+    return &_artillerySpotter;
 }
 
 void MarkerStorage::cleanupObsoleteMapMarkers()

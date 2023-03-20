@@ -6,19 +6,24 @@
 #include <QList>
 #include <QTcpSocket>
 #include <QHostAddress>
+#include <QMap>
 #include "MarkerStorageItems.h"
 #include "TelemetryDataFrame.h"
 
 class ArtillerySpotter : public QObject
 {
     Q_OBJECT
-    QTcpSocket _socket;
+    QTcpSocket _tcpSocket;
+    QByteArray _tcpBuffer;
+
     bool _enabled;
     QHostAddress _address;
     quint16 _port;
     int _reconnectTimerId;
 
     quint32 _messageId;
+
+    QMap<int, int> _sentMessages;
 protected:
     void timerEvent(QTimerEvent *event); // reconnect to socket
 public:
@@ -27,9 +32,11 @@ public:
     void openSocket(const QHostAddress address, const quint16 port);
 
     void sendMarkers(const QList<MapMarker *> *markers);
-    void sendWeather(const QVector<WeatherDataItem> weatherDataCollection);
+    void sendWeather(const QVector<WeatherDataItem> *weatherDataCollection);
 private slots:
     void readData();
+signals:
+    void onMessageExchangeInformation(const QString &information);
 };
 
 #endif // ARTILLERYSPOTTER_H

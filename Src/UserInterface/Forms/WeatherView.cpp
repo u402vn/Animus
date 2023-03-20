@@ -81,5 +81,5 @@ void WeatherView::reinit()
 void WeatherView::onSendWeatherClicked()
 {
     MarkerStorage& markerStorage = MarkerStorage::Instance();
-    markerStorage.sendWeatherToArtillerySpotter(_weatherDataCollection);
+    markerStorage.artillerySpotter()->sendWeather(&_weatherDataCollection);
 }

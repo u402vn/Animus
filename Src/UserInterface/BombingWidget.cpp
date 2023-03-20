@@ -108,6 +108,8 @@ BombingWidget::BombingWidget(QWidget *parent, HardwareLink *hardwareLink, Teleme
     connect(&markerStorage, &MarkerStorage::onTargetMapMarkerHighlightedChanged, this, &BombingWidget::onMapMarkerHighlightedChanged);
     connect(&markerStorage, &MarkerStorage::onMapMarkerCoordChanged, this, &BombingWidget::onMapMarkerCoordChanged);
 
+    connect(markerStorage.artillerySpotter(), &ArtillerySpotter::onMessageExchangeInformation, this, &BombingWidget::onMessageExchangeInformation);
+
     initWidgets();
 
     loadTargetMapMarkers();
@@ -165,7 +167,7 @@ void BombingWidget::onDropBombClicked()
 void BombingWidget::onSendHitCoordinatesClicked()
 {
     MarkerStorage& markerStorage = MarkerStorage::Instance();
-    markerStorage.sendMarkersToArtillerySpotter();
+    markerStorage.artillerySpotter()->sendMarkers(markerStorage.getMapMarkers());
 }
 
 void BombingWidget::onSendWeatherClicked()
@@ -259,6 +261,12 @@ void BombingWidget::onMapMarkerCoordChanged(const QString &markerGUID, const Wor
     {
         _hardwareLink->setBombingPlacePos(coord.lat, coord.lon, coord.hmsl);
     }
+}
+
+void BombingWidget::onMessageExchangeInformation(const QString &information)
+{\
+    qInfo() << information;
+    CommonWidgetUtils::showInfoDialogAutoclose(information, 3000);
 }
 
 QMarkerListWidgetItem::QMarkerListWidgetItem(MapMarker *markerItem, QListWidget *parent) : QListWidgetItem(parent)
