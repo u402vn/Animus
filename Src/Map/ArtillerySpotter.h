@@ -17,6 +17,8 @@ class ArtillerySpotter : public QObject
     QHostAddress _address;
     quint16 _port;
     int _reconnectTimerId;
+
+    quint32 _messageId;
 protected:
     void timerEvent(QTimerEvent *event); // reconnect to socket
 public:
@@ -26,6 +28,8 @@ public:
 
     void sendMarkers(const QList<MapMarker *> *markers);
     void sendWeather(const QVector<WeatherDataItem> weatherDataCollection);
+private slots:
+    void readData();
 };
 
 #endif // ARTILLERYSPOTTER_H

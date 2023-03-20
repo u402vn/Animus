@@ -17,6 +17,10 @@ void ArtillerySpotter::timerEvent(QTimerEvent *event)
 ArtillerySpotter::ArtillerySpotter(QObject *parent) : QObject(parent)
 {
     _enabled = false;
+    _messageId = 0;
+
+    connect(&_socket, &QTcpSocket::readyRead, this, &ArtillerySpotter::readData, Qt::ANIMUS_CONNECTION_TYPE);
+
     _reconnectTimerId = startTimer(2000); // reconnect to socket
 }
 
@@ -39,6 +43,7 @@ struct HeaderData
 {
     uint8_t codeMessage;
     uint8_t protocolVersion;
+    uint32_t messageId;
     uint32_t lenData;
 };
 
@@ -95,7 +100,8 @@ void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
 
     HeaderData header;
     header.codeMessage = 1;
-    header.protocolVersion = 1;
+    header.protocolVersion = 2;
+    header.messageId = _messageId++;
     header.lenData = lenData;
 
     BinaryContent messageContent;
@@ -136,7 +142,8 @@ void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> weatherDataCol
 
     HeaderData header;
     header.codeMessage = 2;
-    header.protocolVersion = 1;
+    header.protocolVersion = 2;
+    header.messageId = _messageId++;
 
     WeatherCommonData commonData;
     commonData.zeroPointAltitude = 0; //???
@@ -163,4 +170,9 @@ void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> weatherDataCol
     }
 
     _socket.write(messageContent.toByteArray());
+}
+
+void ArtillerySpotter::readData()
+{
+
 }
