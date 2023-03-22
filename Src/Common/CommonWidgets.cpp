@@ -1,5 +1,4 @@
 #include "CommonWidgets.h"
-#include <QMessageBox>
 #include <QFileDialog>
 #include <QColorDialog>
 #include <QPainter>
@@ -419,9 +418,9 @@ void CommonWidgetUtils::showInfoDialog(const QString &text)
     QMessageBox::information(nullptr,  qApp->applicationName(), text, QMessageBox::Ok);
 }
 
-void CommonWidgetUtils::showInfoDialogAutoclose(const QString &text, quint32 timeout)
+void CommonWidgetUtils::showInfoDialogAutoclose(const QMessageBox::Icon icon, const QString &text, quint32 timeout)
 {
-    QMessageBox msgBox(QMessageBox::Information, qApp->applicationName(), text, QMessageBox::Ok, nullptr, Qt::Dialog);
+    QMessageBox msgBox(icon, qApp->applicationName(), text, QMessageBox::Ok, nullptr, Qt::Dialog);
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.button(QMessageBox::Ok)->animateClick(timeout);
     msgBox.exec();

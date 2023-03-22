@@ -427,22 +427,28 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>ArtillerySpotter</name>
     <message>
-        <location filename="../Map/ArtillerySpotter.cpp" line="139"/>
+        <location filename="../Map/ArtillerySpotter.cpp" line="92"/>
+        <location filename="../Map/ArtillerySpotter.cpp" line="149"/>
+        <source>Unable to send message. No connection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Map/ArtillerySpotter.cpp" line="142"/>
         <source>Targets information sent successfully (# %1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/ArtillerySpotter.cpp" line="187"/>
+        <location filename="../Map/ArtillerySpotter.cpp" line="193"/>
         <source>Weather information sent successfully (# %1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/ArtillerySpotter.cpp" line="202"/>
+        <location filename="../Map/ArtillerySpotter.cpp" line="208"/>
         <source>Information received successfully (# %1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/ArtillerySpotter.cpp" line="204"/>
+        <location filename="../Map/ArtillerySpotter.cpp" line="210"/>
         <source>Information received unsuccessfully (# %1)</source>
         <translation type="unfinished"></translation>
     </message>

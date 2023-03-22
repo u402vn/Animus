@@ -25,6 +25,7 @@
 #include <QGridLayout>
 #include <QScrollArea>
 #include <QParallelAnimationGroup>
+#include <QMessageBox>
 
 constexpr int DEFAULT_BUTTON_WIDTH = 300;
 constexpr int DEFAULT_BUTTON_HEIGHT = 40;
@@ -180,7 +181,7 @@ public:
     static QWidget *createScrolledWidget(QWidget *parent);
 
     static void showInfoDialog(const QString &text);
-    static void showInfoDialogAutoclose(const QString &text, quint32 timeout);
+    static void showInfoDialogAutoclose(const QMessageBox::Icon icon, const QString &text, quint32 timeout);
     static bool showConfirmDialog(const QString &text, bool defaultValue);
     static const QString showOpenFileDialog(const QString &caption, const QString &dir, const QString &filter);
     static const QString showSaveFileDialog(const QString &caption, const QString &dir, const QString &filter);

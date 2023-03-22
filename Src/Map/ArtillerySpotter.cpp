@@ -88,7 +88,10 @@ struct ReceiptData
 void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
 {
     if (_tcpSocket.state() != QAbstractSocket::ConnectedState)
+    {
+        emit onMessageExchangeInformation(tr("Unable to send message. No connection."), true);
         return;
+    }
 
     QList<MapMarker *> _messageMarkers;
 
@@ -136,13 +139,16 @@ void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
 
     _sentMessages.insert(header.messageId, header.codeMessage);
 
-    emit onMessageExchangeInformation(tr("Targets information sent successfully (# %1)").arg(header.messageId));
+    emit onMessageExchangeInformation(tr("Targets information sent successfully (# %1)").arg(header.messageId), false);
 }
 
 void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> *weatherDataCollection)
 {
     if (_tcpSocket.state() != QAbstractSocket::ConnectedState)
+    {
+        emit onMessageExchangeInformation(tr("Unable to send message. No connection."), true);
         return;
+    }
 
     int weatherDataCount = weatherDataCollection->count();
 
@@ -184,7 +190,7 @@ void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> *weatherDataCo
 
     _sentMessages.insert(header.messageId, header.codeMessage);
 
-    emit onMessageExchangeInformation(tr("Weather information sent successfully (# %1)").arg(header.messageId));
+    emit onMessageExchangeInformation(tr("Weather information sent successfully (# %1)").arg(header.messageId), false);
 }
 
 void ArtillerySpotter::readData()
@@ -199,9 +205,9 @@ void ArtillerySpotter::readData()
 
             receiptData = reinterpret_cast<ReceiptData*>(_tcpBuffer.data());
             if (receiptData->errorCode == 0)
-                emit onMessageExchangeInformation(tr("Information received successfully (# %1)").arg(receiptData->messageId));
+                emit onMessageExchangeInformation(tr("Information received successfully (# %1)").arg(receiptData->messageId), false);
             else
-                emit onMessageExchangeInformation(tr("Information received unsuccessfully (# %1)").arg(receiptData->messageId));
+                emit onMessageExchangeInformation(tr("Information received unsuccessfully (# %1)").arg(receiptData->messageId), true);
             _tcpBuffer.remove(0, sizeof(ReceiptData));
         }
 

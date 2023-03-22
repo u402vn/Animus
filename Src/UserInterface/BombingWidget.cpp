@@ -263,10 +263,10 @@ void BombingWidget::onMapMarkerCoordChanged(const QString &markerGUID, const Wor
     }
 }
 
-void BombingWidget::onMessageExchangeInformation(const QString &information)
+void BombingWidget::onMessageExchangeInformation(const QString &information, bool isEroor)
 {\
     qInfo() << information;
-    CommonWidgetUtils::showInfoDialogAutoclose(information, 3000);
+    CommonWidgetUtils::showInfoDialogAutoclose(isEroor ?  QMessageBox::Critical : QMessageBox::Information,  information, 3000);
 }
 
 QMarkerListWidgetItem::QMarkerListWidgetItem(MapMarker *markerItem, QListWidget *parent) : QListWidgetItem(parent)

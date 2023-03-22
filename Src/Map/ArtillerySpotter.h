@@ -36,7 +36,7 @@ public:
 private slots:
     void readData();
 signals:
-    void onMessageExchangeInformation(const QString &information);
+    void onMessageExchangeInformation(const QString &information, bool isEroor);
 };
 
 #endif // ARTILLERYSPOTTER_H
