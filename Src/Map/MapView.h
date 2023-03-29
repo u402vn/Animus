@@ -27,6 +27,10 @@ public:
     void processTelemetry(const TelemetryDataFrame &telemetryFrame);
     void clearTrajectory();
     void setViewCenter(const WorldGPSCoord &coord);
+
+public slots:
+    void onMapZoomInClicked();
+    void onMapZoomOutClicked();
 };
 
 #endif // MAPVIEW_H

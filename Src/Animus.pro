@@ -240,8 +240,8 @@ DISTFILES += Translations/*
 
 QMAKE_CXXFLAGS += -Wno-unused-parameter -std=gnu++11
 
-QMAKE_CXXFLAGS += -fopenmp -Ofast
-QMAKE_LFLAGS += -fopenmp
+release: QMAKE_CXXFLAGS += -fopenmp -Ofast
+release: QMAKE_LFLAGS += -fopenmp
 LIBS += -fopenmp -lgomp -lpthread
 QMAKE_LIBS += -static -lgomp -lpthread
 

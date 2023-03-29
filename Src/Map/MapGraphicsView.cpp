@@ -51,6 +51,7 @@ void MapGraphicsView::keyPressEvent(QKeyEvent *event)
 
     switch (event->key())
     {
+    /*
     case Qt::Key_Plus:
     case Qt::Key_Equal:
         if (scene->ScaleUp())
@@ -60,6 +61,7 @@ void MapGraphicsView::keyPressEvent(QKeyEvent *event)
         if (scene->ScaleDown())
             scale(.5, .5);
         break;
+        */
     case Qt::Key_Delete:
         scene->deleteSelectedMarkers();
         break;

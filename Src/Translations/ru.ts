@@ -2398,7 +2398,7 @@ Are you sure you want to update it?</source>
         <translation type="vanished">АНИМУС</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="437"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="440"/>
         <source>Sessions</source>
         <translation>Сессии</translation>
     </message>
@@ -2421,27 +2421,27 @@ Are you sure you want to update it?</source>
         <translation>АНИМУС %1</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="451"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="454"/>
         <source>Session Time from Start</source>
         <translation>Время с начала сессии</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="455"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="458"/>
         <source>Play stored session data</source>
         <translation>Воспроизвести сохраненные данные сессии</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="456"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="459"/>
         <source>Pause showed data</source>
         <translation>Остановать отображаемые данные</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="457"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="460"/>
         <source>Show realtime data</source>
         <translation>Показать данные в реальном времени</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="510"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="513"/>
         <source>Are you sure you want to quit?</source>
         <translation>Вы уверены, что хотите выйти из приложения?</translation>
     </message>

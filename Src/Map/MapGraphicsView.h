@@ -11,10 +11,10 @@ class MapGraphicsView final : public QGraphicsView
 
     MapGraphicsScene *mapScene();
 protected:
-    void wheelEvent(QWheelEvent * event) override;
-    void enterEvent(QEvent * event) override;
-    void mousePressEvent(QMouseEvent * event) override;
-    void mouseReleaseEvent(QMouseEvent * event) override;
+    void wheelEvent(QWheelEvent *event) override;
+    void enterEvent(QEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
 
     void dragEnterEvent(QDragEnterEvent *event) override;

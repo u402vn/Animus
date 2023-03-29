@@ -354,6 +354,9 @@ void MainWindow::initHidController(CamAssemblyPreferences *camAssemblyPreference
     connect(_hidController, &HIDController::onColorModeDownClicked,                 _camControlsWidget, &CamControlsWidget::onColorModeDownClicked);
     connect(_hidController, &HIDController::onLaserActivationClicked,               _camControlsWidget, &CamControlsWidget::onLaserActivationClicked);
 
+    connect(_hidController, &HIDController::onMapZoomInClicked,                     _mapView,           &MapView::onMapZoomInClicked);
+    connect(_hidController, &HIDController::onMapZoomOutClicked,                    _mapView,           &MapView::onMapZoomOutClicked);
+
     connect(_hidController, &HIDController::onScreenshotClicked,                    _camControlsWidget, &CamControlsWidget::onScreenshotClicked);
     connect(_hidController, &HIDController::onSnapshotClicked,                      _camControlsWidget, &CamControlsWidget::onSnapshotClicked);
     connect(_hidController, &HIDController::onSnapshotSeriesClicked,                _camControlsWidget, &CamControlsWidget::onSnapshotSeriesClicked);

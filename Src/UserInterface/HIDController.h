@@ -57,8 +57,8 @@ class HIDController : public QObject
 
     bool processKeyboard(QKeyEvent *keyEvent, QObject *senderObj);
 
-    void processZoomUp();
-    void processZoomDown();
+    void processCamZoomUp();
+    void processCamZoomDown();
 
     void processRollUpPress();
     void processRollUpRelease();
@@ -69,7 +69,7 @@ class HIDController : public QObject
     void processPitchDownPress();
     void processPitchDownRelease();
 
-    void updateZoomInternal(quint32 zoom);
+    void updateCamZoomInternal(quint32 zoom);
     void processAxisChanges();
 protected:
     bool virtual eventFilter(QObject *obj, QEvent *event);
@@ -81,6 +81,9 @@ private slots:
 public slots:
     void doSetZoomFromUI(quint32 zoom);
 signals:
+    void onMapZoomInClicked();
+    void onMapZoomOutClicked();
+
     void onOpenApplicationSettingsEditorClicked();
     void onOpenDataConsoleClicked();
     void onOpenEmulatorConsoleClicked();

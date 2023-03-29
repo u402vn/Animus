@@ -1874,32 +1874,32 @@ Speed Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="437"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="440"/>
         <source>Sessions</source>
         <translation type="unfinished">Sessions</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="451"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="454"/>
         <source>Session Time from Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="455"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="458"/>
         <source>Play stored session data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="456"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="459"/>
         <source>Pause showed data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="457"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="460"/>
         <source>Show realtime data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="510"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="513"/>
         <source>Are you sure you want to quit?</source>
         <translation type="unfinished">Are you sure you want to quit?</translation>
     </message>

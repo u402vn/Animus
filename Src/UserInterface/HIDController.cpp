@@ -35,12 +35,16 @@ HIDController::HIDController(QObject *parent) : QObject(parent)
 
     bool processAutoRepeatKeyForCamMoving = (_controlMode == CameraControlModes::AbsolutePosition);
 
-    makeHIDMapItem(hidbtnCamZoomIn,          &HIDController::processZoomUp,                     nullptr, true);
-    makeHIDMapItem(hidbtnCamZoomOut,         &HIDController::processZoomDown,                   nullptr, true);
+    makeHIDMapItem(hidbtnCamZoomIn,          &HIDController::processCamZoomUp,                     nullptr, true);
+    makeHIDMapItem(hidbtnCamZoomOut,         &HIDController::processCamZoomDown,                   nullptr, true);
     makeHIDMapItem(hidbtnCamPitchUp,         &HIDController::processPitchUpPress,               &HIDController::processPitchUpRelease,   processAutoRepeatKeyForCamMoving);
     makeHIDMapItem(hidbtnCamPitchDown,       &HIDController::processPitchDownPress,             &HIDController::processPitchDownRelease, processAutoRepeatKeyForCamMoving);
     makeHIDMapItem(hidbtnCamRollUp,          &HIDController::processRollUpPress,                &HIDController::processRollUpRelease,    processAutoRepeatKeyForCamMoving);
     makeHIDMapItem(hidbtnCamRollDown,        &HIDController::processRollDownPress,              &HIDController::processRollDownRelease,  processAutoRepeatKeyForCamMoving);
+
+    makeHIDMapItem(hidbtnMapZoomIn,          &HIDController::onMapZoomInClicked,         nullptr, true);
+    makeHIDMapItem(hidbtnMapZoomOut,         &HIDController::onMapZoomOutClicked,        nullptr, true);
+
     makeHIDMapItem(hidbtnSettingsEditor,     &HIDController::onOpenApplicationSettingsEditorClicked,   nullptr, false);
     makeHIDMapItem(hidbtnDataConsole,        &HIDController::onOpenDataConsoleClicked,          nullptr, false);
     makeHIDMapItem(hidbtnEmulatorConsole,    &HIDController::onOpenEmulatorConsoleClicked,      nullptr, false);
@@ -95,10 +99,10 @@ void HIDController::setCamZoomRange(quint32 camZoomMin, quint32 camZoomMax)
 {
     _camZoomMin = camZoomMin;
     _camZoomMax = camZoomMax;
-    updateZoomInternal(_camZoom);
+    updateCamZoomInternal(_camZoom);
 }
 
-void HIDController::updateZoomInternal(quint32 zoom)
+void HIDController::updateCamZoomInternal(quint32 zoom)
 {
     quint32 prevZoom = _camZoom;
     bool useJoystickForZoom = ! qFuzzyCompare(_prevJoystickZ, _joystickZ);
@@ -158,7 +162,7 @@ void HIDController::processJoystick(const QList<int> &povs, const QList<double> 
 
 void HIDController::doSetZoomFromUI(quint32 zoom)
 {
-    updateZoomInternal(zoom);
+    updateCamZoomInternal(zoom);
 }
 
 bool HIDController::eventFilter(QObject *obj, QEvent *event)
@@ -199,14 +203,14 @@ bool HIDController::processKeyboard(QKeyEvent *keyEvent, QObject *senderObj)
     return keyProcessed;
 }
 
-void HIDController::processZoomUp()
+void HIDController::processCamZoomUp()
 {
-    updateZoomInternal(_camZoom + deltaZoom);
+    updateCamZoomInternal(_camZoom + deltaZoom);
 }
 
-void HIDController::processZoomDown()
+void HIDController::processCamZoomDown()
 {
-    updateZoomInternal(_camZoom - deltaZoom);
+    updateCamZoomInternal(_camZoom - deltaZoom);
 }
 
 void HIDController::processRollUpPress()
@@ -267,7 +271,7 @@ void HIDController::processPitchDownRelease()
 
 void HIDController::processAxisChanges()
 {
-    updateZoomInternal(_camZoom);
+    updateCamZoomInternal(_camZoom);
 
     float x = qFuzzyCompare(_keyboardX, 0) ? _joystickX : _keyboardX;
     float y = qFuzzyCompare(_keyboardY, 0) ? _joystickY : _keyboardY;
@@ -357,7 +361,9 @@ bool HIDMapItem::processKeyboard(QKeyEvent *keyEvent)
         return false;
 
     int elemet = _keySequence[0];
-    key = key | keyEvent->modifiers();
+    int modifiers = keyEvent->modifiers();
+    modifiers = modifiers & (~ 0x20000000); // Qt::KeypadModifier
+    key = key | modifiers;
     QEvent::Type eventType = keyEvent->type();
 
     if (elemet == key)

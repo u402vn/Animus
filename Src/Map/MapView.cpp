@@ -51,11 +51,13 @@ MapView::~MapView()
 
 void MapView::showMapMarkers()
 {
+    EnterProc("MapView::showMapMarkers");
     _view->loadMapMarkers();
 }
 
 void MapView::showArealObjects()
 {
+    EnterProc("MapView::showArealObjects");
     _view->loadArealObjects();
 }
 
@@ -104,4 +106,18 @@ void MapView::setViewCenter(const WorldGPSCoord &coord)
 {
     _scene->setViewCenter(coord);
     //qDebug() << "setViewCenter. lat:" << coord.lat << " lon: " << coord.lon;
+}
+
+void MapView::onMapZoomInClicked()
+{
+    EnterProc("MapView::onMapZoomInClicked");
+    if (_scene->ScaleUp())
+        _view->scale(2, 2);
+}
+
+void MapView::onMapZoomOutClicked()
+{
+    EnterProc("MapView::onMapZoomOutClicked");
+    if (_scene->ScaleDown())
+        _view->scale(.5, .5);
 }

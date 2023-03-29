@@ -398,7 +398,6 @@ void MapGraphicsScene::drawBackground(QPainter *painter, const QRectF &rect)
 bool MapGraphicsScene::ScaleUp()
 {
     return changeScaneScale(+1);
-
 }
 
 bool MapGraphicsScene::ScaleDown()
