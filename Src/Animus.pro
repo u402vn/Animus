@@ -8,7 +8,7 @@ QT       += core gui widgets svg multimedia multimediawidgets sql network concur
 
 TARGET = ANIMUS
 TEMPLATE = app
-VERSION = 1.4.5.31
+VERSION = 1.4.5.32
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 CONFIG   += precompile_header
@@ -51,6 +51,7 @@ SOURCES += main.cpp \
         UserInterface/BombingWidget.cpp \
         UserInterface/PatrolWidget.cpp \
         UserInterface/FilePathSelector.cpp \        
+        UserInterface/ConnectionsIndicator.cpp \
         UserInterface/VideoDisplayWidget.cpp \
         UserInterface/VideoImageTuner.cpp \
         UserInterface/GPSCoordSelector.cpp \
@@ -103,7 +104,8 @@ SOURCES += main.cpp \
         HardwareLink/MUSV2VideoReceiver.cpp \
         HardwareLink/CalibrationImageVideoReceiver.cpp \
         HardwareLink/lz4.c \
-        HardwareLink/MUSV/protocol.cpp \
+        HardwareLink/TrackerHardwareLink.cpp \
+        HardwareLink/MUSV/protocol.cpp \        
         HardwareLink/MUSV2/CorrelationVideoTrackerProtocolParser.cpp \
         HardwareLink/MUSV2/VideoDataProtocolParser.cpp \
         Joystick.cpp \
@@ -114,8 +116,8 @@ SOURCES += main.cpp \
         Common/CommonWidgets.cpp \
         Common/CommonData.cpp \
         Common/CommonUtils.cpp \
-        Common/BinaryContent.cpp \
-    HardwareLink/TrackerHardwareLink.cpp
+        Common/BinaryContent.cpp
+
 
 HEADERS  += stable.h \
         UserInterface/Forms/mainwindow.h\
@@ -149,6 +151,7 @@ HEADERS  += stable.h \
         UserInterface/BombingWidget.h \
         UserInterface/PatrolWidget.h \
 	UserInterface/FilePathSelector.h \
+        UserInterface/ConnectionsIndicator.h \
         UserInterface/VideoDisplayWidget.h \
         UserInterface/VideoImageTuner.h \
         UserInterface/GPSCoordSelector.h \
@@ -199,9 +202,10 @@ HEADERS  += stable.h \
 	HardwareLink/YurionVideoReceiver.h \
         HardwareLink/RTSPVideoReceiver.h \
         HardwareLink/MUSV2VideoReceiver.h \
-        HardwareLink/CalibrationImageVideoReceiver.h \
+        HardwareLink/CalibrationImageVideoReceiver.h \        
         HardwareLink/lz4.h \
         HardwareLink/MUSV/protocol.h \
+        HardwareLink/TrackerHardwareLink.h \
         HardwareLink/MUSV2/CorrelationVideoTrackerVersion.h \
         HardwareLink/MUSV2/CorrelationVideoTrackerDataStructures.h \
         HardwareLink/MUSV2/CorrelationVideoTrackerProtocolParser.h \
@@ -217,8 +221,8 @@ HEADERS  += stable.h \
         Common/CommonData.h \
         Common/CommonUtils.h \
         Constants.h \
-        Common/BinaryContent.h \
-    HardwareLink/TrackerHardwareLink.h
+        Common/BinaryContent.h
+
 
 RESOURCES += \
     UserInterface/Instruments/qfi.qrc\

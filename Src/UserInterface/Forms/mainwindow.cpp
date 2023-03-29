@@ -450,6 +450,8 @@ void MainWindow::addWidgetsTime()
     _timeFromStartIndicator->setDigitCount(12);
     _timeFromStartIndicator->setToolTip(tr("Session Time from Start"));
 
+    //??? 111
+
     _playHistoryButton = createToolButton(NO_CAPTION, tr("Play stored session data"), true, QStyle::SP_MediaPlay, &MainWindow::playHistoryClicked);
     _pauseButton = createToolButton(NO_CAPTION, tr("Pause showed data"), true, QStyle::SP_MediaPause, &MainWindow::pauseClicked);
     _playRealtimeButton = createToolButton(NO_CAPTION, tr("Show realtime data"), true, QStyle::SP_MediaSkipForward, &MainWindow::playRealtimeClicked);
@@ -712,6 +714,8 @@ void MainWindow::hardwareLinkDataReceived(const TelemetryDataFrame &telemetryFra
         _imageProcessor->processDataAsync(telemetryFrame, videoFrame);
         if (_playStatus == PlayRealtime)
             _timeFromStartIndicator->display(_dataStorage->getLastTelemetryFrameTimeAsString());
+
+    //???    222
     }
 
     // 2. Telemetry

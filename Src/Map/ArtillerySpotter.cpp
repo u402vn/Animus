@@ -2,10 +2,14 @@
 #include <QDebug>
 #include "Common/BinaryContent.h"
 #include "Common/CommonUtils.h"
+#include "EnterProc.h"
 
 void ArtillerySpotter::timerEvent(QTimerEvent *event)
 {
     Q_UNUSED(event)
+
+    EnterProcStart("ArtillerySpotter::timerEvent");
+
     if (!_enabled)
         return;
     if (_tcpSocket.state() == QAbstractSocket::UnconnectedState)
@@ -16,6 +20,8 @@ void ArtillerySpotter::timerEvent(QTimerEvent *event)
 
 ArtillerySpotter::ArtillerySpotter(QObject *parent) : QObject(parent)
 {
+    EnterProcStart("ArtillerySpotter::ArtillerySpotter");
+
     _enabled = false;
     _messageId = 0;
 
@@ -31,6 +37,8 @@ ArtillerySpotter::~ArtillerySpotter()
 
 void ArtillerySpotter::openSocket(const QHostAddress address, const quint16 port)
 {
+    EnterProcStart("ArtillerySpotter::openSocket");
+
     _enabled = true;
     _address = address;
     _port = port;
@@ -87,6 +95,8 @@ struct ReceiptData
 
 void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
 {
+    EnterProcStart("ArtillerySpotter::sendMarkers");
+
     if (_tcpSocket.state() != QAbstractSocket::ConnectedState)
     {
         emit onMessageExchangeInformation(tr("Unable to send message. No connection."), true);
@@ -144,6 +154,8 @@ void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
 
 void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> *weatherDataCollection)
 {
+    EnterProcStart("ArtillerySpotter::sendMarkers");
+
     if (_tcpSocket.state() != QAbstractSocket::ConnectedState)
     {
         emit onMessageExchangeInformation(tr("Unable to send message. No connection."), true);
@@ -195,6 +207,8 @@ void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> *weatherDataCo
 
 void ArtillerySpotter::readData()
 {
+    EnterProcStart("ArtillerySpotter::readData");
+
     ReceiptData* receiptData;
 
     do {

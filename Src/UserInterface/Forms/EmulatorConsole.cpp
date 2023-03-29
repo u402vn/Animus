@@ -3,6 +3,7 @@
 #include "Common/CommonWidgets.h"
 #include "Common/CommonUtils.h"
 #include "ApplicationSettings.h"
+#include "EnterProc.h"
 
 QDoubleSpinBox *EmulatorConsole::addDoubleSpinBox(int row, const QString &caption, double minValue, double maxValue, double step, int decimals, ApplicationPreferenceDouble *preference)
 {
@@ -19,6 +20,8 @@ QDoubleSpinBox *EmulatorConsole::addDoubleSpinBox(int row, const QString &captio
 EmulatorConsole::EmulatorConsole(QWidget *parent) : QWidget(parent),
     _association(this)
 {
+    EnterProcStart("EmulatorConsole::EmulatorConsole");
+
     this->setWindowTitle(tr("Emulator Console"));
     this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint | Qt::WindowMinMaxButtonsHint);
 
@@ -54,6 +57,8 @@ void EmulatorConsole::closeEvent(QCloseEvent *event)
 {
     Q_UNUSED(event)
 
+    EnterProcStart("EmulatorConsole::closeEvent");
+
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
     _association.fromEditor();
     applicationSettings.savePreferences();
@@ -63,6 +68,8 @@ void EmulatorConsole::closeEvent(QCloseEvent *event)
 
 void EmulatorConsole::onValueChanged(double value)
 {
+    EnterProcStart("EmulatorConsole::onValueChanged");
+
     Q_UNUSED(value)
 
     EmulatorTelemetryDataFrame emulatorTelemetryFrame;

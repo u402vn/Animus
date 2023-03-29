@@ -231,7 +231,7 @@ QPixmap * MapTileContainer::getTileImage(int tileX, int tileY, int scale, int so
         }
     }
 
-    //Need Loading. Try to load tile from databse
+    //Need Loading. Try to load tile from database
     QPixmap * resultTileImage = nullptr;
 
     //try to find cuccessful connection from presented in list

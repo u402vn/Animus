@@ -198,18 +198,19 @@ void drawTelemetryOnVideo(QPainter &painter, const TelemetryDataFrame &telemetry
         int seconds = (telemetryFrame.SessionTimeMs - hoursMs - minutesMs) / 1000;
         int secondsMs = seconds * 1000;
         int mseconds = telemetryFrame.SessionTimeMs - hoursMs - minutesMs - secondsMs;
+        auto zeroChar = QLatin1Char('0');
         QString sessinTimeStr = QString("%1:%2:%3:%4")
-                .arg(hours, 2, 10,  QLatin1Char('0'))
-                .arg(minutes, 2, 10,  QLatin1Char('0'))
-                .arg(seconds, 2, 10,  QLatin1Char('0'))
-                .arg(mseconds / 10, 2, 10,  QLatin1Char('0'));
+                .arg(hours, 2, 10,  zeroChar)
+                .arg(minutes, 2, 10,  zeroChar)
+                .arg(seconds, 2, 10,  zeroChar)
+                .arg(mseconds / 10, 2, 10, zeroChar);
         QPoint drawSessionTimePoint(painter.device()->width() - 5, painter.device()->height());
         CommonWidgetUtils::drawText(painter, drawSessionTimePoint, Qt::AlignBottom | Qt::AlignRight, sessinTimeStr, true);
     }
     else if (timeFormat == OSDTelemetryTimeFormat::CurrentDateTime)
     {
         QDateTime date = QDateTime::currentDateTime();
-        QString sessinTimeStr = date.toString("dd.MM.yyyy hh:mm:ss");
+        QString sessinTimeStr = QString("%1 FPS: %2").arg(date.toString("dd.MM.yy hh:mm:ss")).arg(telemetryFrame.VideoFPS);
         QPoint drawSessionTimePoint(painter.device()->width() - 5, painter.device()->height());
         CommonWidgetUtils::drawText(painter, drawSessionTimePoint, Qt::AlignBottom | Qt::AlignRight, sessinTimeStr, true);
     }

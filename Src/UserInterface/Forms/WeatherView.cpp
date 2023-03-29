@@ -6,10 +6,13 @@
 #include "Common/CommonWidgets.h"
 #include "Common/CommonUtils.h"
 #include "Map/MarkerStorage.h"
+#include "EnterProc.h"
 
 WeatherView::WeatherView(QWidget *parent, TelemetryDataStorage *telemetryDataStorage) : QDialog(parent),
     _telemetryDataStorage(telemetryDataStorage)
 {
+    EnterProcStart("WeatherView::WeatherView");
+
     const int WEATHER_VIEW_WIDTH = 800;
 
     this->setWindowTitle(tr("Weather"));
@@ -63,6 +66,8 @@ void WeatherView::setCell(int row, int col, double value)
 
 void WeatherView::reinit()
 {
+    EnterProcStart("WeatherView::reinit");
+
     _weatherDataCollection = _telemetryDataStorage->getWeatherData();
     auto weatherDataCount = _weatherDataCollection.count();
     _weatherTable->setRowCount(weatherDataCount);
@@ -80,6 +85,8 @@ void WeatherView::reinit()
 
 void WeatherView::onSendWeatherClicked()
 {
+    EnterProcStart("WeatherView::onSendWeatherClicked");
+
     MarkerStorage& markerStorage = MarkerStorage::Instance();
     markerStorage.artillerySpotter()->sendWeather(&_weatherDataCollection);
 }
