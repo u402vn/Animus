@@ -140,7 +140,9 @@ enum HIDButton
     hidbtnManualFlightMode,
     hidbtnLaserActivation,
     hidbtnSendHitCoordinates,
-    hidbtnSendWeather
+    hidbtnSendWeather,
+    hidbtnMapZoomOut,
+    hidbtnMapZoomIn
 };
 
 //Singleton

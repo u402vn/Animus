@@ -137,6 +137,12 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
     _keyMappingLayout->addWidget(CommonWidgetUtils::createSeparator(this), rowIndex, 0, 1, 4);
     rowIndex++;
 
+    addHIDButtonBinding(hidbtnMapZoomOut,                               rowIndex);
+    addHIDButtonBinding(hidbtnMapZoomIn,                                rowIndex);
+
+    _keyMappingLayout->addWidget(CommonWidgetUtils::createSeparator(this), rowIndex, 0, 1, 4);
+    rowIndex++;
+
     addHIDButtonBinding(hidbtnChangeActiveCam,                          rowIndex);
     addHIDButtonBinding(hidbtnEnableSoftwareStabilization,              rowIndex);
     addHIDButtonBinding(hidbtnDriversOff,                               rowIndex);

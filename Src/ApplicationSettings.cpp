@@ -187,6 +187,8 @@ void ApplicationSettings::ensureHIDButtonPrefsLoaded()
     addHIDButtonPrefs(hidbtnCamRollUp, "Interface/CamRollUpKey", "D", "", -1, "");
     addHIDButtonPrefs(hidbtnCamZoomOut, "Interface/CamZoomUpKey", "Z", "CamControls/ZoomOutJoystickButton", -1, tr("Zoom Out"));
     addHIDButtonPrefs(hidbtnCamZoomIn, "Interface/CamZoomDownKey", "X",  "CamControls/ZoomInJoystickButton", -1, tr("Zoom In"));
+    addHIDButtonPrefs(hidbtnMapZoomOut, "Interface/MapZoomOutKey", "+",  "CamControls/MapZoomOutJoystickButton", -1, tr("Map Zoom Out"));
+    addHIDButtonPrefs(hidbtnMapZoomIn, "Interface/MapZoomInKey", "-",  "CamControls/MapZoomInJoystickButton", -1, tr("Map Zoom In"));
 
     addHIDButtonPrefs(hidbtnChangeActiveCam, "CamControls/ChangeActiveCamKey", "V",  "CamControls/ChangeActiveCamJoystickButton", -1, tr("Change Active Camera"));
     addHIDButtonPrefs(hidbtnEnableSoftwareStabilization, "CamControls/EnableSoftwareStabilizationKey", "C",  "CamControls/EnableSoftwareStabilizationJoystickButton", -1, tr("Stabilization On/Off"));

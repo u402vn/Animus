@@ -338,8 +338,9 @@ void HIDMapItem::processJoystick(const QList<bool> &buttons)
     bool joystickButtonIsPressed = buttons[_joystickButtonIdx];
     bool isClicked = !_joystickButtonWasPressed && joystickButtonIsPressed;
     bool isUnclicked = _joystickButtonWasPressed && !joystickButtonIsPressed;
+    bool isAutorepeat = joystickButtonIsPressed && _processAutoRepeatKey;
     _joystickButtonWasPressed = joystickButtonIsPressed;
-    if (isClicked)
+    if (isClicked || isAutorepeat)
         emit processPressEvent();
     if (isUnclicked)
         emit processReleaseEvent();
