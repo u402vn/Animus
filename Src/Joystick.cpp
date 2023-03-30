@@ -21,7 +21,7 @@ Joystick::Joystick(QObject *parent, const QString &mappingSettings, uint process
 void Joystick::cleanupJoystickOut()
 {
     for (int i = 0; i < _povs.count(); i++)
-        _povs[i] = 0;
+        _povs[i] = -1;
 
     for (int i = 0; i < _axes.count(); i++)
         _axes[i] = 0;
@@ -62,7 +62,7 @@ void Joystick::configureJoystick(const SDL_Event *event)
 
             _povs.clear();
             for (int i = 0; i < povs; ++i)
-                _povs.append(0);
+                _povs.append(-1);
 
             _axes.clear();
             for (int i = 0; i < axes; ++i)

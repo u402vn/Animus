@@ -3,6 +3,7 @@
 #include <QGraphicsPathItem>
 #include <QAction>
 #include <QVBoxLayout>
+#include <QKeyEvent>
 #include "EnterProc.h"
 
 void MapView::timerEvent(QTimerEvent *event)
@@ -120,4 +121,53 @@ void MapView::onMapZoomOutClicked()
     EnterProc("MapView::onMapZoomOutClicked");
     if (_scene->ScaleDown())
         _view->scale(.5, .5);
+}
+
+void MapView::onMapMoveClicked(int directionAngle)
+{
+    int keyV = 0;
+    int keyH = 0;
+
+    switch (directionAngle)
+    {
+    case 0:
+        keyV = Qt::Key_Up;
+        break;
+    case 45:
+        keyV = Qt::Key_Up;
+        keyH = Qt::Key_Right;
+        break;
+    case 90:
+        keyH = Qt::Key_Right;
+        break;
+    case 135:
+        keyH = Qt::Key_Right;
+        keyV = Qt::Key_Down;
+        break;
+    case 180:
+        keyV = Qt::Key_Down;
+        break;
+    case 225:
+        keyH = Qt::Key_Left;
+        keyV = Qt::Key_Down;
+        break;
+    case 270:
+        keyH = Qt::Key_Left;
+        break;
+    case 315:
+        keyH = Qt::Key_Left;
+        keyV = Qt::Key_Up;
+        break;
+    }
+
+    if (keyH != 0)
+    {
+        QKeyEvent key(QEvent::KeyPress, keyH, Qt::NoModifier);
+        QApplication::sendEvent(_view, &key);
+    }
+    if (keyV != 0)
+    {
+        QKeyEvent key(QEvent::KeyPress, keyV, Qt::NoModifier);
+        QApplication::sendEvent(_view, &key);
+    }
 }

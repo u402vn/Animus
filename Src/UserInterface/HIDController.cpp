@@ -158,6 +158,7 @@ void HIDController::processJoystick(const QList<int> &povs, const QList<double> 
     emit onJoystickStateTextChanged( makeJoystickStateText(povs, axes, buttons) );
 
     processAxisChanges();
+    processPOVChanges(povs);
 }
 
 void HIDController::doSetZoomFromUI(quint32 zoom)
@@ -304,6 +305,15 @@ void HIDController::processAxisChanges()
 
         emit onCamMovingSpeedChange(speedRoll, speedPitch, speedYaw);
     }
+}
+
+void HIDController::processPOVChanges(const QList<int> &povs)
+{
+    if (povs.count() == 0)
+        return;
+
+    if (povs[0] >= 0)
+        emit onMapMoveClicked(povs[0]);
 }
 
 

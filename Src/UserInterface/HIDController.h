@@ -70,7 +70,8 @@ class HIDController : public QObject
     void processPitchDownRelease();
 
     void updateCamZoomInternal(quint32 zoom);
-    void processAxisChanges();
+    void processAxisChanges();\
+    void processPOVChanges(const QList<int> &povs);
 protected:
     bool virtual eventFilter(QObject *obj, QEvent *event);
 public:
@@ -133,6 +134,7 @@ signals:
     void onCamMovingSpeedChange(float speedRoll, float speedPitch, float deltaYaw);
 
     void onJoystickStateTextChanged(const QString stateText);
+    void onMapMoveClicked(int directionAngle);
 };
 
 #endif // HIDCONTROLLER_H

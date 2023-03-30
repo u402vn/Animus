@@ -31,6 +31,7 @@ public:
 public slots:
     void onMapZoomInClicked();
     void onMapZoomOutClicked();
+    void onMapMoveClicked(int directionAngle);
 };
 
 #endif // MAPVIEW_H
