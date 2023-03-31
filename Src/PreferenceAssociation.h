@@ -52,7 +52,7 @@ class PreferenceBindingDouble final: public PreferenceBinding
     Q_OBJECT
     friend class PreferenceAssociation;
 
-    PreferenceBindingDouble(ApplicationPreferenceDouble *preference, QSpinBox *editor);
+    PreferenceBindingDouble(ApplicationPreferenceDouble *preference, QSpinBoxEx *editor);
     void fromEditor();
     void toEditor();
 };
@@ -62,7 +62,7 @@ class PreferenceBindingDouble2 final: public PreferenceBinding
     Q_OBJECT
     friend class PreferenceAssociation;
 
-    PreferenceBindingDouble2(ApplicationPreferenceDouble *preference, QDoubleSpinBox *editor);
+    PreferenceBindingDouble2(ApplicationPreferenceDouble *preference, QDoubleSpinBoxEx *editor);
     void fromEditor();
     void toEditor();
 };
@@ -106,7 +106,7 @@ class PreferenceBindingInt3 final: public PreferenceBinding
     Q_OBJECT
     friend class PreferenceAssociation;
 
-    PreferenceBindingInt3(ApplicationPreferenceInt *preference, QSpinBox *editor);
+    PreferenceBindingInt3(ApplicationPreferenceInt *preference, QSpinBoxEx *editor);
     void fromEditor();
     void toEditor();
 };
@@ -202,9 +202,9 @@ class PreferenceBindingDoubleList final: public PreferenceBinding
     Q_OBJECT
     friend class PreferenceAssociation;
 
-    QList<QDoubleSpinBox *> *_editors;
+    QList<QDoubleSpinBoxEx *> *_editors;
 
-    PreferenceBindingDoubleList(ApplicationPreferenceDoubleList *preference, QList<QDoubleSpinBox*> *editors);
+    PreferenceBindingDoubleList(ApplicationPreferenceDoubleList *preference, QList<QDoubleSpinBoxEx*> *editors);
     void fromEditor();
     void toEditor();
 };
@@ -217,13 +217,13 @@ class PreferenceAssociation final : public QObject
     void addBindingInternal(PreferenceBinding *binding, UniquePreferenceGroup *uniqueGroup = nullptr);
 public:
     explicit PreferenceAssociation(QObject *parent);
-    void addBinding(ApplicationPreferenceDouble *preference, QSpinBox *editor);
-    void addBinding(ApplicationPreferenceDouble *preference, QDoubleSpinBox *editor);
-    void addBinding(ApplicationPreferenceDoubleList *preference, QList<QDoubleSpinBox*> *editors);
+    void addBinding(ApplicationPreferenceDouble *preference, QSpinBoxEx *editor);
+    void addBinding(ApplicationPreferenceDouble *preference, QDoubleSpinBoxEx *editor);
+    void addBinding(ApplicationPreferenceDoubleList *preference, QList<QDoubleSpinBoxEx *> *editors);
     void addBinding(ApplicationPreferenceBool *preference, QCheckBox *editor);
     void addBinding(ApplicationPreferenceInt *preference, QComboBoxExt *editor, UniquePreferenceGroup *uniqueGroup = nullptr);
     void addBinding(ApplicationPreferenceInt *preference, QLineEdit *editor);
-    void addBinding(ApplicationPreferenceInt *preference, QSpinBox *editor);
+    void addBinding(ApplicationPreferenceInt *preference, QSpinBoxEx *editor);
     void addBinding(ApplicationPreferenceString *preference, QLineEdit *editor);
     void addBinding(ApplicationPreferenceString *preference, QComboBoxExt *editor);
     void addBinding(ApplicationPreferenceString *preference, QPlainTextEdit *editor);

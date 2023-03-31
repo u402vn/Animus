@@ -5,7 +5,6 @@
 #include <QWidget>
 #include <QDialog>
 #include <QImage>
-#include <QDoubleSpinBox>
 #include <QSpinBox>
 #include <QProgressBar>
 #include <QPushButton>
@@ -23,7 +22,7 @@ private:
     CamCalibrator * _camCalibrator;
 
     QComboBoxExt * _cmbPatternSize;
-    QDoubleSpinBox * _sbSquareLength;
+    QDoubleSpinBoxEx * _sbSquareLength;
     QComboBoxExt * _cmbRequiredFrameCount;
     QComboBoxExt * _cmbScanInterval;
 

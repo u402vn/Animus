@@ -79,6 +79,30 @@ public:
     bool ignoreMouseWheel();
 };
 
+class QSpinBoxEx final: public QSpinBox
+{
+    Q_OBJECT
+    bool _ignoreMouseWheel;
+protected:
+    void wheelEvent(QWheelEvent *event);
+public:
+    QSpinBoxEx(QWidget *parent);
+    void setIgnoreMouseWheel(bool value);
+    bool ignoreMouseWheel();
+};
+
+class QDoubleSpinBoxEx final: public QDoubleSpinBox
+{
+    Q_OBJECT
+    bool _ignoreMouseWheel;
+protected:
+    void wheelEvent(QWheelEvent *event);
+public:
+    QDoubleSpinBoxEx(QWidget *parent);
+    void setIgnoreMouseWheel(bool value);
+    bool ignoreMouseWheel();
+};
+
 class QLabelEx final : public QLabel
 {
     Q_OBJECT
@@ -174,8 +198,8 @@ public:
     static QFrame *createSeparator(QWidget *parent);
     static QPushButton *createButton(QWidget *parent, const QString &caption, const QString &toolTip,
                                      bool checkable, int width, int height, const QString &iconName);
-    static QSpinBox *createRangeSpinbox(QWidget *parent, int minValue, int maxValue);
-    static QDoubleSpinBox *createDoubleRangeSpinbox(QWidget *parent, double minValue, double maxValue, double step, int decimals);
+    static QSpinBoxEx *createRangeSpinbox(QWidget *parent, int minValue, int maxValue);
+    static QDoubleSpinBoxEx *createDoubleRangeSpinbox(QWidget *parent, double minValue, double maxValue, double step, int decimals);
     static void drawText(QPainter &painter, QPoint pos, Qt::Alignment flags, const QString &text, bool shadowBackground);
     static QGridLayout *createGridLayoutForScrollArea(QScrollArea *scrollArea);
     static QWidget *createScrolledWidget(QWidget *parent);

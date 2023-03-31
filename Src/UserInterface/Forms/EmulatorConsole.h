@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QWidget>
 #include <QGridLayout>
-#include <QDoubleSpinBox>
+#include "Common/CommonWidgets.h"
 #include "TelemetryDataFrame.h"
 #include "PreferenceAssociation.h"
 
@@ -13,17 +13,17 @@ class EmulatorConsole : public QWidget
     Q_OBJECT
 
     QGridLayout *_mainLayout;
-    QDoubleSpinBox *_sbUavRoll;
-    QDoubleSpinBox *_sbUavPitch;
-    QDoubleSpinBox *_sbUavYaw;
-    QDoubleSpinBox *_sbUavGpsLat;
-    QDoubleSpinBox *_sbUavGpsLon;
-    QDoubleSpinBox *_sbUavGpsHmsl;
-    QDoubleSpinBox *_sbUavGpsCourse;
+    QDoubleSpinBoxEx *_sbUavRoll;
+    QDoubleSpinBoxEx *_sbUavPitch;
+    QDoubleSpinBoxEx *_sbUavYaw;
+    QDoubleSpinBoxEx *_sbUavGpsLat;
+    QDoubleSpinBoxEx *_sbUavGpsLon;
+    QDoubleSpinBoxEx *_sbUavGpsHmsl;
+    QDoubleSpinBoxEx *_sbUavGpsCourse;
 
     PreferenceAssociation _association;
 
-    QDoubleSpinBox *addDoubleSpinBox(int row, const QString &caption, double minValue, double maxValue, double step, int decimals, ApplicationPreferenceDouble *preference);
+    QDoubleSpinBoxEx *addDoubleSpinBox(int row, const QString &caption, double minValue, double maxValue, double step, int decimals, ApplicationPreferenceDouble *preference);
 public:    
     explicit EmulatorConsole(QWidget *parent);
     ~EmulatorConsole();

@@ -178,6 +178,54 @@ bool QComboBoxExt::ignoreMouseWheel()
     return _ignoreMouseWheel;
 }
 
+//-------------------------------------- QSpinBoxEx --------------------------------------
+
+void QSpinBoxEx::wheelEvent(QWheelEvent *event)
+{
+    if (!_ignoreMouseWheel)
+        QSpinBox::wheelEvent(event);
+}
+
+QSpinBoxEx::QSpinBoxEx(QWidget *parent) : QSpinBox(parent)
+{
+    _ignoreMouseWheel = true;
+    setFocusPolicy(Qt::StrongFocus); //disable focus by mouse wheel
+}
+
+void QSpinBoxEx::setIgnoreMouseWheel(bool value)
+{
+    _ignoreMouseWheel = value;
+}
+
+bool QSpinBoxEx::ignoreMouseWheel()
+{
+    return _ignoreMouseWheel;
+}
+
+//-------------------------------------- QDoubleSpinBoxEx --------------------------------------
+
+void QDoubleSpinBoxEx::wheelEvent(QWheelEvent *event)
+{
+    if (!_ignoreMouseWheel)
+        QDoubleSpinBox::wheelEvent(event);
+}
+
+QDoubleSpinBoxEx::QDoubleSpinBoxEx(QWidget *parent) : QDoubleSpinBox(parent)
+{
+    _ignoreMouseWheel = true;
+    setFocusPolicy(Qt::StrongFocus); //disable focus by mouse wheel
+}
+
+void QDoubleSpinBoxEx::setIgnoreMouseWheel(bool value)
+{
+    _ignoreMouseWheel = value;
+}
+
+bool QDoubleSpinBoxEx::ignoreMouseWheel()
+{
+    return _ignoreMouseWheel;
+}
+
 //-------------------------------------- QLabelEx --------------------------------------
 
 void QLabelEx::mousePressEvent(QMouseEvent *event)
@@ -327,18 +375,18 @@ QPushButton *CommonWidgetUtils::createButton(QWidget *parent, const QString &cap
     return button;
 }
 
-QSpinBox *CommonWidgetUtils::createRangeSpinbox(QWidget *parent, int minValue, int maxValue)
+QSpinBoxEx *CommonWidgetUtils::createRangeSpinbox(QWidget *parent, int minValue, int maxValue)
 {
-    auto spinBox = new QSpinBox(parent);
+    auto spinBox = new QSpinBoxEx(parent);
     spinBox->setRange(minValue, maxValue);
     spinBox->setAlignment(Qt::AlignRight);
     spinBox->setMaximumWidth(100);
     return spinBox;
 }
 
-QDoubleSpinBox *CommonWidgetUtils::createDoubleRangeSpinbox(QWidget *parent, double minValue, double maxValue, double step, int decimals)
+QDoubleSpinBoxEx *CommonWidgetUtils::createDoubleRangeSpinbox(QWidget *parent, double minValue, double maxValue, double step, int decimals)
 {
-    auto spinBox = new QDoubleSpinBox(parent);
+    auto spinBox = new QDoubleSpinBoxEx(parent);
     spinBox->setRange(minValue, maxValue);
     spinBox->setDecimals(decimals);
     spinBox->setSingleStep(step);

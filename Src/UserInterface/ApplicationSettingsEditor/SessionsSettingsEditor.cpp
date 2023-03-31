@@ -89,7 +89,7 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     auto cbOVRGimbalIndicatorType = new QComboBoxExt(this, mapOVRGimbalIndicatorType);
 
     auto lblOVRGimbalIndicatorSize = new QLabel(tr("Gimbal Indicator Size"), this);
-    auto sbOVRGimbalIndicatorSize = new QSpinBox(this);
+    auto sbOVRGimbalIndicatorSize = new QSpinBoxEx(this);
 
 
     auto spoilerVideoRecord = makeSessionsSpoilerGrid(tr("Video Record"), this);

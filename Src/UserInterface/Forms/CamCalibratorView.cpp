@@ -92,7 +92,7 @@ CamCalibratorView::CamCalibratorView(QWidget *parent) : QDialog(parent)
     _cmbPatternSize->setCurrentData(7);
 
     QLabel * lblSquareLength = new QLabel(tr("Cell Length (mm):"), this);
-    _sbSquareLength = new QDoubleSpinBox(this);
+    _sbSquareLength = new QDoubleSpinBoxEx(this); // createDoubleRangeSpinbox
     _sbSquareLength->setRange(10, 200);
     _sbSquareLength->setValue(20);
 

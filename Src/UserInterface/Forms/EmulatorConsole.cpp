@@ -1,16 +1,15 @@
 #include "EmulatorConsole.h"
 #include <QLabel>
-#include "Common/CommonWidgets.h"
 #include "Common/CommonUtils.h"
 #include "ApplicationSettings.h"
 #include "EnterProc.h"
 
-QDoubleSpinBox *EmulatorConsole::addDoubleSpinBox(int row, const QString &caption, double minValue, double maxValue, double step, int decimals, ApplicationPreferenceDouble *preference)
+QDoubleSpinBoxEx *EmulatorConsole::addDoubleSpinBox(int row, const QString &caption, double minValue, double maxValue, double step, int decimals, ApplicationPreferenceDouble *preference)
 {
     auto label = new QLabel(caption, this);
     auto spinBox = CommonWidgetUtils::createDoubleRangeSpinbox(this, minValue, maxValue, step, decimals);
     _association.addBinding(preference, spinBox);
-    connect(spinBox, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &EmulatorConsole::onValueChanged);
+    connect(spinBox, static_cast<void (QDoubleSpinBoxEx::*)(double)>(&QDoubleSpinBoxEx::valueChanged), this, &EmulatorConsole::onValueChanged);
 
     _mainLayout->addWidget(label,              row, 0, 1, 1);
     _mainLayout->addWidget(spinBox,            row, 1, 1, 1);

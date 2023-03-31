@@ -53,35 +53,35 @@ class CameraSettingsEditor final : public QDialog
     QCheckBox *_chkSnapshot;
 
     QButtonGroupExt *_gbCameraType;
-    QSpinBox *_sbFixedCamPitch;
-    QSpinBox *_sbFixedCamRoll;
-    QSpinBox *_sbFixedCamZoom;
+    QSpinBoxEx *_sbFixedCamPitch;
+    QSpinBoxEx *_sbFixedCamRoll;
+    QSpinBoxEx *_sbFixedCamZoom;
 
     QComboBoxExt *_cbCameraControlMode;
-    QSpinBox *_sbCamPitchMin;
-    QSpinBox *_sbCamRollMin;
-    QSpinBox *_sbCamZoomMin;
-    QSpinBox *_sbCamPitchMax;
-    QSpinBox *_sbCamRollMax;
-    QSpinBox *_sbCamZoomMax;
+    QSpinBoxEx *_sbCamPitchMin;
+    QSpinBoxEx *_sbCamRollMin;
+    QSpinBoxEx *_sbCamZoomMin;
+    QSpinBoxEx *_sbCamPitchMax;
+    QSpinBoxEx *_sbCamRollMax;
+    QSpinBoxEx *_sbCamZoomMax;
     QCheckBox *_chkCamAxisXInverse;
     QCheckBox *_chkCamAxisYInverse;
     QLabel *_lblEncoderAutomaticTracerMultiplie;
-    QDoubleSpinBox *_sbEncoderAutomaticTracerMultiplier;
-    QSpinBox *_sbFixedPosLandingYaw;
-    QSpinBox *_sbFixedPosLandingPitch;
-    QSpinBox *_sbFixedPosLandingRoll;
-    QSpinBox *_sbFixedPosLandingZoom;
+    QDoubleSpinBoxEx *_sbEncoderAutomaticTracerMultiplier;
+    QSpinBoxEx *_sbFixedPosLandingYaw;
+    QSpinBoxEx *_sbFixedPosLandingPitch;
+    QSpinBoxEx *_sbFixedPosLandingRoll;
+    QSpinBoxEx *_sbFixedPosLandingZoom;
     QCheckBox *_chkFixedPosLandingCommand;
 
-    QSpinBox *_sbFixedPosBeginingYaw;
-    QSpinBox *_sbFixedPosBeginingPitch;
-    QSpinBox *_sbFixedPosBeginingRoll;
-    QSpinBox *_sbFixedPosBeginingZoom;
-    QSpinBox *_sbFixedPosVerticalYaw;
-    QSpinBox *_sbFixedPosVerticalPitch;
-    QSpinBox *_sbFixedPosVerticalRoll;
-    QSpinBox *_sbFixedPosVerticalZoom;
+    QSpinBoxEx *_sbFixedPosBeginingYaw;
+    QSpinBoxEx *_sbFixedPosBeginingPitch;
+    QSpinBoxEx *_sbFixedPosBeginingRoll;
+    QSpinBoxEx *_sbFixedPosBeginingZoom;
+    QSpinBoxEx *_sbFixedPosVerticalYaw;
+    QSpinBoxEx *_sbFixedPosVerticalPitch;
+    QSpinBoxEx *_sbFixedPosVerticalRoll;
+    QSpinBoxEx *_sbFixedPosVerticalZoom;
 
     void initBindings();
     void initWidgets();

@@ -21,17 +21,17 @@ PreferenceAssociation::PreferenceAssociation(QObject *parent) : QObject(parent)
 
 }
 
-void PreferenceAssociation::addBinding(ApplicationPreferenceDouble *preference, QSpinBox *editor)
+void PreferenceAssociation::addBinding(ApplicationPreferenceDouble *preference, QSpinBoxEx *editor)
 {
     addBindingInternal(new PreferenceBindingDouble(preference, editor));
 }
 
-void PreferenceAssociation::addBinding(ApplicationPreferenceDouble *preference, QDoubleSpinBox *editor)
+void PreferenceAssociation::addBinding(ApplicationPreferenceDouble *preference, QDoubleSpinBoxEx *editor)
 {
     addBindingInternal(new PreferenceBindingDouble2(preference, editor));
 }
 
-void PreferenceAssociation::addBinding(ApplicationPreferenceDoubleList *preference, QList<QDoubleSpinBox *> *editors)
+void PreferenceAssociation::addBinding(ApplicationPreferenceDoubleList *preference, QList<QDoubleSpinBoxEx *> *editors)
 {
     addBindingInternal(new PreferenceBindingDoubleList(preference, editors));
 }
@@ -51,7 +51,7 @@ void PreferenceAssociation::addBinding(ApplicationPreferenceInt *preference, QLi
     addBindingInternal(new PreferenceBindingInt2(preference, editor));
 }
 
-void PreferenceAssociation::addBinding(ApplicationPreferenceInt *preference, QSpinBox *editor)
+void PreferenceAssociation::addBinding(ApplicationPreferenceInt *preference, QSpinBoxEx *editor)
 {
     addBindingInternal(new PreferenceBindingInt3(preference, editor));
 }
@@ -185,7 +185,7 @@ const QObject *PreferenceBinding::editor() const
 
 // --- PreferenceBindingDouble ---
 
-PreferenceBindingDouble::PreferenceBindingDouble(ApplicationPreferenceDouble *preference, QSpinBox * editor) :
+PreferenceBindingDouble::PreferenceBindingDouble(ApplicationPreferenceDouble *preference, QSpinBoxEx *editor) :
     PreferenceBinding(preference, editor)
 {
 
@@ -193,19 +193,19 @@ PreferenceBindingDouble::PreferenceBindingDouble(ApplicationPreferenceDouble *pr
 
 void PreferenceBindingDouble::fromEditor()
 {
-    ((ApplicationPreferenceDouble *)_preference)->setValue(((QSpinBox *)_editor)->value());
+    ((ApplicationPreferenceDouble *)_preference)->setValue(((QSpinBoxEx *)_editor)->value());
     PreferenceBinding::fromEditor();
 }
 
 void PreferenceBindingDouble::toEditor()
 {
-    ((QSpinBox *)_editor)->setValue(((ApplicationPreferenceDouble *)_preference)->value());
+    ((QSpinBoxEx *)_editor)->setValue(((ApplicationPreferenceDouble *)_preference)->value());
     PreferenceBinding::toEditor();
 }
 
 // --- PreferenceBindingDouble2 ---
 
-PreferenceBindingDouble2::PreferenceBindingDouble2(ApplicationPreferenceDouble *preference, QDoubleSpinBox *editor) :
+PreferenceBindingDouble2::PreferenceBindingDouble2(ApplicationPreferenceDouble *preference, QDoubleSpinBoxEx *editor) :
     PreferenceBinding(preference, editor)
 {
 
@@ -213,13 +213,13 @@ PreferenceBindingDouble2::PreferenceBindingDouble2(ApplicationPreferenceDouble *
 
 void PreferenceBindingDouble2::fromEditor()
 {
-    ((ApplicationPreferenceDouble *)_preference)->setValue(((QDoubleSpinBox *)_editor)->value());
+    ((ApplicationPreferenceDouble *)_preference)->setValue(((QDoubleSpinBoxEx *)_editor)->value());
     PreferenceBinding::fromEditor();
 }
 
 void PreferenceBindingDouble2::toEditor()
 {
-    ((QDoubleSpinBox *)_editor)->setValue(((ApplicationPreferenceDouble *)_preference)->value());
+    ((QDoubleSpinBoxEx *)_editor)->setValue(((ApplicationPreferenceDouble *)_preference)->value());
     PreferenceBinding::toEditor();
 }
 
@@ -328,7 +328,7 @@ void PreferenceBindingInt2::toEditor()
 
 // --- PreferenceBindingInt3 ---
 
-PreferenceBindingInt3::PreferenceBindingInt3(ApplicationPreferenceInt *preference, QSpinBox *editor) :
+PreferenceBindingInt3::PreferenceBindingInt3(ApplicationPreferenceInt *preference, QSpinBoxEx *editor) :
     PreferenceBinding(preference, editor)
 {
 
@@ -336,13 +336,13 @@ PreferenceBindingInt3::PreferenceBindingInt3(ApplicationPreferenceInt *preferenc
 
 void PreferenceBindingInt3::fromEditor()
 {
-    ((ApplicationPreferenceInt *)_preference)->setValue(((QSpinBox *)_editor)->value());
+    ((ApplicationPreferenceInt *)_preference)->setValue(((QSpinBoxEx *)_editor)->value());
     PreferenceBinding::fromEditor();
 }
 
 void PreferenceBindingInt3::toEditor()
 {
-    ((QSpinBox *)_editor)->setValue(((ApplicationPreferenceInt *)_preference)->value());
+    ((QSpinBoxEx *)_editor)->setValue(((ApplicationPreferenceInt *)_preference)->value());
     PreferenceBinding::toEditor();
 }
 
@@ -587,7 +587,7 @@ void UniquePreferenceGroup::editorValueChanged(PreferenceBinding *binding)
     highlightsDuplicates();
 }
 
-PreferenceBindingDoubleList::PreferenceBindingDoubleList(ApplicationPreferenceDoubleList *preference, QList<QDoubleSpinBox *> *editors) :
+PreferenceBindingDoubleList::PreferenceBindingDoubleList(ApplicationPreferenceDoubleList *preference, QList<QDoubleSpinBoxEx *> *editors) :
     PreferenceBinding(preference, nullptr),
     _editors(editors)
 {
