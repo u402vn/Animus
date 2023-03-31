@@ -436,8 +436,8 @@ void CamControlsWidget::tuneImageChangeInternal(qreal brightness, qreal contrast
 }
 
 void CamControlsWidget::onTargetSizeSelectorClick()
-{    
-    QPushButton * btnTargetSizeSelector = qobject_cast<QPushButton *>(sender());
+{
+    auto btnTargetSizeSelector = qobject_cast<QPushButton *>(sender());
     _targetSizeMenu->exec(btnTargetSizeSelector->mapToGlobal(QPoint(0, btnTargetSizeSelector->height())));
 }
 
@@ -512,8 +512,12 @@ void CamControlsWidget::onCamZoomValueChanged(int value)
 void CamControlsWidget::onCamDriversOffClicked()
 {
     EnterProcStart("CamControlsWidget::onCamDriversOffClicked");
-    bool enabled = _btnCamDriversOff->isChecked();
-    _hardwareLink->setCamMotorStatus(enabled);
+
+    if (qobject_cast<QPushButton*>(sender()) == nullptr )
+        _btnCamDriversOff->setChecked(! _btnCamDriversOff->isChecked());
+
+    bool driversEnabled = _btnCamDriversOff->isChecked();
+    _hardwareLink->setCamMotorStatus(driversEnabled);
 }
 
 void CamControlsWidget::setCamControlsEnabled(bool enabled)

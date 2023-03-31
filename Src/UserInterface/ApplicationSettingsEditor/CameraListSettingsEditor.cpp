@@ -37,7 +37,7 @@ CameraListSettingsEditor::CameraListSettingsEditor(QWidget *parent):
 
 void CameraListSettingsEditor::onCamInfoClicked()
 {
-    QPushButton *button = qobject_cast<QPushButton*>(sender());
+    auto button = qobject_cast<QPushButton*>(sender());
     int camIdx = button->property(CAMERA_INDEX).toInt();
 
     auto cameraSettingsEditor = new CameraSettingsEditor(this, camIdx);
