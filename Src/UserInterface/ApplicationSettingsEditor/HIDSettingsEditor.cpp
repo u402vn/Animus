@@ -139,6 +139,7 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
 
     addHIDButtonBinding(hidbtnMapZoomOut,                               rowIndex);
     addHIDButtonBinding(hidbtnMapZoomIn,                                rowIndex);
+    addHIDButtonBinding(hidbtnFollowThePlane,                           rowIndex);
 
     _keyMappingLayout->addWidget(CommonWidgetUtils::createSeparator(this), rowIndex, 0, 1, 4);
     rowIndex++;

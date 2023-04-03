@@ -123,8 +123,16 @@ void MapView::onMapZoomOutClicked()
         _view->scale(.5, .5);
 }
 
+void MapView::onFollowThePlaneClicked()
+{
+    _scene->setFollowThePlane(!_scene->followThePlane());
+}
+
 void MapView::onMapMoveClicked(int directionAngle)
 {
+    if (_scene->followThePlane())
+        _scene->setFollowThePlane(false);
+
     int keyV = 0;
     int keyH = 0;
 
@@ -170,4 +178,7 @@ void MapView::onMapMoveClicked(int directionAngle)
         QKeyEvent key(QEvent::KeyPress, keyV, Qt::NoModifier);
         QApplication::sendEvent(_view, &key);
     }
+
+
+    qDebug() << _view->verticalScrollBar()->singleStep();
 }

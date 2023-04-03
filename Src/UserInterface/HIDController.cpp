@@ -35,6 +35,19 @@ HIDController::HIDController(QObject *parent) : QObject(parent)
 
     bool processAutoRepeatKeyForCamMoving = (_controlMode == CameraControlModes::AbsolutePosition);
 
+
+    _joystickFreqTimer = new QTimer(this);
+    _joystickEventNumber = 0;
+    _joystickEventsCount = 0;
+
+    connect(_joystickFreqTimer, &QTimer::timeout, [&]()
+    {
+        _joystickEventsCount = _joystickEventNumber;
+        _joystickEventNumber = 0;
+    });
+    _joystickFreqTimer->start(1000);
+
+
     makeHIDMapItem(hidbtnCamZoomIn,          &HIDController::processCamZoomUp,                     nullptr, true);
     makeHIDMapItem(hidbtnCamZoomOut,         &HIDController::processCamZoomDown,                   nullptr, true);
     makeHIDMapItem(hidbtnCamPitchUp,         &HIDController::processPitchUpPress,               &HIDController::processPitchUpRelease,   processAutoRepeatKeyForCamMoving);
@@ -42,8 +55,9 @@ HIDController::HIDController(QObject *parent) : QObject(parent)
     makeHIDMapItem(hidbtnCamRollUp,          &HIDController::processRollUpPress,                &HIDController::processRollUpRelease,    processAutoRepeatKeyForCamMoving);
     makeHIDMapItem(hidbtnCamRollDown,        &HIDController::processRollDownPress,              &HIDController::processRollDownRelease,  processAutoRepeatKeyForCamMoving);
 
-    makeHIDMapItem(hidbtnMapZoomIn,          &HIDController::onMapZoomInClicked,         nullptr, true);
-    makeHIDMapItem(hidbtnMapZoomOut,         &HIDController::onMapZoomOutClicked,        nullptr, true);
+    makeHIDMapItem(hidbtnMapZoomIn,          &HIDController::onMapZoomInClicked,                nullptr, true);
+    makeHIDMapItem(hidbtnMapZoomOut,         &HIDController::onMapZoomOutClicked,               nullptr, true);
+    makeHIDMapItem(hidbtnFollowThePlane,     &HIDController::onFollowThePlaneClicked,           nullptr, false);
 
     makeHIDMapItem(hidbtnSettingsEditor,     &HIDController::onOpenApplicationSettingsEditorClicked,   nullptr, false);
     makeHIDMapItem(hidbtnDataConsole,        &HIDController::onOpenDataConsoleClicked,          nullptr, false);
@@ -121,7 +135,7 @@ void HIDController::updateCamZoomInternal(quint32 zoom)
         emit onAbsoluteCamZoomChange(_camZoom);
 }
 
-const QString makeJoystickStateText(const QList<int> &povs, const QList<double> &axes, const QList<bool> &buttons)
+const QString makeJoystickStateText(quint32 joystickEventsCount, const QList<int> &povs, const QList<double> &axes, const QList<bool> &buttons)
 {
     QString povsText, axesText, buttonsText;
     for (int i = 0; i < povs.count(); i++)
@@ -133,7 +147,8 @@ const QString makeJoystickStateText(const QList<int> &povs, const QList<double> 
     for (int i = 0; i < buttons.count(); i++)
         buttonsText += QString("\tButton %1: %2\n").arg(i + 1).arg(buttons[i]);
 
-    QString result = QString("POVs:\n%1\nAxes:\n%2\nButtons:\n%3").arg(povsText).arg(axesText).arg(buttonsText);
+    QString result = QString("Frequency:\t%1\nPOVs:\n%2\nAxes:\n%2\nButtons:\n%3")
+            .arg(joystickEventsCount).arg(povsText).arg(axesText).arg(buttonsText);
 
     return result;
 }
@@ -141,6 +156,8 @@ const QString makeJoystickStateText(const QList<int> &povs, const QList<double> 
 void HIDController::processJoystick(const QList<int> &povs, const QList<double> &axes, const QList<bool> &buttons)
 {
     Q_UNUSED(povs)
+
+    _joystickEventNumber++;
 
     _prevJoystickZ = _joystickZ;
 
@@ -155,7 +172,7 @@ void HIDController::processJoystick(const QList<int> &povs, const QList<double> 
     foreach (auto hidMapItem, _HIDMap)
         hidMapItem->processJoystick(buttons);
 
-    emit onJoystickStateTextChanged( makeJoystickStateText(povs, axes, buttons) );
+    emit onJoystickStateTextChanged( makeJoystickStateText(_joystickEventsCount, povs, axes, buttons) );
 
     processAxisChanges();
     processPOVChanges(povs);

@@ -53,6 +53,9 @@ class HIDController : public QObject
     qreal _joystickEmulationFromKeyboard;
     qreal _joystickAxisSensitivity;
 
+    QTimer *_joystickFreqTimer;
+    quint32 _joystickEventNumber, _joystickEventsCount;
+
     void makeHIDMapItem(HIDButton prefIndex, void(HIDController::*onPressMethod)(), void(HIDController::*onReleaseMethod)(), bool processAutoRepeatKey);
 
     bool processKeyboard(QKeyEvent *keyEvent, QObject *senderObj);
@@ -84,6 +87,8 @@ public slots:
 signals:
     void onMapZoomInClicked();
     void onMapZoomOutClicked();
+    void onFollowThePlaneClicked();
+    void onMapMoveClicked(int directionAngle);
 
     void onOpenApplicationSettingsEditorClicked();
     void onOpenDataConsoleClicked();
@@ -134,7 +139,6 @@ signals:
     void onCamMovingSpeedChange(float speedRoll, float speedPitch, float deltaYaw);
 
     void onJoystickStateTextChanged(const QString stateText);
-    void onMapMoveClicked(int directionAngle);
 };
 
 #endif // HIDCONTROLLER_H

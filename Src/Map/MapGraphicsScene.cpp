@@ -410,6 +410,21 @@ int MapGraphicsScene::scale()
     return _scale;
 }
 
+bool MapGraphicsScene::followThePlane()
+{
+    return _acFollowThePlane->isChecked();
+}
+
+bool MapGraphicsScene::setFollowThePlane(bool value)
+{
+    _acFollowThePlane->setChecked(value);
+
+    if (_acFollowThePlane->isChecked())
+        centerOnUAV();
+    else
+        forceRepaintViews();
+}
+
 void MapGraphicsScene::addTrajectoryPoint(const WorldGPSCoord &pointCoords, bool immediateShow)
 {
     auto point = ConvertGPS2GoogleXY(pointCoords, DEFAULT_GOOGLE_SCALE_FOR_SCENE);

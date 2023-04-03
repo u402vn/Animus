@@ -357,6 +357,7 @@ void MainWindow::initHidController(CamAssemblyPreferences *camAssemblyPreference
     connect(_hidController, &HIDController::onMapZoomInClicked,                     _mapView,           &MapView::onMapZoomInClicked);
     connect(_hidController, &HIDController::onMapZoomOutClicked,                    _mapView,           &MapView::onMapZoomOutClicked);
     connect(_hidController, &HIDController::onMapMoveClicked,                       _mapView,           &MapView::onMapMoveClicked);
+    connect(_hidController, &HIDController::onFollowThePlaneClicked,                _mapView,           &MapView::onFollowThePlaneClicked);
 
     connect(_hidController, &HIDController::onScreenshotClicked,                    _camControlsWidget, &CamControlsWidget::onScreenshotClicked);
     connect(_hidController, &HIDController::onSnapshotClicked,                      _camControlsWidget, &CamControlsWidget::onSnapshotClicked);

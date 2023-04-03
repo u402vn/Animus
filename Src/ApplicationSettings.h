@@ -142,7 +142,8 @@ enum HIDButton
     hidbtnSendHitCoordinates,
     hidbtnSendWeather,
     hidbtnMapZoomOut,
-    hidbtnMapZoomIn
+    hidbtnMapZoomIn,
+    hidbtnFollowThePlane
 };
 
 //Singleton

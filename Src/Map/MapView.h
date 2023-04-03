@@ -31,6 +31,7 @@ public:
 public slots:
     void onMapZoomInClicked();
     void onMapZoomOutClicked();
+    void onFollowThePlaneClicked();
     void onMapMoveClicked(int directionAngle);
 };
 

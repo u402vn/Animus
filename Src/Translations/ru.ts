@@ -14,22 +14,22 @@
         <translation>Приблизить</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="224"/>
+        <location filename="../ApplicationSettings.cpp" line="225"/>
         <source>Start New Session</source>
         <translation>Начать новую сессию</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="225"/>
+        <location filename="../ApplicationSettings.cpp" line="226"/>
         <source>Display Only Mode</source>
         <translation>Перейти в режим отображения</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="227"/>
+        <location filename="../ApplicationSettings.cpp" line="228"/>
         <source>Change map and video positions</source>
         <translation>Сменить позиции карты и видео</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="226"/>
+        <location filename="../ApplicationSettings.cpp" line="227"/>
         <source>Open Select Sessions Window</source>
         <translation>Открыть окно выбора сессий</translation>
     </message>
@@ -49,164 +49,169 @@
         <translation>Увеличить масштаб карты</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="193"/>
+        <location filename="../ApplicationSettings.cpp" line="192"/>
+        <source>Follow The Plane</source>
+        <translation>Следовать за самолетом</translation>
+    </message>
+    <message>
+        <location filename="../ApplicationSettings.cpp" line="194"/>
         <source>Change Active Camera</source>
         <translation>Изменить активную камеру</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="194"/>
+        <location filename="../ApplicationSettings.cpp" line="195"/>
         <source>Stabilization On/Off</source>
         <translation>Стабилизация Вкл/Выкл</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="195"/>
+        <location filename="../ApplicationSettings.cpp" line="196"/>
         <source>Cam Drivers Off</source>
         <translation>Выключить приводы камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="196"/>
+        <location filename="../ApplicationSettings.cpp" line="197"/>
         <source>Activate Landing Position</source>
         <translation>Активировать посадочную позицию</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="197"/>
+        <location filename="../ApplicationSettings.cpp" line="198"/>
         <source>Activate Begining Position</source>
         <translation>Активировать начальную позицию</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="198"/>
+        <location filename="../ApplicationSettings.cpp" line="199"/>
         <source>Activate Vertical Position</source>
         <translation>Активировать вертикальную позицию</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="199"/>
+        <location filename="../ApplicationSettings.cpp" line="200"/>
         <source>Color Mode +</source>
         <translation>Цветовой режим +</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="200"/>
+        <location filename="../ApplicationSettings.cpp" line="201"/>
         <source>Color Mode -</source>
         <translation>Цветовой режим -</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="201"/>
+        <location filename="../ApplicationSettings.cpp" line="202"/>
         <source>Laser Activation</source>
         <translation>Активация лазера</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="203"/>
+        <location filename="../ApplicationSettings.cpp" line="204"/>
         <source>Bombing Sight</source>
         <translation>Бомбовый прицел</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="204"/>
+        <location filename="../ApplicationSettings.cpp" line="205"/>
         <source>Screenshot</source>
         <translation>Скриншот</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="205"/>
+        <location filename="../ApplicationSettings.cpp" line="206"/>
         <source>Snapshot</source>
         <translation>Снимок</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="206"/>
+        <location filename="../ApplicationSettings.cpp" line="207"/>
         <source>Snapshot Series</source>
         <translation>Серия снимков</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="208"/>
+        <location filename="../ApplicationSettings.cpp" line="209"/>
         <source>Target Unlock</source>
         <translation>Отмена цели</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="209"/>
+        <location filename="../ApplicationSettings.cpp" line="210"/>
         <source>Camera Recording</source>
         <translation>Запись камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="210"/>
+        <location filename="../ApplicationSettings.cpp" line="211"/>
         <source>Automatic Tracer</source>
         <translation>Автоматическое подслеживание</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="211"/>
+        <location filename="../ApplicationSettings.cpp" line="212"/>
         <source>Drop Bomb</source>
         <translation>Сбросить бомбу</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="212"/>
+        <location filename="../ApplicationSettings.cpp" line="213"/>
         <source>Send Hit Coordinates</source>
         <translation>Отправить координаты</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="213"/>
+        <location filename="../ApplicationSettings.cpp" line="214"/>
         <source>Send Weather</source>
         <translation>Отправить погоду</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="215"/>
+        <location filename="../ApplicationSettings.cpp" line="216"/>
         <source>Normal Flight Mode</source>
         <translation>Режим нормального полёта</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="216"/>
+        <location filename="../ApplicationSettings.cpp" line="217"/>
         <source>Patrol Moving Target Mode</source>
         <translation>Режим патрулирования подвижной цели</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="217"/>
+        <location filename="../ApplicationSettings.cpp" line="218"/>
         <source>Patrol Static Target Mode</source>
         <translation>Режим патрулирования статичной цели</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="218"/>
+        <location filename="../ApplicationSettings.cpp" line="219"/>
         <source>Manual Flight Mode</source>
         <translation>Режим ручного управления</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="220"/>
+        <location filename="../ApplicationSettings.cpp" line="221"/>
         <source>New Marker (Target)</source>
         <translation>Новый маркер (Цель)</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="221"/>
+        <location filename="../ApplicationSettings.cpp" line="222"/>
         <source>New Marker (Laser)</source>
         <translation>Новый маркер (Лазер)</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="222"/>
+        <location filename="../ApplicationSettings.cpp" line="223"/>
         <source>New Marker (UAV)</source>
         <translation>Новый маркер (БЛА)</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="230"/>
+        <location filename="../ApplicationSettings.cpp" line="231"/>
         <source>Application Settings Editor</source>
         <translation>Редактор настроек приложения</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="228"/>
+        <location filename="../ApplicationSettings.cpp" line="229"/>
         <source>Data Console</source>
         <translation>Консоль данных</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="229"/>
+        <location filename="../ApplicationSettings.cpp" line="230"/>
         <source>Emulator Console</source>
         <translation>Консоль Эмулятора</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="231"/>
+        <location filename="../ApplicationSettings.cpp" line="232"/>
         <source>Help Viewer</source>
         <translation>Просмотр справки</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="328"/>
+        <location filename="../ApplicationSettings.cpp" line="329"/>
         <source>
   Key %1</source>
         <translation>
   Клавиша %1</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="330"/>
+        <location filename="../ApplicationSettings.cpp" line="331"/>
         <source>
   Button# %1</source>
         <translation>
@@ -1247,156 +1252,156 @@ Do you really want to turn it to begining position?</source>
 <context>
     <name>CameraSettingsNode</name>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="475"/>
+        <location filename="../ApplicationSettings.cpp" line="476"/>
         <source>Description</source>
         <translation>Описание</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="524"/>
-        <location filename="../ApplicationSettings.cpp" line="534"/>
+        <location filename="../ApplicationSettings.cpp" line="525"/>
+        <location filename="../ApplicationSettings.cpp" line="535"/>
         <source>Vertical Mirroring</source>
         <translation>Вертикальное отражение</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="479"/>
+        <location filename="../ApplicationSettings.cpp" line="480"/>
         <source>Digital Zoom</source>
         <translation>Цифровое увеличение</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="481"/>
+        <location filename="../ApplicationSettings.cpp" line="482"/>
         <source>Use Gimbal Telemetry Only</source>
         <translation>Использовать только телеметрию подвеса</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="486"/>
+        <location filename="../ApplicationSettings.cpp" line="487"/>
         <source>Value of Fixed Camera Pich</source>
         <translation>Значение тангажа фиксированной камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="487"/>
+        <location filename="../ApplicationSettings.cpp" line="488"/>
         <source>Value of Fixed Camera Roll</source>
         <translation>Значение крена фиксированной камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="488"/>
+        <location filename="../ApplicationSettings.cpp" line="489"/>
         <source>Value of Fixed Camera Zoom</source>
         <translation>Значение зума фиксированной камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="490"/>
+        <location filename="../ApplicationSettings.cpp" line="491"/>
         <source>Maximum Value of Camera Pitch</source>
         <translation>Максимальное значение тангажа  камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="491"/>
+        <location filename="../ApplicationSettings.cpp" line="492"/>
         <source>Minimum Value of Camera Pitch</source>
         <translation>Минимальное значение тангажа  камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="493"/>
+        <location filename="../ApplicationSettings.cpp" line="494"/>
         <source>Maximum Value of Camera Roll</source>
         <translation>Максимальное значение крена  камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="494"/>
+        <location filename="../ApplicationSettings.cpp" line="495"/>
         <source>Minimum Value of Camera Roll</source>
         <translation>Минимальное значение крена  камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="496"/>
+        <location filename="../ApplicationSettings.cpp" line="497"/>
         <source>Maximum Value of Camera Zoom</source>
         <translation>Максимальное значение зума  камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="497"/>
+        <location filename="../ApplicationSettings.cpp" line="498"/>
         <source>Minimum Value of Camera Zoom</source>
         <translation>Минимальное значение зума  камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="498"/>
+        <location filename="../ApplicationSettings.cpp" line="499"/>
         <source>Automatic Tracer Multiplier</source>
         <translation>Коэффициент автоподслеживания</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="500"/>
+        <location filename="../ApplicationSettings.cpp" line="501"/>
         <source>Value of Camera Yaw in Landing Position</source>
         <translation>Значение рысканья  камеры в посадочной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="501"/>
+        <location filename="../ApplicationSettings.cpp" line="502"/>
         <source>Value of Camera Pich in Landing Position</source>
         <translation>Значение тангажа  камеры в посадочной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="502"/>
+        <location filename="../ApplicationSettings.cpp" line="503"/>
         <source>Value of Camera Roll in Landing Position</source>
         <translation>Значение крена  камеры в посадочной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="503"/>
+        <location filename="../ApplicationSettings.cpp" line="504"/>
         <source>Value of Camera Zoom in Landing Position</source>
         <translation>Значение зума  камеры в посадочной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="504"/>
+        <location filename="../ApplicationSettings.cpp" line="505"/>
         <source>Use special command</source>
         <translation>Использовать специальную команду</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="506"/>
+        <location filename="../ApplicationSettings.cpp" line="507"/>
         <source>Value of Camera Yaw in Begining Position</source>
         <translation>Значение рысканья  камеры в начальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="507"/>
+        <location filename="../ApplicationSettings.cpp" line="508"/>
         <source>Value of Camera Pich in Begining Position</source>
         <translation>Значение тангажа  камеры в начальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="508"/>
+        <location filename="../ApplicationSettings.cpp" line="509"/>
         <source>Value of Camera Roll in Begining Position</source>
         <translation>Значение крена  камеры в начальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="509"/>
+        <location filename="../ApplicationSettings.cpp" line="510"/>
         <source>Value of Camera Zoom in Begining Position</source>
         <translation>Значение зума  камеры в начальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="511"/>
+        <location filename="../ApplicationSettings.cpp" line="512"/>
         <source>Value of Camera Yaw in Vertical Position</source>
         <translation>Значение рысканья  камеры в вертикальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="512"/>
+        <location filename="../ApplicationSettings.cpp" line="513"/>
         <source>Value of Camera Pich in Vertical Position</source>
         <translation>Значение тангажа  камеры в вертикальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="513"/>
+        <location filename="../ApplicationSettings.cpp" line="514"/>
         <source>Value of Camera Roll in Vertical Position</source>
         <translation>Значение крена  камеры в вертикальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="514"/>
+        <location filename="../ApplicationSettings.cpp" line="515"/>
         <source>Value of Camera Zoom in Vertical Position</source>
         <translation>Значение зума  камеры в вертикальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="516"/>
-        <location filename="../ApplicationSettings.cpp" line="526"/>
+        <location filename="../ApplicationSettings.cpp" line="517"/>
+        <location filename="../ApplicationSettings.cpp" line="527"/>
         <source>Camera Scale Coefficient</source>
         <translation>Коэффициент масштабирования для камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="519"/>
-        <location filename="../ApplicationSettings.cpp" line="529"/>
+        <location filename="../ApplicationSettings.cpp" line="520"/>
+        <location filename="../ApplicationSettings.cpp" line="530"/>
         <source>Automatic Tracer Speed Multiplier</source>
         <translation>Множитель скорости автоподслеживания</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="520"/>
-        <location filename="../ApplicationSettings.cpp" line="530"/>
+        <location filename="../ApplicationSettings.cpp" line="521"/>
+        <location filename="../ApplicationSettings.cpp" line="531"/>
         <source>Manual Moving Speed Multipliers</source>
         <translation>Множитель скорости ручного перемещения</translation>
     </message>
@@ -1409,26 +1414,26 @@ Do you really want to turn it to begining position?</source>
         <translation type="vanished">Коэффициент масштабирования скорости камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="521"/>
-        <location filename="../ApplicationSettings.cpp" line="531"/>
+        <location filename="../ApplicationSettings.cpp" line="522"/>
+        <location filename="../ApplicationSettings.cpp" line="532"/>
         <source>Horizontal View Size of Camera</source>
         <translation>Горизонтальное разрешение камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="522"/>
-        <location filename="../ApplicationSettings.cpp" line="532"/>
+        <location filename="../ApplicationSettings.cpp" line="523"/>
+        <location filename="../ApplicationSettings.cpp" line="533"/>
         <source>Vertical View Size of Camera</source>
         <translation>Вертикальное разрешение камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="517"/>
-        <location filename="../ApplicationSettings.cpp" line="527"/>
+        <location filename="../ApplicationSettings.cpp" line="518"/>
+        <location filename="../ApplicationSettings.cpp" line="528"/>
         <source>Horizontal View Angle of Camera</source>
         <translation>Горизонтальный угол обзора камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="518"/>
-        <location filename="../ApplicationSettings.cpp" line="528"/>
+        <location filename="../ApplicationSettings.cpp" line="519"/>
+        <location filename="../ApplicationSettings.cpp" line="529"/>
         <source>Vertical View Angle of Camera</source>
         <translation>Вертикальный угол обзора камеры</translation>
     </message>
@@ -1534,18 +1539,18 @@ Are you sure you want to update it?</source>
 <context>
     <name>CommonWidgetUtils</name>
     <message>
-        <location filename="../Common/CommonWidgets.cpp" line="286"/>
-        <location filename="../Common/CommonWidgets.cpp" line="296"/>
+        <location filename="../Common/CommonWidgets.cpp" line="334"/>
+        <location filename="../Common/CommonWidgets.cpp" line="344"/>
         <source>None</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="../Common/CommonWidgets.cpp" line="288"/>
+        <location filename="../Common/CommonWidgets.cpp" line="336"/>
         <source>Button %1</source>
         <translation>Кнопка %1</translation>
     </message>
     <message>
-        <location filename="../Common/CommonWidgets.cpp" line="298"/>
+        <location filename="../Common/CommonWidgets.cpp" line="346"/>
         <source>Axis %1</source>
         <translation>Ось %1</translation>
     </message>
@@ -1840,42 +1845,42 @@ Are you sure you want to update it?</source>
 <context>
     <name>EmulatorConsole</name>
     <message>
-        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="25"/>
+        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="24"/>
         <source>Emulator Console</source>
         <translation>Консоль Эмулятора</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="37"/>
+        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="36"/>
         <source>UAV Roll</source>
         <translation>Крен БЛА</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="38"/>
+        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="37"/>
         <source>UAV Pitch</source>
         <translation>Тангаж БЛА</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="39"/>
+        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="38"/>
         <source>UAV Yaw</source>
         <translation>Рысканье БЛА</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="40"/>
+        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="39"/>
         <source>Latitude</source>
         <translation>Широта</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="41"/>
+        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="40"/>
         <source>Longitude</source>
         <translation>Долгота</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="42"/>
+        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="41"/>
         <source>Altitude (GPS)</source>
         <translation>Высота (GPS)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="43"/>
+        <location filename="../UserInterface/Forms/EmulatorConsole.cpp" line="42"/>
         <source>Course</source>
         <translation>Курс</translation>
     </message>
@@ -2398,7 +2403,7 @@ Are you sure you want to update it?</source>
         <translation type="vanished">АНИМУС</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="440"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="442"/>
         <source>Sessions</source>
         <translation>Сессии</translation>
     </message>
@@ -2421,27 +2426,27 @@ Are you sure you want to update it?</source>
         <translation>АНИМУС %1</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="454"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="456"/>
         <source>Session Time from Start</source>
         <translation>Время с начала сессии</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="458"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="460"/>
         <source>Play stored session data</source>
         <translation>Воспроизвести сохраненные данные сессии</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="459"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="461"/>
         <source>Pause showed data</source>
         <translation>Остановать отображаемые данные</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="460"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="462"/>
         <source>Show realtime data</source>
         <translation>Показать данные в реальном времени</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="513"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="515"/>
         <source>Are you sure you want to quit?</source>
         <translation>Вы уверены, что хотите выйти из приложения?</translation>
     </message>

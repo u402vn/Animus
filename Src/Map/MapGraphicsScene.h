@@ -53,10 +53,9 @@ private:
 
     QList<QAction *> _mapActions;
     QAction *_acBaseLayers;
-    QAction *_acHybridLayers;    
+    QAction *_acHybridLayers;
 
     QAction *_acLegend;
-    //QAction *_acMapTargetSizes;
     QActionGroup *_groupMapTargetSize;
     QAction *_acShowTileNumber;
     QAction *_acShowParallelsMeridians;
@@ -102,6 +101,9 @@ public:
     bool ScaleUp();
     bool ScaleDown();
     int scale();
+
+    bool followThePlane();
+    bool setFollowThePlane(bool value);
 
     void addTrajectoryPoint(const WorldGPSCoord &pointCoords, bool immediateShow);
     void refreshTrajectoryOnMap();
