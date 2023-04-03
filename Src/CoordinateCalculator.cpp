@@ -89,7 +89,7 @@ void CoordinateCalculator::updateLaserRangefinderPosition()
         _telemetryFrame->CalculatedRangefinderGPSHmsl -= v.z();
     }
     else
-        _telemetryFrame->CalculatedRangefinderGPSHmsl = 0; //ground level by default
+        _telemetryFrame->CalculatedRangefinderGPSHmsl = INCORRECT_COORDINATE; //ground level by default
 
     if (_telemetryFrame->TelemetryFrameNumber <= 0)
     {
