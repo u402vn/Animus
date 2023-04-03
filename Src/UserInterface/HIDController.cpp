@@ -147,7 +147,7 @@ const QString makeJoystickStateText(quint32 joystickEventsCount, const QList<int
     for (int i = 0; i < buttons.count(); i++)
         buttonsText += QString("\tButton %1: %2\n").arg(i + 1).arg(buttons[i]);
 
-    QString result = QString("Frequency:\t%1\nPOVs:\n%2\nAxes:\n%2\nButtons:\n%3")
+    QString result = QString("Frequency:\t%1\nPOVs:\n%2\nAxes:\n%3\nButtons:\n%4")
             .arg(joystickEventsCount).arg(povsText).arg(axesText).arg(buttonsText);
 
     return result;

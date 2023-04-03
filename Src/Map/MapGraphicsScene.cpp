@@ -415,7 +415,7 @@ bool MapGraphicsScene::followThePlane()
     return _acFollowThePlane->isChecked();
 }
 
-bool MapGraphicsScene::setFollowThePlane(bool value)
+void MapGraphicsScene::setFollowThePlane(bool value)
 {
     _acFollowThePlane->setChecked(value);
 

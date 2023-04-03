@@ -103,7 +103,7 @@ public:
     int scale();
 
     bool followThePlane();
-    bool setFollowThePlane(bool value);
+    void setFollowThePlane(bool value);
 
     void addTrajectoryPoint(const WorldGPSCoord &pointCoords, bool immediateShow);
     void refreshTrajectoryOnMap();

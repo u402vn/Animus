@@ -178,7 +178,4 @@ void MapView::onMapMoveClicked(int directionAngle)
         QKeyEvent key(QEvent::KeyPress, keyV, Qt::NoModifier);
         QApplication::sendEvent(_view, &key);
     }
-
-
-    qDebug() << _view->verticalScrollBar()->singleStep();
 }
