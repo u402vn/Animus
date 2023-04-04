@@ -33,8 +33,6 @@ DashboardWidget::DashboardWidget(QWidget *parent) : QWidget(parent)
 {
     EnterProcStart("DashboardWidget::DashboardWidget");
 
-    _licenseState = getAnimusLicenseState();
-
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
 
     auto instrumentsLayout = new QVBoxLayout(this);
@@ -132,18 +130,6 @@ DashboardWidget::DashboardWidget(QWidget *parent) : QWidget(parent)
     _telemetryTable->resizeColumnsToContents();
     updateItemsVisibility();
 
-    _btnCamConnectionState = new QPushButton(tr("Camera"), this);
-    _btnCamConnectionState->setEnabled(false);
-    _btnTelemetryConnectionState = new QPushButton(tr("Telemetry"), this);
-    _btnTelemetryConnectionState->setEnabled(false);
-    _btnRecordingState = new QPushButton(tr("Record"), this);
-    _btnRecordingState->setEnabled(false);
-
-    auto connectionsLayout = new QHBoxLayout();
-    connectionsLayout->addWidget(_btnCamConnectionState, 0);
-    connectionsLayout->addWidget(_btnTelemetryConnectionState, 0);
-    connectionsLayout->addWidget(_btnRecordingState, 0);
-
     auto mainSplitter = new QSplitter(Qt::Vertical, this);
 
     mainSplitter->addWidget(_PFD);
@@ -152,48 +138,6 @@ DashboardWidget::DashboardWidget(QWidget *parent) : QWidget(parent)
     instrumentsLayout->addWidget(_coordIndicator, 0);
     instrumentsLayout->addWidget(mainSplitter, 1);
     instrumentsLayout->addWidget(btnCatapultLauncher, 0);
-    instrumentsLayout->addLayout(connectionsLayout, 0);
-
-    _camConnectionState = IndicatorTristateEnum::Off;
-    _telemetryConnectionState = IndicatorTristateEnum::Off;
-    _recordingState = IndicatorTristateEnum::Off;
-
-    showCurrentStatus(IndicatorTristateEnum::Incative, IndicatorTristateEnum::Incative, IndicatorTristateEnum::Incative);
-}
-
-static const QString stateStyles[static_cast<int>(IndicatorTristateEnum::LastValue) + 1] = {
-        QString("background-color: #31363b; border-color: #76797C; color: #eff0f1;"),  // Incative
-        QString("background-color: #009900; border-color: #76797C; color: #eff0f1;"),  // On
-        QString("background-color: #990000; border-color: #76797C; color: #eff0f1;"),  // Off
-        QString("background-color: #000099; border-color: #76797C; color: #eff0f1;")   // Disabled
-        };
-
-void DashboardWidget::showCurrentStatus(IndicatorTristateEnum camConnectionState, IndicatorTristateEnum telemetryConnectionState, IndicatorTristateEnum recordingState)
-{
-    EnterProcStart("DashboardWidget::showCurrentStatus");
-
-    this->setUpdatesEnabled(false);
-    //this->blockSignals(true);
-    if (_camConnectionState != camConnectionState)
-    {
-        _btnCamConnectionState->setStyleSheet(stateStyles[static_cast<int>(camConnectionState)]);
-        _camConnectionState = camConnectionState;
-    }
-    if (_telemetryConnectionState != telemetryConnectionState)
-    {
-        if (_licenseState != AnimusLicenseState::Expired)
-            _btnTelemetryConnectionState->setStyleSheet(stateStyles[static_cast<int>(telemetryConnectionState)]);
-        else
-            _btnTelemetryConnectionState->setStyleSheet(stateStyles[static_cast<int>(IndicatorTristateEnum::Disabled)]);
-        _telemetryConnectionState = telemetryConnectionState;
-    }
-    if (_recordingState != recordingState)
-    {
-        _btnRecordingState->setStyleSheet(stateStyles[static_cast<int>(recordingState)]);
-        _recordingState = recordingState;
-    }
-    //this->blockSignals(false);
-    this->setUpdatesEnabled(true);
 }
 
 void DashboardWidget::processTelemetry(const TelemetryDataFrame &telemetryDataFrame)

@@ -1019,6 +1019,24 @@ Speed Multiplier</source>
     </message>
 </context>
 <context>
+    <name>ConnectionsIndicator</name>
+    <message>
+        <location filename="../UserInterface/ConnectionsIndicator.cpp" line="12"/>
+        <source>Camera</source>
+        <translation type="unfinished">Камера</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConnectionsIndicator.cpp" line="14"/>
+        <source>Telemetry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConnectionsIndicator.cpp" line="16"/>
+        <source>Record</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DashboardWidget</name>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="48"/>
@@ -1241,7 +1259,7 @@ Speed Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="246"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="247"/>
         <source>Do you want to activate catapult?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1728,37 +1746,37 @@ Speed Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="272"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="273"/>
         <source>ANIMUS %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="442"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="443"/>
         <source>Sessions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="456"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="457"/>
         <source>Session Time from Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="460"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="462"/>
         <source>Play stored session data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="461"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="463"/>
         <source>Pause showed data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="462"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="464"/>
         <source>Show realtime data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="515"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="517"/>
         <source>Are you sure you want to quit?</source>
         <translation type="unfinished"></translation>
     </message>

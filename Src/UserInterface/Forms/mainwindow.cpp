@@ -209,7 +209,7 @@ void MainWindow::updateDashboardStatuses()
         break;
     }
 
-    _dashboardWidget->showCurrentStatus(camConnectionState, telemetryConnectionState, recordingState);
+    _connectionsIndicator->showCurrentStatus(camConnectionState, telemetryConnectionState, recordingState);
 }
 
 void MainWindow::initForTwoDisplays(int camDisplayId, int mapDisplayId)
@@ -455,7 +455,7 @@ void MainWindow::addWidgetsTime()
     _timeFromStartIndicator->setDigitCount(12);
     _timeFromStartIndicator->setToolTip(tr("Session Time from Start"));
 
-    //??? 111
+    _connectionsIndicator = new ConnectionsIndicator(this);
 
     _playHistoryButton = createToolButton(NO_CAPTION, tr("Play stored session data"), true, QStyle::SP_MediaPlay, &MainWindow::playHistoryClicked);
     _pauseButton = createToolButton(NO_CAPTION, tr("Pause showed data"), true, QStyle::SP_MediaPause, &MainWindow::pauseClicked);
@@ -464,7 +464,7 @@ void MainWindow::addWidgetsTime()
     _timeSpacerItem = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
     QList<QWidget*> timeWidgets {selectSessionButton, _changeVideo2MapButton, _timeSlider,_timeFromStartIndicator,
-                _playHistoryButton, _pauseButton, _playRealtimeButton};
+                _playHistoryButton, _pauseButton, _playRealtimeButton, _connectionsIndicator};
 
     foreach (auto widget, timeWidgets)
     {
@@ -719,8 +719,6 @@ void MainWindow::hardwareLinkDataReceived(const TelemetryDataFrame &telemetryFra
         _imageProcessor->processDataAsync(telemetryFrame, videoFrame);
         if (_playStatus == PlayRealtime)
             _timeFromStartIndicator->display(_dataStorage->getLastTelemetryFrameTimeAsString());
-
-    //???    222
     }
 
     // 2. Telemetry

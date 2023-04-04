@@ -30,6 +30,7 @@
 #include "UserInterface/Forms/HelpViewer.h"
 #include "UserInterface/Forms/DataConsole.h"
 #include "UserInterface/Forms/EmulatorConsole.h"
+#include "UserInterface/ConnectionsIndicator.h"
 #include "AutomaticTracer.h"
 #include "AutomaticPatrol.h"
 #include "TelemetryDataFrame.h"
@@ -61,6 +62,7 @@ private:
     QToolButton *_playHistoryButton;
     QToolButton *_pauseButton;
     QToolButton *_playRealtimeButton;
+    ConnectionsIndicator *_connectionsIndicator;
 
     QTabWidget *_tabTools;
 

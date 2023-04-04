@@ -10,33 +10,16 @@
 #include <QString>
 #include "GPSCoordIndicator.h"
 #include "UserInterface/PFD.h"
-#include "Common/CommonUtils.h"
-
-enum class IndicatorTristateEnum {
-    Incative = 0,
-    On,
-    Off,
-    Disabled,
-    LastValue = Disabled
-};
 
 class DashboardWidget final: public QWidget
 {
     Q_OBJECT
 
-    AnimusLicenseState _licenseState;
-
     PFD * _PFD;
     QTableWidget *_telemetryTable;
     QMenu *_menu;
 
-    QPushButton *_btnCamConnectionState;
-    QPushButton *_btnTelemetryConnectionState;
-    QPushButton *_btnRecordingState;
-
     GPSCoordIndicator *_coordIndicator;
-
-    IndicatorTristateEnum _camConnectionState, _telemetryConnectionState, _recordingState;
 
     enum TelemetryTableRow {RowUavRoll = 0, RowUavPitch, RowUavYaw, RowUavLatitude_GPS,
                             RowUavLongitude_GPS, RowUavAltitude_GPS, RowUavAltitude_Barometric,
@@ -61,7 +44,6 @@ class DashboardWidget final: public QWidget
     void updateItemsVisibility();
 public:
     explicit DashboardWidget(QWidget *parent);
-    void showCurrentStatus(IndicatorTristateEnum camConnectionState, IndicatorTristateEnum telemetryConnectionState, IndicatorTristateEnum recordingState);
     void processTelemetry(const TelemetryDataFrame &telemetryDataFrame);
 private slots:
     void onActivateCatapultClicked();
