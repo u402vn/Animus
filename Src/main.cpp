@@ -166,6 +166,9 @@ int main(int argc, char *argv[])
         stylesheetFile.close();
     }
 
+    quint32 logFolderMaxSizeMb = applicationSettings.LogFolderCleanup ?
+                applicationSettings.LogFolderMaxSizeMb : 0;
+
 #ifndef QT_DEBUG
     if (splashScreen != nullptr)
         QThread::sleep(3);
@@ -178,6 +181,7 @@ int main(int argc, char *argv[])
         splashScreen->finish(&w);
 
     int appResult = app.exec();
+
     applicationSettings.sync();
     if (splashScreen != nullptr)
         delete splashScreen;
@@ -192,6 +196,10 @@ int main(int argc, char *argv[])
         QProcess::startDetached(program, arguments);
     }
 #endif
+
+
+    if (logFolderMaxSizeMb > 0)
+        cleanupLogFolder(logDir, logFilePath, logFolderMaxSizeMb);
 
     return appResult;
 }

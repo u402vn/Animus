@@ -19,6 +19,7 @@ bool fileExists(const QString &fileName);
 bool dirExists(const QString &dirName);
 bool makeDir(const QString &dirName);
 const QString getFixedFilePath(const QString &fileName);
+void cleanupLogFolder(const QString logFolderPath, const QString currentLogFile, quint32 maximalSizeMb);
 double GetCurrentDateTimeForDB();
 double GetCurrentDateTimeFrom1970Secs();
 const QString getTimeAsString(quint32 timeMs);

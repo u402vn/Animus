@@ -47,15 +47,24 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     fpsSessions->setLabelWidth(SESSIONS_TAB_FIRST_COLUMN_WIDTH);
     fpsSessions->setUseFolder(true);
 
+    auto chkLogFolderCleanup = new QCheckBox(tr("Log Folder Cleanup"), this);
+    auto sbLogFolderMaxSizeMb = CommonWidgetUtils::createRangeSpinbox(this, 10, 1000);
+    auto lblLogFolderMaxSizeMb = new QLabel(tr("Mb (Maximal Log Folder Size)"), this);
+
     auto netInfo = new NetworkInformationWidget(this);
 
     auto computerInfoLayout = new QGridLayout();
 
     int row = 0;
-    computerInfoLayout->addWidget(fpsSessions,                row, 1, 1, 1);
+    computerInfoLayout->addWidget(fpsSessions,                row, 0, 1, 4);
     row++;
 
-    computerInfoLayout->addWidget(netInfo,                    row, 1, 1, 1);
+    computerInfoLayout->addWidget(chkLogFolderCleanup,        row, 0, 1, 1);
+    computerInfoLayout->addWidget(sbLogFolderMaxSizeMb,       row, 1, 1, 1, Qt::AlignLeft);
+    computerInfoLayout->addWidget(lblLogFolderMaxSizeMb,      row, 2, 1, 1, Qt::AlignLeft);
+    row++;
+
+    computerInfoLayout->addWidget(netInfo,                    row, 0, 1, 4);
     row++;
 
     auto spoilerComputerInfo = new Spoiler(tr("Computer Info"), this);
@@ -90,7 +99,6 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
 
     auto lblOVRGimbalIndicatorSize = new QLabel(tr("Gimbal Indicator Size"), this);
     auto sbOVRGimbalIndicatorSize = new QSpinBoxEx(this);
-
 
     auto spoilerVideoRecord = makeSessionsSpoilerGrid(tr("Video Record"), this);
     auto videoRecordLayout = spoilerVideoRecord->gridLayout();
@@ -376,6 +384,8 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     videoSourceSettingsGrid->setRowStretch(row++, 1);
 
     _association.addBinding(&applicationSettings.SessionsFolder,                    fpsSessions);
+    _association.addBinding(&applicationSettings.LogFolderCleanup,                  chkLogFolderCleanup);
+    _association.addBinding(&applicationSettings.LogFolderMaxSizeMb,                sbLogFolderMaxSizeMb);
     _association.addBinding(&applicationSettings.VideoFileFrameCount,               cbVideoFileFrameCount);
     _association.addBinding(&applicationSettings.VideoFileQuality,                  sbVideoFileQuality);
     _association.addBinding(&applicationSettings.OVRDisplayTelemetry,               chkOVRDisplayTelemetry);

@@ -519,3 +519,25 @@ bool makeDir(const QString &dirName)
         return true;
     return QDir().mkpath(dirName);
 }
+
+void cleanupLogFolder(const QString logFolderPath, const QString currentLogFile, quint32 maximalSizeMb)
+{
+    QFileInfo currentLogFileInfo(currentLogFile);
+    QString excludedLogFileName = currentLogFileInfo.fileName();
+
+    QDir dir(logFolderPath);
+    QFileInfoList files = dir.entryInfoList(QDir::NoFilter, QDir::Time);
+    quint64 filesTotalSizeBytes = 0;
+    quint64 maximalSizeBytes = 1024 * 1024 * maximalSizeMb;
+    foreach (QFileInfo file, files)
+    {
+        filesTotalSizeBytes += file.size();
+
+        QString fileName = file.fileName();
+        if ((excludedLogFileName != fileName) && (filesTotalSizeBytes > maximalSizeBytes) )
+        {
+            bool result = dir.remove(file.filePath());
+            qInfo() << QString("Remove log file %1 - %2").arg(fileName).arg(result ? "Ok" : "Error");
+        }
+    }
+}

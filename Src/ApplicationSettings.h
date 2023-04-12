@@ -199,6 +199,8 @@ public:
     ApplicationPreferenceString ArealObjectDatabase;
     ApplicationPreferenceString BallisticMacro;
     ApplicationPreferenceString SessionsFolder;
+    ApplicationPreferenceInt LogFolderMaxSizeMb;
+    ApplicationPreferenceBool LogFolderCleanup;
     ApplicationPreferenceInt CommandSendingInterval;
     ApplicationPreferenceEnum<CommandProtocols> CommandProtocol;
     ApplicationPreferenceEnum<CommandTransports> CommandTransport;

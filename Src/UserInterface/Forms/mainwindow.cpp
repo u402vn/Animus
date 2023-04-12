@@ -515,8 +515,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
         needExit = CommonWidgetUtils::showConfirmDialog(tr("Are you sure you want to quit?"), true);
     if (needExit)
     {
-        ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
-
         auto mainSplitterSizes =_mainSplitter->sizes();
         applicationSettings.MainFormViewPanelWidth = mainSplitterSizes[0];
         applicationSettings.MainFormToolPanelWidth = mainSplitterSizes[1];
