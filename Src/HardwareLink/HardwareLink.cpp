@@ -269,11 +269,11 @@ void HardwareLink::doOnCommandSent(const BinaryContent &commandContent, const QS
     if (commandContent.size() == 0)
         return;
 
-    ClientCommand clientCommand;
+    DataExchangePackage clientCommand;
     clientCommand.SessionTimeMs = getSessionTimeMs();
     clientCommand.VideoFrameNumber = _currentTelemetryDataFrame.VideoFrameNumber;
     clientCommand.TelemetryFrameNumber = _currentTelemetryDataFrame.TelemetryFrameNumber;
-    clientCommand.CommandHEX = commandContent.toHex();
+    clientCommand.ContentHEX = commandContent.toHex();
     clientCommand.Description = commandDescription;
     emit onClientCommandSent(clientCommand);
 }

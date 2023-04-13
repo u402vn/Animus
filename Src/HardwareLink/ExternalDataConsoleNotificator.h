@@ -16,7 +16,7 @@ public:
     explicit ExternalDataConsoleNotificator(QObject *parent, quint32 udpConsolePort);
     ~ExternalDataConsoleNotificator();
 public slots:
-    void onClientCommandSent(const ClientCommand &clientCommand);
+    void onClientCommandSent(const DataExchangePackage &clientCommand);
     void onTelemetryReceived(const QString &telemetryHEX);
 };
 

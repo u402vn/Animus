@@ -223,11 +223,11 @@ void TelemetryDataStorage::flushClientCommands()
     int clientCommandsCount = _clientCommands.count();
     for (int i = _lastSavedClientCommandIndex + 1; i < clientCommandsCount; i++)
     {
-        const ClientCommand clientCommand = _clientCommands[i];
+        const DataExchangePackage clientCommand = _clientCommands[i];
         insertQuery.addBindValue(clientCommand.SessionTimeMs);
         insertQuery.addBindValue(clientCommand.TelemetryFrameNumber);
         insertQuery.addBindValue(clientCommand.VideoFrameNumber);
-        insertQuery.addBindValue(clientCommand.CommandHEX);
+        insertQuery.addBindValue(clientCommand.ContentHEX);
 
         insertQuery.exec();
         LOG_SQL_ERROR(insertQuery);
@@ -522,7 +522,7 @@ void TelemetryDataStorage::onDataReceived(const TelemetryDataFrame &telemetryFra
     }
 }
 
-void TelemetryDataStorage::onClientCommandSent(const ClientCommand &clientCommand)
+void TelemetryDataStorage::onClientCommandSent(const DataExchangePackage &clientCommand)
 {
     if (_workMode != WorkMode::RecordAndDisplay)
         return;
@@ -530,6 +530,11 @@ void TelemetryDataStorage::onClientCommandSent(const ClientCommand &clientComman
     _clientCommands.append(clientCommand);
     if (_clientCommands.count() - _lastSavedClientCommandIndex > FRAME_FLUSH_BATCH_SIZE)
         flushClientCommands();
+}
+
+void TelemetryDataStorage::onArtillerySpotterDataExchange(const DataExchangePackage &dataPackage, DataExchangePackageDirection direction)
+{
+
 }
 
 const TelemetryDataFrame TelemetryDataStorage::getTelemetryDataFrameByIndex(int frameIndex)

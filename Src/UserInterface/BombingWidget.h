@@ -8,9 +8,9 @@
 #include "HardwareLink/HardwareLink.h"
 #include "PFD.h"
 #include "UserInterface/GPSCoordSelector.h"
-#include "Map/MarkerStorage.h"
 #include "TelemetryDataStorage.h"
 #include "Forms/WeatherView.h"
+#include "Map/ArtillerySpotter.h"
 
 class QMarkerListWidgetItem;
 
@@ -66,6 +66,7 @@ class BombingWidget final : public QWidget
     WeatherView *_weatherView;
 
     HardwareLink *_hardwareLink;
+    ArtillerySpotter *_artillerySpotter;
 
     TelemetryDataStorage *_telemetryDataStorage;
 
@@ -78,7 +79,8 @@ class BombingWidget final : public QWidget
     void loadTargetMapMarkers();
     void addNewMarker(const WorldGPSCoord &coord, bool showEditor);
 public:
-    explicit BombingWidget(QWidget *parent, HardwareLink *hardwareLink, TelemetryDataStorage *telemetryDataStorage);
+    explicit BombingWidget(QWidget *parent, HardwareLink *hardwareLink, ArtillerySpotter *artillerySpotter,
+                           TelemetryDataStorage *telemetryDataStorage);
     ~BombingWidget();
     void processTelemetry(const TelemetryDataFrame &telemetryDataFrame);
 private slots:

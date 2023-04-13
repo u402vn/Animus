@@ -4,6 +4,19 @@
 #include "Common/CommonUtils.h"
 #include "EnterProc.h"
 
+void ArtillerySpotter::processDataExchange(const QString &contentHEX, const QString &description, DataExchangePackageDirection direction)
+{
+    EnterProcStart("ArtillerySpotter::processDataExchange");
+
+    DataExchangePackage dataPackage;
+    dataPackage.SessionTimeMs = _telemetryDataFrame.SessionTimeMs;
+    dataPackage.VideoFrameNumber = _telemetryDataFrame.VideoFrameNumber;
+    dataPackage.TelemetryFrameNumber = _telemetryDataFrame.TelemetryFrameNumber;
+    dataPackage.ContentHEX = contentHEX;
+    dataPackage.Description = description;
+    emit onArtillerySpotterDataExchange(dataPackage, direction);
+}
+
 void ArtillerySpotter::timerEvent(QTimerEvent *event)
 {
     Q_UNUSED(event)
@@ -43,6 +56,11 @@ void ArtillerySpotter::openSocket(const QHostAddress address, const quint16 port
     _address = address;
     _port = port;
     _tcpSocket.close();
+}
+
+void ArtillerySpotter::processTelemetry(const TelemetryDataFrame &telemetryDataFrame)
+{
+    _telemetryDataFrame = telemetryDataFrame;
 }
 
 
@@ -99,6 +117,7 @@ void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
 
     if (_tcpSocket.state() != QAbstractSocket::ConnectedState)
     {
+        processDataExchange("", "Send Markers. Unable to send message. No connection.", DataExchangePackageDirection::Outgoing);
         emit onMessageExchangeInformation(tr("Unable to send message. No connection."), true);
         return;
     }
@@ -149,6 +168,7 @@ void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
 
     _sentMessages.insert(header.messageId, header.codeMessage);
 
+    processDataExchange(messageContent.toHex(), "Send Markers", DataExchangePackageDirection::Outgoing);
     emit onMessageExchangeInformation(tr("Targets information sent successfully (# %1)").arg(header.messageId), false);
 }
 
@@ -158,6 +178,7 @@ void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> *weatherDataCo
 
     if (_tcpSocket.state() != QAbstractSocket::ConnectedState)
     {
+        processDataExchange("", "Send Weather. Unable to send message. No connection.", DataExchangePackageDirection::Outgoing);
         emit onMessageExchangeInformation(tr("Unable to send message. No connection."), true);
         return;
     }
@@ -202,6 +223,7 @@ void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> *weatherDataCo
 
     _sentMessages.insert(header.messageId, header.codeMessage);
 
+    processDataExchange(messageContent.toHex(), "Send Weather", DataExchangePackageDirection::Outgoing);
     emit onMessageExchangeInformation(tr("Weather information sent successfully (# %1)").arg(header.messageId), false);
 }
 

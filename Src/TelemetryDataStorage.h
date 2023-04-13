@@ -59,7 +59,8 @@ public:
 
 public slots:
     void onDataReceived(const TelemetryDataFrame &telemetryFrame, const QImage &videoFrame);
-    void onClientCommandSent(const ClientCommand &clientCommand);
+    void onClientCommandSent(const DataExchangePackage &clientCommand);
+    void onArtillerySpotterDataExchange(const DataExchangePackage &dataPackage, DataExchangePackageDirection direction);
 private:
     const QString SessionInfo_FormatVersion             = "FormatVersion";
     const QString SessionInfo_LocalHostName             = "LocalHostName";
@@ -86,7 +87,7 @@ private:
     bool _isLaserRangefinderLicensed;
 
     QVector<TelemetryDataFrame> _telemetryFrames;
-    QVector<ClientCommand> _clientCommands;
+    QVector<DataExchangePackage> _clientCommands;
     PartitionedVideoRecorder * _videoRecorder;
     QMediaPlayer * _mediaPlayer;
     CameraFrameGrabber * _mediaPlayerFrameGraber;

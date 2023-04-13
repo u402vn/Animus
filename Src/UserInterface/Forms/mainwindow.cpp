@@ -44,6 +44,14 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     connect(_hardwareLink, &HardwareLink::dataReceived, this, &MainWindow::hardwareLinkDataReceived, Qt::DirectConnection);
     connect(_hardwareLink, &HardwareLink::onClientCommandSent, _dataStorage, &TelemetryDataStorage::onClientCommandSent);
 
+
+    _artillerySpotter = new ArtillerySpotter(this);
+    if (applicationSettings.EnableArtilleryMountNotification)
+    {
+        _artillerySpotter->openSocket(QHostAddress(applicationSettings.ArtilleryMountAddress), applicationSettings.ArtilleryMountTCPPort);
+        connect(_artillerySpotter, &ArtillerySpotter::onArtillerySpotterDataExchange, _dataStorage, &TelemetryDataStorage::onArtillerySpotterDataExchange);
+    }
+
     auto heightMapContainer = new HeightMapContainer(this, applicationSettings.DatabaseHeightMap);
     //???? get from map tile container
 
@@ -407,7 +415,7 @@ void MainWindow::addTabWidgets()
     connect(_dashboardWidget, &DashboardWidget::activateCatapult,           _hardwareLink,     &HardwareLink::activateCatapult);
 
     _bombingWidget = applicationSettings.isBombingTabLicensed() || applicationSettings.isTargetTabLicensed() ?
-                new BombingWidget(_tabTools, _hardwareLink, _dataStorage) : nullptr;
+                new BombingWidget(_tabTools, _hardwareLink, _artillerySpotter, _dataStorage) : nullptr;
     _patrolWidget = applicationSettings.isPatrolTabLicensed() ?
                 new PatrolWidget(_tabTools) : nullptr;
     _markerListWidget = applicationSettings.isMarkersTabLicensed() ?
@@ -690,6 +698,7 @@ void MainWindow::onDataReceived(const TelemetryDataFrame &telemetryFrame, const 
     if (_playStatus == PlayStatus::PlayRealtime)
     {
         _videoWidget->setData(telemetryFrame, videoFrame);
+        _artillerySpotter->processTelemetry(telemetryFrame);
         if (_mapView != nullptr)
             _mapView->processTelemetry(telemetryFrame);
         _camControlsWidget->processTelemetry(telemetryFrame);

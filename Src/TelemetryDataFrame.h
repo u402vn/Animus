@@ -105,16 +105,18 @@ struct TelemetryDataFrame final
 
 // Q_DECLARE_METATYPE(TelemetryDataFrame)
 
-struct ClientCommand final
+enum DataExchangePackageDirection {Incoming, Outgoing};
+
+struct DataExchangePackage final
 {
     quint32 TelemetryFrameNumber;
     quint32 VideoFrameNumber;
     quint32 SessionTimeMs;
 
-    QString CommandHEX;
+    QString ContentHEX;
     QString Description;
 
-    ClientCommand()
+    DataExchangePackage()
     {
         TelemetryFrameNumber = 0;
         VideoFrameNumber = 0;

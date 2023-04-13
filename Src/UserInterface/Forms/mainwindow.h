@@ -84,6 +84,7 @@ private:
     PlayStatus _playStatus;
 
     HardwareLink *_hardwareLink;
+    ArtillerySpotter *_artillerySpotter;
 
     DataConsole *_dataConsole;
     EmulatorConsole *_emulatorConsole;

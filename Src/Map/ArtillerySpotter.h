@@ -24,6 +24,10 @@ class ArtillerySpotter : public QObject
     quint32 _messageId;
 
     QMap<int, int> _sentMessages;
+
+    TelemetryDataFrame _telemetryDataFrame;
+
+    void processDataExchange(const QString &contentHEX, const QString &description, DataExchangePackageDirection direction);
 protected:
     void timerEvent(QTimerEvent *event); // reconnect to socket
 public:
@@ -31,12 +35,15 @@ public:
     ~ArtillerySpotter();
     void openSocket(const QHostAddress address, const quint16 port);
 
+    void processTelemetry(const TelemetryDataFrame &telemetryDataFrame);
+
     void sendMarkers(const QList<MapMarker *> *markers);
     void sendWeather(const QVector<WeatherDataItem> *weatherDataCollection);
 private slots:
     void readData();
 signals:
     void onMessageExchangeInformation(const QString &information, bool isEroor);
+    void onArtillerySpotterDataExchange(const DataExchangePackage &dataPackage, DataExchangePackageDirection direction);
 };
 
 #endif // ARTILLERYSPOTTER_H

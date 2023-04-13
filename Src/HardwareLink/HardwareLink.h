@@ -180,7 +180,7 @@ private slots:
 signals:
     void dataReceived(const TelemetryDataFrame &telemetryFrame, const QImage &videoFrame);
     void onHardwareLinkStateChanged();
-    void onClientCommandSent(const ClientCommand &clientCommand);
+    void onClientCommandSent(const DataExchangePackage &clientCommand);
     void onTelemetryReceived(const QString &telemetryHEX);
 };
 

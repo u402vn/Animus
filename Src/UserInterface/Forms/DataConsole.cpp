@@ -79,12 +79,12 @@ DataConsole::~DataConsole()
 
 }
 
-void DataConsole::onHardwareLinkCommandSent(const ClientCommand &command)
+void DataConsole::onHardwareLinkCommandSent(const DataExchangePackage &command)
 {
     if (!_acShowCommands->isChecked() || _pauseButton->isChecked())
         return;
 
-    QString logLine = QString("<body>%1&emsp;&emsp;<font color=""#00FF00"">%2</font><br></body>").arg(command.CommandHEX).arg(command.Description);
+    QString logLine = QString("<body>%1&emsp;&emsp;<font color=""#00FF00"">%2</font><br></body>").arg(command.ContentHEX).arg(command.Description);
     _logText->moveCursor(QTextCursor::End);
     _logText->insertHtml(logLine);
     clearObsoleteLines();

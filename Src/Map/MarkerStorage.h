@@ -5,7 +5,6 @@
 #include <QSqlDatabase>
 #include <QList>
 #include "MarkerThesaurus.h"
-#include "ArtillerySpotter.h"
 #include "Common/CommonData.h"
 #include "MarkerStorageItems.h"
 
@@ -18,7 +17,6 @@ class MarkerStorage final : public QObject
     QList<TargetMapMarker *> _targetMapMarkers;
     ArtillerySalvoCenterMarker *_salvoCenterMarker;
     bool _mapMarkersLoaded;
-    ArtillerySpotter _artillerySpotter;
 
     void updateArtillerySalvoCenterMarker();
     void loadMarkerList();
@@ -47,8 +45,6 @@ public:
     const QList<TargetMapMarker*> *getTargetMapMarkers();
     ArtillerySalvoCenterMarker *getSalvoCenterMarker();
     MapMarker *getMapMarkerByGUID(const QString &markerGUID);
-
-    ArtillerySpotter *artillerySpotter();
 signals:
     void onMapMarkerDeleted(const QString &markerGUID);
     void onMapMarkerCreated(const QString &markerGUID);

@@ -11,9 +11,9 @@ ExternalDataConsoleNotificator::~ExternalDataConsoleNotificator()
 
 }
 
-void ExternalDataConsoleNotificator::onClientCommandSent(const ClientCommand &clientCommand)
+void ExternalDataConsoleNotificator::onClientCommandSent(const DataExchangePackage &clientCommand)
 {
-    QByteArray datagram = clientCommand.CommandHEX.toUtf8();
+    QByteArray datagram = clientCommand.ContentHEX.toUtf8();
     _udpConsoleSocket.writeDatagram(datagram, QHostAddress::Broadcast, _udpConsolePort);
 }
 

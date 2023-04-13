@@ -13,8 +13,7 @@
 #include "EnterProc.h"
 
 
-MarkerStorage::MarkerStorage(QObject *parent) : QObject(parent),
-    _artillerySpotter(this)
+MarkerStorage::MarkerStorage(QObject *parent) : QObject(parent)
 {
     EnterProc("MarkerStorage::MarkerStorage");
 
@@ -41,10 +40,6 @@ MarkerStorage::MarkerStorage(QObject *parent) : QObject(parent),
     _mapMarkersLoaded = false;
     _salvoCenterMarker = nullptr;
     startTimer(1000); //save dirty markers
-
-    if (applicationSettings.EnableArtilleryMountNotification)
-        _artillerySpotter.openSocket(QHostAddress(applicationSettings.ArtilleryMountAddress), applicationSettings.ArtilleryMountTCPPort);
-    //connect(this, &MarkerStorage::onMarkerListUpdated, &_artillerySpotter, &ArtillerySpotter::onMarkerListUpdated, Qt::DirectConnection);
 }
 
 MarkerStorage::~MarkerStorage()
@@ -319,11 +314,6 @@ MapMarker *MarkerStorage::getMapMarkerByGUID(const QString &markerGUID)
         if (mapMarker->GUID() == markerGUID)
             return mapMarker;
     return nullptr;
-}
-
-ArtillerySpotter *MarkerStorage::artillerySpotter()
-{
-    return &_artillerySpotter;
 }
 
 void MarkerStorage::cleanupObsoleteMapMarkers()

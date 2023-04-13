@@ -8,8 +8,9 @@
 #include "Map/MarkerStorage.h"
 #include "EnterProc.h"
 
-WeatherView::WeatherView(QWidget *parent, TelemetryDataStorage *telemetryDataStorage) : QDialog(parent),
-    _telemetryDataStorage(telemetryDataStorage)
+WeatherView::WeatherView(QWidget *parent, TelemetryDataStorage *telemetryDataStorage, ArtillerySpotter *artillerySpotter) : QDialog(parent),
+    _telemetryDataStorage(telemetryDataStorage),
+    _artillerySpotter(artillerySpotter)
 {
     EnterProcStart("WeatherView::WeatherView");
 
@@ -86,7 +87,5 @@ void WeatherView::reinit()
 void WeatherView::onSendWeatherClicked()
 {
     EnterProcStart("WeatherView::onSendWeatherClicked");
-
-    MarkerStorage& markerStorage = MarkerStorage::Instance();
-    markerStorage.artillerySpotter()->sendWeather(&_weatherDataCollection);
+    _artillerySpotter->sendWeather(&_weatherDataCollection);
 }

@@ -6,6 +6,7 @@
 #include <QActionGroup>
 #include "ApplicationSettings.h"
 #include "EnterProc.h"
+#include "Map/MarkerStorage.h"
 #include <Common/CommonWidgets.h>
 
 
@@ -93,12 +94,13 @@ void BombingWidget::initWidgets()
     row++;
 }
 
-BombingWidget::BombingWidget(QWidget *parent, HardwareLink *hardwareLink, TelemetryDataStorage *telemetryDataStorage) : QWidget(parent)
+BombingWidget::BombingWidget(QWidget *parent, HardwareLink *hardwareLink, ArtillerySpotter *artillerySpotter, TelemetryDataStorage *telemetryDataStorage) : QWidget(parent),
+    _hardwareLink(hardwareLink),
+    _artillerySpotter(artillerySpotter),
+    _telemetryDataStorage(telemetryDataStorage)
 {
     EnterProc("BombingWidget::BombingWidget");
 
-    _hardwareLink = hardwareLink;
-    _telemetryDataStorage = telemetryDataStorage;
     _weatherView = nullptr;
 
     MarkerStorage& markerStorage = MarkerStorage::Instance();
@@ -108,7 +110,7 @@ BombingWidget::BombingWidget(QWidget *parent, HardwareLink *hardwareLink, Teleme
     connect(&markerStorage, &MarkerStorage::onTargetMapMarkerHighlightedChanged, this, &BombingWidget::onMapMarkerHighlightedChanged);
     connect(&markerStorage, &MarkerStorage::onMapMarkerCoordChanged, this, &BombingWidget::onMapMarkerCoordChanged);
 
-    connect(markerStorage.artillerySpotter(), &ArtillerySpotter::onMessageExchangeInformation, this, &BombingWidget::onMessageExchangeInformation);
+    connect(_artillerySpotter, &ArtillerySpotter::onMessageExchangeInformation, this, &BombingWidget::onMessageExchangeInformation);
 
     initWidgets();
 
@@ -167,13 +169,13 @@ void BombingWidget::onDropBombClicked()
 void BombingWidget::onSendHitCoordinatesClicked()
 {
     MarkerStorage& markerStorage = MarkerStorage::Instance();
-    markerStorage.artillerySpotter()->sendMarkers(markerStorage.getMapMarkers());
+    _artillerySpotter->sendMarkers(markerStorage.getMapMarkers());
 }
 
 void BombingWidget::onSendWeatherClicked()
 {
     if (_weatherView == nullptr)
-        _weatherView = new WeatherView(nullptr, _telemetryDataStorage);
+        _weatherView = new WeatherView(nullptr, _telemetryDataStorage, _artillerySpotter);
     _weatherView->reinit();
     _weatherView->showNormal();
 }

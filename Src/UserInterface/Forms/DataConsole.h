@@ -29,7 +29,7 @@ public:
     explicit DataConsole(QWidget *parent);
     ~DataConsole();
 public slots:
-    void onHardwareLinkCommandSent(const ClientCommand &clientCommand);
+    void onHardwareLinkCommandSent(const DataExchangePackage &clientCommand);
     void onHardwareLinkTelemetryReceived(const QString &telemetryHEX);
 private slots:
     void onSetingsButtonClicked();
