@@ -60,7 +60,7 @@ public:
 public slots:
     void onDataReceived(const TelemetryDataFrame &telemetryFrame, const QImage &videoFrame);
     void onClientCommandSent(const DataExchangePackage &clientCommand);
-    void onArtillerySpotterDataExchange(const DataExchangePackage &dataPackage, DataExchangePackageDirection direction);
+    void onArtillerySpotterDataExchange(const DataExchangePackage &dataPackage);
 private:
     const QString SessionInfo_FormatVersion             = "FormatVersion";
     const QString SessionInfo_LocalHostName             = "LocalHostName";
@@ -88,6 +88,7 @@ private:
 
     QVector<TelemetryDataFrame> _telemetryFrames;
     QVector<DataExchangePackage> _clientCommands;
+    QVector<DataExchangePackage> _artillerySpotterDataPackages;
     PartitionedVideoRecorder * _videoRecorder;
     QMediaPlayer * _mediaPlayer;
     CameraFrameGrabber * _mediaPlayerFrameGraber;
@@ -99,6 +100,7 @@ private:
 
     qint32 _lastSavedTelemetryFrameIndex;
     qint32 _lastSavedClientCommandIndex;
+    qint32 _lastSavedArtillerySpotterDataPackageIndex;
     qint32 _lastVideoFrameNumber;
     QString _lastOpenedVideoFile;
 
@@ -108,7 +110,7 @@ private:
     QMap<QString, QString> _sessionInfos;
     void loadSessionInfos();
     void initSessionInfos();
-    void flushSessionInfos();
+    void flushSessionInfos();    
     void setSessionInfo(const QString &key, const QString &value);
     const QString getSessionInfo(const QString &key) const;
     int getSessionFormatVersion();
@@ -119,6 +121,7 @@ private:
     void openTelemetryFramesDatabase();
     void flushTelemetryDataFrames();
     void flushClientCommands();
+    void flushArtillerySpotterDataPackages();
 signals:
     void storedDataReceived(const TelemetryDataFrame &telemetryFrame, const QImage &videoFrame);
     void workModeChanged();

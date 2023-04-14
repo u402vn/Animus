@@ -274,6 +274,7 @@ void HardwareLink::doOnCommandSent(const BinaryContent &commandContent, const QS
     clientCommand.SessionTimeMs = getSessionTimeMs();
     clientCommand.VideoFrameNumber = _currentTelemetryDataFrame.VideoFrameNumber;
     clientCommand.TelemetryFrameNumber = _currentTelemetryDataFrame.TelemetryFrameNumber;
+    clientCommand.Direction = DataExchangePackageDirection::Outgoing;
     clientCommand.ContentHEX = commandContent.toHex();
     clientCommand.Description = commandDescription;
     emit onClientCommandSent(clientCommand);

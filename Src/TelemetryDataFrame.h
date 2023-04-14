@@ -115,6 +115,7 @@ struct DataExchangePackage final
 
     QString ContentHEX;
     QString Description;
+    DataExchangePackageDirection Direction;
 
     DataExchangePackage()
     {

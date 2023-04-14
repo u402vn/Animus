@@ -81,11 +81,13 @@ void TelemetryDataStorage::stopSession()
     _videoRecorder->stop();
     flushTelemetryDataFrames();
     flushClientCommands();
+    flushArtillerySpotterDataPackages();
     flushSessionInfos();
 
     _sessionDatabase.close();
     _lastSavedTelemetryFrameIndex = -1;
     _lastSavedClientCommandIndex = -1;
+    _lastSavedArtillerySpotterDataPackageIndex = -1;
     _lastVideoFrameNumber = -1;
     // _telemetryFramesDatabase.close();
 
@@ -94,6 +96,7 @@ void TelemetryDataStorage::stopSession()
 
     _telemetryFrames.clear();
     _clientCommands.clear();
+    _artillerySpotterDataPackages.clear();
 
     _workMode = WorkMode::DisplayOnly;
     _sessionName = "";
@@ -220,8 +223,8 @@ void TelemetryDataStorage::flushClientCommands()
 
     QSqlQuery insertQuery(_sessionDatabase);
     insertQuery.prepare("INSERT INTO ClientCommands "
-                        "(SessionTimeMs, TelemetryFrameNumber, VideoFrameNumber, CommandHEX) "
-                        "VALUES (?, ?, ?, ?)"
+                        "(SessionTimeMs, TelemetryFrameNumber, VideoFrameNumber, CommandHEX, Description) "
+                        "VALUES (?, ?, ?, ?, ?)"
                         );
     LOG_SQL_ERROR(insertQuery);
 
@@ -233,6 +236,7 @@ void TelemetryDataStorage::flushClientCommands()
         insertQuery.addBindValue(clientCommand.TelemetryFrameNumber);
         insertQuery.addBindValue(clientCommand.VideoFrameNumber);
         insertQuery.addBindValue(clientCommand.ContentHEX);
+        insertQuery.addBindValue(clientCommand.Description);
 
         insertQuery.exec();
         LOG_SQL_ERROR(insertQuery);
@@ -241,6 +245,42 @@ void TelemetryDataStorage::flushClientCommands()
     _sessionDatabase.commit();
     LOG_SQL_ERROR(_sessionDatabase);
     _lastSavedClientCommandIndex = clientCommandsCount - 1;
+}
+
+void TelemetryDataStorage::flushArtillerySpotterDataPackages()
+{
+    if (!_sessionDatabase.isOpen() || (_workMode != WorkMode::RecordAndDisplay))
+        return;
+    EnterProcStart("TelemetryDataStorage::flushArtillerySpotterDataPackages");
+
+    _sessionDatabase.transaction();
+    LOG_SQL_ERROR(_sessionDatabase);
+
+    QSqlQuery insertQuery(_sessionDatabase);
+    insertQuery.prepare("INSERT INTO ArtillerySpotterData "
+                        "(SessionTimeMs, TelemetryFrameNumber, VideoFrameNumber, ContentHEX, Description, Direction) "
+                        "VALUES (?, ?, ?, ?, ?, ?)"
+                        );
+    LOG_SQL_ERROR(insertQuery);
+
+    int artillerySpotterDataPackagesCount = _artillerySpotterDataPackages.count();
+    for (int i = _lastSavedArtillerySpotterDataPackageIndex + 1; i < artillerySpotterDataPackagesCount; i++)
+    {
+        const DataExchangePackage dataPackage = _artillerySpotterDataPackages[i];
+        insertQuery.addBindValue(dataPackage.SessionTimeMs);
+        insertQuery.addBindValue(dataPackage.TelemetryFrameNumber);
+        insertQuery.addBindValue(dataPackage.VideoFrameNumber);
+        insertQuery.addBindValue(dataPackage.ContentHEX);
+        insertQuery.addBindValue(dataPackage.Description);
+        insertQuery.addBindValue(dataPackage.Direction);
+
+        insertQuery.exec();
+        LOG_SQL_ERROR(insertQuery);
+    }
+
+    _sessionDatabase.commit();
+    LOG_SQL_ERROR(_sessionDatabase);
+    _lastSavedArtillerySpotterDataPackageIndex = artillerySpotterDataPackagesCount - 1;
 }
 
 const QString TelemetryDataStorage::getSessionFolder() const
@@ -490,7 +530,7 @@ void TelemetryDataStorage::onDataReceived(const TelemetryDataFrame &telemetryFra
     if (_workMode != WorkMode::RecordAndDisplay)
         return;
     EnterProcStart("TelemetryDataStorage::onDataReceived");
-    //1. Telemetry    
+    //1. Telemetry
     if (_telemetryFrames.count() - _lastSavedTelemetryFrameIndex > FRAME_FLUSH_BATCH_SIZE)
         flushTelemetryDataFrames();
 
@@ -537,9 +577,14 @@ void TelemetryDataStorage::onClientCommandSent(const DataExchangePackage &client
         flushClientCommands();
 }
 
-void TelemetryDataStorage::onArtillerySpotterDataExchange(const DataExchangePackage &dataPackage, DataExchangePackageDirection direction)
+void TelemetryDataStorage::onArtillerySpotterDataExchange(const DataExchangePackage &dataPackage)
 {
-
+    if (_workMode != WorkMode::RecordAndDisplay)
+        return;
+    EnterProcStart("TelemetryDataStorage::onArtillerySpotterDataExchange");
+    _artillerySpotterDataPackages.append(dataPackage);
+    if (_artillerySpotterDataPackages.count() - _lastSavedArtillerySpotterDataPackageIndex > FRAME_FLUSH_BATCH_SIZE)
+        flushArtillerySpotterDataPackages();
 }
 
 const TelemetryDataFrame TelemetryDataStorage::getTelemetryDataFrameByIndex(int frameIndex)
