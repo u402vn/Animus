@@ -1,6 +1,5 @@
 #include "MapTileDownloader.h"
 #include <QNetworkRequest>
-#include <QDebug>
 #include "Map/MapTileContainer.h"
 #include "Common/CommonUtils.h"
 

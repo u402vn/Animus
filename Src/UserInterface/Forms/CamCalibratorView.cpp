@@ -1,6 +1,5 @@
 #include "CamCalibratorView.h"
 #include <QGridLayout>
-#include <QDebug>
 #include <QPainter>
 #include "ApplicationSettings.h"
 #include "EnterProc.h"

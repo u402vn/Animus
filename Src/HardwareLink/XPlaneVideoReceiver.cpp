@@ -1,5 +1,5 @@
 #include "XPlaneVideoReceiver.h"
-#include "QDebug"
+#include <QDebug>
 #include "lz4.h"
 #include "EnterProc.h"
 

@@ -1,6 +1,7 @@
 #include "VoiceInformant.h"
 #include <QtGlobal>
 #include <QTimer>
+#include <QDebug>
 
 void VoiceInformant::tryToSay()
 {

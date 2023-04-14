@@ -2,7 +2,6 @@
 #include <QWheelEvent>
 #include <QCursor>
 #include <QMimeData>
-#include <QDebug>
 #include "EnterProc.h"
 
 MapGraphicsScene *MapGraphicsView::mapScene()

@@ -3,6 +3,7 @@
 #include <QTimer>
 #include <QtMath>
 #include <QRegExp>
+#include <QDebug>
 #include "HardwareLink/MUSVPhotoCommandBuilder.h"
 #include "HardwareLink/OtusCommonCommandBuilder.h"
 #include "EnterProc.h"

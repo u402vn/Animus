@@ -267,7 +267,6 @@ void BombingWidget::onMapMarkerCoordChanged(const QString &markerGUID, const Wor
 
 void BombingWidget::onMessageExchangeInformation(const QString &information, bool isEroor)
 {\
-    qInfo() << information;
     CommonWidgetUtils::showInfoDialogAutoclose(isEroor ?  QMessageBox::Critical : QMessageBox::Information,  information, 3000);
 }
 

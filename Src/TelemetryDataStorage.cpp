@@ -6,6 +6,7 @@
 #include <QSqlError>
 #include <QHostInfo>
 #include <QStorageInfo>
+#include <QDebug>
 #include "Common/CommonUtils.h"
 #include "EnterProc.h"
 
@@ -123,7 +124,11 @@ void TelemetryDataStorage::openTelemetryFramesDatabase()
 
     EXEC_SQL(_sessionDatabase, "CREATE TABLE IF NOT EXISTS ClientCommands ( "
                                "SessionTimeMs INTEGER, TelemetryFrameNumber INTEGER, VideoFrameNumber INTEGER, "
-                               "CommandHEX VARCHAR(255) )");
+                               "CommandHEX TEXT, Description VARCHAR(255) )");
+
+    EXEC_SQL(_sessionDatabase, "CREATE TABLE IF NOT EXISTS ArtillerySpotterData ( "
+                               "SessionTimeMs INTEGER, TelemetryFrameNumber INTEGER, VideoFrameNumber INTEGER, "
+                               "ContentHEX TEXT, Description VARCHAR(255), Direction INTEGER )");
 
     EXEC_SQL(_sessionDatabase, "PRAGMA journal_mode = MEMORY");
 

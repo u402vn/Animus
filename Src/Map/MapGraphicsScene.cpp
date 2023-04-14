@@ -3,7 +3,6 @@
 #include <QGraphicsItem>
 #include <QGraphicsView>
 #include <QList>
-#include <QDebug>
 #include "ArealObjectContainer.h"
 #include "MapTileContainer.h"
 #include "MapTileExportDialog.h"

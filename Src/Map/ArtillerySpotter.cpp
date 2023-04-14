@@ -15,6 +15,8 @@ void ArtillerySpotter::processDataExchange(const QString &contentHEX, const QStr
     dataPackage.ContentHEX = contentHEX;
     dataPackage.Description = description;
     emit onArtillerySpotterDataExchange(dataPackage, direction);
+
+    qInfo() << description << contentHEX;
 }
 
 void ArtillerySpotter::timerEvent(QTimerEvent *event)
@@ -38,7 +40,7 @@ ArtillerySpotter::ArtillerySpotter(QObject *parent) : QObject(parent)
     _enabled = false;
     _messageId = 0;
 
-    connect(&_tcpSocket, &QTcpSocket::readyRead, this, &ArtillerySpotter::readData, Qt::ANIMUS_CONNECTION_TYPE);
+    connect(&_tcpSocket, &QTcpSocket::readyRead, this, &ArtillerySpotter::readSocketData, Qt::ANIMUS_CONNECTION_TYPE);
 
     _reconnectTimerId = startTimer(2000); // reconnect to socket
 }
@@ -85,7 +87,6 @@ struct PointItemData
     double dateTime;
 };
 
-
 struct WeatherCommonData
 {
     double dateTime;
@@ -108,7 +109,6 @@ struct ReceiptData
     uint32_t messageId;
     uint8_t errorCode;
 };
-
 #pragma pack(pop)
 
 void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
@@ -227,9 +227,9 @@ void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> *weatherDataCo
     emit onMessageExchangeInformation(tr("Weather information sent successfully (# %1)").arg(header.messageId), false);
 }
 
-void ArtillerySpotter::readData()
+void ArtillerySpotter::readSocketData()
 {
-    EnterProcStart("ArtillerySpotter::readData");
+    EnterProcStart("ArtillerySpotter::readSocketData");
 
     ReceiptData* receiptData;
 
@@ -240,6 +240,12 @@ void ArtillerySpotter::readData()
         {
 
             receiptData = reinterpret_cast<ReceiptData*>(_tcpBuffer.data());
+
+            BinaryContent messageContent;
+            messageContent.clear();
+            messageContent.appendData((const char *)receiptData, sizeof(ReceiptData));
+            processDataExchange(messageContent.toHex(), "Receipt Data", DataExchangePackageDirection::Outgoing);
+
             if (receiptData->errorCode == 0)
                 emit onMessageExchangeInformation(tr("Information received successfully (# %1)").arg(receiptData->messageId), false);
             else

@@ -1,4 +1,5 @@
 #include "VideoLink.h"
+#include <QDebug>
 #include <QMediaPlayer>
 #include "ApplicationSettings.h"
 #include "VideoRecorder/CameraFrameGrabber.h"

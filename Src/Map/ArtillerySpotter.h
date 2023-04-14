@@ -40,7 +40,7 @@ public:
     void sendMarkers(const QList<MapMarker *> *markers);
     void sendWeather(const QVector<WeatherDataItem> *weatherDataCollection);
 private slots:
-    void readData();
+    void readSocketData();
 signals:
     void onMessageExchangeInformation(const QString &information, bool isEroor);
     void onArtillerySpotterDataExchange(const DataExchangePackage &dataPackage, DataExchangePackageDirection direction);
