@@ -25,12 +25,16 @@ public:
     };
 
     explicit TelemetryDataStorage(QObject *parent, const QString &sessionFolder,
-                                  const quint32 videoFileFrameCount, const quint32 videoFileQuality,
+                                  const quint32 videoFileFrameCount,
+                                  const quint32 videoFileQuality,
                                   const bool displayTelemetryOnVideo,
+                                  const quint32 telemetryIndicatorFontSize,
                                   const OSDTelemetryTimeFormat telemetryTimeFormat,
                                   const bool displayTargetRectangleOnVideo,
-                                  const OSDGimbalIndicatorType gimbalIndicatorType, const OSDGimbalIndicatorAngles gimbalIndicatorAngles,
-                                  const quint32 gimbalIndicatorSize, const bool isLaserRangefinderLicensed);
+                                  const OSDGimbalIndicatorType gimbalIndicatorType,
+                                  const OSDGimbalIndicatorAngles gimbalIndicatorAngles,
+                                  const quint32 gimbalIndicatorSize,
+                                  const bool isLaserRangefinderLicensed);
     ~TelemetryDataStorage();
 
     WorkMode getWorkMode() const;
@@ -80,6 +84,7 @@ private:
     QString _sessionName;
     quint32 _sessionVideoFileFrameCount;
     bool _displayTelemetryOnVideo, _displayTargetRectangleOnVideo;
+    quint32 _telemetryIndicatorFontSize;
     OSDTelemetryTimeFormat _telemetryTimeFormat;
     OSDGimbalIndicatorType _gimbalIndicatorType;
     OSDGimbalIndicatorAngles _gimbalIndicatorAngles;
@@ -110,7 +115,7 @@ private:
     QMap<QString, QString> _sessionInfos;
     void loadSessionInfos();
     void initSessionInfos();
-    void flushSessionInfos();    
+    void flushSessionInfos();
     void setSessionInfo(const QString &key, const QString &value);
     const QString getSessionInfo(const QString &key) const;
     int getSessionFormatVersion();

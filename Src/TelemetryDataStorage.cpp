@@ -14,8 +14,11 @@ const QString SCREENSHOTS_FOLDER_NAME = "Screenshots";
 const qint32 FRAME_FLUSH_BATCH_SIZE = 50;
 
 TelemetryDataStorage::TelemetryDataStorage(QObject *parent, const QString &sessionFolder,
-                                           const quint32 videoFileFrameCount, const quint32 videoFileQuality,
-                                           const bool displayTelemetryOnVideo, const OSDTelemetryTimeFormat telemetryTimeFormat,
+                                           const quint32 videoFileFrameCount,
+                                           const quint32 videoFileQuality,
+                                           const bool displayTelemetryOnVideo,
+                                           const quint32 telemetryIndicatorFontSize,
+                                           const OSDTelemetryTimeFormat telemetryTimeFormat,
                                            const bool displayTargetRectangleOnVideo,
                                            const OSDGimbalIndicatorType gimbalIndicatorType,
                                            const OSDGimbalIndicatorAngles gimbalIndicatorAngles,
@@ -28,6 +31,7 @@ TelemetryDataStorage::TelemetryDataStorage(QObject *parent, const QString &sessi
     _defaultVideoFileFrameCount = videoFileFrameCount;
     _defaultVideoFileQuality = videoFileQuality;
     _displayTelemetryOnVideo = displayTelemetryOnVideo;
+    _telemetryIndicatorFontSize = telemetryIndicatorFontSize;
     _telemetryTimeFormat = telemetryTimeFormat;
     _gimbalIndicatorType = gimbalIndicatorType;
     _gimbalIndicatorAngles = gimbalIndicatorAngles;
@@ -549,7 +553,7 @@ void TelemetryDataStorage::onDataReceived(const TelemetryDataFrame &telemetryFra
             pen.setColor(Qt::green);
             painter.setPen(pen);
             if (_displayTelemetryOnVideo)
-                drawTelemetryOnVideo(painter, telemetryFrame, _displayTargetRectangleOnVideo, _telemetryTimeFormat);
+                drawTelemetryOnVideo(painter, telemetryFrame, _telemetryIndicatorFontSize, _isLaserRangefinderLicensed,  _telemetryTimeFormat);
 
             drawGimbalOnVideo(painter, _gimbalIndicatorType, _gimbalIndicatorAngles, _gimbalIndicatorSize, telemetryFrame);
 

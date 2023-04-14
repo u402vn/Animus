@@ -98,7 +98,10 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     auto cbOVRGimbalIndicatorType = new QComboBoxExt(this, mapOVRGimbalIndicatorType);
 
     auto lblOVRGimbalIndicatorSize = new QLabel(tr("Gimbal Indicator Size"), this);
-    auto sbOVRGimbalIndicatorSize = new QSpinBoxEx(this);
+    auto sbOVRGimbalIndicatorSize = CommonWidgetUtils::createRangeSpinbox(this, 20, 200);
+
+    auto lblOVRTelemetryIndicatorFontSize = new QLabel(tr("Telemetry Indicator Font Size"), this);
+    auto sbOVRTelemetryIndicatorFontSize = CommonWidgetUtils::createRangeSpinbox(this, 2, 40);
 
     auto spoilerVideoRecord = makeSessionsSpoilerGrid(tr("Video Record"), this);
     auto videoRecordLayout = spoilerVideoRecord->gridLayout();
@@ -114,17 +117,21 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     row++;
 
     videoRecordLayout->addWidget(lblVideoRecord,                               row, 0, 1, 1);
-    videoRecordLayout->addWidget(chkOVRDisplayTelemetry,             row, 1, 1, 4);
+    videoRecordLayout->addWidget(chkOVRDisplayTelemetry,                       row, 1, 1, 4);
     row++;
 
-    videoRecordLayout->addWidget(chkOVRDisplayTargetRectangle,       row, 1, 1, 4);
+    videoRecordLayout->addWidget(chkOVRDisplayTargetRectangle,                  row, 1, 1, 4);
     row++;
 
-    videoRecordLayout->addWidget(cbOVRGimbalIndicatorType,           row, 1, 1, 4);
+    videoRecordLayout->addWidget(cbOVRGimbalIndicatorType,                      row, 1, 1, 4);
     row++;
 
-    videoRecordLayout->addWidget(lblOVRGimbalIndicatorSize,          row, 0, 1, 1);
-    videoRecordLayout->addWidget(sbOVRGimbalIndicatorSize,           row, 1, 1, 1);
+    videoRecordLayout->addWidget(lblOVRGimbalIndicatorSize,                     row, 0, 1, 1);
+    videoRecordLayout->addWidget(sbOVRGimbalIndicatorSize,                      row, 1, 1, 1);
+    row++;
+
+    videoRecordLayout->addWidget(lblOVRTelemetryIndicatorFontSize,              row, 0, 1, 1);
+    videoRecordLayout->addWidget(sbOVRTelemetryIndicatorFontSize,               row, 1, 1, 1);
     row++;
 
     // Init Data Reception Section
@@ -392,6 +399,7 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     _association.addBinding(&applicationSettings.OVRDisplayTargetRectangle,         chkOVRDisplayTargetRectangle);
     _association.addBinding(&applicationSettings.OVRGimbalIndicatorType,            cbOVRGimbalIndicatorType);
     _association.addBinding(&applicationSettings.OVRGimbalIndicatorSize,            sbOVRGimbalIndicatorSize);
+    _association.addBinding(&applicationSettings.OVRTelemetryIndicatorFontSize,     sbOVRTelemetryIndicatorFontSize);
     _association.addBinding(&applicationSettings.UAVTelemetrySourceType,            gbUAVTelemetrySourceType);
     _association.addBinding(&applicationSettings.TelemetryDataFormat,               cbUAVTelemetryFormat);
     _association.addBinding(&applicationSettings.UAVTelemetryUDPPort,               edUAVTelemetryUDPPort);

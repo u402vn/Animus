@@ -170,6 +170,9 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
     auto lblOSDGimbalIndicatorSize = new QLabel(tr("Gimbal Indicator Size"), this);
     auto sbOSDGimbalIndicatorSize = CommonWidgetUtils::createRangeSpinbox(this, 20, 200);
 
+    auto lblOSDTelemetryIndicatorFontSize = new QLabel(tr("Telemetry Indicator Font Size"), this);
+    auto sbOSDTelemetryIndicatorFontSize = CommonWidgetUtils::createRangeSpinbox(this, 2, 40);
+
     auto osdLayout = makeInterfaceSpoilerGridLayout();
     rowIndex = 0;
 
@@ -186,6 +189,10 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
 
     osdLayout->addWidget(lblOSDGimbalIndicatorSize,               rowIndex, 0, 1, 1);
     osdLayout->addWidget(sbOSDGimbalIndicatorSize,                rowIndex, 1, 1, 1);
+    rowIndex++;
+
+    osdLayout->addWidget(lblOSDTelemetryIndicatorFontSize,        rowIndex, 0, 1, 1);
+    osdLayout->addWidget(sbOSDTelemetryIndicatorFontSize,         rowIndex, 1, 1, 1);
     rowIndex++;
 
     auto spoilerOSD = new Spoiler(tr("OSD"), this);
@@ -287,6 +294,7 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
     _association.addBinding(&applicationSettings.OSDScreenLinesColor,                            scbOSDColor);
     _association.addBinding(&applicationSettings.OSDScreenCenterMarkColor,                       csbOSDCenterMarkColor);
     _association.addBinding(&applicationSettings.OSDGimbalIndicatorSize,                         sbOSDGimbalIndicatorSize);
+    _association.addBinding(&applicationSettings.OSDTelemetryIndicatorFontSize,                  sbOSDTelemetryIndicatorFontSize);
     _association.addBinding(&applicationSettings.ViewFieldLineWidth,                             sbViewFieldLineWidth);
     _association.addBinding(&applicationSettings.ViewFieldLineColor,                             scbViewFieldLineColor);
     _association.addBinding(&applicationSettings.TrajectoryPathLineWidth,                        sbTrajectoryPathLineWidth);

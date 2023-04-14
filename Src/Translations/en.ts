@@ -4,213 +4,213 @@
 <context>
     <name>ApplicationSettings</name>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="189"/>
+        <location filename="../ApplicationSettings.cpp" line="191"/>
         <source>Zoom Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="190"/>
+        <location filename="../ApplicationSettings.cpp" line="192"/>
         <source>Zoom In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="226"/>
+        <location filename="../ApplicationSettings.cpp" line="228"/>
         <source>Start New Session</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="227"/>
+        <location filename="../ApplicationSettings.cpp" line="229"/>
         <source>Display Only Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="229"/>
+        <location filename="../ApplicationSettings.cpp" line="231"/>
         <source>Change map and video positions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="228"/>
+        <location filename="../ApplicationSettings.cpp" line="230"/>
         <source>Open Select Sessions Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="131"/>
+        <location filename="../ApplicationSettings.cpp" line="132"/>
         <source>Target Marker Sizes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="191"/>
+        <location filename="../ApplicationSettings.cpp" line="193"/>
         <source>Map Zoom Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="192"/>
+        <location filename="../ApplicationSettings.cpp" line="194"/>
         <source>Map Zoom In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="193"/>
+        <location filename="../ApplicationSettings.cpp" line="195"/>
         <source>Follow The Plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="195"/>
+        <location filename="../ApplicationSettings.cpp" line="197"/>
         <source>Change Active Camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="196"/>
+        <location filename="../ApplicationSettings.cpp" line="198"/>
         <source>Stabilization On/Off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="197"/>
+        <location filename="../ApplicationSettings.cpp" line="199"/>
         <source>Cam Drivers Off</source>
         <translation type="unfinished">Cam Drivers Off</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="198"/>
+        <location filename="../ApplicationSettings.cpp" line="200"/>
         <source>Activate Landing Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="199"/>
+        <location filename="../ApplicationSettings.cpp" line="201"/>
         <source>Activate Begining Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="200"/>
+        <location filename="../ApplicationSettings.cpp" line="202"/>
         <source>Activate Vertical Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="201"/>
+        <location filename="../ApplicationSettings.cpp" line="203"/>
         <source>Color Mode +</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="202"/>
+        <location filename="../ApplicationSettings.cpp" line="204"/>
         <source>Color Mode -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="203"/>
+        <location filename="../ApplicationSettings.cpp" line="205"/>
         <source>Laser Activation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="205"/>
+        <location filename="../ApplicationSettings.cpp" line="207"/>
         <source>Bombing Sight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="206"/>
+        <location filename="../ApplicationSettings.cpp" line="208"/>
         <source>Screenshot</source>
         <translation type="unfinished">Screenshot</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="207"/>
+        <location filename="../ApplicationSettings.cpp" line="209"/>
         <source>Snapshot</source>
         <translation type="unfinished">Snapshot</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="208"/>
+        <location filename="../ApplicationSettings.cpp" line="210"/>
         <source>Snapshot Series</source>
         <translation type="unfinished">Snapshot Series</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="210"/>
+        <location filename="../ApplicationSettings.cpp" line="212"/>
         <source>Target Unlock</source>
         <translation type="unfinished">Target Unlock</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="211"/>
+        <location filename="../ApplicationSettings.cpp" line="213"/>
         <source>Camera Recording</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="212"/>
+        <location filename="../ApplicationSettings.cpp" line="214"/>
         <source>Automatic Tracer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="213"/>
+        <location filename="../ApplicationSettings.cpp" line="215"/>
         <source>Drop Bomb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="214"/>
+        <location filename="../ApplicationSettings.cpp" line="216"/>
         <source>Send Hit Coordinates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="215"/>
+        <location filename="../ApplicationSettings.cpp" line="217"/>
         <source>Send Weather</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="217"/>
+        <location filename="../ApplicationSettings.cpp" line="219"/>
         <source>Normal Flight Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="218"/>
+        <location filename="../ApplicationSettings.cpp" line="220"/>
         <source>Patrol Moving Target Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="219"/>
+        <location filename="../ApplicationSettings.cpp" line="221"/>
         <source>Patrol Static Target Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="220"/>
+        <location filename="../ApplicationSettings.cpp" line="222"/>
         <source>Manual Flight Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="222"/>
+        <location filename="../ApplicationSettings.cpp" line="224"/>
         <source>New Marker (Target)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="223"/>
+        <location filename="../ApplicationSettings.cpp" line="225"/>
         <source>New Marker (Laser)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="224"/>
+        <location filename="../ApplicationSettings.cpp" line="226"/>
         <source>New Marker (UAV)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="232"/>
+        <location filename="../ApplicationSettings.cpp" line="234"/>
         <source>Application Settings Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="230"/>
+        <location filename="../ApplicationSettings.cpp" line="232"/>
         <source>Data Console</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="231"/>
+        <location filename="../ApplicationSettings.cpp" line="233"/>
         <source>Emulator Console</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="233"/>
+        <location filename="../ApplicationSettings.cpp" line="235"/>
         <source>Help Viewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="330"/>
+        <location filename="../ApplicationSettings.cpp" line="332"/>
         <source>
   Key %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="332"/>
+        <location filename="../ApplicationSettings.cpp" line="334"/>
         <source>
   Button# %1</source>
         <translation type="unfinished"></translation>
@@ -443,28 +443,28 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>ArtillerySpotter</name>
     <message>
-        <location filename="../Map/ArtillerySpotter.cpp" line="102"/>
-        <location filename="../Map/ArtillerySpotter.cpp" line="161"/>
+        <location filename="../Map/ArtillerySpotter.cpp" line="121"/>
+        <location filename="../Map/ArtillerySpotter.cpp" line="182"/>
         <source>Unable to send message. No connection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/ArtillerySpotter.cpp" line="152"/>
+        <location filename="../Map/ArtillerySpotter.cpp" line="172"/>
         <source>Targets information sent successfully (# %1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/ArtillerySpotter.cpp" line="205"/>
+        <location filename="../Map/ArtillerySpotter.cpp" line="227"/>
         <source>Weather information sent successfully (# %1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/ArtillerySpotter.cpp" line="222"/>
+        <location filename="../Map/ArtillerySpotter.cpp" line="250"/>
         <source>Information received successfully (# %1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/ArtillerySpotter.cpp" line="224"/>
+        <location filename="../Map/ArtillerySpotter.cpp" line="252"/>
         <source>Information received unsuccessfully (# %1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -485,47 +485,47 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>CamCalibratorView</name>
     <message>
-        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="72"/>
+        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="71"/>
         <source>Camera Calibration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="88"/>
+        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="87"/>
         <source>Pattern Size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="94"/>
+        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="93"/>
         <source>Cell Length (mm):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="99"/>
+        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="98"/>
         <source>Frame Count:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="105"/>
+        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="104"/>
         <source>Scan Frequency:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="116"/>
+        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="115"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="118"/>
+        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="117"/>
         <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="120"/>
+        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="119"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="122"/>
+        <location filename="../UserInterface/Forms/CamCalibratorView.cpp" line="121"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -874,180 +874,180 @@ Do you really want to turn it to begining position?</translation>
 <context>
     <name>CameraSettingsNode</name>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="477"/>
+        <location filename="../ApplicationSettings.cpp" line="479"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="526"/>
-        <location filename="../ApplicationSettings.cpp" line="536"/>
+        <location filename="../ApplicationSettings.cpp" line="528"/>
+        <location filename="../ApplicationSettings.cpp" line="538"/>
         <source>Vertical Mirroring</source>
         <translation type="unfinished">Vertical Mirroring</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="481"/>
+        <location filename="../ApplicationSettings.cpp" line="483"/>
         <source>Digital Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="483"/>
+        <location filename="../ApplicationSettings.cpp" line="485"/>
         <source>Use Gimbal Telemetry Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="488"/>
+        <location filename="../ApplicationSettings.cpp" line="490"/>
         <source>Value of Fixed Camera Pich</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="489"/>
+        <location filename="../ApplicationSettings.cpp" line="491"/>
         <source>Value of Fixed Camera Roll</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="490"/>
+        <location filename="../ApplicationSettings.cpp" line="492"/>
         <source>Value of Fixed Camera Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="492"/>
+        <location filename="../ApplicationSettings.cpp" line="494"/>
         <source>Maximum Value of Camera Pitch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="493"/>
+        <location filename="../ApplicationSettings.cpp" line="495"/>
         <source>Minimum Value of Camera Pitch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="495"/>
+        <location filename="../ApplicationSettings.cpp" line="497"/>
         <source>Maximum Value of Camera Roll</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="496"/>
+        <location filename="../ApplicationSettings.cpp" line="498"/>
         <source>Minimum Value of Camera Roll</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="498"/>
+        <location filename="../ApplicationSettings.cpp" line="500"/>
         <source>Maximum Value of Camera Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="499"/>
+        <location filename="../ApplicationSettings.cpp" line="501"/>
         <source>Minimum Value of Camera Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="500"/>
+        <location filename="../ApplicationSettings.cpp" line="502"/>
         <source>Automatic Tracer Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="502"/>
+        <location filename="../ApplicationSettings.cpp" line="504"/>
         <source>Value of Camera Yaw in Landing Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="503"/>
+        <location filename="../ApplicationSettings.cpp" line="505"/>
         <source>Value of Camera Pich in Landing Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="504"/>
+        <location filename="../ApplicationSettings.cpp" line="506"/>
         <source>Value of Camera Roll in Landing Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="505"/>
+        <location filename="../ApplicationSettings.cpp" line="507"/>
         <source>Value of Camera Zoom in Landing Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="506"/>
+        <location filename="../ApplicationSettings.cpp" line="508"/>
         <source>Use special command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="508"/>
+        <location filename="../ApplicationSettings.cpp" line="510"/>
         <source>Value of Camera Yaw in Begining Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="509"/>
+        <location filename="../ApplicationSettings.cpp" line="511"/>
         <source>Value of Camera Pich in Begining Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="510"/>
+        <location filename="../ApplicationSettings.cpp" line="512"/>
         <source>Value of Camera Roll in Begining Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="511"/>
+        <location filename="../ApplicationSettings.cpp" line="513"/>
         <source>Value of Camera Zoom in Begining Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="513"/>
+        <location filename="../ApplicationSettings.cpp" line="515"/>
         <source>Value of Camera Yaw in Vertical Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="514"/>
+        <location filename="../ApplicationSettings.cpp" line="516"/>
         <source>Value of Camera Pich in Vertical Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="515"/>
+        <location filename="../ApplicationSettings.cpp" line="517"/>
         <source>Value of Camera Roll in Vertical Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="516"/>
-        <source>Value of Camera Zoom in Vertical Position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ApplicationSettings.cpp" line="518"/>
-        <location filename="../ApplicationSettings.cpp" line="528"/>
-        <source>Camera Scale Coefficient</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ApplicationSettings.cpp" line="521"/>
-        <location filename="../ApplicationSettings.cpp" line="531"/>
-        <source>Automatic Tracer Speed Multiplier</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ApplicationSettings.cpp" line="522"/>
-        <location filename="../ApplicationSettings.cpp" line="532"/>
-        <source>Manual Moving Speed Multipliers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ApplicationSettings.cpp" line="523"/>
-        <location filename="../ApplicationSettings.cpp" line="533"/>
-        <source>Horizontal View Size of Camera</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ApplicationSettings.cpp" line="524"/>
-        <location filename="../ApplicationSettings.cpp" line="534"/>
-        <source>Vertical View Size of Camera</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ApplicationSettings.cpp" line="519"/>
-        <location filename="../ApplicationSettings.cpp" line="529"/>
-        <source>Horizontal View Angle of Camera</source>
+        <source>Value of Camera Zoom in Vertical Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ApplicationSettings.cpp" line="520"/>
         <location filename="../ApplicationSettings.cpp" line="530"/>
+        <source>Camera Scale Coefficient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ApplicationSettings.cpp" line="523"/>
+        <location filename="../ApplicationSettings.cpp" line="533"/>
+        <source>Automatic Tracer Speed Multiplier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ApplicationSettings.cpp" line="524"/>
+        <location filename="../ApplicationSettings.cpp" line="534"/>
+        <source>Manual Moving Speed Multipliers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ApplicationSettings.cpp" line="525"/>
+        <location filename="../ApplicationSettings.cpp" line="535"/>
+        <source>Horizontal View Size of Camera</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ApplicationSettings.cpp" line="526"/>
+        <location filename="../ApplicationSettings.cpp" line="536"/>
+        <source>Vertical View Size of Camera</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ApplicationSettings.cpp" line="521"/>
+        <location filename="../ApplicationSettings.cpp" line="531"/>
+        <source>Horizontal View Angle of Camera</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ApplicationSettings.cpp" line="522"/>
+        <location filename="../ApplicationSettings.cpp" line="532"/>
         <source>Vertical View Angle of Camera</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1790,48 +1790,53 @@ Speed Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="191"/>
-        <source>OSD</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="196"/>
-        <source>View Field Border</source>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="173"/>
+        <source>Telemetry Indicator Font Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="198"/>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="202"/>
+        <source>OSD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="203"/>
+        <source>View Field Border</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="205"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="209"/>
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="200"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="207"/>
         <source>Trajectory Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="204"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="211"/>
         <source>Path Points Distance (pixel)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="224"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="231"/>
         <source>Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="229"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="236"/>
         <source>Sound Effects Allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="230"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="237"/>
         <source>Sound Level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="246"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="253"/>
         <source>Sound</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1859,67 +1864,67 @@ Speed Multiplier</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="159"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="168"/>
         <source>Camera</source>
         <translation type="unfinished">Camera</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="161"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="170"/>
         <source>Bombing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="163"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="172"/>
         <source>Targets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="164"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="173"/>
         <source>Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="165"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="174"/>
         <source>Markers</source>
         <translation type="unfinished">Markers</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="166"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="175"/>
         <source>Patrol</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="272"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="281"/>
         <source>ANIMUS %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="442"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="451"/>
         <source>Sessions</source>
         <translation type="unfinished">Sessions</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="456"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="465"/>
         <source>Session Time from Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="460"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="469"/>
         <source>Play stored session data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="461"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="470"/>
         <source>Pause showed data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="462"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="471"/>
         <source>Show realtime data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="515"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="524"/>
         <source>Are you sure you want to quit?</source>
         <translation type="unfinished">Are you sure you want to quit?</translation>
     </message>
@@ -1927,12 +1932,12 @@ Speed Multiplier</source>
 <context>
     <name>MapGraphicsScene</name>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="36"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="35"/>
         <source>Map %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="37"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="36"/>
         <source>Labels %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1945,92 +1950,92 @@ Speed Multiplier</source>
         <translation type="obsolete">Database Files (*.db)</translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="55"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="54"/>
         <source>Do you want to clear the UAV path?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="173"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="172"/>
         <source>Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="177"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="176"/>
         <source>Labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="181"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="180"/>
         <source>Legend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="236"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="235"/>
         <source>Tile Numbers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="237"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="236"/>
         <source>Parallels and meridians</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="242"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="241"/>
         <source>Black Marker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="243"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="242"/>
         <source>White Marker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="244"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="243"/>
         <source>Blue Marker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="245"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="244"/>
         <source>Red Marker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="246"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="245"/>
         <source>Green Marker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="251"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="250"/>
         <source>Target Sizes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="276"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="275"/>
         <source>Show UAV Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="283"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="282"/>
         <source>Clear UAV Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="286"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="285"/>
         <source>Follow aircraft</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="287"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="286"/>
         <source>Show areas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="292"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="291"/>
         <source>Import/Export Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MapGraphicsScene.cpp" line="295"/>
+        <location filename="../Map/MapGraphicsScene.cpp" line="294"/>
         <source>Export Visible Area Map</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2365,22 +2370,22 @@ Y:%6%7</source>
 <context>
     <name>QMarkerListWidget</name>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="442"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="443"/>
         <source>Deactivate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="442"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="443"/>
         <source>Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="443"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="444"/>
         <source>Change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="444"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="445"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2408,17 +2413,17 @@ Y:%6%7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Common/CommonUtils.cpp" line="401"/>
+        <location filename="../Common/CommonUtils.cpp" line="406"/>
         <source>Animus license expires in %1 day(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Common/CommonUtils.cpp" line="402"/>
+        <location filename="../Common/CommonUtils.cpp" line="407"/>
         <source>Animus license expired %1 day(s) ago.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Common/CommonUtils.cpp" line="405"/>
+        <location filename="../Common/CommonUtils.cpp" line="410"/>
         <source>Animus has unlimited license.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2481,17 +2486,17 @@ Y:%6%7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/SessionSelectorWidget.cpp" line="189"/>
+        <location filename="../UserInterface/Forms/SessionSelectorWidget.cpp" line="190"/>
         <source>Export Telemetry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/SessionSelectorWidget.cpp" line="189"/>
+        <location filename="../UserInterface/Forms/SessionSelectorWidget.cpp" line="190"/>
         <source>Telemetry</source>
         <translation type="unfinished">Telemetry</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/SessionSelectorWidget.cpp" line="189"/>
+        <location filename="../UserInterface/Forms/SessionSelectorWidget.cpp" line="190"/>
         <source>CSV Files (*.csv)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2546,7 +2551,7 @@ Are you sure you want to deleted it?</source>
     </message>
     <message>
         <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="87"/>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="103"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="106"/>
         <source>Video Record</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2590,162 +2595,167 @@ Are you sure you want to deleted it?</source>
         <translation type="obsolete">Telemetry</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="133"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="103"/>
+        <source>Telemetry Indicator Font Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="140"/>
         <source>UDP Channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="134"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="141"/>
         <source>Emulator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="138"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="145"/>
         <source>V4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="144"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="151"/>
         <source>Extended Telemetry UDP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="147"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="154"/>
         <source>Camera Telemetry UDP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="150"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="157"/>
         <source>Camera</source>
         <translation type="unfinished">Camera</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="155"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="162"/>
         <source>Video Lag (ms)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="158"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="165"/>
         <source>Data Reception</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="196"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="203"/>
         <source>Commands over UDP/IP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="197"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="204"/>
         <source>Commands over a serial port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="204"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="211"/>
         <source>Command Sending Interval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="207"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="214"/>
         <source>Command Protocol:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="210"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="217"/>
         <source>MUSV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="211"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="218"/>
         <source>Otus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="212"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="219"/>
         <source>MUSV Direct</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="213"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="220"/>
         <source>Otus Direct</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="217"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="224"/>
         <source>Data Sending</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="247"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="254"/>
         <source>External Data Console (UDP)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="250"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="257"/>
         <source>Data Forwarding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="271"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="278"/>
         <source>Enable Artillery Mount Notification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="273"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="280"/>
         <source>Artillery Mount (TCP)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="276"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="283"/>
         <source>Artillery Spotter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="295"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="302"/>
         <source>Catapult Launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="301"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="308"/>
         <source>Other</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="318"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="325"/>
         <source>Internal Tracker #1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="319"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="326"/>
         <source>Internal Tracker #2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="320"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="327"/>
         <source>Internal Tracker #3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="321"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="328"/>
         <source>External Tracker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="325"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="332"/>
         <source>External Tracker Commands (UDP/IP)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="328"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="335"/>
         <source>External Tracker Telemetry (UDP/IP)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="332"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="339"/>
         <source>Tracker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="243"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="250"/>
         <source>Forwarding</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2758,7 +2768,7 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>TelemetryDataStorage</name>
     <message>
-        <location filename="../TelemetryDataStorage.cpp" line="673"/>
+        <location filename="../TelemetryDataStorage.cpp" line="732"/>
         <source>Recording video...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2831,44 +2841,44 @@ Are you sure you want to deleted it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="425"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="426"/>
         <source>Height: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="579"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="580"/>
         <source>LAPEL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="600"/>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="630"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="601"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="631"/>
         <source>%1 m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="603"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="604"/>
         <source>%1 m/s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="626"/>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="637"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="627"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="638"/>
         <source>%1°</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="646"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="647"/>
         <source>Turn Right &gt;&gt;&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="648"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="649"/>
         <source>&lt;&lt;&lt; Turn Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="608"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="609"/>
         <source>M</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2878,7 +2888,7 @@ Are you sure you want to deleted it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="575"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="576"/>
         <source>DROP</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2944,37 +2954,37 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>WeatherView</name>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="18"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="19"/>
         <source>Weather</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="23"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="24"/>
         <source>Altitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="23"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="24"/>
         <source>Wind (Direction)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="23"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="24"/>
         <source>Wind (Speed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="23"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="24"/>
         <source>Pressure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="23"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="24"/>
         <source>Temperature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/WeatherView.cpp" line="44"/>
+        <location filename="../UserInterface/Forms/WeatherView.cpp" line="45"/>
         <source>Send</source>
         <translation type="unfinished"></translation>
     </message>

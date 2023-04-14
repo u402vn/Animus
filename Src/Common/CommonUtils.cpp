@@ -151,7 +151,7 @@ const QString objectCoordinateAsStr(const WorldGPSCoord &coord)
                 .arg(coord.EncodeLongitude(GeographicalCoordinatesFormat::DegreeMinutesSeconds));
 }
 
-void drawTelemetryOnVideo(QPainter &painter, const TelemetryDataFrame &telemetryFrame,
+void drawTelemetryOnVideo(QPainter &painter, const TelemetryDataFrame &telemetryFrame, quint32 fontSize,
                           bool showRangefinderDistance, OSDTelemetryTimeFormat timeFormat)
 {
     WorldGPSCoord uavCoord(telemetryFrame.UavLatitude_GPS, telemetryFrame.UavLongitude_GPS, telemetryFrame.UavAltitude_GPS);
@@ -159,6 +159,11 @@ void drawTelemetryOnVideo(QPainter &painter, const TelemetryDataFrame &telemetry
     WorldGPSCoord laserCoord(telemetryFrame.CalculatedRangefinderGPSLat, telemetryFrame.CalculatedRangefinderGPSLon, telemetryFrame.CalculatedRangefinderGPSHmsl);
     if (telemetryFrame.RangefinderDistance <= 0)
         laserCoord.setIncorrect();
+
+
+    QFont font = painter.font();
+    font.setPointSize(fontSize);
+    painter.setFont(font);
 
     QString info;
     if (showRangefinderDistance)

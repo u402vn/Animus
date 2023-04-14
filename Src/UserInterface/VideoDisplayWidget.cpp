@@ -88,6 +88,7 @@ void VideoDisplayWidget::loadSettings()
     _showBombingSight = applicationSettings.OSDShowBombingSight && _isBombingTabLicensed;
     _showCenterMark = applicationSettings.OSDShowCenterMark;
     _showTelemetry = applicationSettings.OSDShowTelemetry;
+    _telemetryIndicatorFontSize = applicationSettings.OSDTelemetryIndicatorFontSize;
     _gimbalIndicatorType = applicationSettings.OSDGimbalIndicator;
     _gimbalIndicatorAngles = applicationSettings.OSDGimbalAngles;
     _gimbalIndicatorSize = applicationSettings.OSDGimbalIndicatorSize;
@@ -494,7 +495,7 @@ void VideoDisplayWidget::paintEvent(QPaintEvent *event)
 
     updatePen(painter, _osdMarkColor);
     if (_showTelemetry)
-        drawTelemetryOnVideo(painter, _telemetryFrame, _isLaserRangefinderLicensed, _telemetryTimeFormat);
+        drawTelemetryOnVideo(painter, _telemetryFrame, _telemetryIndicatorFontSize * _scale, _isLaserRangefinderLicensed, _telemetryTimeFormat);
     drawGimbalOnVideo(painter, _gimbalIndicatorType, _gimbalIndicatorAngles, _gimbalIndicatorSize * _scale, _telemetryFrame);
 
 

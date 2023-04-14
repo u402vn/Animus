@@ -249,6 +249,7 @@ public:
     ApplicationPreferenceBool OSDShowBombingSight;
     ApplicationPreferenceBool OSDShowCenterMark;
     ApplicationPreferenceBool OSDShowTelemetry;
+    ApplicationPreferenceInt OSDTelemetryIndicatorFontSize;
     ApplicationPreferenceBool SoftwareStabilizationEnabled;
     ApplicationPreferenceEnum<ArtillerySpotterState> LastTargetArtillerySpotterState;
 
@@ -286,6 +287,7 @@ public:
     ApplicationPreferenceInt VideoFileFrameCount;
     ApplicationPreferenceInt VideoFileQuality;
     ApplicationPreferenceBool OVRDisplayTelemetry;
+    ApplicationPreferenceInt OVRTelemetryIndicatorFontSize;
     ApplicationPreferenceEnum<OSDTelemetryTimeFormat> OVRTelemetryTimeFormat;
     ApplicationPreferenceBool OVRDisplayTargetRectangle;
     ApplicationPreferenceEnum<OSDGimbalIndicatorType> OVRGimbalIndicatorType;

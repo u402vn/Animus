@@ -42,7 +42,8 @@ void OutSqlDatabaseErrorInObjectMethod(const QSqlDatabase *sqlDatabase, QObject 
 #define EXEC_SQL(database, sql) ExecuteSQLInObjectMethod(database, sql, this, __FUNCTION__);
 QSqlQuery ExecuteSQLInObjectMethod(const QSqlDatabase &database, const QString &sql, QObject *executor, const QString functionName);
 
-void drawTelemetryOnVideo(QPainter &painter, const TelemetryDataFrame &telemetryFrame, bool showRangefinderDistance, OSDTelemetryTimeFormat timeFormat);
+void drawTelemetryOnVideo(QPainter &painter, const TelemetryDataFrame &telemetryFrame, quint32 fontSize,
+                          bool showRangefinderDistance, OSDTelemetryTimeFormat timeFormat);
 void drawGimbalOnVideo(QPainter &painter, const OSDGimbalIndicatorType gimbalIndicatorType, const OSDGimbalIndicatorAngles gimbalIndicatorAngles,
                        const quint32 size, const TelemetryDataFrame &telemetryFrame);
 void drawTargetRectangleOnVideo(QPainter &painter, const QRect &targetRect);

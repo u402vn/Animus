@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     _dataStorage = new TelemetryDataStorage(this, applicationSettings.SessionsFolder,
                                             applicationSettings.VideoFileFrameCount, applicationSettings.VideoFileQuality,
                                             applicationSettings.OVRDisplayTelemetry,
+                                            applicationSettings.OVRTelemetryIndicatorFontSize,
                                             applicationSettings.OVRTelemetryTimeFormat,
                                             applicationSettings.OVRDisplayTargetRectangle,
                                             applicationSettings.OVRGimbalIndicatorType,

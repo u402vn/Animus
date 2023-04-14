@@ -39,6 +39,7 @@ class VideoDisplayWidget final : public QWidget
     bool _showBombingSight;
     bool _showCenterMark;
     bool _showTelemetry;
+    quint32 _telemetryIndicatorFontSize;
 
     int _defaultLineWidth;
     bool _useFixedLineWidth;
