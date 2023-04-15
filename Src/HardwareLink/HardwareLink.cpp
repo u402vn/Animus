@@ -149,6 +149,8 @@ HardwareLink::HardwareLink(QObject *parent) : VideoLink(parent)
 
     _camAssemblyPreferences = applicationSettings.getCurrentCamAssemblyPreferences();
 
+    _isRangefinderEnabled = false;
+
     _opticalSystemId = PRIMARY_OPTYCAL_SYSTEM_ID;
     auto cameraSettings = applicationSettings.installedCameraSettings();
     _isCameraFixed = (cameraSettings->CameraSuspensionType == CameraSuspensionTypes::FixedCamera);
@@ -369,8 +371,16 @@ void HardwareLink::updateTelemetryValues(TelemetryDataFrame &telemetryDataFrame)
     telemetryDataFrame.OpticalSystemId = _opticalSystemId;
 
     //Update Laser rangefinder
-    if (telemetryDataFrame.RangefinderDistance == 10)
+    if (_isRangefinderEnabled)
+    {
+        if (telemetryDataFrame.RangefinderDistance == 10)
+            telemetryDataFrame.RangefinderDistance = 0;
+    }
+    else
+    {
         telemetryDataFrame.RangefinderDistance = 0;
+        telemetryDataFrame.RangefinderTemperature = 0;
+    }
 
     //update ground speed
     if (qFuzzyCompare(telemetryDataFrame.GroundSpeed_GPS, 0))
@@ -549,6 +559,7 @@ void HardwareLink::setLaserActivation(bool active)
 {
     auto description = QString("setLaserActivation: %1").arg(active);
     sendCommand(_commandBuilder->SetLaserActivationCommand(active), description);
+    _isRangefinderEnabled = active;
 }
 
 void HardwareLink::setBombingPlacePos(double lat, double lon, double hmsl)
@@ -721,7 +732,7 @@ void HardwareLink::processExtTelemetryPendingDatagrams()
         {
             bool ok = false;
 
-            QString strValue = rx.cap(1);            
+            QString strValue = rx.cap(1);
             double value = strValue.toDouble(&ok);
             if (ok)
                 _extendedTelemetryDataFrame.AtmosphereTemperature = value;

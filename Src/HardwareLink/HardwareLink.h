@@ -75,6 +75,7 @@ private:
     CameraTelemetryDataFrame _cameraTelemetryDataFrame;
     EmulatorTelemetryDataFrame _emulatorTelemetryDataFrame;
     ExtendedTelemetryDataFrame _extendedTelemetryDataFrame;
+    bool _isRangefinderEnabled;
 
     quint32 _telemetryFrameNumber;
     quint32 _videoFrameNumber;
