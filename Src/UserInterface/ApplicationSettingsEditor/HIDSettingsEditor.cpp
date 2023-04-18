@@ -78,11 +78,11 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
     auto lblJAxisZoom = new QLabel(tr("Joystick Axis for Zoom"), this);
     auto cbJAxisZoom = CommonWidgetUtils::createJAxisComboBox(this);
 
-    auto lblJAxisTrackerX = new QLabel(tr("Joystick Axis for Tracker (X)"), this);
-    auto cbJAxisTrackerX = CommonWidgetUtils::createJAxisComboBox(this);
+    auto lblJAxisCursorX = new QLabel(tr("Joystick Axis for Cursor (X)"), this);
+    auto cbJAxisCursorX = CommonWidgetUtils::createJAxisComboBox(this);
 
-    auto lblJAxisTrackerY = new QLabel(tr("Joystick Axis for Tracker (Y)"), this);
-    auto cbJAxisTrackerY = CommonWidgetUtils::createJAxisComboBox(this);
+    auto lblJAxisCursorY = new QLabel(tr("Joystick Axis for Cursor (Y)"), this);
+    auto cbJAxisCursorY = CommonWidgetUtils::createJAxisComboBox(this);
 
     auto lblJoystickEmulationFromKeyboard = new QLabel(tr("Joystick Emulation from Keyboard"), this);
     auto sbJoystickEmulationFromKeyboard = CommonWidgetUtils::createDoubleRangeSpinbox(this, 0.010, 1.000, 0.001, 3);
@@ -146,12 +146,12 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
     joystickConfigLayout->addWidget(CommonWidgetUtils::createSeparator(this), rowIndex, 0, 1, 4);
     rowIndex++;
 
-    joystickConfigLayout->addWidget(lblJAxisTrackerX,                         rowIndex, 0, 1, 1);
-    joystickConfigLayout->addWidget(cbJAxisTrackerX,                          rowIndex, 1, 1, 1);
+    joystickConfigLayout->addWidget(lblJAxisCursorX,                         rowIndex, 0, 1, 1);
+    joystickConfigLayout->addWidget(cbJAxisCursorX,                          rowIndex, 1, 1, 1);
     rowIndex++;
 
-    joystickConfigLayout->addWidget(lblJAxisTrackerY,                         rowIndex, 0, 1, 1);
-    joystickConfigLayout->addWidget(cbJAxisTrackerY,                          rowIndex, 1, 1, 1);
+    joystickConfigLayout->addWidget(lblJAxisCursorY,                         rowIndex, 0, 1, 1);
+    joystickConfigLayout->addWidget(cbJAxisCursorY,                          rowIndex, 1, 1, 1);
     rowIndex++;
 
     // Init Key Mapping section
@@ -211,6 +211,8 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
     }
 
     addHIDButtonBinding(hidbtnTargetUnlock,                             rowIndex);
+    addHIDButtonBinding(hidbtnTargetLockInCursor,                       rowIndex);
+
     if (applicationSettings.isPhotographyLicensed())
         addHIDButtonBinding(hidbtnCamRecording,                         rowIndex);
     addHIDButtonBinding(hidbtnAutomaticTracer,                          rowIndex);
@@ -267,12 +269,12 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
     _association.addBinding(&applicationSettings.JoystickAxisCameraXIndex,          cbJAxisCameraX);
     _association.addBinding(&applicationSettings.JoystickAxisCameraYIndex,          cbJAxisCameraY);
     _association.addBinding(&applicationSettings.JoystickAxisZoomIndex,             cbJAxisZoom);
-    _association.addBinding(&applicationSettings.JoystickAxisTrackerXIndex,         cbJAxisTrackerX);
-    _association.addBinding(&applicationSettings.JoystickAxisTrackerYIndex,         cbJAxisTrackerY);
+    _association.addBinding(&applicationSettings.JoystickAxisCursorXIndex,         cbJAxisCursorX);
+    _association.addBinding(&applicationSettings.JoystickAxisCursorYIndex,         cbJAxisCursorY);
 
-    _association.addBinding(&applicationSettings.JoystickEmulationFromKeyboard,     sbJoystickEmulationFromKeyboard);
-    _association.addBinding(&applicationSettings.JoystickAxisMultiplier,            sbJoystickAxisMultiplier);
-    _association.addBinding(&applicationSettings.JoystickAxisInsensitivity,         sbJoystickAxisInsensitivity);
+    _association.addBinding(&applicationSettings.JoystickCameraEmulationFromKeyboard,     sbJoystickEmulationFromKeyboard);
+    _association.addBinding(&applicationSettings.JoystickCameraAxisMultiplier,            sbJoystickAxisMultiplier);
+    _association.addBinding(&applicationSettings.JoystickCameraAxisInsensitivity,         sbJoystickAxisInsensitivity);
     _association.addBinding(&applicationSettings.UseZoomScaleForManualMoving,       chkUseZoomScaleForManualMoving);
 }
 

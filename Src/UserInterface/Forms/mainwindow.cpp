@@ -376,14 +376,16 @@ void MainWindow::initHidController(CamAssemblyPreferences *camAssemblyPreference
     connect(_hidController, &HIDController::onEnableAutomaticTracerClicked,         _camControlsWidget, &CamControlsWidget::onEnableAutomaticTracerClicked);
     if (_bombingWidget != nullptr)
     {
-        connect(_hidController, &HIDController::onDropBombClicked,                      _bombingWidget,     &BombingWidget::onDropBombClicked);
-        connect(_hidController, &HIDController::onSendHitCoordinatesClicked,            _bombingWidget,     &BombingWidget::onSendHitCoordinatesClicked);
-        connect(_hidController, &HIDController::onSendWeatherClicked,                   _bombingWidget,     &BombingWidget::onSendWeatherClicked);
-        connect(_hidController, &HIDController::onNewMarkerForTargetClicked,            _bombingWidget,     &BombingWidget::onNewMarkerForTargetClicked);
-        connect(_hidController, &HIDController::onNewMarkerForLaserClicked,             _bombingWidget,     &BombingWidget::onNewMarkerForLaserClicked);
-        connect(_hidController, &HIDController::onNewMarkerForUAVClicked,               _bombingWidget,     &BombingWidget::onNewMarkerForUAVClicked);
+        connect(_hidController, &HIDController::onDropBombClicked,                  _bombingWidget,     &BombingWidget::onDropBombClicked);
+        connect(_hidController, &HIDController::onSendHitCoordinatesClicked,        _bombingWidget,     &BombingWidget::onSendHitCoordinatesClicked);
+        connect(_hidController, &HIDController::onSendWeatherClicked,               _bombingWidget,     &BombingWidget::onSendWeatherClicked);
+        connect(_hidController, &HIDController::onNewMarkerForTargetClicked,        _bombingWidget,     &BombingWidget::onNewMarkerForTargetClicked);
+        connect(_hidController, &HIDController::onNewMarkerForLaserClicked,         _bombingWidget,     &BombingWidget::onNewMarkerForLaserClicked);
+        connect(_hidController, &HIDController::onNewMarkerForUAVClicked,           _bombingWidget,     &BombingWidget::onNewMarkerForUAVClicked);
     }
     connect(_hidController, &HIDController::onChangeBombingSightClicked,            _videoWidget,       &VideoDisplayWidget::onChangeBombingSightClicked);
+    connect(_hidController, &HIDController::onTargetLockCursorSpeedChange,          _videoWidget,       &VideoDisplayWidget::onTargetLockCursorSpeedChange);
+    connect(_hidController, &HIDController::onTargetLockInCursorClick,              _videoWidget,       &VideoDisplayWidget::onTargetLockInCursorClick);
 
     connect(_camControlsWidget, &CamControlsWidget::doSetZoomFromUI,                _hidController,     &HIDController::doSetZoomFromUI);
 }

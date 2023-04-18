@@ -21,7 +21,7 @@ CamControlsWidgetKnob::CamControlsWidgetKnob(QWidget *parent) : QWidget(parent),
 {
     setMinimumSize(0.5 * DEFAULT_BUTTON_WIDTH, 0.5 * DEFAULT_BUTTON_WIDTH);
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
-    _joystickAxisMultiplier = applicationSettings.JoystickAxisMultiplier;
+    _joystickAxisMultiplier = applicationSettings.JoystickCameraAxisMultiplier;
 
     int animationDurationMsec = 0; //todo move to settings
 

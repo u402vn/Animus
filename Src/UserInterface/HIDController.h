@@ -41,20 +41,15 @@ class HIDController : public QObject
     QList<HIDMapItem*> _HIDMap;
 
     quint32 _camZoomMin, _camZoomMax, _camZoom;
+    qreal _prevJoystickZoom;
 
-    qreal _joystickCameraX, _joystickCameraY, _joystickCameraZoom;
-    qreal _keyboardCameraX, _keyboardCameraY;
-    bool _joystickCameraAxesInZeroPoint;
-
-    qint32 _joystickAxisZoomIndex;
-    qint32 _joystickAxisCameraXIndex;
-    qint32 _joystickAxisCameraYIndex;
-
-    qreal _prevJoystickZ;
-
-    qreal _joystickCameraAxisMultiplier;
-    qreal _joystickEmulationFromKeyboard;
-    qreal _joystickAxisSensitivity;
+    qreal _joystickCameraX, _joystickCameraY, _joystickCameraZoom, _joystickCursorX, _joystickCursorY;
+    qreal _keyboardCameraX, _keyboardCameraY, _keyboardCursorX, _keyboardCursorY;
+    bool _joystickCameraAxesInZeroPoint, _joystickCursorAxesInZeroPoint;
+    qint32 _joystickAxisCameraXIndex, _joystickAxisCameraYIndex, _joystickAxisZoomIndex;
+    qint32 _joystickAxisCursorXIndex, _joystickAxisCursorYIndex;
+    qreal _joystickCameraAxisMultiplier, _joystickCameraEmulationFromKeyboard, _joystickCameraAxisSensitivity;
+    qreal _joystickCursorAxisMultiplier, _joystickCursorEmulationFromKeyboard, _joystickCursorAxisSensitivity;
 
     QTimer *_joystickFreqTimer;
     quint32 _joystickEventNumber, _joystickEventsCount;
@@ -76,7 +71,7 @@ class HIDController : public QObject
     void processPitchDownRelease();
 
     void updateCamZoomInternal(quint32 zoom);
-    void processAxisChanges();\
+    void processAxesChanges();\
     void processPOVChanges(const QList<int> &povs);
 protected:
     bool virtual eventFilter(QObject *obj, QEvent *event);
@@ -120,6 +115,7 @@ signals:
     void onSnapshotSeriesClicked();
 
     void onTargetUnlockClicked();
+    void onTargetLockInCursorClick();
     void onCamRecordingClicked();
     void onEnableAutomaticTracerClicked();
 
@@ -140,6 +136,7 @@ signals:
     void onRelativeCamPositionChange(float deltaRoll, float deltaPitch, float deltaYaw);
     void onAbsoluteCamZoomChange(quint32 zoom);
     void onCamMovingSpeedChange(float speedRoll, float speedPitch, float deltaYaw);
+    void onTargetLockCursorSpeedChange(float speedX, float speedY);
 
     void onJoystickStateTextChanged(const QString stateText);
 };

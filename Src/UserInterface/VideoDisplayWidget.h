@@ -8,6 +8,7 @@
 #include <QPainter>
 #include <QPoint>
 #include <QRect>
+#include <QDateTime>
 #include "Common/CommonData.h"
 #include "CamPreferences.h"
 #include "VoiceInformant/VoiceInformant.h"
@@ -35,11 +36,14 @@ class VideoDisplayWidget final : public QWidget
     QRect _osdRect;
     double _scale;
     double _digitalZoom;
-    bool _useBluredBorders;    
+    bool _useBluredBorders;
     bool _showBombingSight;
     bool _showCenterMark;
     bool _showTelemetry;
     quint32 _telemetryIndicatorFontSize;
+
+    QRect _cursorMark;
+    QDateTime _cursorMarkLastMove;
 
     int _defaultLineWidth;
     bool _useFixedLineWidth;
@@ -72,13 +76,15 @@ class VideoDisplayWidget final : public QWidget
     QAction *_acShowTelemetry;
     QAction *_acUseBluredBorders;
     QAction *_acUseGimbalTelemetryOnly;
-    QActionGroup *_agDigitalZoom;    
+    QActionGroup *_agDigitalZoom;
     QActionGroup *_agGimbalIndicatorType;
     QActionGroup *_agGimbalIndicatorAngles;
 
     void updateDrawParams();
 
     void lockTargetOnClick(const QPoint &clickPos);
+
+    bool isCursorVisible();
 
     inline QPointF alignPoint(const QPointF &point);
 
@@ -112,6 +118,8 @@ public:
 public slots:
     void onChangeBombingSightClicked();
     void onEnableStabilization(bool enable);
+    void onTargetLockCursorSpeedChange(float speedX, float speedY);
+    void onTargetLockInCursorClick();
 signals:
     void lockTarget(const QPoint &targetCenter);
 };

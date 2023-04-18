@@ -144,14 +144,17 @@ ApplicationSettings::ApplicationSettings() : ApplicationSettingsRoot(),
     KeyboardUsing(this, "Interface/KeyboardUsing", true),
     JoystickUsing(this, "Interface/JoystickUsing", true),
     JoystickMapping(this, "Interface/JoystickMapping", DefaultJoystickMapping),
-    JoystickEmulationFromKeyboard(this, "Interface/JoystickEmulationFromKeyboard", 0.125),
-    JoystickAxisMultiplier(this, "Interface/JoystickAxisMultiplier", 30),
-    JoystickAxisInsensitivity(this, "Interface/JoystickAxisSensitivity", 0.004),
+    JoystickCameraEmulationFromKeyboard(this, "Interface/JoystickEmulationFromKeyboard", 0.125),
+    JoystickCursorEmulationFromKeyboard(this, "Interface/JoystickCursorEmulationFromKeyboard", 0.125),
+    JoystickCameraAxisMultiplier(this, "Interface/JoystickAxisMultiplier", 30),
+    JoystickCursorAxisMultiplier(this, "Interface/JoystickCursorAxisMultiplier", 30),
+    JoystickCameraAxisInsensitivity(this, "Interface/JoystickAxisSensitivity", 0.004),
+    JoystickCursorAxisInsensitivity(this, "Interface/JoystickCursorAxisInsensitivity", 0.004),
     JoystickAxisZoomIndex(this, "Interface/JoystickAxisZoomIndex", 2),
     JoystickAxisCameraXIndex(this, "Interface/JoystickAxisCameraXIndex", 0),
     JoystickAxisCameraYIndex(this, "Interface/JoystickAxisCameraYIndex", 1),
-    JoystickAxisTrackerXIndex(this, "Interface/JoystickAxisTrackerXIndex", 3),
-    JoystickAxisTrackerYIndex(this, "Interface/JoystickAxisTrackerYIndex", 4),
+    JoystickAxisCursorXIndex(this, "Interface/JoystickAxisCursorXIndex", 3),
+    JoystickAxisCursorYIndex(this, "Interface/JoystickAxisCursorYIndex", 4),
     UseZoomScaleForManualMoving(this, "Interface/UseZoomScaleForManualMoving", false),
 
     VideoFileFrameCount(this, "Interface/VideoFileFrameCount", VIDEO_FRAMES_PER_FILE_DEFAULT),
@@ -214,6 +217,8 @@ void ApplicationSettings::ensureHIDButtonPrefsLoaded()
     addHIDButtonPrefs(hidbtnSnapshotSeries, "CamControls/SnapshotSeriesKey", "", "CamControls/SnapshotSeriesJoystickButton", -1, tr("Snapshot Series"));
 
     addHIDButtonPrefs(hidbtnTargetUnlock, "CamControls/TargetUnlockKey", "U",  "CamControls/TargetUnlockJoystickButton", -1, tr("Target Unlock"));
+    addHIDButtonPrefs(hidbtnTargetLockInCursor, "CamControls/TargetLockInCursorKey", "",  "CamControls/TargetLockInCursorJoystickButton", 7, tr("Target Lock In Cursor"));
+
     addHIDButtonPrefs(hidbtnCamRecording, "CamControls/CamRecordingKey", "",  "CamControls/CamRecordingJoystickButton", -1, tr("Camera Recording"));
     addHIDButtonPrefs(hidbtnAutomaticTracer, "CamControls/AutomaticTracerKey", "T",  "CamControls/AutomaticTracerJoystickButton", -1, tr("Automatic Tracer"));
     addHIDButtonPrefs(hidbtnDropBomb,  "CamControls/DropBombKey", "", "CamControls/DropBombJoystickButton", -1, tr("Drop Bomb"));

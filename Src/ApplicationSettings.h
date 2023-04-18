@@ -143,7 +143,8 @@ enum HIDButton
     hidbtnSendWeather,
     hidbtnMapZoomOut,
     hidbtnMapZoomIn,
-    hidbtnFollowThePlane
+    hidbtnFollowThePlane,
+    hidbtnTargetLockInCursor
 };
 
 //Singleton
@@ -279,14 +280,17 @@ public:
     ApplicationPreferenceBool KeyboardUsing;
     ApplicationPreferenceBool JoystickUsing;
     ApplicationPreferenceString JoystickMapping;
-    ApplicationPreferenceDouble JoystickEmulationFromKeyboard;
-    ApplicationPreferenceDouble JoystickAxisMultiplier;
-    ApplicationPreferenceDouble JoystickAxisInsensitivity;
+    ApplicationPreferenceDouble JoystickCameraEmulationFromKeyboard;
+    ApplicationPreferenceDouble JoystickCursorEmulationFromKeyboard;
+    ApplicationPreferenceDouble JoystickCameraAxisMultiplier;
+    ApplicationPreferenceDouble JoystickCursorAxisMultiplier;
+    ApplicationPreferenceDouble JoystickCameraAxisInsensitivity;
+    ApplicationPreferenceDouble JoystickCursorAxisInsensitivity;
     ApplicationPreferenceInt JoystickAxisZoomIndex;
     ApplicationPreferenceInt JoystickAxisCameraXIndex;
     ApplicationPreferenceInt JoystickAxisCameraYIndex;
-    ApplicationPreferenceInt JoystickAxisTrackerXIndex;
-    ApplicationPreferenceInt JoystickAxisTrackerYIndex;
+    ApplicationPreferenceInt JoystickAxisCursorXIndex;
+    ApplicationPreferenceInt JoystickAxisCursorYIndex;
     ApplicationPreferenceBool UseZoomScaleForManualMoving;
     ApplicationPreferenceInt VideoFileFrameCount;
     ApplicationPreferenceInt VideoFileQuality;

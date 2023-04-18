@@ -24,6 +24,8 @@ VideoDisplayWidget::VideoDisplayWidget(QWidget *parent, VoiceInformant *voiceInf
 
     _osdActiveSightNumbers = -1;
 
+    _cursorMark = QRect(0, 0, 40, 40);
+
     loadSettings();
     createMenu();
 }
@@ -159,6 +161,34 @@ void VideoDisplayWidget::saveScreenshot(const QString &screenShotFolder)
 void VideoDisplayWidget::onEnableStabilization(bool enable)
 {
     _enableStabilization = enable;
+}
+
+void VideoDisplayWidget::onTargetLockCursorSpeedChange(float speedX, float speedY)
+{
+    auto center = _cursorMark.center();
+
+    auto x = center.x() + speedX;
+    if (x < _cursorMark.width() / 2)
+        x = _cursorMark.width() / 2;
+    else if (x > _frame.width() - _cursorMark.width() / 2 - 1)
+        x = _frame.width() - _cursorMark.width() / 2 - 1;
+
+    auto y = center.y() + speedY;
+    if (y < _cursorMark.height() / 2)
+        y = _cursorMark.height() / 2;
+    else if (y > _frame.height() - _cursorMark.height() / 2 - 1)
+        y = _frame.height() - _cursorMark.height() / 2 - 1;
+
+    _cursorMark.moveCenter(QPoint(x, y));
+
+    if ((speedX != 0) || (speedY != 0))
+        _cursorMarkLastMove = QDateTime::currentDateTime();
+}
+
+void VideoDisplayWidget::onTargetLockInCursorClick()
+{
+    _cursorMarkLastMove = QDateTime::currentDateTime();
+    emit lockTarget(_cursorMark.center());
 }
 
 void VideoDisplayWidget::onChangeBombingSightClicked()
@@ -478,6 +508,9 @@ void VideoDisplayWidget::paintEvent(QPaintEvent *event)
     //draw target frame
     const QColor targetRectColor = ((AutomaticTracerMode)_telemetryFrame.CamTracerMode == AutomaticTracerMode::atmScreenPoint) ?  Qt::blue : Qt::red;
     drawRectangleOnFrame(painter, _telemetryFrame.targetRect(), targetRectColor);
+
+    if (isCursorVisible())
+        drawRectangleOnFrame(painter, _cursorMark, Qt::magenta);
 
     painter.restore();
 
@@ -842,6 +875,12 @@ void VideoDisplayWidget::lockTargetOnClick(const QPoint &clickPos)
     if (targetCenter.x() >= 0 && targetCenter.x() < _sourceFrameRect.width()  && \
             targetCenter.y() >= 0 && targetCenter.y() < _sourceFrameRect.height() )
         emit lockTarget(targetCenter);
+}
+
+bool VideoDisplayWidget::isCursorVisible()
+{
+    auto timeMs = _cursorMarkLastMove.msecsTo(QDateTime::currentDateTime());
+    return (timeMs < 4000);
 }
 
 void VideoDisplayWidget::resizeEvent(QResizeEvent *event)
