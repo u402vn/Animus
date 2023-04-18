@@ -283,6 +283,10 @@ public:
     ApplicationPreferenceDouble JoystickAxisMultiplier;
     ApplicationPreferenceDouble JoystickAxisInsensitivity;
     ApplicationPreferenceInt JoystickAxisZoomIndex;
+    ApplicationPreferenceInt JoystickAxisCameraXIndex;
+    ApplicationPreferenceInt JoystickAxisCameraYIndex;
+    ApplicationPreferenceInt JoystickAxisTrackerXIndex;
+    ApplicationPreferenceInt JoystickAxisTrackerYIndex;
     ApplicationPreferenceBool UseZoomScaleForManualMoving;
     ApplicationPreferenceInt VideoFileFrameCount;
     ApplicationPreferenceInt VideoFileQuality;

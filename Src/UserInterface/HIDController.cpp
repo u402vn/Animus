@@ -10,19 +10,21 @@ HIDController::HIDController(QObject *parent) : QObject(parent)
 {
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
 
-    _joystickX = 0;
-    _joystickY = 0;
-    _joystickZ = 0;
-    _keyboardX = 0;
-    _keyboardY = 0;
-    _joystickInZeroPoint = false;
+    _joystickCameraX = 0;
+    _joystickCameraY = 0;
+    _joystickCameraZoom = 0;
+    _keyboardCameraX = 0;
+    _keyboardCameraY = 0;
+    _joystickCameraAxesInZeroPoint = false;
     _prevJoystickZ = 0;
     setCamZoomRange(1, 1);
 
-    _joystickAxisMultiplier = applicationSettings.JoystickAxisMultiplier;
+    _joystickCameraAxisMultiplier = applicationSettings.JoystickAxisMultiplier;
     _joystickEmulationFromKeyboard = applicationSettings.JoystickEmulationFromKeyboard;
     _joystickAxisSensitivity = applicationSettings.JoystickAxisInsensitivity;
     _joystickAxisZoomIndex = applicationSettings.JoystickAxisZoomIndex;
+    _joystickAxisCameraXIndex = applicationSettings.JoystickAxisCameraXIndex;
+    _joystickAxisCameraYIndex = applicationSettings.JoystickAxisCameraYIndex;
 
     if (applicationSettings.JoystickUsing)
     {
@@ -119,10 +121,10 @@ void HIDController::setCamZoomRange(quint32 camZoomMin, quint32 camZoomMax)
 void HIDController::updateCamZoomInternal(quint32 zoom)
 {
     quint32 prevZoom = _camZoom;
-    bool useJoystickForZoom = ! qFuzzyCompare(_prevJoystickZ, _joystickZ);
+    bool useJoystickForZoom = ! qFuzzyCompare(_prevJoystickZ, _joystickCameraZoom);
 
     if (useJoystickForZoom)
-        _camZoom = _camZoomMin + (_camZoomMax - _camZoomMin) * (_joystickZ + 1) * 0.5;
+        _camZoom = _camZoomMin + (_camZoomMax - _camZoomMin) * (_joystickCameraZoom + 1) * 0.5;
     else
         _camZoom = zoom;
 
@@ -153,21 +155,25 @@ const QString makeJoystickStateText(quint32 joystickEventsCount, const QList<int
     return result;
 }
 
+qreal getAxisValue(const QList<double> &axes, qint32 index)
+{
+    if ( (index >= 0)  && (index < axes.count()) )
+        return axes[index];
+    else
+        return 0;
+}
+
 void HIDController::processJoystick(const QList<int> &povs, const QList<double> &axes, const QList<bool> &buttons)
 {
     Q_UNUSED(povs)
 
     _joystickEventNumber++;
 
-    _prevJoystickZ = _joystickZ;
+    _prevJoystickZ = _joystickCameraZoom;
 
-    _joystickX = axes[0];
-    _joystickY = axes[1];
-
-    if ( (_joystickAxisZoomIndex > 0)  && (_joystickAxisZoomIndex < axes.count()) )
-        _joystickZ = axes[_joystickAxisZoomIndex];
-    else
-        _joystickZ = 0;
+    _joystickCameraX = getAxisValue(axes, _joystickAxisCameraXIndex);
+    _joystickCameraY = getAxisValue(axes, _joystickAxisCameraYIndex);
+    _joystickCameraZoom = getAxisValue(axes, _joystickAxisZoomIndex);
 
     foreach (auto hidMapItem, _HIDMap)
         hidMapItem->processJoystick(buttons);
@@ -233,57 +239,57 @@ void HIDController::processCamZoomDown()
 
 void HIDController::processRollUpPress()
 {
-    if (qFuzzyCompare(_keyboardX, 0))
-        _keyboardX = _joystickEmulationFromKeyboard;
+    if (qFuzzyCompare(_keyboardCameraX, 0))
+        _keyboardCameraX = _joystickEmulationFromKeyboard;
     processAxisChanges();
 }
 
 void HIDController::processRollUpRelease()
 {
-    if (qFuzzyCompare(_keyboardX, _joystickEmulationFromKeyboard))
-        _keyboardX = 0;
+    if (qFuzzyCompare(_keyboardCameraX, _joystickEmulationFromKeyboard))
+        _keyboardCameraX = 0;
     processAxisChanges();
 }
 
 void HIDController::processRollDownPress()
 {
-    if (qFuzzyCompare(_keyboardX, 0))
-        _keyboardX = -_joystickEmulationFromKeyboard;
+    if (qFuzzyCompare(_keyboardCameraX, 0))
+        _keyboardCameraX = -_joystickEmulationFromKeyboard;
     processAxisChanges();
 }
 
 void HIDController::processRollDownRelease()
 {
-    if (qFuzzyCompare(_keyboardX, -_joystickEmulationFromKeyboard))
-        _keyboardX = 0;
+    if (qFuzzyCompare(_keyboardCameraX, -_joystickEmulationFromKeyboard))
+        _keyboardCameraX = 0;
     processAxisChanges();
 }
 
 void HIDController::processPitchUpPress()
 {
-    if (qFuzzyCompare(_keyboardY, 0))
-        _keyboardY = -_joystickEmulationFromKeyboard;
+    if (qFuzzyCompare(_keyboardCameraY, 0))
+        _keyboardCameraY = -_joystickEmulationFromKeyboard;
     processAxisChanges();
 }
 
 void HIDController::processPitchUpRelease()
 {
-    if (qFuzzyCompare(_keyboardY, -_joystickEmulationFromKeyboard))
-        _keyboardY = 0;
+    if (qFuzzyCompare(_keyboardCameraY, -_joystickEmulationFromKeyboard))
+        _keyboardCameraY = 0;
     processAxisChanges();
 }
 
 void HIDController::processPitchDownPress()
 {
-    if (qFuzzyCompare(_keyboardY, 0))
-        _keyboardY = _joystickEmulationFromKeyboard;
+    if (qFuzzyCompare(_keyboardCameraY, 0))
+        _keyboardCameraY = _joystickEmulationFromKeyboard;
     processAxisChanges();
 }
 
 void HIDController::processPitchDownRelease()
 {
-    if (qFuzzyCompare(_keyboardY, _joystickEmulationFromKeyboard))
-        _keyboardY = 0;
+    if (qFuzzyCompare(_keyboardCameraY, _joystickEmulationFromKeyboard))
+        _keyboardCameraY = 0;
     processAxisChanges();
 }
 
@@ -291,16 +297,16 @@ void HIDController::processAxisChanges()
 {
     updateCamZoomInternal(_camZoom);
 
-    float x = qFuzzyCompare(_keyboardX, 0) ? _joystickX : _keyboardX;
-    float y = qFuzzyCompare(_keyboardY, 0) ? _joystickY : _keyboardY;
+    float x = qFuzzyCompare(_keyboardCameraX, 0) ? _joystickCameraX : _keyboardCameraX;
+    float y = qFuzzyCompare(_keyboardCameraY, 0) ? _joystickCameraY : _keyboardCameraY;
 
-    bool inZeroPoint = (qAbs(x) < _joystickAxisSensitivity) && (qAbs(y) < _joystickAxisSensitivity);
+    bool cameraAxesInZeroPoint = (qAbs(x) < _joystickAxisSensitivity) && (qAbs(y) < _joystickAxisSensitivity);
 
-    if (_joystickInZeroPoint && inZeroPoint)
+    if (_joystickCameraAxesInZeroPoint && cameraAxesInZeroPoint)
         return;
-    _joystickInZeroPoint = inZeroPoint;
+    _joystickCameraAxesInZeroPoint = cameraAxesInZeroPoint;
 
-    if (inZeroPoint)
+    if (cameraAxesInZeroPoint)
     {
         x = 0;
         y = 0;
@@ -308,16 +314,16 @@ void HIDController::processAxisChanges()
 
     if (_controlMode == CameraControlModes::AbsolutePosition)
     {
-        float deltaRoll = x * _joystickAxisMultiplier;
-        float deltaPitch = y * _joystickAxisMultiplier;
+        float deltaRoll = x * _joystickCameraAxisMultiplier;
+        float deltaPitch = y * _joystickCameraAxisMultiplier;
         float deltaYaw = 0;
 
         emit onRelativeCamPositionChange(deltaRoll, deltaPitch, deltaYaw);
     }
     else if (_controlMode == CameraControlModes::RotationSpeed)
     {
-        float speedYaw = x * _joystickAxisMultiplier;
-        float speedPitch = y * _joystickAxisMultiplier;
+        float speedYaw = x * _joystickCameraAxisMultiplier;
+        float speedPitch = y * _joystickCameraAxisMultiplier;
         float speedRoll = 0;
 
         emit onCamMovingSpeedChange(speedRoll, speedPitch, speedYaw);

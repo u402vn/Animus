@@ -51,6 +51,17 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
     auto chkKeyboardUsing  = new QCheckBox(tr("Use Keyboard"), this);
     auto chkJoystickUsing = new QCheckBox(tr("Use Joystick"), this);
 
+    // Init Joysick State
+    auto spoilerJoystickState = new SpoilerGrid(tr("Joystick State"), this);
+    auto joystickStateLayout = spoilerJoystickState->gridLayout();
+
+    int rowIndex = 0;
+
+    _lblJoystickStateText = new QLabel(this);
+
+    joystickStateLayout->addWidget(_lblJoystickStateText,                    rowIndex, 0, 1, 4);
+    rowIndex++;
+
     // Init Joysick Section
     auto spoilerJoystickConfig = new SpoilerGrid(tr("Joystick Configuration"), this);
     auto joystickConfigLayout = spoilerJoystickConfig->gridLayout();
@@ -58,8 +69,20 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
     auto lblJoystickMapping = new QLabel(tr("Joystick Configuration"), this);
     auto edtJoystickMapping = new QLineEdit(this);
 
+    auto lblJAxisCameraX = new QLabel(tr("Joystick Axis for Camera (X)"), this);
+    auto cbJAxisCameraX = CommonWidgetUtils::createJAxisComboBox(this);
+
+    auto lblJAxisCameraY = new QLabel(tr("Joystick Axis for Camera (Y)"), this);
+    auto cbJAxisCameraY = CommonWidgetUtils::createJAxisComboBox(this);
+
     auto lblJAxisZoom = new QLabel(tr("Joystick Axis for Zoom"), this);
     auto cbJAxisZoom = CommonWidgetUtils::createJAxisComboBox(this);
+
+    auto lblJAxisTrackerX = new QLabel(tr("Joystick Axis for Tracker (X)"), this);
+    auto cbJAxisTrackerX = CommonWidgetUtils::createJAxisComboBox(this);
+
+    auto lblJAxisTrackerY = new QLabel(tr("Joystick Axis for Tracker (Y)"), this);
+    auto cbJAxisTrackerY = CommonWidgetUtils::createJAxisComboBox(this);
 
     auto lblJoystickEmulationFromKeyboard = new QLabel(tr("Joystick Emulation from Keyboard"), this);
     auto sbJoystickEmulationFromKeyboard = CommonWidgetUtils::createDoubleRangeSpinbox(this, 0.010, 1.000, 0.001, 3);
@@ -75,12 +98,21 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
 
     auto chkUseZoomScaleForManualMoving  = new QCheckBox(tr("Use Zoom Scale for Manual Moving"), this);
 
-    _lblJoystickStateText = new QLabel(this);
-
-    int rowIndex = 0;
+    rowIndex = 0;
 
     joystickConfigLayout->addWidget(lblJoystickMapping,                       rowIndex, 0, 1, 1);
     joystickConfigLayout->addWidget(edtJoystickMapping,                       rowIndex, 1, 1, 3);
+    rowIndex++;
+
+    joystickConfigLayout->addWidget(CommonWidgetUtils::createSeparator(this), rowIndex, 0, 1, 4);
+    rowIndex++;
+
+    joystickConfigLayout->addWidget(lblJAxisCameraX,                          rowIndex, 0, 1, 1);
+    joystickConfigLayout->addWidget(cbJAxisCameraX,                           rowIndex, 1, 1, 1);
+    rowIndex++;
+
+    joystickConfigLayout->addWidget(lblJAxisCameraY,                          rowIndex, 0, 1, 1);
+    joystickConfigLayout->addWidget(cbJAxisCameraY,                           rowIndex, 1, 1, 1);
     rowIndex++;
 
     joystickConfigLayout->addWidget(lblJAxisZoom,                             rowIndex, 0, 1, 1);
@@ -114,7 +146,12 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
     joystickConfigLayout->addWidget(CommonWidgetUtils::createSeparator(this), rowIndex, 0, 1, 4);
     rowIndex++;
 
-    joystickConfigLayout->addWidget(_lblJoystickStateText,                    rowIndex, 0, 1, 4);
+    joystickConfigLayout->addWidget(lblJAxisTrackerX,                         rowIndex, 0, 1, 1);
+    joystickConfigLayout->addWidget(cbJAxisTrackerX,                          rowIndex, 1, 1, 1);
+    rowIndex++;
+
+    joystickConfigLayout->addWidget(lblJAxisTrackerY,                         rowIndex, 0, 1, 1);
+    joystickConfigLayout->addWidget(cbJAxisTrackerY,                          rowIndex, 1, 1, 1);
     rowIndex++;
 
     // Init Key Mapping section
@@ -211,6 +248,9 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
     hidGridLayout->addWidget(CommonWidgetUtils::createSeparator(this), rowIndex, 0, 1, 4);
     rowIndex++;
 
+    hidGridLayout->addWidget(spoilerJoystickState,                rowIndex, 0, 1, 4);
+    rowIndex++;
+
     hidGridLayout->addWidget(spoilerJoystickConfig,                rowIndex, 0, 1, 4);
     rowIndex++;
 
@@ -224,7 +264,12 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
     _association.addBinding(&applicationSettings.JoystickUsing,                     chkJoystickUsing);
     _association.addBinding(&applicationSettings.JoystickMapping,                   edtJoystickMapping);
 
+    _association.addBinding(&applicationSettings.JoystickAxisCameraXIndex,          cbJAxisCameraX);
+    _association.addBinding(&applicationSettings.JoystickAxisCameraYIndex,          cbJAxisCameraY);
     _association.addBinding(&applicationSettings.JoystickAxisZoomIndex,             cbJAxisZoom);
+    _association.addBinding(&applicationSettings.JoystickAxisTrackerXIndex,         cbJAxisTrackerX);
+    _association.addBinding(&applicationSettings.JoystickAxisTrackerYIndex,         cbJAxisTrackerY);
+
     _association.addBinding(&applicationSettings.JoystickEmulationFromKeyboard,     sbJoystickEmulationFromKeyboard);
     _association.addBinding(&applicationSettings.JoystickAxisMultiplier,            sbJoystickAxisMultiplier);
     _association.addBinding(&applicationSettings.JoystickAxisInsensitivity,         sbJoystickAxisInsensitivity);

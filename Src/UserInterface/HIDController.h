@@ -42,14 +42,17 @@ class HIDController : public QObject
 
     quint32 _camZoomMin, _camZoomMax, _camZoom;
 
-    qreal _joystickX, _joystickY, _joystickZ;
-    qreal _keyboardX, _keyboardY;
-    bool _joystickInZeroPoint;
+    qreal _joystickCameraX, _joystickCameraY, _joystickCameraZoom;
+    qreal _keyboardCameraX, _keyboardCameraY;
+    bool _joystickCameraAxesInZeroPoint;
 
     qint32 _joystickAxisZoomIndex;
+    qint32 _joystickAxisCameraXIndex;
+    qint32 _joystickAxisCameraYIndex;
+
     qreal _prevJoystickZ;
 
-    qreal _joystickAxisMultiplier;
+    qreal _joystickCameraAxisMultiplier;
     qreal _joystickEmulationFromKeyboard;
     qreal _joystickAxisSensitivity;
 
