@@ -4,213 +4,218 @@
 <context>
     <name>ApplicationSettings</name>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="191"/>
+        <location filename="../ApplicationSettings.cpp" line="199"/>
         <source>Zoom Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="192"/>
+        <location filename="../ApplicationSettings.cpp" line="200"/>
         <source>Zoom In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="228"/>
+        <location filename="../ApplicationSettings.cpp" line="238"/>
         <source>Start New Session</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="229"/>
+        <location filename="../ApplicationSettings.cpp" line="239"/>
         <source>Display Only Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="231"/>
+        <location filename="../ApplicationSettings.cpp" line="241"/>
         <source>Change map and video positions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="230"/>
+        <location filename="../ApplicationSettings.cpp" line="240"/>
         <source>Open Select Sessions Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="132"/>
+        <location filename="../ApplicationSettings.cpp" line="133"/>
         <source>Target Marker Sizes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="193"/>
+        <location filename="../ApplicationSettings.cpp" line="201"/>
         <source>Map Zoom Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="194"/>
+        <location filename="../ApplicationSettings.cpp" line="202"/>
         <source>Map Zoom In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="195"/>
+        <location filename="../ApplicationSettings.cpp" line="203"/>
         <source>Follow The Plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="197"/>
+        <location filename="../ApplicationSettings.cpp" line="205"/>
         <source>Change Active Camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="198"/>
+        <location filename="../ApplicationSettings.cpp" line="206"/>
         <source>Stabilization On/Off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="199"/>
+        <location filename="../ApplicationSettings.cpp" line="207"/>
         <source>Cam Drivers Off</source>
         <translation type="unfinished">Cam Drivers Off</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="200"/>
+        <location filename="../ApplicationSettings.cpp" line="208"/>
         <source>Activate Landing Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="201"/>
+        <location filename="../ApplicationSettings.cpp" line="209"/>
         <source>Activate Begining Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="202"/>
+        <location filename="../ApplicationSettings.cpp" line="210"/>
         <source>Activate Vertical Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="203"/>
+        <location filename="../ApplicationSettings.cpp" line="211"/>
         <source>Color Mode +</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="204"/>
+        <location filename="../ApplicationSettings.cpp" line="212"/>
         <source>Color Mode -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="205"/>
+        <location filename="../ApplicationSettings.cpp" line="213"/>
         <source>Laser Activation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="207"/>
+        <location filename="../ApplicationSettings.cpp" line="215"/>
         <source>Bombing Sight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="208"/>
+        <location filename="../ApplicationSettings.cpp" line="216"/>
         <source>Screenshot</source>
         <translation type="unfinished">Screenshot</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="209"/>
+        <location filename="../ApplicationSettings.cpp" line="217"/>
         <source>Snapshot</source>
         <translation type="unfinished">Snapshot</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="210"/>
+        <location filename="../ApplicationSettings.cpp" line="218"/>
         <source>Snapshot Series</source>
         <translation type="unfinished">Snapshot Series</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="212"/>
+        <location filename="../ApplicationSettings.cpp" line="220"/>
         <source>Target Unlock</source>
         <translation type="unfinished">Target Unlock</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="213"/>
+        <location filename="../ApplicationSettings.cpp" line="221"/>
+        <source>Target Lock In Cursor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ApplicationSettings.cpp" line="223"/>
         <source>Camera Recording</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="214"/>
+        <location filename="../ApplicationSettings.cpp" line="224"/>
         <source>Automatic Tracer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="215"/>
+        <location filename="../ApplicationSettings.cpp" line="225"/>
         <source>Drop Bomb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="216"/>
+        <location filename="../ApplicationSettings.cpp" line="226"/>
         <source>Send Hit Coordinates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="217"/>
+        <location filename="../ApplicationSettings.cpp" line="227"/>
         <source>Send Weather</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="219"/>
+        <location filename="../ApplicationSettings.cpp" line="229"/>
         <source>Normal Flight Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="220"/>
+        <location filename="../ApplicationSettings.cpp" line="230"/>
         <source>Patrol Moving Target Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="221"/>
+        <location filename="../ApplicationSettings.cpp" line="231"/>
         <source>Patrol Static Target Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="222"/>
+        <location filename="../ApplicationSettings.cpp" line="232"/>
         <source>Manual Flight Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="224"/>
+        <location filename="../ApplicationSettings.cpp" line="234"/>
         <source>New Marker (Target)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="225"/>
+        <location filename="../ApplicationSettings.cpp" line="235"/>
         <source>New Marker (Laser)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="226"/>
+        <location filename="../ApplicationSettings.cpp" line="236"/>
         <source>New Marker (UAV)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="234"/>
+        <location filename="../ApplicationSettings.cpp" line="244"/>
         <source>Application Settings Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="232"/>
+        <location filename="../ApplicationSettings.cpp" line="242"/>
         <source>Data Console</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="233"/>
+        <location filename="../ApplicationSettings.cpp" line="243"/>
         <source>Emulator Console</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="235"/>
+        <location filename="../ApplicationSettings.cpp" line="245"/>
         <source>Help Viewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="332"/>
+        <location filename="../ApplicationSettings.cpp" line="342"/>
         <source>
   Key %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="334"/>
+        <location filename="../ApplicationSettings.cpp" line="344"/>
         <source>
   Button# %1</source>
         <translation type="unfinished"></translation>
@@ -874,180 +879,180 @@ Do you really want to turn it to begining position?</translation>
 <context>
     <name>CameraSettingsNode</name>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="479"/>
+        <location filename="../ApplicationSettings.cpp" line="489"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="528"/>
         <location filename="../ApplicationSettings.cpp" line="538"/>
+        <location filename="../ApplicationSettings.cpp" line="548"/>
         <source>Vertical Mirroring</source>
         <translation type="unfinished">Vertical Mirroring</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="483"/>
+        <location filename="../ApplicationSettings.cpp" line="493"/>
         <source>Digital Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="485"/>
+        <location filename="../ApplicationSettings.cpp" line="495"/>
         <source>Use Gimbal Telemetry Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="490"/>
+        <location filename="../ApplicationSettings.cpp" line="500"/>
         <source>Value of Fixed Camera Pich</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="491"/>
+        <location filename="../ApplicationSettings.cpp" line="501"/>
         <source>Value of Fixed Camera Roll</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="492"/>
+        <location filename="../ApplicationSettings.cpp" line="502"/>
         <source>Value of Fixed Camera Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="494"/>
+        <location filename="../ApplicationSettings.cpp" line="504"/>
         <source>Maximum Value of Camera Pitch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="495"/>
+        <location filename="../ApplicationSettings.cpp" line="505"/>
         <source>Minimum Value of Camera Pitch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="497"/>
+        <location filename="../ApplicationSettings.cpp" line="507"/>
         <source>Maximum Value of Camera Roll</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="498"/>
+        <location filename="../ApplicationSettings.cpp" line="508"/>
         <source>Minimum Value of Camera Roll</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="500"/>
+        <location filename="../ApplicationSettings.cpp" line="510"/>
         <source>Maximum Value of Camera Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="501"/>
+        <location filename="../ApplicationSettings.cpp" line="511"/>
         <source>Minimum Value of Camera Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="502"/>
+        <location filename="../ApplicationSettings.cpp" line="512"/>
         <source>Automatic Tracer Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="504"/>
+        <location filename="../ApplicationSettings.cpp" line="514"/>
         <source>Value of Camera Yaw in Landing Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="505"/>
+        <location filename="../ApplicationSettings.cpp" line="515"/>
         <source>Value of Camera Pich in Landing Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="506"/>
+        <location filename="../ApplicationSettings.cpp" line="516"/>
         <source>Value of Camera Roll in Landing Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="507"/>
+        <location filename="../ApplicationSettings.cpp" line="517"/>
         <source>Value of Camera Zoom in Landing Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="508"/>
+        <location filename="../ApplicationSettings.cpp" line="518"/>
         <source>Use special command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="510"/>
+        <location filename="../ApplicationSettings.cpp" line="520"/>
         <source>Value of Camera Yaw in Begining Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="511"/>
+        <location filename="../ApplicationSettings.cpp" line="521"/>
         <source>Value of Camera Pich in Begining Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="512"/>
+        <location filename="../ApplicationSettings.cpp" line="522"/>
         <source>Value of Camera Roll in Begining Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="513"/>
+        <location filename="../ApplicationSettings.cpp" line="523"/>
         <source>Value of Camera Zoom in Begining Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="515"/>
+        <location filename="../ApplicationSettings.cpp" line="525"/>
         <source>Value of Camera Yaw in Vertical Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="516"/>
+        <location filename="../ApplicationSettings.cpp" line="526"/>
         <source>Value of Camera Pich in Vertical Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="517"/>
+        <location filename="../ApplicationSettings.cpp" line="527"/>
         <source>Value of Camera Roll in Vertical Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="518"/>
+        <location filename="../ApplicationSettings.cpp" line="528"/>
         <source>Value of Camera Zoom in Vertical Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="520"/>
         <location filename="../ApplicationSettings.cpp" line="530"/>
+        <location filename="../ApplicationSettings.cpp" line="540"/>
         <source>Camera Scale Coefficient</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="523"/>
         <location filename="../ApplicationSettings.cpp" line="533"/>
+        <location filename="../ApplicationSettings.cpp" line="543"/>
         <source>Automatic Tracer Speed Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="524"/>
         <location filename="../ApplicationSettings.cpp" line="534"/>
+        <location filename="../ApplicationSettings.cpp" line="544"/>
         <source>Manual Moving Speed Multipliers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="525"/>
         <location filename="../ApplicationSettings.cpp" line="535"/>
+        <location filename="../ApplicationSettings.cpp" line="545"/>
         <source>Horizontal View Size of Camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="526"/>
         <location filename="../ApplicationSettings.cpp" line="536"/>
+        <location filename="../ApplicationSettings.cpp" line="546"/>
         <source>Vertical View Size of Camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="521"/>
         <location filename="../ApplicationSettings.cpp" line="531"/>
+        <location filename="../ApplicationSettings.cpp" line="541"/>
         <source>Horizontal View Angle of Camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="522"/>
         <location filename="../ApplicationSettings.cpp" line="532"/>
+        <location filename="../ApplicationSettings.cpp" line="542"/>
         <source>Vertical View Angle of Camera</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1549,52 +1554,77 @@ Speed Multiplier</source>
     </message>
     <message>
         <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="55"/>
-        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="58"/>
-        <source>Joystick Configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="61"/>
-        <source>Joystick Axis for Zoom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="64"/>
-        <source>Joystick Emulation from Keyboard</source>
+        <source>Joystick State</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="66"/>
-        <source>(equivalent to the joystick position for the pressed key [0..1])</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="70"/>
-        <source>(conversion coefficient of joystick deflection to angular velocity)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="74"/>
-        <source>(joystick insensitivity in zero position [0..1])</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="123"/>
-        <source>Key Mapping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="68"/>
-        <source>Joystick Axis Multiplier</source>
+        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="69"/>
+        <source>Joystick Configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="72"/>
+        <source>Joystick Axis for Camera (X)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="75"/>
+        <source>Joystick Axis for Camera (Y)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="78"/>
+        <source>Joystick Axis for Zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="81"/>
+        <source>Joystick Axis for Cursor (X)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="84"/>
+        <source>Joystick Axis for Cursor (Y)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="87"/>
+        <source>Joystick Emulation from Keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="89"/>
+        <source>(equivalent to the joystick position for the pressed key [0..1])</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="93"/>
+        <source>(conversion coefficient of joystick deflection to angular velocity)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="97"/>
+        <source>(joystick insensitivity in zero position [0..1])</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="160"/>
+        <source>Key Mapping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="91"/>
+        <source>Joystick Axis Multiplier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="95"/>
         <source>Joystick Axis Insensitivity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="76"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/HIDSettingsEditor.cpp" line="99"/>
         <source>Use Zoom Scale for Manual Moving</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1795,48 +1825,58 @@ Speed Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="198"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="176"/>
+        <source>Target Tracker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="177"/>
+        <source>Cursor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="206"/>
         <source>OSD</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="203"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="211"/>
         <source>View Field Border</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="205"/>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="209"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="213"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="217"/>
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="207"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="215"/>
         <source>Trajectory Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="211"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="219"/>
         <source>Path Points Distance (pixel)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="231"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="239"/>
         <source>Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="236"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="244"/>
         <source>Sound Effects Allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="237"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="245"/>
         <source>Sound Level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="253"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="261"/>
         <source>Sound</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1899,32 +1939,32 @@ Speed Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="451"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="453"/>
         <source>Sessions</source>
         <translation type="unfinished">Sessions</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="465"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="467"/>
         <source>Session Time from Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="469"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="471"/>
         <source>Play stored session data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="470"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="472"/>
         <source>Pause showed data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="471"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="473"/>
         <source>Show realtime data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/mainwindow.cpp" line="524"/>
+        <location filename="../UserInterface/Forms/mainwindow.cpp" line="526"/>
         <source>Are you sure you want to quit?</source>
         <translation type="unfinished">Are you sure you want to quit?</translation>
     </message>
@@ -2776,119 +2816,119 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>VideoDisplayWidget</name>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="36"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="39"/>
         <source>Show Bombing Sight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="38"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="41"/>
         <source>Show Center Mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="40"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="43"/>
         <source>Show Telemetry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="43"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="46"/>
         <source>Digital Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="50"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="53"/>
         <source>Blured Borders</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="54"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="57"/>
         <source>Gimbal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="56"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="59"/>
         <source>Use Gimbal Telemetry Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="60"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="63"/>
         <source>Static Plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="61"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="64"/>
         <source>Rotating Plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="62"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="65"/>
         <source>Combined Presentation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="66"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="69"/>
         <source>Hide Gimbal Angles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="67"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="70"/>
         <source>Show Absolute Gimbal Angles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="68"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="71"/>
         <source>Show Relative Gimbal Angles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="426"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="459"/>
         <source>Height: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="580"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="619"/>
         <source>LAPEL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="601"/>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="631"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="640"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="670"/>
         <source>%1 m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="604"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="643"/>
         <source>%1 m/s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="627"/>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="638"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="666"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="677"/>
         <source>%1°</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="647"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="686"/>
         <source>Turn Right &gt;&gt;&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="649"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="688"/>
         <source>&lt;&lt;&lt; Turn Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="609"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="648"/>
         <source>M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="59"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="62"/>
         <source>Hide Indication</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="576"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="615"/>
         <source>DROP</source>
         <translation type="unfinished"></translation>
     </message>

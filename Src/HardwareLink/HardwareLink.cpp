@@ -762,8 +762,17 @@ void HardwareLink::updateCameraTelemetryDataFrame(const QByteArray &rawData)
     _cameraTelemetryDataFrame.CamEncoderRoll = info->Encoders[0];
     _cameraTelemetryDataFrame.CamEncoderPitch = info->Encoders[1];
     _cameraTelemetryDataFrame.CamEncoderYaw = info->Encoders[2];
-    _cameraTelemetryDataFrame.RangefinderDistance = info->LdDistance;
-    _cameraTelemetryDataFrame.RangefinderTemperature = info->LdTemperature;
+
+    if (_isRangefinderEnabled)
+    {
+        _cameraTelemetryDataFrame.RangefinderDistance = info->LdDistance;
+        _cameraTelemetryDataFrame.RangefinderTemperature = info->LdTemperature;
+    }
+    else
+    {
+        _cameraTelemetryDataFrame.RangefinderDistance = 0;
+        _cameraTelemetryDataFrame.RangefinderTemperature = 0;
+    }
 }
 
 void HardwareLink::readSerialPortMUSVData()
@@ -827,7 +836,11 @@ bool HardwareLink::processTelemetryPendingDatagramsV4()
         telemetryDataFrame.GroundSpeedEast_GPS =      udpTelemetryMessage.GroundSpeedEast_GPS;
         telemetryDataFrame.VerticalSpeed =            udpTelemetryMessage.VerticalSpeed;
         telemetryDataFrame.BombState =                udpTelemetryMessage.BombState;
-        telemetryDataFrame.RangefinderDistance =      udpTelemetryMessage.RangefinderDistance;
+
+        if (_isRangefinderEnabled) //???
+            telemetryDataFrame.RangefinderDistance =      udpTelemetryMessage.RangefinderDistance;
+        else
+            telemetryDataFrame.RangefinderDistance =      0;
 
         telemetryDataFrame.TrackedTargetCenterX =     udpTelemetryMessage.TargetCenterX;
         telemetryDataFrame.TrackedTargetCenterY =     udpTelemetryMessage.TargetCenterY;

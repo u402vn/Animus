@@ -173,6 +173,9 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
     auto lblOSDTelemetryIndicatorFontSize = new QLabel(tr("Telemetry Indicator Font Size"), this);
     auto sbOSDTelemetryIndicatorFontSize = CommonWidgetUtils::createRangeSpinbox(this, 2, 40);
 
+    auto lblOSDTargetTracker = new QLabel(tr("Target Tracker"));
+    auto csbOSDTargetTrackerCursor = new SelectColorButton(tr("Cursor"), this);
+
     auto osdLayout = makeInterfaceSpoilerGridLayout();
     rowIndex = 0;
 
@@ -194,6 +197,11 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
     osdLayout->addWidget(lblOSDTelemetryIndicatorFontSize,        rowIndex, 0, 1, 1);
     osdLayout->addWidget(sbOSDTelemetryIndicatorFontSize,         rowIndex, 1, 1, 1);
     rowIndex++;
+
+    osdLayout->addWidget(lblOSDTargetTracker,                     rowIndex, 0, 1, 1);
+    osdLayout->addWidget(csbOSDTargetTrackerCursor,               rowIndex, 1, 1, 1);
+    rowIndex++;
+
 
     auto spoilerOSD = new Spoiler(tr("OSD"), this);
     spoilerOSD->setContentLayout(osdLayout);
@@ -294,7 +302,8 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
     _association.addBinding(&applicationSettings.OSDScreenLinesColor,                            scbOSDColor);
     _association.addBinding(&applicationSettings.OSDScreenCenterMarkColor,                       csbOSDCenterMarkColor);
     _association.addBinding(&applicationSettings.OSDGimbalIndicatorSize,                         sbOSDGimbalIndicatorSize);
-    _association.addBinding(&applicationSettings.OSDTelemetryIndicatorFontSize,                  sbOSDTelemetryIndicatorFontSize);
+    _association.addBinding(&applicationSettings.OSDTelemetryIndicatorFontSize,                  sbOSDTelemetryIndicatorFontSize);    
+    _association.addBinding(&applicationSettings.OSDTargetTrackerCursor,                         csbOSDTargetTrackerCursor);
     _association.addBinding(&applicationSettings.ViewFieldLineWidth,                             sbViewFieldLineWidth);
     _association.addBinding(&applicationSettings.ViewFieldLineColor,                             scbViewFieldLineColor);
     _association.addBinding(&applicationSettings.TrajectoryPathLineWidth,                        sbTrajectoryPathLineWidth);

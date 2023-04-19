@@ -42,6 +42,7 @@ class VideoDisplayWidget final : public QWidget
     bool _showTelemetry;
     quint32 _telemetryIndicatorFontSize;
 
+    bool _drawTargetRectangle;
     QRect _cursorMark;
     QDateTime _cursorMarkLastMove;
 
@@ -51,8 +52,7 @@ class VideoDisplayWidget final : public QWidget
     OSDGimbalIndicatorType _gimbalIndicatorType;
     OSDGimbalIndicatorAngles _gimbalIndicatorAngles;
     quint32 _gimbalIndicatorSize;
-    QColor _osdLinesColor;
-    QColor _osdMarkColor;
+    QColor _osdLinesColor,_osdMarkColor, _osdCursorColor;
     OSDTelemetryTimeFormat _telemetryTimeFormat;
     bool _isBombingTabLicensed;
     bool _isLaserRangefinderLicensed;

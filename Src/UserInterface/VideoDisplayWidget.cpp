@@ -25,6 +25,7 @@ VideoDisplayWidget::VideoDisplayWidget(QWidget *parent, VoiceInformant *voiceInf
     _osdActiveSightNumbers = -1;
 
     _cursorMark = QRect(0, 0, 40, 40);
+    _cursorMarkLastMove = QDateTime::currentDateTime();
 
     loadSettings();
     createMenu();
@@ -95,6 +96,8 @@ void VideoDisplayWidget::loadSettings()
     _gimbalIndicatorAngles = applicationSettings.OSDGimbalAngles;
     _gimbalIndicatorSize = applicationSettings.OSDGimbalIndicatorSize;
     _telemetryTimeFormat = applicationSettings.OVRTelemetryTimeFormat; //? make separate setting or use common with video recorder
+    _drawTargetRectangle = (applicationSettings.ObjectTrackerType.value()) != ObjectTrackerTypeEnum::External;
+    _osdCursorColor = applicationSettings.OSDTargetTrackerCursor;
 
     QString serializedPreference = cameraSettings->BombingSightNumbers;
     QStringList settingPairs = serializedPreference.split("&");
@@ -506,11 +509,14 @@ void VideoDisplayWidget::paintEvent(QPaintEvent *event)
 
 
     //draw target frame
-    const QColor targetRectColor = ((AutomaticTracerMode)_telemetryFrame.CamTracerMode == AutomaticTracerMode::atmScreenPoint) ?  Qt::blue : Qt::red;
-    drawRectangleOnFrame(painter, _telemetryFrame.targetRect(), targetRectColor);
+    if (_drawTargetRectangle)
+    {
+        const QColor targetRectColor = ((AutomaticTracerMode)_telemetryFrame.CamTracerMode == AutomaticTracerMode::atmScreenPoint) ?  Qt::blue : Qt::red;
+        drawRectangleOnFrame(painter, _telemetryFrame.targetRect(), targetRectColor);
+    }
 
     if (isCursorVisible())
-        drawRectangleOnFrame(painter, _cursorMark, Qt::magenta);
+        drawRectangleOnFrame(painter, _cursorMark, _osdCursorColor);
 
     painter.restore();
 

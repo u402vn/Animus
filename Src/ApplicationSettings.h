@@ -251,6 +251,7 @@ public:
     ApplicationPreferenceBool OSDShowCenterMark;
     ApplicationPreferenceBool OSDShowTelemetry;
     ApplicationPreferenceInt OSDTelemetryIndicatorFontSize;
+    ApplicationPreferenceColor OSDTargetTrackerCursor;
     ApplicationPreferenceBool SoftwareStabilizationEnabled;
     ApplicationPreferenceEnum<ArtillerySpotterState> LastTargetArtillerySpotterState;
 
