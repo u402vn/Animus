@@ -111,6 +111,9 @@ void GSIUAVMarker::updateForTelemetry(const TelemetryDataFrame &telemetryFrame)
     //_windItem->setRotation(telemetryFrame.WindDirection + 180);
     _windItem->setRotation(telemetryFrame.WindDirection);
     _windItem->setPos(uavPosPoint);
+    _windItem->setToolTip(QString("%1 m/s\n%2°")
+                          .arg(telemetryFrame.WindSpeed, 0, 'f', 1)
+                          .arg(telemetryFrame.WindDirection, 0, 'f', 1));
 }
 
 void GSIUAVMarker::setImageName(const QString &name)
