@@ -57,5 +57,6 @@
         <file>ManualFlight.png</file>
         <file>NormalFlight.png</file>
 
+        <file>targetlistdirection.png</file>
     </qresource>
 </RCC>

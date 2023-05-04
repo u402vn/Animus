@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QListWidget>
+#include <QStyledItemDelegate>
 #include "HardwareLink/HardwareLink.h"
 #include "PFD.h"
 #include "UserInterface/GPSCoordSelector.h"
@@ -16,7 +17,11 @@ class QMarkerListWidgetItem;
 
 class QMarkerListWidget final : public QListWidget
 {
+    friend class MarkerStyledItemDelegate;
+
     Q_OBJECT
+    TelemetryDataFrame _telemetryFrame;
+
     GPSCoordSelector * _gpsCoordSelector;
 
     void keyPressEvent(QKeyEvent *event);
@@ -33,14 +38,16 @@ public:
     QMarkerListWidgetItem *addMapMarker(MapMarker *marker);
     void removeMarker(const QString &markerGUID);
     void showCoordEditor();
+    void processTelemetry(const TelemetryDataFrame &telemetryDataFrame);
 private slots:
     void onCoordSelectorChanged(const WorldGPSCoord &gpsCoord, const QString &description);
 };
 
 class QMarkerListWidgetItem final : public QObject, public QListWidgetItem
 {
-    Q_OBJECT
     friend class QMarkerListWidget;
+
+    Q_OBJECT
 
     MapMarker *_mapMarker;
     explicit QMarkerListWidgetItem(MapMarker *markerItem, QListWidget *parent);
@@ -55,6 +62,16 @@ private slots:
     void onDisplayedImageChanged();
     void onDescriptionChanged();
 };
+
+class MarkerStyledItemDelegate : public QStyledItemDelegate
+{
+    Q_OBJECT
+public:
+    using QStyledItemDelegate::QStyledItemDelegate;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option,
+               const QModelIndex &index) const override;
+};
+
 
 class BombingWidget final : public QWidget
 {

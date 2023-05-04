@@ -16,15 +16,16 @@ WorldGPSCoord::WorldGPSCoord(const double Lat, const double Lon, const double Hm
 
 WorldGPSCoord::WorldGPSCoord()
 {
-    this->lat =  0;
-    this->lon =  0;
-    this->hmsl = 0;
-    this->CoordSystem = WGS84;
+    lat =  0;
+    lon =  0;
+    hmsl = 0;
+    CoordSystem = WGS84;
 }
 
 bool WorldGPSCoord::isIncorrect() const
 {
-    return this->lat == INCORRECT_COORDINATE || this->lon == INCORRECT_COORDINATE;
+    bool incorrect = lat == INCORRECT_COORDINATE || lon == INCORRECT_COORDINATE;
+    return incorrect;
 }
 
 void WorldGPSCoord::setIncorrect()

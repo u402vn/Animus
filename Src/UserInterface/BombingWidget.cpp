@@ -185,6 +185,7 @@ void BombingWidget::processTelemetry(const TelemetryDataFrame &telemetryDataFram
     EnterProcStart("BombingWidget::processTelemetry");
 
     _telemetryFrame = telemetryDataFrame;
+    _lwTargetMapMarkers->processTelemetry(_telemetryFrame);
     _PFD->showTelemetryDataFrame(_telemetryFrame);
 }
 
@@ -378,6 +379,7 @@ QMarkerListWidget::QMarkerListWidget(QWidget *parent) : QListWidget(parent)
 {    
     _gpsCoordSelector = new GPSCoordSelector(this);
     connect(_gpsCoordSelector, &GPSCoordSelector::onCoordSelectorChanged, this, &QMarkerListWidget::onCoordSelectorChanged);
+    this->setItemDelegate(new MarkerStyledItemDelegate(this));
 }
 
 QMarkerListWidgetItem *QMarkerListWidget::findMarkerItemByGUID(const QString &markerGUID)
@@ -417,6 +419,13 @@ void QMarkerListWidget::showCoordEditor()
         QPoint screenPos = mapToGlobal(QPoint(itemRect.left(), itemRect.bottom()));
         _gpsCoordSelector->show(screenPos, markerItem->mapMarker()->gpsCoord(), markerItem->mapMarker()->description());
     }
+}
+
+void QMarkerListWidget::processTelemetry(const TelemetryDataFrame &telemetryDataFrame)
+{
+    _telemetryFrame = telemetryDataFrame;
+    if (_telemetryFrame.TelemetryFrameNumber % 20 == 0)
+        this->update();
 }
 
 void QMarkerListWidget::mouseDoubleClickEvent(QMouseEvent *event)
@@ -486,4 +495,33 @@ void QMarkerListWidget::onCoordSelectorChanged(const WorldGPSCoord &gpsCoord, co
     auto mapMarker = markerItem->mapMarker();
     mapMarker->setGPSCoord(gpsCoord);
     mapMarker->setDescription(description);
+}
+
+void MarkerStyledItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    QStyledItemDelegate::paint(painter, option, index);
+
+    static QPixmap directionImage = QPixmap(":/targetlistdirection.png");
+
+    auto listWidget = dynamic_cast<QMarkerListWidget*>(this->parent());
+    auto item = dynamic_cast<QMarkerListWidgetItem*>(listWidget->itemFromIndex(index));
+
+    auto uavCoords = getUavCoordsFromTelemetry(listWidget->_telemetryFrame);
+    if (!uavCoords.isIncorrect())
+    {
+        double distance, azimuth;
+        item->mapMarker()->gpsCoord().getDistanceAzimuthTo(uavCoords, distance, azimuth);
+        auto itemRect = option.rect; //listWidget->visualItemRect(item);
+        auto size = itemRect.height();
+
+        painter->save();
+        painter->translate(itemRect.width() - size / 2, itemRect.top() + size / 2);
+        painter->rotate(azimuth + 180);
+        painter->drawPixmap(QRect(- size / 2, - size / 2, size, size), directionImage);
+        painter->restore();
+
+        itemRect.setWidth(itemRect.width() - size);
+        painter->drawText(itemRect, Qt::AlignRight, QString::number(distance, 'f', 0));
+
+    }
 }
