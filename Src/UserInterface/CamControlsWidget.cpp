@@ -24,7 +24,7 @@ void CamControlsWidget::createTrackingButtons()
         QString caption = tr("Size %1x%1").arg(size);
         bool isChecked = size == currentTargetSize;
         auto acSizeItem = CommonWidgetUtils::createCheckableMenuGroupAction(caption, isChecked, _targetSizeGroup, _targetSizeMenu, size);
-        connect(acSizeItem, &QAction::triggered, this, &CamControlsWidget::onTargetSizeActionTriggered);
+        connect(acSizeItem, &QAction::triggered, this, &CamControlsWidget::onTargetSizeActionTriggered, Qt::DirectConnection);
 
         int key = shortCuts[i];
         QKeySequence shortCut(key);
@@ -144,7 +144,7 @@ void CamControlsWidget::createCamMoveControls()
     {
         _camKnob = nullptr;
         _camDials = new CamControlsWidgetDials(this);
-        connect(_camDials, &CamControlsWidgetDials::setCamPosition, _hardwareLink, &HardwareLink::setCamPosition);
+        connect(_camDials, &CamControlsWidgetDials::setCamPosition, _hardwareLink, &HardwareLink::setCamPosition, Qt::DirectConnection);
         _mainLayout->addWidget(_camDials,        row, 1, 1, 4, Qt::AlignCenter);
         _mainLayout->setRowStretch(row, 0);
     }
@@ -152,7 +152,7 @@ void CamControlsWidget::createCamMoveControls()
     {
         _camDials = nullptr;
         _camKnob = new CamControlsWidgetKnob(this);
-        connect(_camKnob, &CamControlsWidgetKnob::onCamMovingSpeedChange, this, &CamControlsWidget::onManualCamMovingSpeedChange);
+        connect(_camKnob, &CamControlsWidgetKnob::onCamMovingSpeedChange, this, &CamControlsWidget::onManualCamMovingSpeedChange, Qt::DirectConnection);
         _mainLayout->addWidget(_camKnob,        row, 1, 1, 4, Qt::AlignCenter);
         _mainLayout->setRowStretch(row, 0);
     }
@@ -171,7 +171,7 @@ void CamControlsWidget::createCamZoomControls()
     _camZoom->setTickInterval(1);
     _camZoom->setPageStep(1);
     _camZoom->setOrientation(Qt::Horizontal);
-    connect(_camZoom, &QSlider::valueChanged, this, &CamControlsWidget::onCamZoomValueChanged);
+    connect(_camZoom, &QSlider::valueChanged, this, &CamControlsWidget::onCamZoomValueChanged, Qt::DirectConnection);
     _camZoomIndicator = new QLabel(this);
 
     _btnLaserActivation = createButton(applicationSettings.hidUIHint(hidbtnLaserActivation), true, ":/laseractivate.png", &CamControlsWidget::onLaserActivationClick_Internal);
@@ -216,12 +216,12 @@ void CamControlsWidget::createCamViewControls()
     _grpCamButtons = new QButtonGroup(this);
     _grpCamButtons->addButton(btnCam1, PRIMARY_OPTYCAL_SYSTEM_ID);
     _grpCamButtons->addButton(btnCam2, SECONDARY_OPTYCAL_SYSTEM_ID);
-    connect(_grpCamButtons, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this, &CamControlsWidget::onActiveCamClicked);
+    connect(_grpCamButtons, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this, &CamControlsWidget::onActiveCamClicked, Qt::DirectConnection);
 
     _imageTuner = new VideoImageTuner(_btnLiveViewSettings);
     _imageTuner->resize(DEFAULT_BUTTON_WIDTH * 0.75, _imageTuner->height());
-    connect(_imageTuner, &VideoImageTuner::tuneImageChange, this, &CamControlsWidget::tuneImageChangeInternal);
-    connect(_imageTuner, &VideoImageTuner::changeColorMode, this, &CamControlsWidget::onChangeColorMode);
+    connect(_imageTuner, &VideoImageTuner::tuneImageChange, this, &CamControlsWidget::tuneImageChangeInternal, Qt::DirectConnection);
+    connect(_imageTuner, &VideoImageTuner::changeColorMode, this, &CamControlsWidget::onChangeColorMode, Qt::DirectConnection);
 
     //append buttons to grid
     int row = _mainLayout->rowCount();
@@ -397,7 +397,7 @@ QPushButton *CamControlsWidget::createButton(const QString &toolTip, bool checka
 {
     auto button = CommonWidgetUtils::createButton(this, NO_CAPTION, toolTip, checkable, QUARTER_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT, iconName);
     if (onClickMethod != nullptr)
-        connect(button, &QPushButton::clicked, this, onClickMethod);
+        connect(button, &QPushButton::clicked, this, onClickMethod, Qt::DirectConnection);
     return button;
 }
 

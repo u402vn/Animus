@@ -227,7 +227,7 @@ void HardwareLink::doActivateCatapult()
 void HardwareLink::doProcessTelemetryDataFrameQueue()
 {
     _currentTelemetryDataFrame = _incommingFrames.dequeue();
-    void notifyDataReceived();
+    notifyDataReceived();
 }
 
 void HardwareLink::timerEvent(QTimerEvent *event)

@@ -522,6 +522,5 @@ void MarkerStyledItemDelegate::paint(QPainter *painter, const QStyleOptionViewIt
 
         itemRect.setWidth(itemRect.width() - size);
         painter->drawText(itemRect, Qt::AlignRight, QString::number(distance, 'f', 0));
-
     }
 }
