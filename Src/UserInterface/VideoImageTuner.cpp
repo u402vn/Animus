@@ -3,6 +3,7 @@
 #include <QDialogButtonBox>
 #include <QStyle>
 #include <QComboBox>
+#include "UserInterface/ConstantNames.h"
 #include "EnterProc.h"
 
 constexpr int SLIDER_MIN_VALUE = 0;
@@ -34,20 +35,7 @@ VideoImageTuner::VideoImageTuner(QWidget *parent) : QFrame(parent)
     connect(_chkGrayscale, &QCheckBox::toggled, this, &VideoImageTuner::onGrayscaleChecked);
     _gridLayout->addWidget(_chkGrayscale,        row++, 1, 1, 2);
 
-    QMap <int, QString> mapColorMode = {
-        { 0,    tr("Whitehot") },
-        { 1,    tr("Blackhot") },
-        { 2,    tr("Ranbow") },
-        { 3,    tr("Three-primary colors") },
-        { 4,    tr("Blue-red-yellow") },
-        { 5,    tr("Blue-purple-red") },
-        { 6,    tr("Mixed colors") },
-        { 7,    tr("Blue-green-red") },
-        { 8,    tr("Blackish green-red") },
-        { 9,    tr("Lava") }
-    };
-
-    _cbColorMode = new QComboBoxExt(this, mapColorMode);
+    _cbColorMode = new QComboBoxExt(this, ConstantNames::ColorModeCaptions());
 
     connect(_cbColorMode, static_cast<void(QComboBoxExt::*)(int)>(&QComboBoxExt::currentIndexChanged), this, &VideoImageTuner::onColorModeChanged);
     _gridLayout->addWidget(_cbColorMode,        row++, 1, 1, 2);

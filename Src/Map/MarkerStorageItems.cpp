@@ -1,19 +1,8 @@
 #include "MarkerStorageItems.h"
 #include "Common/CommonUtils.h"
+#include "UserInterface/ConstantNames.h"
 
 int TargetMapMarker::_lastTargetNumber = 0;
-
-const QMap<int, QString> MapArtillerySpotterStateCaptions()
-{
-    static const QMap <int, QString> mapArtillerySpotterStateCaptions {
-        { ArtillerySpotterState::Unspecified,       QObject::tr("Unspecified") },
-        { ArtillerySpotterState::DefeatRequired,    QObject::tr("Defeat Required") },
-        { ArtillerySpotterState::TrialShot,         QObject::tr("Trial Shot") },
-        { ArtillerySpotterState::RealShot,          QObject::tr("Real Shot") } };
-
-    return mapArtillerySpotterStateCaptions;
-}
-
 
 // ----------------------------------------------------------------------------------------
 
@@ -92,7 +81,7 @@ const QString MapMarker::hint() const
 
     QString spotterStateCaption = _artillerySpotterState == ArtillerySpotterState::Unspecified ?
                 QString("") :
-                QString("\n%1").arg(MapArtillerySpotterStateCaptions()[_artillerySpotterState]);
+                QString("\n%1").arg(ConstantNames::ArtillerySpotterStateCaptions()[_artillerySpotterState]);
 
     QString hint = QString(tr("%1\n%2\n%3\nHeight: %4\nX:%5\nY:%6%7"))
             .arg(_description)

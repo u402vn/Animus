@@ -2,6 +2,7 @@
 #include "ApplicationSettings.h"
 #include "EnterProc.h"
 #include "Map/MapTileContainer.h"
+#include "UserInterface/ConstantNames.h"
 
 MapSettingsEditor::MapSettingsEditor(QWidget *parent) :
     QWidget(parent),
@@ -12,12 +13,7 @@ MapSettingsEditor::MapSettingsEditor(QWidget *parent) :
 
     auto pathLayout = CommonWidgetUtils::createVBoxLayout(this);
 
-    const QMap <int, QString> mapTileReceivingMode{
-        { TileReceivingMode::DatabaseOnly, tr("Use Tiles from Database Only") },
-        { TileReceivingMode::NetworkOnly, tr("Use Tiles from Network Only") },
-        { TileReceivingMode::DatabaseAndNetwork, tr("Use Tiles from Database and Network")}
-    };
-    auto cbTileReceivingMode = new QComboBoxExt(this, mapTileReceivingMode);
+    auto cbTileReceivingMode = new QComboBoxExt(this, ConstantNames::TileReceivingModeCaptions());
 
     pathLayout->addWidget(cbTileReceivingMode);
 

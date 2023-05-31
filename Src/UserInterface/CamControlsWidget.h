@@ -74,7 +74,7 @@ private:
     QPushButtonEx *createButton(const QString &toolTip, bool checkable, const QString &iconName,
                                 void(CamControlsWidget::*onClickMethod)(),
                                 void(CamControlsWidget::*onRightClick)() = nullptr
-                                );
+            );
 
     void createTrackingButtons();
     void createFixedPositionsButtons();

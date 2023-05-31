@@ -1,6 +1,13 @@
 #ifndef CONSTANTS
 #define CONSTANTS
 
+enum TileReceivingMode
+{
+    DatabaseOnly = 0,
+    NetworkOnly,
+    DatabaseAndNetwork
+};
+
 enum CameraSuspensionTypes
 {
     FixedCamera = 0,
@@ -135,4 +142,10 @@ enum ArtillerySpotterState
     EllipseCenter = 10
 };
 
+
+enum StabilizationType
+{
+    StabilizationByFrame = 0,
+    StabilizationByTarget = 1
+};
 #endif // CONSTANTS

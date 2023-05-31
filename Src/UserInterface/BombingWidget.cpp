@@ -7,7 +7,8 @@
 #include "ApplicationSettings.h"
 #include "EnterProc.h"
 #include "Map/MarkerStorage.h"
-#include <Common/CommonWidgets.h>
+#include "Common/CommonWidgets.h"
+#include "ConstantNames.h"
 
 
 void BombingWidget::initWidgets()
@@ -456,7 +457,7 @@ void QMarkerListWidget::mousePressEvent(QMouseEvent *event)
 
         QActionGroup artillerySpotterStateGroup(this);
 
-        auto captions = MapArtillerySpotterStateCaptions();
+        auto captions = ConstantNames::ArtillerySpotterStateCaptions();
 
         auto i = captions.begin();
         while (i != captions.end())

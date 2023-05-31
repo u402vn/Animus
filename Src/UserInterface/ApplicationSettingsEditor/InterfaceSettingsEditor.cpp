@@ -6,6 +6,7 @@
 #include <QDir>
 #include "ApplicationSettings.h"
 #include "Common/CommonWidgets.h"
+#include "UserInterface/ConstantNames.h"
 #include "EnterProc.h"
 
 
@@ -43,21 +44,11 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
 
     auto lblAppLanguage = new QLabel(tr("Interface Language"), this);
 
-    const QMap <int, QString> mapAppLanguage {
-        { ApplicationLanguages::English,    tr("English") },
-        { ApplicationLanguages::Russian,    tr("Russian") },
-        { ApplicationLanguages::Belarusian, tr("Belarusian") },
-        { ApplicationLanguages::Arabic,     tr("Arabic") }
-    };
-    auto cbAppLanguage = new QComboBoxExt(this, mapAppLanguage);
+    auto cbAppLanguage = new QComboBoxExt(this, ConstantNames::ApplicationLanguageCaptions());
 
     auto lblAppStyle = new QLabel(tr("Application Style"), this);
-    const QMap <int, QString> mapAppStyle {
-        { DisplayModes::SingleDisplay, tr("Single Display") },
-        { DisplayModes::Camera1Map2,   tr("Camera (1) & Map (2)") },
-        { DisplayModes::Map1Camera2,   tr("Map (1) & Camera (2)") }
-    };
-    auto cbDisplayMode = new QComboBoxExt(this, mapAppStyle);
+
+    auto cbDisplayMode = new QComboBoxExt(this, ConstantNames::ApplicationStyleCaptions());
 
     auto chkMinimalisticDesign = new QCheckBox(tr("Minimalistic Design"), this);
 
@@ -159,10 +150,7 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
     auto chkUseFixedOSDLineWidth = new QCheckBox(tr("Fixed Width"), this);
 
     auto lblOSDScreen = new QLabel(tr("OSD Information"), this);
-    auto cbOSDScreenCenterMark = new QComboBoxExt(this);
-    cbOSDScreenCenterMark->addItem(tr("Cross in Center"),  OSDScreenCenterMarks::SimpleCross);
-    cbOSDScreenCenterMark->addItem(tr("Circle in Center"), OSDScreenCenterMarks::CircleCross);
-    cbOSDScreenCenterMark->addItem(tr("Cross and Rulers"), OSDScreenCenterMarks::CrossAndRulers);
+    auto cbOSDScreenCenterMark = new QComboBoxExt(this, ConstantNames::OSDScreenCenterMarkCaptions());
 
     auto scbOSDColor = new SelectColorButton(tr("Lines Color"), this);
     auto csbOSDCenterMarkColor = new SelectColorButton(tr("Mark Color"), this);
@@ -302,7 +290,7 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
     _association.addBinding(&applicationSettings.OSDScreenLinesColor,                            scbOSDColor);
     _association.addBinding(&applicationSettings.OSDScreenCenterMarkColor,                       csbOSDCenterMarkColor);
     _association.addBinding(&applicationSettings.OSDGimbalIndicatorSize,                         sbOSDGimbalIndicatorSize);
-    _association.addBinding(&applicationSettings.OSDTelemetryIndicatorFontSize,                  sbOSDTelemetryIndicatorFontSize);    
+    _association.addBinding(&applicationSettings.OSDTelemetryIndicatorFontSize,                  sbOSDTelemetryIndicatorFontSize);
     _association.addBinding(&applicationSettings.OSDTargetTrackerCursor,                         csbOSDTargetTrackerCursor);
     _association.addBinding(&applicationSettings.ViewFieldLineWidth,                             sbViewFieldLineWidth);
     _association.addBinding(&applicationSettings.ViewFieldLineColor,                             scbViewFieldLineColor);

@@ -13,8 +13,6 @@ const QMap <int, QColor> MapArtillerySpotterStateColors {
     { ArtillerySpotterState::RealShot,          QColor("#119911") } };
 
 
-const QMap<int, QString> MapArtillerySpotterStateCaptions();
-
 class MapMarker : public QObject
 {
     Q_OBJECT

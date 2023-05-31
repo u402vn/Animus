@@ -5,6 +5,7 @@
 #include <QKeyEvent>
 #include <QWindow>
 #include <QVector>
+#include "UserInterface/ConstantNames.h"
 #include "EnterProc.h"
 
 void CamControlsWidget::createTrackingButtons()
@@ -214,9 +215,13 @@ void CamControlsWidget::createCamViewControls()
     _stabilizationTypeMenu = new QMenu(tr("Stabilization Type"), this);
     _stabilizationTypeGroup = new QActionGroup(this);
 
-    auto acStabilizationItem = CommonWidgetUtils::createCheckableMenuGroupAction("Stabilization by Frame", false, _stabilizationTypeGroup, _stabilizationTypeMenu, 1);
-    acStabilizationItem = CommonWidgetUtils::createCheckableMenuGroupAction("Stabilization by Target", true, _stabilizationTypeGroup, _stabilizationTypeMenu, 2);
-
+    auto stabilizationTypeCaptions = ConstantNames::StabilizationTypeCaptions();
+    auto i = stabilizationTypeCaptions.begin();
+    while (i != stabilizationTypeCaptions.end())
+    {
+        CommonWidgetUtils::createCheckableMenuGroupAction(i.value(), false, _stabilizationTypeGroup, _stabilizationTypeMenu, i.key());
+        ++i;
+    }
 
     auto btnCam1 = createButton(tr("Camera 1"), true, ":/camera1.png", nullptr);
     auto btnCam2 = createButton(tr("Camera 2"), true, ":/camera2.png", nullptr);

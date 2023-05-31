@@ -6,6 +6,7 @@
 #include <QDialogButtonBox>
 #include "EnterProc.h"
 #include "UserInterface/ApplicationSettingsEditor/CameraZoomSettingsEditor.h"
+#include "UserInterface/ConstantNames.h"
 
 QComboBoxExt *CameraSettingsEditor::createCamListCombo(QWidget *parent)
 {
@@ -121,11 +122,7 @@ QWidget *CameraSettingsEditor::createGimbalWidgets()
     _sbFixedCamZoom  = CommonWidgetUtils::createRangeSpinbox(this, 1, MAXIMAL_CAMERA_ZOOM);
 
     // Main Controls
-    const QMap <int, QString> mapCameraControlMode {
-        { CameraControlModes::AbsolutePosition, tr("Position") },
-        { CameraControlModes::RotationSpeed, tr("Speed")}
-    };
-    _cbCameraControlMode = new QComboBoxExt(this, mapCameraControlMode);
+    _cbCameraControlMode = new QComboBoxExt(this, ConstantNames::CameraControlModeCaptions());
 
     auto lblCamHeaderMin = new QLabel(tr("Minimum Value"), this);
     _sbCamPitchMin = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);

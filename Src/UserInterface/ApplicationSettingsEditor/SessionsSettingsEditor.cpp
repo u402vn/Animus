@@ -10,6 +10,7 @@
 #include "UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.h"
 #include "UserInterface/ApplicationSettingsEditor/NetworkInformationWidget.h"
 #include "UserInterface/ApplicationSettingsEditor/NetworkAddressEditor.h"
+#include "UserInterface/ConstantNames.h"
 #include "Common/CommonWidgets.h"
 
 const int SESSIONS_TAB_FIRST_COLUMN_WIDTH = 200;
@@ -89,13 +90,7 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     auto chkOVRDisplayTelemetry = new QCheckBox(tr("Telemetry On Video"), this);
     auto chkOVRDisplayTargetRectangle = new QCheckBox(tr("Target Rectangle On Video"), this);
 
-    const QMap <int, QString> mapOVRGimbalIndicatorType {
-        { OSDGimbalIndicatorType::NoGimbal, tr("None") },
-        { OSDGimbalIndicatorType::StaticPlane, tr("Static Plane") },
-        { OSDGimbalIndicatorType::RotatingPlane, tr("Rotating Plane") },
-        { OSDGimbalIndicatorType::CombinedPresentation, tr("Combined Presentation") }
-    };
-    auto cbOVRGimbalIndicatorType = new QComboBoxExt(this, mapOVRGimbalIndicatorType);
+    auto cbOVRGimbalIndicatorType = new QComboBoxExt(this, ConstantNames::OVRGimbalIndicatorTypeCaptions());
 
     auto lblOVRGimbalIndicatorSize = new QLabel(tr("Gimbal Indicator Size"), this);
     auto sbOVRGimbalIndicatorSize = CommonWidgetUtils::createRangeSpinbox(this, 20, 200);
@@ -141,10 +136,7 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     auto rbUAVTelemetryEmulator   = gbUAVTelemetrySourceType->appendButton(tr("Emulator"),     UAVTelemetrySourceTypes::Emulator);
 
 
-    const QMap <int, QString> mapUAVTelemetryFormat {
-        { UAVTelemetryDataFormats::UAVTelemetryFormatV4, tr("V4") }
-    };
-    auto cbUAVTelemetryFormat = new QComboBoxExt(this, mapUAVTelemetryFormat);
+    auto cbUAVTelemetryFormat = new QComboBoxExt(this, ConstantNames::UAVTelemetryFormatCaptions());
 
     auto edUAVTelemetryUDPPort = CommonWidgetUtils::makePortEditor(this);
 
@@ -213,13 +205,7 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
 
     auto lblCommandProtocol = new QLabel(tr("Command Protocol:"), this);
 
-    const QMap <int, QString> mapCommandProtocol {
-        { CommandProtocols::MUSV, tr("MUSV") },
-        { CommandProtocols::Otus, tr("Otus") },
-        { CommandProtocols::MUSVDirect, tr("MUSV Direct") },
-        { CommandProtocols::OtusDirect, tr("Otus Direct") }
-    };
-    auto cbCommandProtocol = new QComboBoxExt(this, mapCommandProtocol);
+    auto cbCommandProtocol = new QComboBoxExt(this, ConstantNames::CommandProtocolCaptions());
 
     auto spoilerDataSending = makeSessionsSpoilerGrid(tr("Data Sending"), this);
     auto dataSendingLayout = spoilerDataSending->gridLayout();
@@ -321,13 +307,7 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
 
     // Init Tracker section
 
-    const QMap <int, QString> mapObjectTrackerType {
-        { ObjectTrackerTypeEnum::InternalCorrelation,   tr("Internal Tracker #1") },
-        { ObjectTrackerTypeEnum::InternalRT,            tr("Internal Tracker #2") },
-        { ObjectTrackerTypeEnum::InternalDefault,       tr("Internal Tracker #3") },
-        { ObjectTrackerTypeEnum::External,              tr("External Tracker")    }
-    };
-    auto cmbObjectTrackerType = new QComboBoxExt(this, mapObjectTrackerType);
+    auto cmbObjectTrackerType = new QComboBoxExt(this, ConstantNames::ObjectTrackerTypeCaptions());
 
     auto lblTrackerCommandUDP = new QLabel(tr("External Tracker Commands (UDP/IP)"), this);
     auto naeTrackerCommandUDP = new NetworkAddressEditor(this, &_association, &applicationSettings.TrackerCommandUDPAddress, &applicationSettings.TrackerCommandUDPPort);

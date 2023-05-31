@@ -8,7 +8,7 @@ QT       += core gui widgets svg multimedia multimediawidgets sql network concur
 
 TARGET = ANIMUS
 TEMPLATE = app
-VERSION = 1.4.5.49
+VERSION = 1.4.5.50
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 CONFIG   += precompile_header
@@ -116,7 +116,8 @@ SOURCES += main.cpp \
         Common/CommonWidgets.cpp \
         Common/CommonData.cpp \
         Common/CommonUtils.cpp \
-        Common/BinaryContent.cpp
+        Common/BinaryContent.cpp \
+    UserInterface/ConstantNames.cpp
 
 
 HEADERS  += stable.h \
@@ -221,7 +222,8 @@ HEADERS  += stable.h \
         Common/CommonData.h \
         Common/CommonUtils.h \
         Constants.h \
-        Common/BinaryContent.h
+        Common/BinaryContent.h \
+    UserInterface/ConstantNames.h
 
 
 RESOURCES += \

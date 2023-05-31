@@ -90,18 +90,18 @@ CamCalibratorView::CamCalibratorView(QWidget *parent) : QDialog(parent)
         _cmbPatternSize->addItem(QString("%1 x %1").arg(i), i - 1);
     _cmbPatternSize->setCurrentData(7);
 
-    QLabel * lblSquareLength = new QLabel(tr("Cell Length (mm):"), this);
+    auto lblSquareLength = new QLabel(tr("Cell Length (mm):"), this);
     _sbSquareLength = new QDoubleSpinBoxEx(this); // createDoubleRangeSpinbox
     _sbSquareLength->setRange(10, 200);
     _sbSquareLength->setValue(20);
 
-    QLabel * lblRequiredFrameCount = new QLabel(tr("Frame Count:"), this);
+    auto lblRequiredFrameCount = new QLabel(tr("Frame Count:"), this);
     _cmbRequiredFrameCount = new QComboBoxExt(this);
     for (int i = 20; i < 40; i += 5)
         _cmbRequiredFrameCount->addItem(QString("%1").arg(i), i);
     _cmbRequiredFrameCount->setCurrentData(30);
 
-    QLabel * lblScanFreq  = new QLabel(tr("Scan Frequency:"), this);
+    auto lblScanFreq  = new QLabel(tr("Scan Frequency:"), this);
     _cmbScanInterval = new QComboBoxExt(this);
     _cmbScanInterval->addItem(QString("Low"), 45);
     _cmbScanInterval->addItem(QString("Normal"), 30);
@@ -123,7 +123,7 @@ CamCalibratorView::CamCalibratorView(QWidget *parent) : QDialog(parent)
 
     updateControlsForState(false);
 
-    QGridLayout * mainGrid = new QGridLayout();
+    auto mainGrid = new QGridLayout();
     //mainGrid->setMargin(0);
     //mainGrid->setSpacing(0);
     mainGrid->setColumnStretch(1, 1);

@@ -710,7 +710,7 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>ArtillerySalvoCenterMarker</name>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="288"/>
+        <location filename="../Map/MarkerStorageItems.cpp" line="277"/>
         <source>Ellipse Center</source>
         <translation>Центр эллипса</translation>
     </message>
@@ -858,7 +858,7 @@ Are you sure you want to deleted it?</source>
         <translation type="vanished">Отмена цели</translation>
     </message>
     <message>
-        <location filename="../UserInterface/CamControlsWidget.cpp" line="24"/>
+        <location filename="../UserInterface/CamControlsWidget.cpp" line="25"/>
         <source>Size %1x%1</source>
         <translation>Размер %1x%1</translation>
     </message>
@@ -867,8 +867,8 @@ Are you sure you want to deleted it?</source>
         <translation type="vanished">Стабилизация</translation>
     </message>
     <message>
-        <location filename="../UserInterface/CamControlsWidget.cpp" line="13"/>
-        <location filename="../UserInterface/CamControlsWidget.cpp" line="42"/>
+        <location filename="../UserInterface/CamControlsWidget.cpp" line="14"/>
+        <location filename="../UserInterface/CamControlsWidget.cpp" line="43"/>
         <source>Target Size</source>
         <translation>Размер цели</translation>
     </message>
@@ -913,17 +913,22 @@ Are you sure you want to deleted it?</source>
         <translation type="vanished">Вертикальная позиция</translation>
     </message>
     <message>
-        <location filename="../UserInterface/CamControlsWidget.cpp" line="210"/>
+        <location filename="../UserInterface/CamControlsWidget.cpp" line="212"/>
         <source>Live View Settings</source>
         <translation>Настройки отображения</translation>
     </message>
     <message>
-        <location filename="../UserInterface/CamControlsWidget.cpp" line="212"/>
+        <location filename="../UserInterface/CamControlsWidget.cpp" line="215"/>
+        <source>Stabilization Type</source>
+        <translation>Тип стабилизации</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/CamControlsWidget.cpp" line="226"/>
         <source>Camera 1</source>
         <translation>Камера 1</translation>
     </message>
     <message>
-        <location filename="../UserInterface/CamControlsWidget.cpp" line="213"/>
+        <location filename="../UserInterface/CamControlsWidget.cpp" line="227"/>
         <source>Camera 2</source>
         <translation>Камера 2</translation>
     </message>
@@ -968,7 +973,7 @@ Do you really want to turn it to begining position?</source>
 <context>
     <name>CameraSettingsEditor</name>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="65"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="66"/>
         <source>Description</source>
         <translation>Описание</translation>
     </message>
@@ -981,17 +986,17 @@ Do you really want to turn it to begining position?</source>
         <translation type="vanished">Вертикальное отражение</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="114"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="115"/>
         <source>Yaw</source>
         <translation>Рысканье</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="140"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="137"/>
         <source>Inverse Axis X</source>
         <translation>Инверсия оси X</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="141"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="138"/>
         <source>Inverse Axis Y</source>
         <translation>Инверсия оси Y</translation>
     </message>
@@ -1000,18 +1005,18 @@ Do you really want to turn it to begining position?</source>
         <translation type="vanished">Коэффицент автоподслеживания</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="245"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="242"/>
         <source>Image File</source>
         <translation>Файл изображения</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="246"/>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="370"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="243"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="367"/>
         <source>Video File</source>
         <translation>Файл видео</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="247"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="244"/>
         <source>RTSP</source>
         <translation>RTSP</translation>
     </message>
@@ -1024,58 +1029,58 @@ Do you really want to turn it to begining position?</source>
         <translation type="vanished">Оптические параметры</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="68"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="69"/>
         <source>Primary camera</source>
         <translation>Первичная камера</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="71"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="72"/>
         <source>Secondary camera</source>
         <translation>Вторичная камера</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="106"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="107"/>
         <source>Gimbal</source>
         <translation>Подвес</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="142"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="139"/>
         <source>Tracker Speed Multiplier</source>
         <translation>Множитель скорости системы подслеживания</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="269"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="266"/>
         <source>Unknown camera</source>
         <translation>Неизвестная камера</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="276"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="273"/>
         <source>URL: %1:%2</source>
         <translation>URL: %1:%2</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="281"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="278"/>
         <source>Port: %1</source>
         <translation>Порт: %1</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="286"/>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="291"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="283"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="288"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="296"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="293"/>
         <source>URL: %1</source>
         <translation>URL: %1</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="308"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="305"/>
         <source>Unnamed video source</source>
         <translation>Безымяный источник видео</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="310"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="307"/>
         <source> %1
  %2 	 %3x%4
  %5</source>
@@ -1084,38 +1089,38 @@ Do you really want to turn it to begining position?</source>
  %5</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="343"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="340"/>
         <source>Connection</source>
         <translation>Подключение</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="370"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="367"/>
         <source>Select Video File</source>
         <translation>Выберите файл видео</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="370"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="367"/>
         <source>Video Files (*.avi)</source>
         <translation>Файлы видео (*.avi)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="417"/>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="424"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="414"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="421"/>
         <source>Functions</source>
         <translation>Функции</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="425"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="422"/>
         <source>On Board Recording</source>
         <translation>Запись на борту</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="426"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="423"/>
         <source>Snapshot</source>
         <translation>Снимок</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="110"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="111"/>
         <source>Fixed Camera</source>
         <translation>Фиксированная камера</translation>
     </message>
@@ -1128,52 +1133,50 @@ Do you really want to turn it to begining position?</source>
         <translation type="vanished">Принудительно установить</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="111"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="112"/>
         <source>Rotating Camera</source>
         <translation>Поворотная камера</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="115"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="116"/>
         <source>Pitch</source>
         <translation>Тангаж</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="116"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="117"/>
         <source>Roll</source>
         <translation>Крен</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="117"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="118"/>
         <source>Zoom</source>
         <translation>Зум</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="125"/>
         <source>Position</source>
-        <translation>Позиция</translation>
+        <translation type="vanished">Позиция</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="126"/>
         <source>Speed</source>
-        <translation>Скорость</translation>
+        <translation type="vanished">Скорость</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="130"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="127"/>
         <source>Minimum Value</source>
         <translation>Минимальное значение</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="135"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="132"/>
         <source>Maximum Value</source>
         <translation>Максимальное значение</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="248"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="245"/>
         <source>MUSV-2</source>
         <translation>МУСВ-2</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="301"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="298"/>
         <source>UDP Port: %1</source>
         <translation>UDP порт: %1</translation>
     </message>
@@ -1182,37 +1185,37 @@ Do you really want to turn it to begining position?</source>
         <translation type="vanished">Инверсия</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="146"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="143"/>
         <source>Landing Position</source>
         <translation>Посадочная позиция</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="151"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="148"/>
         <source>Special Command for Landing Position</source>
         <translation>Специальная команда для посадочной позиции</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="153"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="150"/>
         <source>Begining Position</source>
         <translation>Начальная позиция</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="159"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="156"/>
         <source>Vertical Position</source>
         <translation>Вертикальная позиция</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="242"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="239"/>
         <source>USB Camera</source>
         <translation>USB камера</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="243"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="240"/>
         <source>X-Plane</source>
         <translation>X-Plane</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="244"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="241"/>
         <source>Yurion</source>
         <translation>Юрион</translation>
     </message>
@@ -1221,13 +1224,13 @@ Do you really want to turn it to begining position?</source>
         <translation type="vanished">Файл</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="362"/>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="375"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="359"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="372"/>
         <source>UDP Port:</source>
         <translation>UDP порт:</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="436"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="433"/>
         <source>Numbers on Sight</source>
         <translation>Числа на прицеле</translation>
     </message>
@@ -1236,12 +1239,12 @@ Do you really want to turn it to begining position?</source>
         <translation type="vanished">Углы обзора</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="19"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="20"/>
         <source>Camera %1 %2</source>
         <translation>Камера %1 %2</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="50"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp" line="51"/>
         <source>Video Source # %1</source>
         <translation>Источник видео № %1</translation>
     </message>
@@ -1579,6 +1582,229 @@ Are you sure you want to update it?</source>
     </message>
 </context>
 <context>
+    <name>ConstantNames</name>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="18"/>
+        <source>Unspecified</source>
+        <translation>Не определено</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="19"/>
+        <source>Defeat Required</source>
+        <translation>Ожидается поражение</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="20"/>
+        <source>Trial Shot</source>
+        <translation>Пристрелочный выстрел</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="21"/>
+        <source>Real Shot</source>
+        <translation>Реальное попадание</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="29"/>
+        <source>Use Tiles from Database Only</source>
+        <translation>Использовать тайлы только из Базы Данных</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="30"/>
+        <source>Use Tiles from Network Only</source>
+        <translation>Использовать тайлы только из Сети</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="31"/>
+        <source>Use Tiles from Database and Network</source>
+        <translation>Использовать тайлы из Базы Данных и Сети</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="39"/>
+        <source>Whitehot</source>
+        <translation>Whitehot</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="40"/>
+        <source>Blackhot</source>
+        <translation>Blackhot</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="41"/>
+        <source>Ranbow</source>
+        <translation>Ranbow</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="42"/>
+        <source>Three-primary colors</source>
+        <translation>Three-primary colors</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="43"/>
+        <source>Blue-red-yellow</source>
+        <translation>Blue-red-yellow</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="44"/>
+        <source>Blue-purple-red</source>
+        <translation>Blue-purple-red</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="45"/>
+        <source>Mixed colors</source>
+        <translation>Mixed colors</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="46"/>
+        <source>Blue-green-red</source>
+        <translation>Blue-green-red</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="47"/>
+        <source>Blackish green-red</source>
+        <translation>Blackish green-red</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="48"/>
+        <source>Lava</source>
+        <translation>Lava</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="56"/>
+        <source>None</source>
+        <translation>Нет</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="57"/>
+        <source>Static Plane</source>
+        <translation>Неподвижный самолет</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="58"/>
+        <source>Rotating Plane</source>
+        <translation>Вращающийся самолет</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="59"/>
+        <source>Combined Presentation</source>
+        <translation>Комбинированное представление</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="68"/>
+        <source>V4</source>
+        <translation>V4</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="76"/>
+        <source>MUSV</source>
+        <translation>МУСВ</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="77"/>
+        <source>Otus</source>
+        <translation>Otus</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="78"/>
+        <source>MUSV Direct</source>
+        <translation>МУСВ прямое</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="79"/>
+        <source>Otus Direct</source>
+        <translation>Otus прямое</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="87"/>
+        <source>Internal Tracker #1</source>
+        <translation>Внутренний трекер №1</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="88"/>
+        <source>Internal Tracker #2</source>
+        <translation>Внутренний трекер №2</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="89"/>
+        <source>Internal Tracker #3</source>
+        <translation>Внутренний трекер №3</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="90"/>
+        <source>External Tracker</source>
+        <translation>Внешний трекер</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="99"/>
+        <source>English</source>
+        <translation>Английский</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="100"/>
+        <source>Russian</source>
+        <translation>Русский</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="101"/>
+        <source>Belarusian</source>
+        <translation>Белорусский</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="102"/>
+        <source>Arabic</source>
+        <translation>Арабский</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="110"/>
+        <source>Single Display</source>
+        <translation>Один дисплей</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="111"/>
+        <source>Camera (1) &amp; Map (2)</source>
+        <translation>Камера (1) и Карта (2)</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="112"/>
+        <source>Map (1) &amp; Camera (2)</source>
+        <translation>Карта (1) и Камера (2)</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="120"/>
+        <source>Position</source>
+        <translation>Позиция</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="121"/>
+        <source>Speed</source>
+        <translation>Скорость</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="130"/>
+        <source>Stabilization by Frame</source>
+        <translation>Стабилизация по кадру</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="131"/>
+        <source>Stabilization by Target</source>
+        <translation>Стабилизация по цели</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="141"/>
+        <source>Cross in Center</source>
+        <translation>Перекрестие в центре</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="142"/>
+        <source>Circle in Center</source>
+        <translation>Окружность в центре</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="143"/>
+        <source>Cross and Rulers</source>
+        <translation>Перекрестие  с линейками</translation>
+    </message>
+</context>
+<context>
     <name>DashboardWidget</name>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="46"/>
@@ -1806,58 +2032,58 @@ Are you sure you want to update it?</source>
 <context>
     <name>DataConsole</name>
     <message>
-        <location filename="../UserInterface/Forms/DataConsole.cpp" line="26"/>
+        <location filename="../UserInterface/Forms/DataConsole.cpp" line="25"/>
         <source>Data Console</source>
         <translation>Консоль данных</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/DataConsole.cpp" line="35"/>
-        <location filename="../UserInterface/Forms/DataConsole.cpp" line="47"/>
+        <location filename="../UserInterface/Forms/DataConsole.cpp" line="34"/>
+        <location filename="../UserInterface/Forms/DataConsole.cpp" line="46"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/DataConsole.cpp" line="38"/>
+        <location filename="../UserInterface/Forms/DataConsole.cpp" line="37"/>
         <source>Pause</source>
         <translation>Пауза</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/DataConsole.cpp" line="38"/>
+        <location filename="../UserInterface/Forms/DataConsole.cpp" line="37"/>
         <source>Pause logging</source>
         <translation>Приостановить логирование</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/DataConsole.cpp" line="41"/>
+        <location filename="../UserInterface/Forms/DataConsole.cpp" line="40"/>
         <source>Clear</source>
         <translation>Очистить</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/DataConsole.cpp" line="41"/>
+        <location filename="../UserInterface/Forms/DataConsole.cpp" line="40"/>
         <source>Clear log</source>
         <translation>Очистить лог</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/DataConsole.cpp" line="48"/>
+        <location filename="../UserInterface/Forms/DataConsole.cpp" line="47"/>
         <source>Show Commands</source>
         <translation>Показать команды</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/DataConsole.cpp" line="49"/>
+        <location filename="../UserInterface/Forms/DataConsole.cpp" line="48"/>
         <source>Show Telemetry</source>
         <translation>Показать телеметрию</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/DataConsole.cpp" line="54"/>
+        <location filename="../UserInterface/Forms/DataConsole.cpp" line="53"/>
         <source>Full Telemetry</source>
         <translation>Вся телеметрия</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/DataConsole.cpp" line="55"/>
+        <location filename="../UserInterface/Forms/DataConsole.cpp" line="54"/>
         <source>Skip 4 of 5 telemetry frames</source>
         <translation>Пропустить 4 из 5 кадров телеметрии</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/DataConsole.cpp" line="56"/>
+        <location filename="../UserInterface/Forms/DataConsole.cpp" line="55"/>
         <source>Skip 9 of 10 telemetry frames</source>
         <translation>Пропустить 9 из 10 кадров телеметрии</translation>
     </message>
@@ -2186,72 +2412,65 @@ Are you sure you want to update it?</source>
 <context>
     <name>InterfaceSettingsEditor</name>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="37"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="38"/>
         <source>Settings File</source>
         <translation>Файл настроек</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="44"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="45"/>
         <source>Interface Language</source>
         <translation>Язык интерфейса</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="47"/>
         <source>English</source>
-        <translation>Английский</translation>
+        <translation type="vanished">Английский</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="48"/>
         <source>Russian</source>
-        <translation>Русский</translation>
+        <translation type="vanished">Русский</translation>
+    </message>
+    <message>
+        <source>Belarusian</source>
+        <translation type="vanished">Белорусский</translation>
+    </message>
+    <message>
+        <source>Arabic</source>
+        <translation type="vanished">Арабский</translation>
     </message>
     <message>
         <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="49"/>
-        <source>Belarusian</source>
-        <translation>Белорусский</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="50"/>
-        <source>Arabic</source>
-        <translation>Арабский</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="54"/>
         <source>Application Style</source>
         <translation>Стиль приложения</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="56"/>
         <source>Single Display</source>
-        <translation>Один дисплей</translation>
+        <translation type="vanished">Один дисплей</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="57"/>
         <source>Camera (1) &amp; Map (2)</source>
-        <translation>Камера (1) и Карта (2)</translation>
+        <translation type="vanished">Камера (1) и Карта (2)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="58"/>
         <source>Map (1) &amp; Camera (2)</source>
-        <translation>Карта (1) и Камера (2)</translation>
+        <translation type="vanished">Карта (1) и Камера (2)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="62"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="53"/>
         <source>Minimalistic Design</source>
         <translation>Минималистический дизайн</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="64"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="55"/>
         <source>Ask About Quit</source>
         <translation>Запрос о закрытии</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="65"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="56"/>
         <source>On Save Settings</source>
         <translation>При сохранении настроек</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="66"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="57"/>
         <source>On Close Application</source>
         <translation>При закрытии приложения</translation>
     </message>
@@ -2260,173 +2479,170 @@ Are you sure you want to update it?</source>
         <translation type="vanished">Перезахват цели (кадры)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="152"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="143"/>
         <source>Allowed Functions</source>
         <translation>Доступные функции</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="114"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="105"/>
         <source>Camera</source>
         <translation>Камера</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="33"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="34"/>
         <source>Application File</source>
         <translation>Файл приложения</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="109"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="100"/>
         <source>Common</source>
         <translation>Общие</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="117"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="108"/>
         <source>Bombing</source>
         <translation>Бомбардировка</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="118"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="109"/>
         <source>Markers</source>
         <translation>Маркеры</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="119"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="110"/>
         <source>Tools</source>
         <translation>Инструменты</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="120"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="111"/>
         <source>Patrol</source>
         <translation>Патрулирование</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="122"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="113"/>
         <source>Coord Indicator</source>
         <translation>Индикатор координат</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="157"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="148"/>
         <source>OSD Line Width</source>
         <translation>Ширина линии OSD</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="159"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="150"/>
         <source>Fixed Width</source>
         <translation>Фиксированная ширина</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="161"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="152"/>
         <source>OSD Information</source>
         <translation>OSD информация</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="163"/>
         <source>Cross in Center</source>
-        <translation>Перекрестие в центре</translation>
+        <translation type="vanished">Перекрестие в центре</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="164"/>
         <source>Circle in Center</source>
-        <translation>Окружность в центре</translation>
+        <translation type="vanished">Окружность в центре</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="165"/>
         <source>Cross and Rulers</source>
-        <translation>Перекрестие  с линейками</translation>
+        <translation type="vanished">Перекрестие  с линейками</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="167"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="155"/>
         <source>Lines Color</source>
         <translation>Цвет линий</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="168"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="156"/>
         <source>Mark Color</source>
         <translation>Цвет марки</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="170"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="158"/>
         <source>Gimbal Indicator Size</source>
         <translation>Размер индикатора гимбла</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="173"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="161"/>
         <source>Telemetry Indicator Font Size</source>
         <translation>Размер шрифта индикатора телеметрии</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="176"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="164"/>
         <source>Target Tracker</source>
         <translation>Автомат сопровождения</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="177"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="165"/>
         <source>Cursor</source>
         <translation>Курсор</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="206"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="194"/>
         <source>OSD</source>
         <translation>OSD</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="211"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="199"/>
         <source>View Field Border</source>
         <translation>Граница поля зрения</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="213"/>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="217"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="201"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="205"/>
         <source>Color</source>
         <translation>Цвет</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="215"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="203"/>
         <source>Trajectory Line</source>
         <translation>Линия траектории</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="219"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="207"/>
         <source>Path Points Distance (pixel)</source>
         <translation>Расстояние между точками пути (пикс)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="239"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="227"/>
         <source>Map</source>
         <translation>Карта</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="244"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="232"/>
         <source>Sound Effects Allowed</source>
         <translation>Звуковые эфекты разрешены</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="245"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="233"/>
         <source>Sound Level</source>
         <translation>Уровень звука</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="261"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="249"/>
         <source>Sound</source>
         <translation>Звук</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="69"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="60"/>
         <source>Use Laser Rangefinder For Ground Level Calculation</source>
         <translation>Использовать лазерный дальномер для вычисления высоты земной поверхности</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="41"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="42"/>
         <source>Help File</source>
         <translation>Файл справки</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="42"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="43"/>
         <source>Select Help File</source>
         <translation>Выберите файл справки</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="42"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/InterfaceSettingsEditor.cpp" line="43"/>
         <source>HTML Files (*.html)</source>
         <translation>HTML файлы (*.html)</translation>
     </message>
@@ -2662,7 +2878,7 @@ X:%5
 Y:%6</translation>
     </message>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="97"/>
+        <location filename="../Map/MarkerStorageItems.cpp" line="86"/>
         <source>%1
 %2
 %3
@@ -2680,62 +2896,59 @@ Y:%6%7</translation>
 <context>
     <name>MapSettingsEditor</name>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="16"/>
         <source>Use Tiles from Database Only</source>
-        <translation>Использовать тайлы только из Базы Данных</translation>
+        <translation type="vanished">Использовать тайлы только из Базы Данных</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="17"/>
         <source>Use Tiles from Network Only</source>
-        <translation>Использовать тайлы только из Сети</translation>
+        <translation type="vanished">Использовать тайлы только из Сети</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="18"/>
         <source>Use Tiles from Database and Network</source>
-        <translation>Использовать тайлы из Базы Данных и Сети</translation>
+        <translation type="vanished">Использовать тайлы из Базы Данных и Сети</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="28"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="24"/>
         <source>Update</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="29"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="25"/>
         <source>Add</source>
         <translation>Добавить</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="30"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="26"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="41"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="37"/>
         <source>Tile Map</source>
         <translation>Тайловая карта</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="45"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="41"/>
         <source>Tile Download Cache</source>
         <translation>Кэш загрузки тайлов</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="46"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="42"/>
         <source>Height Map</source>
         <translation>Карта высот</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="47"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="43"/>
         <source>Geocoder</source>
         <translation>Геокодер</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="82"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="78"/>
         <source>Open %1 Database File</source>
         <translation>Октрыть файл данных для %1</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="82"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MapSettingsEditor.cpp" line="78"/>
         <source>Database Files (*.db)</source>
         <translation>Файлы баз данных (*.db)</translation>
     </message>
@@ -3029,22 +3242,22 @@ Y:%6%7</translation>
 <context>
     <name>QMarkerListWidget</name>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="443"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="453"/>
         <source>Deactivate</source>
         <translation>Деактивировать</translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="443"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="453"/>
         <source>Activate</source>
         <translation>Активировать</translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="444"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="454"/>
         <source>Change</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="445"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="455"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
@@ -3068,22 +3281,22 @@ Y:%6%7</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../Common/CommonData.cpp" line="350"/>
+        <location filename="../Common/CommonData.cpp" line="351"/>
         <source>S</source>
         <translation>ЮШ</translation>
     </message>
     <message>
-        <location filename="../Common/CommonData.cpp" line="344"/>
+        <location filename="../Common/CommonData.cpp" line="345"/>
         <source>N</source>
         <translation>СШ</translation>
     </message>
     <message>
-        <location filename="../Common/CommonData.cpp" line="356"/>
+        <location filename="../Common/CommonData.cpp" line="357"/>
         <source>W</source>
         <translation>ЗД</translation>
     </message>
     <message>
-        <location filename="../Common/CommonData.cpp" line="362"/>
+        <location filename="../Common/CommonData.cpp" line="363"/>
         <source>E</source>
         <translation>ВД</translation>
     </message>
@@ -3107,24 +3320,20 @@ Y:%6%7</translation>
         <translation type="vanished">Отдалить</translation>
     </message>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="9"/>
         <source>Unspecified</source>
-        <translation>Не определено</translation>
+        <translation type="vanished">Не определено</translation>
     </message>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="10"/>
         <source>Defeat Required</source>
-        <translation>Ожидается поражение</translation>
+        <translation type="vanished">Ожидается поражение</translation>
     </message>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="11"/>
         <source>Trial Shot</source>
-        <translation>Пристрелочный выстрел</translation>
+        <translation type="vanished">Пристрелочный выстрел</translation>
     </message>
     <message>
-        <location filename="../Map/MarkerStorageItems.cpp" line="12"/>
         <source>Real Shot</source>
-        <translation>Реальное попадание</translation>
+        <translation type="vanished">Реальное попадание</translation>
     </message>
 </context>
 <context>
@@ -3203,48 +3412,48 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>SessionsSettingsEditor</name>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="46"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="47"/>
         <source>Sessions Folder</source>
         <translation>Директория сессий</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="46"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="47"/>
         <source>Select Sessions Folder</source>
         <translation>Выберите директорию сессий</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="50"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="51"/>
         <source>Log Folder Cleanup</source>
         <translation>Очистка директории журналов</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="52"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="53"/>
         <source>Mb (Maximal Log Folder Size)</source>
         <translation>Мб (Максимальный размер директории журналов)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="75"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="76"/>
         <source>Frame Number in Video File</source>
         <translation>Число кадров в видео файле</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="77"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="78"/>
         <source>Unlimited</source>
         <translation>Неограниченно</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="84"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="85"/>
         <source>Video File Quality</source>
         <translation>Качество видео файла</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="87"/>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="106"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="88"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="101"/>
         <source>Video Record</source>
         <translation>Видеозапись</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="89"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="90"/>
         <source>Telemetry On Video</source>
         <translation>Телеметрия на видео</translation>
     </message>
@@ -3261,32 +3470,28 @@ Are you sure you want to deleted it?</source>
         <translation type="vanished">Время сессии</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="90"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="91"/>
         <source>Target Rectangle On Video</source>
         <translation>Прямоугольник цели на видео</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="93"/>
         <source>None</source>
-        <translation>Нет</translation>
+        <translation type="vanished">Нет</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="94"/>
         <source>Static Plane</source>
-        <translation>Неподвижный самолет</translation>
+        <translation type="vanished">Неподвижный самолет</translation>
+    </message>
+    <message>
+        <source>Rotating Plane</source>
+        <translation type="vanished">Вращающийся самолет</translation>
+    </message>
+    <message>
+        <source>Combined Presentation</source>
+        <translation type="vanished">Комбинированное представление</translation>
     </message>
     <message>
         <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="95"/>
-        <source>Rotating Plane</source>
-        <translation>Вращающийся самолет</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="96"/>
-        <source>Combined Presentation</source>
-        <translation>Комбинированное представление</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="100"/>
         <source>Gimbal Indicator Size</source>
         <translation>Размер индикатора гимбла</translation>
     </message>
@@ -3315,157 +3520,148 @@ Are you sure you want to deleted it?</source>
         <translation type="vanished">Телеметрия БЛА по UDP</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="103"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="98"/>
         <source>Telemetry Indicator Font Size</source>
         <translation>Размер шрифта индикатора телеметрии</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="140"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="135"/>
         <source>UDP Channel</source>
         <translation>Канал UDP</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="141"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="136"/>
         <source>Emulator</source>
         <translation>Эмулятор</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="145"/>
         <source>V4</source>
-        <translation>V4</translation>
+        <translation type="vanished">V4</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="151"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="143"/>
         <source>Extended Telemetry UDP</source>
         <translation>Расширенная телеметрия по UDP</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="154"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="146"/>
         <source>Camera Telemetry UDP</source>
         <translation>Телеметрия камеры по UDP</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="157"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="149"/>
         <source>Camera</source>
         <translation>Камера</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="162"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="154"/>
         <source>Video Lag (ms)</source>
         <translation>Задержка видео (мс)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="165"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="157"/>
         <source>Data Reception</source>
         <translation>Получение данных</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="203"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="195"/>
         <source>Commands over UDP/IP</source>
         <translation>Команды через UDP/IP</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="204"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="196"/>
         <source>Commands over a serial port</source>
         <translation>Команды по посл. порту</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="211"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="203"/>
         <source>Command Sending Interval</source>
         <translation>Интервал отправки команд</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="214"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="206"/>
         <source>Command Protocol:</source>
         <translation>Командный протокол:</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="217"/>
         <source>MUSV</source>
-        <translation>МУСВ</translation>
+        <translation type="vanished">МУСВ</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="218"/>
         <source>Otus</source>
-        <translation>Otus</translation>
+        <translation type="vanished">Otus</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="219"/>
         <source>MUSV Direct</source>
-        <translation>МУСВ прямое</translation>
+        <translation type="vanished">МУСВ прямое</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="220"/>
         <source>Otus Direct</source>
-        <translation>Otus прямое</translation>
+        <translation type="vanished">Otus прямое</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="224"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="210"/>
         <source>Data Sending</source>
         <translation>Отправка данных</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="254"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="240"/>
         <source>External Data Console (UDP)</source>
         <translation>Внешняя консоль данных (UDP)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="257"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="243"/>
         <source>Data Forwarding</source>
         <translation>Пересылка данных</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="278"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="264"/>
         <source>Enable Artillery Mount Notification</source>
         <translation>Разрешить уведомления для артиллерийской установки</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="280"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="266"/>
         <source>Artillery Mount (TCP)</source>
         <translation>Артиллерийская установка (TCP)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="283"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="269"/>
         <source>Artillery Spotter</source>
         <translation>Артиллерийский корректировщик</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="302"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="288"/>
         <source>Catapult Launcher</source>
         <translation>Катапульта</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="308"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="294"/>
         <source>Other</source>
         <translation>Прочее</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="325"/>
         <source>Internal Tracker #1</source>
-        <translation>Внутренний трекер №1</translation>
+        <translation type="vanished">Внутренний трекер №1</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="326"/>
         <source>Internal Tracker #2</source>
-        <translation>Внутренний трекер №2</translation>
+        <translation type="vanished">Внутренний трекер №2</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="327"/>
         <source>Internal Tracker #3</source>
-        <translation>Внутренний трекер №3</translation>
+        <translation type="vanished">Внутренний трекер №3</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="328"/>
         <source>External Tracker</source>
-        <translation>Внешний трекер</translation>
+        <translation type="vanished">Внешний трекер</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="332"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="312"/>
         <source>External Tracker Commands (UDP/IP)</source>
         <translation>Команды внешнего трекера (UDP/IP)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="335"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="315"/>
         <source>External Tracker Telemetry (UDP/IP)</source>
         <translation>Телеметрия внешнего трекера (UDP/IP)</translation>
     </message>
@@ -3474,17 +3670,17 @@ Are you sure you want to deleted it?</source>
         <translation type="vanished">Использовать внешний трекер</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="339"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="319"/>
         <source>Tracker</source>
         <translation>Трекер</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="250"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="236"/>
         <source>Forwarding</source>
         <translation>Пересылка</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="70"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/SessionsSettingsEditor.cpp" line="71"/>
         <source>Computer Info</source>
         <translation>Информация о компьютере</translation>
     </message>
@@ -3629,59 +3825,49 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>VideoImageTuner</name>
     <message>
-        <location filename="../UserInterface/VideoImageTuner.cpp" line="33"/>
+        <location filename="../UserInterface/VideoImageTuner.cpp" line="34"/>
         <source>Grayscale Image</source>
         <translation>Черно-белое изображение</translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoImageTuner.cpp" line="38"/>
         <source>Whitehot</source>
-        <translation>Whitehot</translation>
+        <translation type="vanished">Whitehot</translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoImageTuner.cpp" line="39"/>
         <source>Blackhot</source>
-        <translation>Blackhot</translation>
+        <translation type="vanished">Blackhot</translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoImageTuner.cpp" line="40"/>
         <source>Ranbow</source>
-        <translation>Ranbow</translation>
+        <translation type="vanished">Ranbow</translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoImageTuner.cpp" line="41"/>
         <source>Three-primary colors</source>
-        <translation>Three-primary colors</translation>
+        <translation type="vanished">Three-primary colors</translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoImageTuner.cpp" line="42"/>
         <source>Blue-red-yellow</source>
-        <translation>Blue-red-yellow</translation>
+        <translation type="vanished">Blue-red-yellow</translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoImageTuner.cpp" line="43"/>
         <source>Blue-purple-red</source>
-        <translation>Blue-purple-red</translation>
+        <translation type="vanished">Blue-purple-red</translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoImageTuner.cpp" line="44"/>
         <source>Mixed colors</source>
-        <translation>Mixed colors</translation>
+        <translation type="vanished">Mixed colors</translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoImageTuner.cpp" line="45"/>
         <source>Blue-green-red</source>
-        <translation>Blue-green-red</translation>
+        <translation type="vanished">Blue-green-red</translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoImageTuner.cpp" line="46"/>
         <source>Blackish green-red</source>
-        <translation>Blackish green-red</translation>
+        <translation type="vanished">Blackish green-red</translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoImageTuner.cpp" line="47"/>
         <source>Lava</source>
-        <translation>Lava</translation>
+        <translation type="vanished">Lava</translation>
     </message>
     <message>
         <source>Color Mode %1</source>

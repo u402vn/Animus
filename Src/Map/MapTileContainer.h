@@ -12,6 +12,7 @@
 #include "Common/CommonData.h"
 #include "Map/HeightMapContainer.h"
 #include "Map/MapTileDownloader.h"
+#include "Constants.h"
 
 // http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
 // http://habrahabr.ru/post/146107/
@@ -50,13 +51,6 @@ enum MapHybridTileSource
     NoHybridTile    = -2,
     YandexHybrid    = 5,
     GoogleHybrid    = 8
-};
-
-enum TileReceivingMode
-{
-    DatabaseOnly = 0,
-    NetworkOnly,
-    DatabaseAndNetwork
 };
 
 class TileDatabaseConnection final : public QObject
