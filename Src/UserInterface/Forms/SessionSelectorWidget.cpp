@@ -203,27 +203,3 @@ void SessionSelectorWidget::sessionButtonRightClicked()
         clipboard->setText(path);
     }
 }
-
-void QPushButtonEx::mouseDoubleClickEvent(QMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton)
-        emit onDoubleClick();
-}
-
-void QPushButtonEx::mousePressEvent(QMouseEvent *event)
-{
-    if (event->button() == Qt::RightButton)
-        emit onRightClick();
-    else
-        QPushButton::mousePressEvent(event);
-}
-
-QPushButtonEx::QPushButtonEx(const QString &text, QWidget *parent) : QPushButton(text, parent)
-{
-
-}
-
-QPushButtonEx::~QPushButtonEx()
-{
-
-}

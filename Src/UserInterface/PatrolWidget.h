@@ -13,9 +13,9 @@ class PatrolWidget : public QWidget
     void initWidgets();
 
     QGridLayout *_mainLayout;
-    QPushButton *_btnNormalFlightMode, *_btnPatrolMovingTargetMode, *_btnPatrolStaticTargetMode, *_btnManualFlightMode;
+    QPushButtonEx *_btnNormalFlightMode, *_btnPatrolMovingTargetMode, *_btnPatrolStaticTargetMode, *_btnManualFlightMode;
 
-    QPushButton *createButton(const QString &toolTip, bool checkable, const QString &iconName, void(PatrolWidget::*onClickMethod)());
+    QPushButtonEx *createButton(const QString &toolTip, bool checkable, const QString &iconName, void(PatrolWidget::*onClickMethod)());
 public:
     explicit PatrolWidget(QWidget *parent);
 private slots:

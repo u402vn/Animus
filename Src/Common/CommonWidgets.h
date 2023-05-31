@@ -138,6 +138,19 @@ public:
     KeySequenceEditExt(QWidget *parent);
 };
 
+class QPushButtonEx : public QPushButton
+{
+    Q_OBJECT
+public:
+    void mouseDoubleClickEvent(QMouseEvent * event);
+    void mousePressEvent(QMouseEvent * event);
+    QPushButtonEx(const QString &text, QWidget *parent);
+    ~QPushButtonEx();
+signals:
+    void onDoubleClick();
+    void onRightClick();
+};
+
 class Spoiler : public QWidget
 {
     Q_OBJECT
@@ -196,7 +209,7 @@ public:
     static QComboBoxExt *createJButtonComboBox(QWidget *parent);
     static QComboBoxExt *createJAxisComboBox(QWidget *parent);
     static QFrame *createSeparator(QWidget *parent);
-    static QPushButton *createButton(QWidget *parent, const QString &caption, const QString &toolTip,
+    static QPushButtonEx *createButton(QWidget *parent, const QString &caption, const QString &toolTip,
                                      bool checkable, int width, int height, const QString &iconName);
     static QSpinBoxEx *createRangeSpinbox(QWidget *parent, int minValue, int maxValue);
     static QDoubleSpinBoxEx *createDoubleRangeSpinbox(QWidget *parent, double minValue, double maxValue, double step, int decimals);

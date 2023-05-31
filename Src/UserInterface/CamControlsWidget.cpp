@@ -39,7 +39,7 @@ void CamControlsWidget::createTrackingButtons()
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
     auto cameraSettings = currCameraSettings();
 
-    auto btnTargetSizeSelector = createButton(tr("Target Size"), false, ":/targetsizeselector.png", &CamControlsWidget::onTargetSizeSelectorClick);
+    auto btnTargetSizeSelector = createButton(tr("Target Size"), false, ":/targetsizeselector.png", &CamControlsWidget::onTargetSizeSelectorClick, &CamControlsWidget::onTargetSizeSelectorClick);
     _btnTargetUnlock = createButton(applicationSettings.hidUIHint(hidbtnTargetUnlock), false, ":/targetunlock.png", &CamControlsWidget::onTargetUnlockClicked);
     _btnTargetUnlock->setEnabled(false);
     _btnCamRecording = createButton(applicationSettings.hidUIHint(hidbtnCamRecording), true, ":/camrecord.png", &CamControlsWidget::onCamRecordingClicked_Internal);
@@ -204,10 +204,19 @@ void CamControlsWidget::createCamViewControls()
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
 
     //create buttons
-    _btnEnableStabilization = createButton(applicationSettings.hidUIHint(hidbtnEnableSoftwareStabilization), true, ":/stabilization.png", &CamControlsWidget::onEnableStabilizationClick_Internal);
+    _btnEnableStabilization = createButton(applicationSettings.hidUIHint(hidbtnEnableSoftwareStabilization), true, ":/stabilization.png",
+                                           &CamControlsWidget::onEnableStabilizationClick_Internal, &CamControlsWidget::onEnableStabilizationMenuClick);
     _btnEnableStabilization->setChecked(applicationSettings.SoftwareStabilizationEnabled);
     onEnableStabilizationClick_Internal();
-    _btnLiveViewSettings = createButton(tr("Live View Settings"), false, ":/liveviewsettings.png", &CamControlsWidget::onLiveViewSettingsClick);
+    _btnLiveViewSettings = createButton(tr("Live View Settings"), false, ":/liveviewsettings.png",
+                                        &CamControlsWidget::onLiveViewSettingsClick, &CamControlsWidget::onLiveViewSettingsClick);
+
+    _stabilizationTypeMenu = new QMenu(tr("Stabilization Type"), this);
+    _stabilizationTypeGroup = new QActionGroup(this);
+
+    auto acStabilizationItem = CommonWidgetUtils::createCheckableMenuGroupAction("Stabilization by Frame", false, _stabilizationTypeGroup, _stabilizationTypeMenu, 1);
+    acStabilizationItem = CommonWidgetUtils::createCheckableMenuGroupAction("Stabilization by Target", true, _stabilizationTypeGroup, _stabilizationTypeMenu, 2);
+
 
     auto btnCam1 = createButton(tr("Camera 1"), true, ":/camera1.png", nullptr);
     auto btnCam2 = createButton(tr("Camera 2"), true, ":/camera2.png", nullptr);
@@ -393,11 +402,14 @@ void CamControlsWidget::processTelemetry(const TelemetryDataFrame &telemetryFram
     }
 }
 
-QPushButton *CamControlsWidget::createButton(const QString &toolTip, bool checkable, const QString &iconName, void(CamControlsWidget::*onClickMethod)() )
+QPushButtonEx *CamControlsWidget::createButton(const QString &toolTip, bool checkable, const QString &iconName,
+                                               void(CamControlsWidget::*onClickMethod)(), void(CamControlsWidget::*onRightClick)())
 {
     auto button = CommonWidgetUtils::createButton(this, NO_CAPTION, toolTip, checkable, QUARTER_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT, iconName);
     if (onClickMethod != nullptr)
-        connect(button, &QPushButton::clicked, this, onClickMethod, Qt::DirectConnection);
+        connect(button, &QPushButtonEx::clicked, this, onClickMethod, Qt::DirectConnection);
+    if (onRightClick != nullptr)
+        connect(button, &QPushButtonEx::onRightClick, this, onRightClick, Qt::DirectConnection);
     return button;
 }
 
@@ -437,7 +449,7 @@ void CamControlsWidget::tuneImageChangeInternal(qreal brightness, qreal contrast
 
 void CamControlsWidget::onTargetSizeSelectorClick()
 {
-    auto btnTargetSizeSelector = qobject_cast<QPushButton *>(sender());
+    auto btnTargetSizeSelector = qobject_cast<QPushButtonEx *>(sender());
     _targetSizeMenu->exec(btnTargetSizeSelector->mapToGlobal(QPoint(0, btnTargetSizeSelector->height())));
 }
 
@@ -459,6 +471,12 @@ void CamControlsWidget::onEnableStabilizationClick_Internal()
     bool isSoftwareEnabled = _btnEnableStabilization->isChecked();
     applicationSettings.SoftwareStabilizationEnabled = isSoftwareEnabled;
     emit enableSoftwareStabilization(isSoftwareEnabled);
+}
+
+void CamControlsWidget::onEnableStabilizationMenuClick()
+{
+    auto btnStabilization = qobject_cast<QPushButtonEx *>(sender());
+    _stabilizationTypeMenu->exec(btnStabilization->mapToGlobal(QPoint(0, btnStabilization->height())));
 }
 
 void CamControlsWidget::onLaserActivationClick_Internal()
@@ -513,7 +531,7 @@ void CamControlsWidget::onCamDriversOffClicked()
 {
     EnterProcStart("CamControlsWidget::onCamDriversOffClicked");
 
-    if (qobject_cast<QPushButton*>(sender()) == nullptr )
+    if (qobject_cast<QPushButtonEx*>(sender()) == nullptr )
         _btnCamDriversOff->setChecked(! _btnCamDriversOff->isChecked());
 
     bool driversEnabled = _btnCamDriversOff->isChecked();

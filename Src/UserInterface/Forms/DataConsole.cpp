@@ -2,7 +2,6 @@
 #include <QGridLayout>
 #include <QTextBlock>
 #include <QTextCursor>
-#include "Common/CommonWidgets.h"
 #include "Common/CommonUtils.h"
 #include <QPushButton>
 
@@ -38,8 +37,8 @@ DataConsole::DataConsole(QWidget *parent) : QWidget(parent)
     _pauseButton = CommonWidgetUtils::createButton(this, tr("Pause"), tr("Pause logging"),  true, 0, 0, "");
 
     // https://forum.qt.io/topic/30568/how-to-get-the-sender-in-a-c-lambda-signal-slot-handler
-    QPushButton *clearButton = CommonWidgetUtils::createButton(this, tr("Clear"), tr("Clear log"),  false, 0, 0, "");
-    connect(clearButton, &QPushButton::clicked, [ this]()
+    auto clearButton = CommonWidgetUtils::createButton(this, tr("Clear"), tr("Clear log"),  false, 0, 0, "");
+    connect(clearButton, &QPushButtonEx::clicked, [ this]()
     {
         _logText->clear();
     });

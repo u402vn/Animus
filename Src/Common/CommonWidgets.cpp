@@ -356,9 +356,9 @@ QFrame *CommonWidgetUtils::createSeparator(QWidget *parent)
     return separator;
 }
 
-QPushButton *CommonWidgetUtils::createButton(QWidget *parent, const QString &caption, const QString &toolTip, bool checkable, int width, int height, const QString &iconName)
+QPushButtonEx *CommonWidgetUtils::createButton(QWidget *parent, const QString &caption, const QString &toolTip, bool checkable, int width, int height, const QString &iconName)
 {
-    auto button = new QPushButton(caption, parent);
+    auto button = new QPushButtonEx(caption, parent);
     button->setToolTip(toolTip);
     button->setCheckable(checkable);
     if ((width > 0) && (height > 0))
@@ -550,6 +550,32 @@ KeySequenceEditExt::KeySequenceEditExt(QWidget *parent) :
     int fixedSize = this->sizeHint().height() - frameWidth * 2;
     _clearButton->setMinimumSize(fixedSize, fixedSize);
     _clearButton->setMaximumSize(fixedSize, fixedSize);
+}
+
+//-------------------------------------- QPushButtonEx --------------------------------------
+
+void QPushButtonEx::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+        emit onDoubleClick();
+}
+
+void QPushButtonEx::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::RightButton)
+        emit onRightClick();
+    else
+        QPushButton::mousePressEvent(event);
+}
+
+QPushButtonEx::QPushButtonEx(const QString &text, QWidget *parent) : QPushButton(text, parent)
+{
+
+}
+
+QPushButtonEx::~QPushButtonEx()
+{
+
 }
 
 //-------------------------------------- CheckableMenu --------------------------------------

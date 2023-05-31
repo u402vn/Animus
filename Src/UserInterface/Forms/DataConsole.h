@@ -6,6 +6,7 @@
 #include <QMenu>
 #include <QAction>
 #include <QPushButton>
+#include "Common/CommonWidgets.h"
 #include "TelemetryDataFrame.h"
 
 class DataConsole : public QWidget
@@ -13,8 +14,8 @@ class DataConsole : public QWidget
     Q_OBJECT
     QTextEdit *_logText;
 
-    QPushButton *_pauseButton;
-    QPushButton *_setingsButton;
+    QPushButtonEx *_pauseButton;
+    QPushButtonEx *_setingsButton;
     QMenu *_menu;
     QAction *_acShowCommands;
     QAction *_acShowTelemetry;

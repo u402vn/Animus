@@ -46,30 +46,35 @@ private:
 
     GPSCoordIndicator *_coordIndicator;
 
-    QPushButton *_btnCamDriversOff, *_btnCamLandingPos, *_btnCamBeginingPos, *_btnCamVerticalPos;
+    QPushButtonEx *_btnCamDriversOff, *_btnCamLandingPos, *_btnCamBeginingPos, *_btnCamVerticalPos;
 
     CamControlsWidgetDials *_camDials;
     CamControlsWidgetKnob *_camKnob;
     QSlider *_camZoom;
     QLabel *_camZoomIndicator;
 
-    QPushButton *_btnLaserActivation;
+    QPushButtonEx *_btnLaserActivation;
 
     QActionGroup *_targetSizeGroup;
     QMenu *_targetSizeMenu;
-    QPushButton *_btnTargetUnlock;
-    QPushButton *_btnCamRecording;
-    QPushButton *_btnAutomaticTracer;
+    QPushButtonEx *_btnTargetUnlock;
+    QPushButtonEx *_btnCamRecording;
+    QPushButtonEx *_btnAutomaticTracer;
 
-    QPushButton *_btnEnableStabilization;
+    QPushButtonEx *_btnEnableStabilization;
+    QActionGroup *_stabilizationTypeGroup;
+    QMenu *_stabilizationTypeMenu;
 
-    QPushButton *_btnLiveViewSettings;
+    QPushButtonEx *_btnLiveViewSettings;
     QButtonGroup *_grpCamButtons;
 
     QDoubleSpinBox *_sbSnapshotSeriesInterval;
-    QPushButton *_btnSnapshotSeries;
+    QPushButtonEx *_btnSnapshotSeries;
 
-    QPushButton *createButton(const QString &toolTip, bool checkable, const QString &iconName, void(CamControlsWidget::*onClickMethod)());
+    QPushButtonEx *createButton(const QString &toolTip, bool checkable, const QString &iconName,
+                                void(CamControlsWidget::*onClickMethod)(),
+                                void(CamControlsWidget::*onRightClick)() = nullptr
+                                );
 
     void createTrackingButtons();
     void createFixedPositionsButtons();
@@ -132,6 +137,7 @@ private slots:
     void onTargetSizeSelectorClick();
     void onTargetSizeActionTriggered();
     void onEnableStabilizationClick_Internal();
+    void onEnableStabilizationMenuClick();
 
     void onLaserActivationClick_Internal();
 

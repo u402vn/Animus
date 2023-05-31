@@ -28,11 +28,11 @@ void PatrolWidget::initWidgets()
     _mainLayout->addWidget(topButtons, 0, 1, 1, 1, Qt::AlignHCenter | Qt::AlignTop);
 }
 
-QPushButton *PatrolWidget::createButton(const QString &toolTip, bool checkable, const QString &iconName, void (PatrolWidget::*onClickMethod)())
+QPushButtonEx *PatrolWidget::createButton(const QString &toolTip, bool checkable, const QString &iconName, void (PatrolWidget::*onClickMethod)())
 {
     auto button = CommonWidgetUtils::createButton(this, NO_CAPTION, toolTip, checkable, QUARTER_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT, iconName);
     if (onClickMethod != nullptr)
-        connect(button, &QPushButton::clicked, this, onClickMethod);
+        connect(button, &QPushButtonEx::clicked, this, onClickMethod);
     return button;
 }
 

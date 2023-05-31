@@ -28,8 +28,7 @@ private:
 
     QProgressBar *_prgressBar;
 
-    QPushButton * _btnStart;
-    QPushButton * _btnStop;
+    QPushButton *_btnStart, *_btnStop;
 
     void updateControlsForState(bool started);
 protected:
