@@ -253,6 +253,7 @@ public:
     ApplicationPreferenceInt OSDTelemetryIndicatorFontSize;
     ApplicationPreferenceColor OSDTargetTrackerCursor;
     ApplicationPreferenceBool SoftwareStabilizationEnabled;
+    ApplicationPreferenceEnum<StabilizationType> VideoStabilizationType;
     ApplicationPreferenceEnum<ArtillerySpotterState> LastTargetArtillerySpotterState;
 
     ApplicationPreferenceBool AskAboutQuitOnSaveSettings;

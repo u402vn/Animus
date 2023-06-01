@@ -28,6 +28,8 @@ class ImageProcessorThread final: public QThread
     bool _quit;
     QWaitCondition _waitCondition;
 
+    StabilizationType _stabilizationType;
+
     ImageCorrector *_imageCorrector;
     ImageStabilazation  *_imageStabilazation;
     ImageTracker *_imageTracker;
@@ -41,6 +43,7 @@ public:
     void lockTarget(const QPoint &targetCenter);
     void unlockTarget();
     void setTargetSize(int targetSize);
+    void setStabilizationType(StabilizationType stabType);
     void setTuneImageSettings(qreal brightness, qreal contrast, qreal gamma, bool grayscale);
     void getTuneImageSettings(qreal &brightness, qreal &contrast, qreal &gamma, bool &grayscale);
 signals:
@@ -67,6 +70,7 @@ public slots:
     void lockTarget(const QPoint &targetCenter);
     void unlockTarget();
     void setTargetSize(int targetSize);
+    void setStabilizationType(StabilizationType stabType);
 private slots:
     void dataProcessedInThread(const TelemetryDataFrame &telemetryFrame, const QImage &videoFrame);
 };

@@ -219,7 +219,8 @@ void CamControlsWidget::createCamViewControls()
     auto i = stabilizationTypeCaptions.begin();
     while (i != stabilizationTypeCaptions.end())
     {
-        CommonWidgetUtils::createCheckableMenuGroupAction(i.value(), false, _stabilizationTypeGroup, _stabilizationTypeMenu, i.key());
+        CommonWidgetUtils::createCheckableMenuGroupAction(i.value(), applicationSettings.VideoStabilizationType == i.key(),
+                                                          _stabilizationTypeGroup, _stabilizationTypeMenu, i.key());
         ++i;
     }
 
@@ -480,8 +481,20 @@ void CamControlsWidget::onEnableStabilizationClick_Internal()
 
 void CamControlsWidget::onEnableStabilizationMenuClick()
 {
+    EnterProcStart("CamControlsWidget::onEnableStabilizationMenuClick");
+    ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
+
     auto btnStabilization = qobject_cast<QPushButtonEx *>(sender());
     _stabilizationTypeMenu->exec(btnStabilization->mapToGlobal(QPoint(0, btnStabilization->height())));
+    auto acSelectedStabilizationType = _stabilizationTypeGroup->checkedAction();
+
+    if (acSelectedStabilizationType != nullptr)
+    {
+        StabilizationType stabType = StabilizationType::StabilizationByFrame;
+        stabType = StabilizationType(acSelectedStabilizationType->data().toInt());
+        applicationSettings.VideoStabilizationType = stabType;
+        emit setStabilizationType(stabType);
+    }
 }
 
 void CamControlsWidget::onLaserActivationClick_Internal()

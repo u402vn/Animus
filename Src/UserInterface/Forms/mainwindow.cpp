@@ -59,6 +59,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     auto coordinateCalculator = new CoordinateCalculator(this, heightMapContainer);
 
     _imageProcessor = new ImageProcessor(this, coordinateCalculator, cameraSettings->UseVerticalFrameMirrororing, applicationSettings.ObjectTrackerType);
+    _imageProcessor->setStabilizationType(applicationSettings.VideoStabilizationType);
 
     connect(_hardwareLink, &HardwareLink::onHardwareLinkStateChanged, this, &MainWindow::onHardwareLinkStateChanged);
     connect(_imageProcessor, &ImageProcessor::onDataProcessed, this, &MainWindow::onDataReceived, Qt::DirectConnection);
@@ -400,6 +401,8 @@ void MainWindow::addTabWidgets()
     connect(_camControlsWidget, &CamControlsWidget::makeScreenshot,            this,               &MainWindow::makeScreenshot);
 
     connect(_camControlsWidget, &CamControlsWidget::tuneImageChange,           this,               &MainWindow::tuneImageChange);
+
+    connect(_camControlsWidget,  &CamControlsWidget::setStabilizationType,     _imageProcessor,  &ImageProcessor::setStabilizationType);
 
     if (applicationSettings.ObjectTrackerType == ObjectTrackerTypeEnum::External)
     {

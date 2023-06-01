@@ -100,6 +100,7 @@ public:
 signals:
     void unlockTarget();
     void setTargetSize(int targetSize);
+    void setStabilizationType(StabilizationType stabType);
     void enableSoftwareStabilization(bool enable);
     void makeScreenshot();
     void tuneImageChange(qreal brightness, qreal contrast, qreal gamma, bool grayscale);

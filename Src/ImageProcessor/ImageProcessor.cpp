@@ -56,6 +56,11 @@ void ImageProcessor::setTargetSize(int targetSize)
     _procThread->setTargetSize(targetSize);
 }
 
+void ImageProcessor::setStabilizationType(StabilizationType stabType)
+{
+    _procThread->setStabilizationType(stabType);
+}
+
 void ImageProcessor::setTuneImageSettings(qreal brightness, qreal contrast, qreal gamma, bool grayscale)
 {
     _procThread->setTuneImageSettings(brightness, contrast, gamma, grayscale);
@@ -81,6 +86,8 @@ ImageProcessorThread::ImageProcessorThread(QObject *parent, bool verticalMirror,
     _telemetryFrames = new QQueue<TelemetryDataFrame>();
     _imageCorrector = new ImageCorrector();
     _imageStabilazation = new ImageStabilazation(verticalMirror);
+
+    _stabilizationType = StabilizationType::StabilizationByFrame;
 
     switch (trackerType)
     {
@@ -141,10 +148,6 @@ void ImageProcessorThread::run()
             FrameShift2D correctionFrameShift = _imageStabilazation->getLastFrameCorrectionShift();
             FrameShift2D frameShift = _imageStabilazation->getLastFrameShift();
 
-            telemetryFrame.StabilizedCenterX = frameMat.cols / 2 + correctionFrameShift.X;
-            telemetryFrame.StabilizedCenterY = frameMat.rows / 2 + correctionFrameShift.Y;
-            telemetryFrame.StabilizedRotationAngle = correctionFrameShift.A;
-
             if (_imageTracker != nullptr)
             {
                 QRect targetRect = _imageTracker->processFrame(frameMat, frameShift);
@@ -153,6 +156,20 @@ void ImageProcessorThread::run()
                 telemetryFrame.TrackedTargetRectWidth = targetRect.width();
                 telemetryFrame.TrackedTargetRectHeight = targetRect.height();
             }
+
+            if ((_stabilizationType == StabilizationType::StabilizationByTarget) && telemetryFrame.targetIsVisible())
+            {
+                telemetryFrame.StabilizedCenterX = telemetryFrame.TrackedTargetCenterX;
+                telemetryFrame.StabilizedCenterY = telemetryFrame.TrackedTargetCenterY;
+                telemetryFrame.StabilizedRotationAngle = 0;
+            }
+            else
+            {
+                telemetryFrame.StabilizedCenterX = frameMat.cols / 2 + correctionFrameShift.X;
+                telemetryFrame.StabilizedCenterY = frameMat.rows / 2 + correctionFrameShift.Y;
+                telemetryFrame.StabilizedRotationAngle = correctionFrameShift.A;
+            }
+
         }
         emit dataProcessedInThread(telemetryFrame, videoFrame);
     }
@@ -198,6 +215,11 @@ void ImageProcessorThread::setTargetSize(int targetSize)
         _imageTracker->setTargetSize(targetSize);
         _mutex.unlock();
     }
+}
+
+void ImageProcessorThread::setStabilizationType(StabilizationType stabType)
+{
+    _stabilizationType = stabType;
 }
 
 void ImageProcessorThread::setTuneImageSettings(qreal brightness, qreal contrast, qreal gamma, bool grayscale)
