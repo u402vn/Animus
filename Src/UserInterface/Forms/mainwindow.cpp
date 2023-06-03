@@ -387,6 +387,7 @@ void MainWindow::initHidController(CamAssemblyPreferences *camAssemblyPreference
     connect(_hidController, &HIDController::onChangeBombingSightClicked,            _videoWidget,       &VideoDisplayWidget::onChangeBombingSightClicked, Qt::DirectConnection);
     connect(_hidController, &HIDController::onTargetLockCursorSpeedChange,          _videoWidget,       &VideoDisplayWidget::onTargetLockCursorSpeedChange, Qt::DirectConnection);
     connect(_hidController, &HIDController::onTargetLockInCursorClick,              _videoWidget,       &VideoDisplayWidget::onTargetLockInCursorClick, Qt::DirectConnection);
+    connect(_hidController, &HIDController::onMagnifierClick,                       _videoWidget,       &VideoDisplayWidget::onMagnifierClick, Qt::DirectConnection);
 
     connect(_camControlsWidget, &CamControlsWidget::doSetZoomFromUI,                _hidController,     &HIDController::doSetZoomFromUI, Qt::DirectConnection);
 }

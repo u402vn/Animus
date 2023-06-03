@@ -212,6 +212,7 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
 
     addHIDButtonBinding(hidbtnTargetUnlock,                             rowIndex);
     addHIDButtonBinding(hidbtnTargetLockInCursor,                       rowIndex);
+    addHIDButtonBinding(hidbtnMagnifier,                                rowIndex);
 
     if (applicationSettings.isPhotographyLicensed())
         addHIDButtonBinding(hidbtnCamRecording,                         rowIndex);

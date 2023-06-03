@@ -118,6 +118,7 @@ signals:
     void onTargetLockInCursorClick();
     void onCamRecordingClicked();
     void onEnableAutomaticTracerClicked();
+    void onMagnifierClick();
 
     void onChangeBombingSightClicked();
 

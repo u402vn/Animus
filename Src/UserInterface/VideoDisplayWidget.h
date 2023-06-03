@@ -45,6 +45,7 @@ class VideoDisplayWidget final : public QWidget
     bool _drawTargetRectangle;
     QRect _cursorMark;
     QDateTime _cursorMarkLastMove;
+    bool _showMagnifier;
 
     int _defaultLineWidth;
     bool _useFixedLineWidth;
@@ -87,9 +88,11 @@ class VideoDisplayWidget final : public QWidget
     bool isCursorVisible();
 
     inline QPointF alignPoint(const QPointF &point);
+    inline QRect alignRect(const QRect &rect);
 
     void updatePen(QPainter &painter, const QColor &color);
 
+    void drawMagnifier(QPainter &painter);
     void drawBluredBorders(QPainter &painter);
     void drawRectangleOnFrame(QPainter &painter, const QRect &rect, const QColor &color);
     void drawFrameCenterMark(QPainter &painter);
@@ -120,6 +123,7 @@ public slots:
     void onEnableStabilization(bool enable);
     void onTargetLockCursorSpeedChange(float speedX, float speedY);
     void onTargetLockInCursorClick();
+    void onMagnifierClick();
 signals:
     void lockTarget(const QPoint &targetCenter);
 };

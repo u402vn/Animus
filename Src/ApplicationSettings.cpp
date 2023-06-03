@@ -220,6 +220,7 @@ void ApplicationSettings::ensureHIDButtonPrefsLoaded()
 
     addHIDButtonPrefs(hidbtnTargetUnlock, "CamControls/TargetUnlockKey", "U",  "CamControls/TargetUnlockJoystickButton", -1, tr("Target Unlock"));
     addHIDButtonPrefs(hidbtnTargetLockInCursor, "CamControls/TargetLockInCursorKey", "",  "CamControls/TargetLockInCursorJoystickButton", 7, tr("Target Lock In Cursor"));
+    addHIDButtonPrefs(hidbtnMagnifier, "CamControls/MagnifierKey", "K",  "CamControls/MagnifierJoystickButton", -1, tr("Magnifier"));
 
     addHIDButtonPrefs(hidbtnCamRecording, "CamControls/CamRecordingKey", "",  "CamControls/CamRecordingJoystickButton", -1, tr("Camera Recording"));
     addHIDButtonPrefs(hidbtnAutomaticTracer, "CamControls/AutomaticTracerKey", "T",  "CamControls/AutomaticTracerJoystickButton", -1, tr("Automatic Tracer"));

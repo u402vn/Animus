@@ -144,7 +144,8 @@ enum HIDButton
     hidbtnMapZoomOut,
     hidbtnMapZoomIn,
     hidbtnFollowThePlane,
-    hidbtnTargetLockInCursor
+    hidbtnTargetLockInCursor,
+    hidbtnMagnifier
 };
 
 //Singleton

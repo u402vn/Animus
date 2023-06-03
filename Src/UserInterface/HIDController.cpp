@@ -96,6 +96,8 @@ HIDController::HIDController(QObject *parent) : QObject(parent)
     makeHIDMapItem(hidbtnSnapshotSeries,     &HIDController::onSnapshotSeriesClicked,           nullptr, false);
     makeHIDMapItem(hidbtnTargetUnlock,       &HIDController::onTargetUnlockClicked,             nullptr, false);
     makeHIDMapItem(hidbtnTargetLockInCursor, &HIDController::onTargetLockInCursorClick,         nullptr, false);
+    makeHIDMapItem(hidbtnMagnifier,          &HIDController::onMagnifierClick,                 nullptr, false);
+
 
     makeHIDMapItem(hidbtnCamRecording,       &HIDController::onCamRecordingClicked,             nullptr, false);
     makeHIDMapItem(hidbtnAutomaticTracer,    &HIDController::onEnableAutomaticTracerClicked,    nullptr, false);

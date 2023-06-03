@@ -15,6 +15,7 @@ VideoDisplayWidget::VideoDisplayWidget(QWidget *parent, VoiceInformant *voiceInf
     // setAttribute(Qt::WA_NoSystemBackground, true);
 
     _enableStabilization = false;
+    _showMagnifier = false;
 
     _voiceInformant = voiceInformant;
 
@@ -194,6 +195,11 @@ void VideoDisplayWidget::onTargetLockInCursorClick()
     emit lockTarget(_cursorMark.center());
 }
 
+void VideoDisplayWidget::onMagnifierClick()
+{
+    _showMagnifier = !_showMagnifier;
+}
+
 void VideoDisplayWidget::onChangeBombingSightClicked()
 {
     int count = _osdSightNumbers.count();
@@ -243,6 +249,16 @@ QPointF VideoDisplayWidget::alignPoint(const QPointF &point)
     return alignedPoint;
 }
 
+
+QRect VideoDisplayWidget::alignRect(const QRect &rect)
+{
+    QRect showedRect = rect;
+    QPointF pos = alignPoint(showedRect.center());
+    showedRect.setSize(rect.size() * _scale);
+    showedRect.moveCenter(pos.toPoint());
+    return showedRect;
+}
+
 void VideoDisplayWidget::updatePen(QPainter &painter, const QColor &color)
 {
     int penWidth = _defaultLineWidth;
@@ -257,6 +273,34 @@ void VideoDisplayWidget::updatePen(QPainter &painter, const QColor &color)
     QFont font = painter.font();
     font.setPointSize(1.0 + 12.0 * _scale);
     painter.setFont(font);
+}
+
+void VideoDisplayWidget::drawMagnifier(QPainter &painter)
+{
+    if (!_showMagnifier)
+        return;
+
+    QPoint mCenter;
+    bool needDraw = false;
+
+    QPoint mousePos = this->mapFromGlobal(QCursor::pos());
+
+    if (this->geometry().contains(mousePos))
+    {
+        mCenter = (mousePos - _screenViewRect.center() + _sourceFrameRect.center() * _scale) / _scale;
+        needDraw = true;
+    }
+
+    if (needDraw)
+    {
+        QSize srcSize(50, 50);
+        QSize destSize(100, 100);
+
+        QRect srcRect = QRect(mCenter - QPoint(srcSize.width() / 2, srcSize.height() / 2) , srcSize);
+        QRect destRect = alignRect(QRect(mCenter - QPoint(destSize.width() / 2, destSize.height() / 2), destSize));
+
+        painter.drawImage(destRect, _frame, srcRect);
+    }
 }
 
 void VideoDisplayWidget::drawBluredBorders(QPainter &painter)
@@ -352,11 +396,7 @@ void VideoDisplayWidget::drawRectangleOnFrame(QPainter &painter, const QRect &re
     if (rect.width() <= 0)
         return;
 
-    QRect showedRect = rect;
-    QPointF pos = alignPoint(showedRect.center());
-    showedRect.setSize(rect.size() * _scale);
-    showedRect.moveCenter(pos.toPoint());
-
+    QRect showedRect = alignRect(rect);
     updatePen(painter, color);
 
     drawTargetRectangleOnVideo(painter, showedRect);
@@ -503,10 +543,10 @@ void VideoDisplayWidget::paintEvent(QPaintEvent *event)
 
     painter.drawImage(_screenViewRect, _frame, _sourceFrameRect);
 
+    drawMagnifier(painter);
 
     //if (_useBluredBorders)
     //    drawBluredBorders(painter);
-
 
     //draw target frame
     if (_drawTargetRectangle)
