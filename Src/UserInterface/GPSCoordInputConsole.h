@@ -10,9 +10,8 @@ class GPSCoordInputConsole final : public QFrame
 {
     Q_OBJECT
 
-    QLineEdit *_edtUAVCoordLat;
-    QLineEdit *_edtUAVCoordLon;
-    QLineEdit *createCoordEdit(const QString &mask);
+    QLineEdit *_edtCoordLat;
+    QLineEdit *_edtCoordLon;
 
     void keyPressEvent(QKeyEvent *event);
 

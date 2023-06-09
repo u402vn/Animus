@@ -69,7 +69,7 @@ MapTileContainer::MapTileContainer(QObject *parent, const QList<QString> &mapDat
 
     _tileReceivingMode = TileReceivingMode::DatabaseOnly;
 
-    _coordFormat = DegreeMinutesSeconds; //todo move to settings
+    _coordFormat = DegreeMinutesSecondsF; //todo move to settings
     _coordSystem = WGS84;
 
     _usingCounter = 1;

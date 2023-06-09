@@ -85,8 +85,8 @@ const QString MapMarker::hint() const
 
     QString hint = QString(tr("%1\n%2\n%3\nHeight: %4\nX:%5\nY:%6%7"))
             .arg(_description)
-            .arg(_gpsCoord.EncodeLatitude(DegreeMinutesSeconds))
-            .arg(_gpsCoord.EncodeLongitude(DegreeMinutesSeconds))
+            .arg(_gpsCoord.EncodeLatitude(DegreeMinutesSecondsF))
+            .arg(_gpsCoord.EncodeLongitude(DegreeMinutesSecondsF))
             .arg(_gpsCoord.hmsl)
             .arg(sk42coord.x(), 0, 'f', 2, '0').arg(sk42coord.y(), 0, 'f', 2, '0')
             .arg(spotterStateCaption);

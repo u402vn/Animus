@@ -26,6 +26,7 @@ enum GeographicalCoordinatesFormat
 {
     Degree,
     DegreeMinutes,
+    DegreeMinutesSecondsF,
     DegreeMinutesSeconds
 };
 

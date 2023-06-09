@@ -2,6 +2,7 @@
 #define PATROLWIDGET_H
 
 #include <QWidget>
+#include <QObject>
 #include <QGridLayout>
 #include <QPushButton>
 #include "Common/CommonWidgets.h"
@@ -15,7 +16,7 @@ class PatrolWidget : public QWidget
     QGridLayout *_mainLayout;
     QPushButtonEx *_btnNormalFlightMode, *_btnPatrolMovingTargetMode, *_btnPatrolStaticTargetMode, *_btnManualFlightMode;
 
-    QPushButtonEx *createButton(const QString &toolTip, bool checkable, const QString &iconName, void(PatrolWidget::*onClickMethod)());
+    QPushButtonEx *createButton(const QString &toolTip, bool checkable, const QString &iconName, void (PatrolWidget::*onClickMethod)());
 public:
     explicit PatrolWidget(QWidget *parent);
 private slots:

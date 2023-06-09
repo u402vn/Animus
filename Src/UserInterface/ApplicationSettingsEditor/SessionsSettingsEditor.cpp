@@ -138,13 +138,13 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
 
     auto cbUAVTelemetryFormat = new QComboBoxExt(this, ConstantNames::UAVTelemetryFormatCaptions());
 
-    auto edUAVTelemetryUDPPort = CommonWidgetUtils::makePortEditor(this);
+    auto edUAVTelemetryUDPPort = CommonWidgetUtils::createPortEditor(this);
 
     auto chkExtTelemetryUDP = new QCheckBox(tr("Extended Telemetry UDP"), this);
-    auto edExtTelemetryUDPPort = CommonWidgetUtils::makePortEditor(this);
+    auto edExtTelemetryUDPPort = CommonWidgetUtils::createPortEditor(this);
 
     auto chkCamTelemetryUDP = new QCheckBox(tr("Camera Telemetry UDP"), this);
-    auto edCamTelemetryUDPPort = CommonWidgetUtils::makePortEditor(this);
+    auto edCamTelemetryUDPPort = CommonWidgetUtils::createPortEditor(this);
 
     auto lblCurrentCamera = new QLabel(tr("Camera"), this);
     _cbCurrentCamera = CameraSettingsEditor::createCamListCombo(this);

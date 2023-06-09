@@ -21,7 +21,7 @@ NetworkAddressEditor::NetworkAddressEditor(QWidget *parent, PreferenceAssociatio
         association->addBinding(addressPref, edtAddress);
     }
 
-    auto edtPort = CommonWidgetUtils::makePortEditor(this);
+    auto edtPort = CommonWidgetUtils::createPortEditor(this);
     mainLayout->addWidget(edtPort, 0, column++, 1, 1);
     association->addBinding(portPref, edtPort);
 }

@@ -271,28 +271,57 @@ inline void EncodeSingleCoord(double coord, int& grad, int& min, double& sec)
     sec = (absCoord - grad - double(min) / 60.0) * 3600.0;
 }
 
+
+const QString formatSingleCoordinate(double coord, const QString &siteText, GeographicalCoordinatesFormat format)
+{
+    int degrees, minutes;
+    double seconds;
+    EncodeSingleCoord(coord, degrees, minutes, seconds);
+
+    QString coordInfo;
+
+    switch(format)
+    {
+    case GeographicalCoordinatesFormat::Degree:
+    {
+        coordInfo = QString("%1°%2")
+                .arg(coord, 0, 'f', 6, '0').arg(siteText);
+        break;
+    }
+    case GeographicalCoordinatesFormat::DegreeMinutes:
+    {
+        double minutes2 = minutes + seconds / 60.0;
+
+        coordInfo = QString("%1°%2'%3")
+                .arg(degrees, 3).arg(minutes2, 0, 'f', 6, '0').arg(siteText);
+        break;
+    }
+    case GeographicalCoordinatesFormat::DegreeMinutesSeconds:
+    {
+        int seconds2 = qRound(seconds);
+        coordInfo = QString("%1°%2'%3\"%4")
+                .arg(degrees, 3).arg(minutes, 2).arg(seconds2, 2).arg(siteText);
+        break;
+    }
+    case GeographicalCoordinatesFormat::DegreeMinutesSecondsF:
+    default:
+    {
+        coordInfo = QString("%1°%2'%3\"%4")
+                .arg(degrees, 3).arg(minutes, 2).arg(seconds, 5, 'f', 2, '0').arg(siteText);
+    }
+    }
+
+    return coordInfo;
+}
+
 const QString WorldGPSCoord::EncodeLatitude(GeographicalCoordinatesFormat format) const
 {
-    int lat_grad, lat_min;
-    double lat_sec;
-    EncodeSingleCoord(lat, lat_grad, lat_min, lat_sec);
-    QString lat_site = lat < 0 ? postfixS() :postfixN(); //"ЮШ": "СШ";
-    QString coordInfo = "%1°%2'%3\"%4";
-    coordInfo = coordInfo
-            .arg(lat_grad, 3).arg(lat_min, 2).arg(lat_sec, 5, 'f', 2, '0').arg(lat_site);
-    return coordInfo;
+    return formatSingleCoordinate(lat, lat < 0 ? postfixS() :postfixN(), format);  //"ЮШ": "СШ";
 }
 
 const QString WorldGPSCoord::EncodeLongitude(GeographicalCoordinatesFormat format) const
 {
-    int lon_grad, lon_min;
-    double lon_sec;
-    EncodeSingleCoord(lon, lon_grad, lon_min, lon_sec);
-    QString lon_site = lon < 0 ? postfixW() : postfixE(); //"ЗД" : "ВД";
-    QString coordInfo = "%1°%2'%3\"%4";
-    coordInfo = coordInfo
-            .arg(lon_grad, 3).arg(lon_min, 2).arg(lon_sec, 5, 'f', 2, '0').arg(lon_site);
-    return coordInfo;
+    return formatSingleCoordinate(lon, lon < 0 ? postfixW() : postfixE(), format);  //"ЗД" : "ВД";
 }
 
 QString WorldGPSCoord::EncodeLatLon(GeographicalCoordinatesFormat format, bool safeString) const

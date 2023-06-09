@@ -210,7 +210,7 @@ public:
     static QComboBoxExt *createJAxisComboBox(QWidget *parent);
     static QFrame *createSeparator(QWidget *parent);
     static QPushButtonEx *createButton(QWidget *parent, const QString &caption, const QString &toolTip,
-                                     bool checkable, int width, int height, const QString &iconName);
+                                       bool checkable, int width, int height, const QString &iconName);
     static QSpinBoxEx *createRangeSpinbox(QWidget *parent, int minValue, int maxValue);
     static QDoubleSpinBoxEx *createDoubleRangeSpinbox(QWidget *parent, double minValue, double maxValue, double step, int decimals);
     static void drawText(QPainter &painter, QPoint pos, Qt::Alignment flags, const QString &text, bool shadowBackground);
@@ -223,7 +223,8 @@ public:
     static const QString showOpenFileDialog(const QString &caption, const QString &dir, const QString &filter);
     static const QString showSaveFileDialog(const QString &caption, const QString &dir, const QString &filter);
     static const QString showOpenDirectoryDialog(const QString &caption, const QString &dir);
-    static QLineEdit *makePortEditor(QWidget *parent);
+    static QLineEdit *createPortEditor(QWidget *parent);
+    static QLineEdit *createCoordEdit(QWidget *parent);
     static QRect getDesktopAvailableGeometry();
     static QDialogButtonBox *makeDialogButtonBox(QDialog *dialog, QDialogButtonBox::StandardButtons buttons);
     static void updateWidgetGeometry(QWidget *widget, const int width, const int height = 0);

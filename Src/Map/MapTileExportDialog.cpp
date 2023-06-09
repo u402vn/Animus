@@ -233,12 +233,12 @@ void MapTileExportDialog::onExportProcessEnded()
 void MapTileExportDialog::showCoordValues()
 {
     _lblCoordLeftTop->setText(QString(tr("From\t\t Lat:%1\t\tLon:%2"))
-                              .arg(_coordLeftTop.EncodeLatitude(DegreeMinutesSeconds))
-                              .arg(_coordLeftTop.EncodeLongitude(DegreeMinutesSeconds)));
+                              .arg(_coordLeftTop.EncodeLatitude(DegreeMinutesSecondsF))
+                              .arg(_coordLeftTop.EncodeLongitude(DegreeMinutesSecondsF)));
 
     _lblCoordRightBottom->setText(QString(tr("To\t\t Lat:%1\t\tLon:%2"))
-                                  .arg(_coordRightBottom.EncodeLatitude(DegreeMinutesSeconds))
-                                  .arg(_coordRightBottom.EncodeLongitude(DegreeMinutesSeconds)));
+                                  .arg(_coordRightBottom.EncodeLatitude(DegreeMinutesSecondsF))
+                                  .arg(_coordRightBottom.EncodeLongitude(DegreeMinutesSecondsF)));
 }
 
 void MapTileExportDialog::runExport()

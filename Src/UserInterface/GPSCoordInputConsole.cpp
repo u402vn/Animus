@@ -6,16 +6,6 @@
 #include "Common/CommonWidgets.h"
 #include "Common/CommonData.h"
 
-QLineEdit *GPSCoordInputConsole::createCoordEdit(const QString &mask)
-{
-    auto editor = new QLineEdit(this);
-    editor->setAlignment(Qt::AlignRight);
-    editor->setInputMask(mask);
-    editor->setAlignment(Qt::AlignRight);
-    connect(editor, &QLineEdit::textEdited, this, &GPSCoordInputConsole::onCoordTextEdited);
-    return editor;
-}
-
 void GPSCoordInputConsole::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key())
@@ -23,17 +13,17 @@ void GPSCoordInputConsole::keyPressEvent(QKeyEvent *event)
     case Qt::Key_Return:
     case Qt::Key_Enter:
     case Qt::Key_Tab:
-        if (_edtUAVCoordLat->hasFocus())
+        if (_edtCoordLat->hasFocus())
         {
             event->accept();
-            setEditFocus(_edtUAVCoordLon);
+            setEditFocus(_edtCoordLon);
         }
-        else if (_edtUAVCoordLon->hasFocus())
+        else if (_edtCoordLon->hasFocus())
         {
             event->accept();
             emit onCoordEdited();
             emit onCoordEditingFinished();
-            setEditFocus(_edtUAVCoordLat);
+            setEditFocus(_edtCoordLat);
         }
         break;
     default:
@@ -49,15 +39,17 @@ void GPSCoordInputConsole::setEditFocus(QLineEdit *edit)
 
 GPSCoordInputConsole::GPSCoordInputConsole(QWidget *parent) : QFrame(parent)
 {
-    _edtUAVCoordLat = createCoordEdit(QString("99°99\'99\"aa;0"));
-    _edtUAVCoordLon = createCoordEdit(QString("99°99\'99\"aa;0")); // 009°00\'00\"aa;0
+    _edtCoordLat = CommonWidgetUtils::createCoordEdit(this);
+    connect(_edtCoordLat, &QLineEdit::textEdited, this, &GPSCoordInputConsole::onCoordTextEdited);
+    _edtCoordLon = CommonWidgetUtils::createCoordEdit(this);
+    connect(_edtCoordLon, &QLineEdit::textEdited, this, &GPSCoordInputConsole::onCoordTextEdited);
 
-    QGridLayout *coordLayout = new QGridLayout(this);
+    auto coordLayout = new QGridLayout(this);
     coordLayout->setMargin(0);
     coordLayout->setSpacing(1);
 
-    coordLayout->addWidget(_edtUAVCoordLat, 0, 0, 1, 1);
-    coordLayout->addWidget(_edtUAVCoordLon, 0, 1, 1, 1);
+    coordLayout->addWidget(_edtCoordLat, 0, 0, 1, 1);
+    coordLayout->addWidget(_edtCoordLon, 0, 1, 1, 1);
 }
 
 GPSCoordInputConsole::~GPSCoordInputConsole()
@@ -97,20 +89,20 @@ void GPSCoordInputConsole::setCoordinatesString(const QString &coordinates)
     auto coordParts = coordinates.split(' ', QString::SkipEmptyParts);
     if (coordParts.count() == 2)
     {
-        _edtUAVCoordLat->setText(coordParts[0]);
-        _edtUAVCoordLon->setText(coordParts[1]);
+        _edtCoordLat->setText(coordParts[0]);
+        _edtCoordLon->setText(coordParts[1]);
     }
     else
     {
-        _edtUAVCoordLat->setText(QString("°\'\"%1").arg(WorldGPSCoord::postfixN()));
-        _edtUAVCoordLon->setText(QString("°\'\"%1").arg(WorldGPSCoord::postfixE()));
+        _edtCoordLat->setText(QString("°\'\"%1").arg(WorldGPSCoord::postfixN()));
+        _edtCoordLon->setText(QString("°\'\"%1").arg(WorldGPSCoord::postfixE()));
     }
 }
 
 const QString GPSCoordInputConsole::coordinatesString()
 {
-    QString lat = _edtUAVCoordLat->displayText();
-    QString lon = _edtUAVCoordLon->displayText();
+    QString lat = _edtCoordLat->displayText();
+    QString lon = _edtCoordLon->displayText();
 
     QString result = QString("%1 %2").arg(lat).arg(lon);
     return result;

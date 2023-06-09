@@ -15,7 +15,7 @@ QLineEdit * GPSCoordIndicator::createCoordEdit()
 
 GPSCoordIndicator::GPSCoordIndicator(QWidget *parent) : QWidget(parent)
 {
-    _coordFormat = DegreeMinutesSeconds; //todo move to settings
+    _coordFormat = DegreeMinutesSecondsF; //todo move to settings
 
     _uavPos.setIncorrect();
     _screenCenterPos.setIncorrect();

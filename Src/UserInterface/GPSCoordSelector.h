@@ -11,14 +11,17 @@ class GPSCoordSelector final : public QFrame
 {
     Q_OBJECT
 
-    bool _initInProgress;
+    quint32 _initInProgress;
+
+    WorldGPSCoord _intialCoord;
+    QString _intialDescription;
 
     QLineEdit * _edDescription;
-    QDoubleSpinBox * _sbTargetLat;
-    QDoubleSpinBox * _sbTargetLon;
-    QDoubleSpinBox * createGeoCoordSpinBox(double min, double max);
+    QDoubleSpinBox *_sbCoordLat, *_sbCoordLon;
+    QLineEdit *_edtCoordLat, *_edtCoordLon;
+    QDoubleSpinBox *createGeoCoordSpinBox(double min, double max);
 
-    void processChanges();
+    void setupCoord(const WorldGPSCoord &gpsCoord, const QString &description);
 protected:
     void focusOutEvent(QFocusEvent * event);
 public:
@@ -29,8 +32,10 @@ public:
 signals:
     void onCoordSelectorChanged(const WorldGPSCoord &gpsCoord, const QString &description);
 private slots:
-    void onCoordEditorChanged(double value);
+    void onCoordAsNumberChanged(double value);
+    void onCoordAsTextChanged(const QString &text);
     void onTextEditorChanged();
+
 };
 
 #endif // GPSCOORDSELECTOR_H

@@ -357,7 +357,7 @@ QWidget *CameraSettingsEditor::createConnectionWidgets()
 
     _naeXPlane = new NetworkAddressEditor(this, &_association, &cameraSettings->VideoFrameSourceXPlaneAddress, &cameraSettings->VideoFrameSourceXPlanePort);
     _lblYurionUDPPort = new QLabel(tr("UDP Port:"), this);
-    _edYurionUDPPort = CommonWidgetUtils::makePortEditor(this);
+    _edYurionUDPPort = CommonWidgetUtils::createPortEditor(this);
 
     _cbCalibrationImagePath = new QComboBoxExt(this);
     _cbCalibrationImagePath->setEditable(true);
@@ -370,7 +370,7 @@ QWidget *CameraSettingsEditor::createConnectionWidgets()
     _edRTSPUrl = new QLineEdit(this);
 
     _lblMUSV2UDPPort = new QLabel(tr("UDP Port:"), this);
-    _edMUSV2UDPPort = CommonWidgetUtils::makePortEditor(this);
+    _edMUSV2UDPPort = CommonWidgetUtils::createPortEditor(this);
 
     int row = 0;
     connectionLayout->addWidget(rbVideoSourceUSBCamera,          row, 0, 1, 1);

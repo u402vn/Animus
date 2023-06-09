@@ -474,7 +474,7 @@ void CommonWidgetUtils::showInfoDialogAutoclose(const QMessageBox::Icon icon, co
     msgBox.exec();
 }
 
-QLineEdit *CommonWidgetUtils::makePortEditor(QWidget *parent)
+QLineEdit *CommonWidgetUtils::createPortEditor(QWidget *parent)
 {
     static QRegExp portRegex("^(?:[0-9]?[0-9]?[0-9]?[0-9]?[0-9])$");
     static QRegExpValidator portValidator{portRegex};
@@ -482,6 +482,15 @@ QLineEdit *CommonWidgetUtils::makePortEditor(QWidget *parent)
     auto editor = new QLineEdit(parent);
     editor->setValidator(&portValidator);
     editor->setMaximumWidth(100);
+    return editor;
+}
+
+QLineEdit *CommonWidgetUtils::createCoordEdit(QWidget *parent)
+{
+    auto editor = new QLineEdit(parent);
+    editor->setAlignment(Qt::AlignRight);
+    editor->setInputMask("99°99\'99\"aa;0"); // 009°00\'00\"aa;0
+    editor->setAlignment(Qt::AlignRight);
     return editor;
 }
 

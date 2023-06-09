@@ -147,8 +147,8 @@ const QString objectCoordinateAsStr(const WorldGPSCoord &coord)
         return "-";
     else
         return QString("%1 %2")
-                .arg(coord.EncodeLatitude(GeographicalCoordinatesFormat::DegreeMinutesSeconds))
-                .arg(coord.EncodeLongitude(GeographicalCoordinatesFormat::DegreeMinutesSeconds));
+                .arg(coord.EncodeLatitude(GeographicalCoordinatesFormat::DegreeMinutesSecondsF))
+                .arg(coord.EncodeLongitude(GeographicalCoordinatesFormat::DegreeMinutesSecondsF));
 }
 
 void drawTelemetryOnVideo(QPainter &painter, const TelemetryDataFrame &telemetryFrame, quint32 fontSize,
