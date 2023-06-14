@@ -75,6 +75,8 @@ public:
     ApplicationPreferenceInt CamViewSizeVertical;
     ApplicationPreferenceBool CamViewSizeForceSet;
     ApplicationPreferenceBool UseVerticalFrameMirrororing;
+    ApplicationPreferenceInt MagnifierSourceSize;
+    ApplicationPreferenceDouble MagnifierScale;
 
     //Secondary optical system
     ApplicationPreferenceDoubleList CamScaleCoefficient2;
@@ -86,6 +88,8 @@ public:
     ApplicationPreferenceInt CamViewSizeVertical2;
     ApplicationPreferenceBool CamViewSizeForceSet2;
     ApplicationPreferenceBool UseVerticalFrameMirrororing2;
+    ApplicationPreferenceInt MagnifierSourceSize2;
+    ApplicationPreferenceDouble MagnifierScale2;
 
     ApplicationPreferenceEnum<VideoFrameTrafficSources> VideoTrafficSource;
     ApplicationPreferenceString VideoFrameSourceCameraName;

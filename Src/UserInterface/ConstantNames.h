@@ -24,6 +24,9 @@ public:
     static const QMap<int, QString> CameraControlModeCaptions();
     static const QMap<int, QString> StabilizationTypeCaptions();
     static const QMap<int, QString> OSDScreenCenterMarkCaptions();
+    static const QMap<int, QString> VideoFrameTrafficSourceCaptions();
+
+
 };
 
 #endif // CONSTANTNAMES_H

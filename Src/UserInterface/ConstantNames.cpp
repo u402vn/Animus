@@ -142,3 +142,17 @@ const QMap<int, QString> ConstantNames::OSDScreenCenterMarkCaptions()
     };
     return mapOSDScreenCenterMarkCaptions;
 }
+
+const QMap<int, QString> ConstantNames::VideoFrameTrafficSourceCaptions()
+{
+    static const QMap <int, QString> videoFrameTrafficSourceCaptions {
+        { VideoFrameTrafficSources::USBCamera,    tr("USB Camera") },
+        { VideoFrameTrafficSources::XPlane,    tr("X-Plane") },
+        { VideoFrameTrafficSources::Yurion,    tr("Yurion") },
+        { VideoFrameTrafficSources::CalibrationImage,    tr("Image File") },
+        { VideoFrameTrafficSources::VideoFile,    tr("Video File") },
+        { VideoFrameTrafficSources::RTSP,    tr("RTSP") },
+        { VideoFrameTrafficSources::MUSV2,    tr("MUSV-2") }
+    };
+    return videoFrameTrafficSourceCaptions;
+}

@@ -233,20 +233,6 @@ QWidget *CameraSettingsEditor::createGimbalWidgets()
     return spoilerGimbal;
 }
 
-const QString CameraSettingsEditor::getSourceCaption(VideoFrameTrafficSources source)
-{
-    const QString captions[VideoFrameTrafficSources::LastEelemet + 1] =
-    {CameraSettingsEditor::tr("USB Camera"),
-     CameraSettingsEditor::tr("X-Plane"),
-     CameraSettingsEditor::tr("Yurion"),
-     CameraSettingsEditor::tr("Image File"),
-     CameraSettingsEditor::tr("Video File"),
-     CameraSettingsEditor::tr("RTSP"),
-     CameraSettingsEditor::tr("MUSV-2")
-    };
-    return captions[source];
-}
-
 const QString CameraSettingsEditor::getCameraInfo(qint32 camIdx)
 {
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
@@ -306,7 +292,7 @@ const QString CameraSettingsEditor::getCameraInfo(qint32 camIdx)
 
     QString info = tr(" %1\n %2 \t %3x%4\n %5")
             .arg(description)
-            .arg(getSourceCaption(source))
+            .arg(ConstantNames::VideoFrameTrafficSourceCaptions()[source])
             .arg(cameraSettings->CamViewSizeHorizontal).arg(cameraSettings->CamViewSizeVertical)
             .arg(detail);
 
@@ -329,7 +315,7 @@ void CameraSettingsEditor::onEditSecondaryCamSettingsClicked()
 
 QRadioButton *CameraSettingsEditor::addVideoSourceRadioButton(VideoFrameTrafficSources source)
 {
-    return _gbVideoSource->appendButton(getSourceCaption(source), source);
+    return _gbVideoSource->appendButton(ConstantNames::VideoFrameTrafficSourceCaptions()[source], source);
 }
 
 QWidget *CameraSettingsEditor::createConnectionWidgets()
@@ -408,9 +394,6 @@ QWidget *CameraSettingsEditor::createConnectionWidgets()
 
 QWidget *CameraSettingsEditor::createFunctionsWidgets()
 {
-    if (!_isPhotographyLicensed && !_isBombingTabLicensed)
-        return nullptr;
-
     auto spoilerFunctions = new SpoilerGrid(tr("Functions"), this);
     auto functionsLayout = spoilerFunctions->gridLayout();
 

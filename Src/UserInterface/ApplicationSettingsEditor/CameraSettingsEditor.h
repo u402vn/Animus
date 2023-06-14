@@ -101,7 +101,6 @@ public:
 
     static QComboBoxExt *createCamListCombo(QWidget *parent);
 
-    static const QString getSourceCaption(VideoFrameTrafficSources source);
     static const QString getCameraInfo(qint32 camIdx);
 private slots:
     void onEditPrimaryCamSettingsClicked();

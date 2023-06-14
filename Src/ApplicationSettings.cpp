@@ -283,12 +283,14 @@ CamAssemblyPreferences *ApplicationSettings::getCurrentCamAssemblyPreferences()
         _camAssemblyPreferences->initCam(1, // PRIMARY_OPTYCAL_SYSTEM_ID
                                          cameraSettings->CamViewSizeHorizontal, cameraSettings->CamViewSizeVertical,
                                          cameraSettings->CamZoomMin, cameraSettings->CamZoomMax,
+                                         cameraSettings->MagnifierSourceSize, cameraSettings->MagnifierScale,
                                          cameraSettings->CamViewAnglesHorizontal, cameraSettings->CamViewAnglesVertical,
                                          cameraSettings->CamAutomaticTracerSpeedMultipliers,
                                          cameraSettings->CamManualSpeedMultipliers);
         _camAssemblyPreferences->initCam(2, // SECONDARY_OPTYCAL_SYSTEM_ID
                                          cameraSettings->CamViewSizeHorizontal2, cameraSettings->CamViewSizeVertical2,
                                          cameraSettings->CamZoomMin, cameraSettings->CamZoomMax,
+                                         cameraSettings->MagnifierSourceSize2, cameraSettings->MagnifierScale2,
                                          cameraSettings->CamViewAnglesHorizontal2, cameraSettings->CamViewAnglesVertical2,
                                          cameraSettings->CamAutomaticTracerSpeedMultipliers2,
                                          cameraSettings->CamManualSpeedMultipliers2);
@@ -538,6 +540,9 @@ CameraSettingsNode::CameraSettingsNode(ApplicationSettingsImpl *parentSettings, 
     CamViewSizeVertical(this, "CamViewSizeVertical",        576,    tr("Vertical View Size of Camera")),
     CamViewSizeForceSet(this, "CamViewSizeForceSet",        false),
     UseVerticalFrameMirrororing(this, "UseVerticalImageMirror", true, tr("Vertical Mirroring")),
+    MagnifierSourceSize(this, "MagnifierSourceSize",        100,    tr("Magnifier Source Size")),
+    MagnifierScale(this, "MagnifierScale",                    2,    tr("Magnifier Scale")),
+
 
     CamScaleCoefficient2(this, "CamScaleCoefficient2",                         tr("Camera Scale Coefficient")),
     CamViewAnglesHorizontal2(this, "CamViewAnglesHorizontal2",                 tr("Horizontal View Angle of Camera")),
@@ -548,6 +553,8 @@ CameraSettingsNode::CameraSettingsNode(ApplicationSettingsImpl *parentSettings, 
     CamViewSizeVertical2(this, "CamViewSizeVertical2",        576,    tr("Vertical View Size of Camera")),
     CamViewSizeForceSet2(this, "CamViewSizeForceSet2",        false),
     UseVerticalFrameMirrororing2(this, "UseVerticalImageMirror2", true, tr("Vertical Mirroring")),
+    MagnifierSourceSize2(this, "MagnifierSourceSize",        100,    tr("Magnifier Source Size")),
+    MagnifierScale2(this, "MagnifierScale",                    2,    tr("Magnifier Scale")),
 
     VideoTrafficSource(this, "VideoTrafficSource", VideoFrameTrafficSources::USBCamera),
     VideoFrameSourceCameraName(this, "VideoFrameSourceCameraName", ""),

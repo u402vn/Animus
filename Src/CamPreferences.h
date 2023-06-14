@@ -16,6 +16,8 @@ class CamPreferences final : public QObject
 
     quint32 _zoomMin, _zoomMax;
     qint32 _frameWidth, _frameHeight;
+    quint32 _magnifierSize;
+    qreal _magnifierScale;
     QList<double> _fovHorizontalAngles;
     QList<double> _fovVerticalAngles;
     QList<double> _automaticTracerSpeedMultipliers;
@@ -28,6 +30,7 @@ public:
 
     void init(qint32 farmeWidth, qint32 frameHeight,
               quint32 zoomMinValue, quint32 zoomMaxValue,
+              quint32 magnifierSize, qreal magnifierScale,
               const QList<double> &fovHorizontalAngles,
               const QList<double> &fovVerticalAngles,
               const QList<double> &automaticTracerSpeedMultipliers,
@@ -43,6 +46,9 @@ public:
 
     quint32 zoomMin();
     quint32 zoomMax();
+
+    quint32 magnifierSize();
+    qreal magnifierScale();
 
     void getScreenPointAnglesRad(const quint32 zoom, const qint32 screenX, const qint32 screenY, double &angleXRad, double &angleYRad);
     void getScreenPointAnglesDegree(const quint32 zoom, const qint32 screenX, const qint32 screenY, double &angleXDegree, double &angleYDegree);
@@ -62,7 +68,7 @@ public:
 
     void initCam(qint32 opticalSystemId,
                  qint32 farmeWidth, qint32 frameHeight,
-                 quint32 zoomMinValue, quint32 zoomMaxValue,
+                 quint32 zoomMinValue, quint32 zoomMaxValue, quint32 magnifierSize, qreal magnifierScale,
                  const QList<double> &fovHorizontalAngles,
                  const QList<double> &fovVerticalAngles,
                  const QList<double> &automaticTracerSpeedMultipliers,

@@ -28,6 +28,9 @@ VideoDisplayWidget::VideoDisplayWidget(QWidget *parent, VoiceInformant *voiceInf
     _cursorMark = QRect(0, 0, 40, 40);
     _cursorMarkLastMove = QDateTime::currentDateTime();
 
+    ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
+    _camAssemblyPreferences = applicationSettings.getCurrentCamAssemblyPreferences();
+
     loadSettings();
     createMenu();
 }
@@ -280,6 +283,10 @@ void VideoDisplayWidget::drawMagnifier(QPainter &painter)
     if (!_showMagnifier)
         return;
 
+    auto camPreferences = _camAssemblyPreferences->device(_telemetryFrame.OpticalSystemId);
+    quint32 srcSizeR = camPreferences->magnifierSize();
+    quint32 destSizeR = srcSizeR * camPreferences->magnifierScale();
+
     QPoint mCenter;
     bool needDraw = false;
 
@@ -293,8 +300,8 @@ void VideoDisplayWidget::drawMagnifier(QPainter &painter)
 
     if (needDraw)
     {
-        QSize srcSize(50, 50);
-        QSize destSize(100, 100);
+        QSize srcSize(srcSizeR, srcSizeR);
+        QSize destSize(destSizeR, destSizeR);
 
         QRect srcRect = QRect(mCenter - QPoint(srcSize.width() / 2, srcSize.height() / 2) , srcSize);
         QRect destRect = alignRect(QRect(mCenter - QPoint(destSize.width() / 2, destSize.height() / 2), destSize));

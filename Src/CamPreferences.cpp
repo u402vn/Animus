@@ -12,6 +12,7 @@ CamPreferences::~CamPreferences()
 }
 
 void CamPreferences::init(qint32 farmeWidth, qint32 frameHeight, quint32 zoomMinValue, quint32 zoomMaxValue,
+                          quint32 magnifierSize, qreal magnifierScale,
                           const QList<double> &fovHorizontalAngles, const QList<double> &fovVerticalAngles,
                           const QList<double> &automaticTracerSpeedMultipliers, const QList<double> &manualSpeedMultipliers)
 {
@@ -19,6 +20,8 @@ void CamPreferences::init(qint32 farmeWidth, qint32 frameHeight, quint32 zoomMin
     _frameHeight = frameHeight;
     _zoomMin = zoomMinValue;
     _zoomMax = zoomMaxValue;
+    _magnifierSize = magnifierSize;
+    _magnifierScale = magnifierScale;
     _fovHorizontalAngles = fovHorizontalAngles;
     _fovVerticalAngles = fovVerticalAngles;
     _automaticTracerSpeedMultipliers = automaticTracerSpeedMultipliers;
@@ -86,6 +89,16 @@ quint32 CamPreferences::zoomMax()
     return _zoomMax;
 }
 
+quint32 CamPreferences::magnifierSize()
+{
+    return _magnifierSize;
+}
+
+qreal CamPreferences::magnifierScale()
+{
+    return _magnifierScale;
+}
+
 quint32 CamPreferences::zoomMin()
 {
     return _zoomMin;
@@ -136,6 +149,7 @@ void CamAssemblyPreferences::initGimbal(double encoderAutomaticTracerMultiplier)
 }
 
 void CamAssemblyPreferences::initCam(qint32 opticalSystemId, qint32 farmeWidth, qint32 frameHeight, quint32 zoomMinValue, quint32 zoomMaxValue,
+                                     quint32 magnifierSize, qreal magnifierScale,
                                      const QList<double> &fovHorizontalAngles, const QList<double> &fovVerticalAngles,
                                      const QList<double> &automaticTracerSpeedMultipliers, const QList<double> &manualSpeedMultipliers)
 {
@@ -145,7 +159,7 @@ void CamAssemblyPreferences::initCam(qint32 opticalSystemId, qint32 farmeWidth, 
         camPrefernces = new CamPreferences(this);
         _devices.insert(opticalSystemId, camPrefernces);
     }
-    camPrefernces->init(farmeWidth, frameHeight, zoomMinValue, zoomMaxValue,
+    camPrefernces->init(farmeWidth, frameHeight, zoomMinValue, zoomMaxValue, magnifierSize, magnifierScale,
                         fovHorizontalAngles, fovVerticalAngles,
                         automaticTracerSpeedMultipliers, manualSpeedMultipliers);
 }

@@ -31,6 +31,8 @@ class VideoDisplayWidget final : public QWidget
 
     VoiceInformant *_voiceInformant;
 
+    CamAssemblyPreferences *_camAssemblyPreferences;
+
     QRect _sourceFrameRect;
     QRect _screenViewRect;
     QRect _osdRect;

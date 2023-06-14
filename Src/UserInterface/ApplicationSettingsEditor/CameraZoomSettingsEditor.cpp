@@ -97,6 +97,11 @@ QWidget *CameraZoomSettingsEditor::createImageParams()
 
     _chkVerticalMirror = new QCheckBox(tr("Vertical Mirroring"), this);
 
+    auto lblMagnifier = new QLabel(tr("Magnifier"), this);
+    _sbMagnifierSourceSize = CommonWidgetUtils::createRangeSpinbox(this, 50, 250);
+    _sbMagnifierScale = CommonWidgetUtils::createDoubleRangeSpinbox(this, 1.5, 3, 0.1, 1);
+
+
     int row = 0;
 
     imageParamsGrid->addWidget(lblCamViewSize,                  row, 0, 1, 1);
@@ -107,6 +112,12 @@ QWidget *CameraZoomSettingsEditor::createImageParams()
     row++;
 
     imageParamsGrid->addWidget(_chkVerticalMirror,              row, 2, 1, 3);
+    imageParamsGrid->setRowStretch(row, 0);
+    row++;
+
+    imageParamsGrid->addWidget(lblMagnifier,                  row, 0, 1, 1);
+    imageParamsGrid->addWidget(_sbMagnifierSourceSize,        row, 2, 1, 1);
+    imageParamsGrid->addWidget(_sbMagnifierScale,             row, 3, 1, 1);
     imageParamsGrid->setRowStretch(row, 0);
     row++;
 
@@ -145,6 +156,9 @@ void CameraZoomSettingsEditor::initWidgets()
         _association.addBinding(&(cameraSettings->CamViewSizeVertical),                 _sbCamViewSizeVertical);
         _association.addBinding(&(cameraSettings->CamViewSizeForceSet),                 _chkCamViewSizeForceSet);
         _association.addBinding(&(cameraSettings->UseVerticalFrameMirrororing),         _chkVerticalMirror);
+
+        _association.addBinding(&(cameraSettings->MagnifierSourceSize),                 _sbMagnifierSourceSize);
+        _association.addBinding(&(cameraSettings->MagnifierScale),                      _sbMagnifierScale);
     }
     else if (_opticalSystemNumber == 2)
     {
@@ -158,6 +172,9 @@ void CameraZoomSettingsEditor::initWidgets()
         _association.addBinding(&(cameraSettings->CamViewSizeVertical2),                 _sbCamViewSizeVertical);
         _association.addBinding(&(cameraSettings->CamViewSizeForceSet2),                 _chkCamViewSizeForceSet);
         _association.addBinding(&(cameraSettings->UseVerticalFrameMirrororing2),         _chkVerticalMirror);
+
+        _association.addBinding(&(cameraSettings->MagnifierSourceSize2),                 _sbMagnifierSourceSize);
+        _association.addBinding(&(cameraSettings->MagnifierScale2),                      _sbMagnifierScale);
     }
     else
         Q_ASSERT(false);

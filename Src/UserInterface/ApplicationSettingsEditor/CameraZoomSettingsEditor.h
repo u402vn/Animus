@@ -19,6 +19,9 @@ class CameraZoomSettingsEditor final : public QDialog
     QSpinBoxEx *_sbCamViewSizeVertical;
     QCheckBox *_chkCamViewSizeForceSet;
     QCheckBox *_chkVerticalMirror;
+    QSpinBoxEx *_sbMagnifierSourceSize;
+    QDoubleSpinBoxEx *_sbMagnifierScale;
+
 
     qint32 _camIdx, _opticalSystemNumber;
 
