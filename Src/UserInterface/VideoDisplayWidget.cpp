@@ -587,7 +587,7 @@ void VideoDisplayWidget::paintEvent(QPaintEvent *event)
 
     updatePen(painter, _osdMarkColor);
     {
-        qreal osdScale = 1.0;
+        qreal osdScale = _scale / _digitalZoom;
         if (_showTelemetry)
             drawTelemetryOnVideo(painter, _telemetryFrame, osdScale * _telemetryIndicatorFontSize, _isLaserRangefinderLicensed, _telemetryTimeFormat);
         drawGimbalOnVideo(painter, _gimbalIndicatorType, _gimbalIndicatorAngles, osdScale * _gimbalIndicatorSize, _telemetryFrame);
