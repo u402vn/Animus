@@ -668,7 +668,8 @@ void HardwareLink::processUAVTelemetryPendingDatagrams()
 {
     bool isProcessed = false;
 
-    if (_telemetryDataFormat == UAVTelemetryDataFormats::UAVTelemetryFormatV4)
+    if ((_telemetryDataFormat == UAVTelemetryDataFormats::UAVTelemetryFormatV4) ||
+            (_telemetryDataFormat == UAVTelemetryDataFormats::UAVTelemetryFormatV4_1))
     {
         isProcessed = processTelemetryPendingDatagramsV4();
         if (!isProcessed)
@@ -813,11 +814,19 @@ bool HardwareLink::processTelemetryPendingDatagramsV4()
         telemetryDataFrame.UavRoll =                 udpTelemetryMessage.UavRoll;
         telemetryDataFrame.UavPitch =                udpTelemetryMessage.UavPitch;
         telemetryDataFrame.UavYaw =                  udpTelemetryMessage.UavYaw;
+
         telemetryDataFrame.UavLatitude_GPS =         udpTelemetryMessage.UavLatitude_GPS;
         telemetryDataFrame.UavLongitude_GPS =        udpTelemetryMessage.UavLongitude_GPS;
         telemetryDataFrame.UavAltitude_GPS =         udpTelemetryMessage.UavAltitude_GPS;
         telemetryDataFrame.UavAltitude_Barometric =  udpTelemetryMessage.UavAltitude_Barometric;
         telemetryDataFrame.Course_GPS =              udpTelemetryMessage.Course_GPS;
+
+        //Fix Error in transfer order
+        if (_telemetryDataFormat == UAVTelemetryDataFormats::UAVTelemetryFormatV4_1)
+        {
+            telemetryDataFrame.UavYaw =              udpTelemetryMessage.Course_GPS;
+            telemetryDataFrame.Course_GPS =          udpTelemetryMessage.UavYaw;
+        }
 
         telemetryDataFrame.CamPitch =                udpTelemetryMessage.CamPitch;
         telemetryDataFrame.CamRoll =                 udpTelemetryMessage.CamRoll;
@@ -875,7 +884,8 @@ void HardwareLink::processTelemetryPendingDatagramsUnknownFormat()
         _udpUAVTelemetrySocket.readDatagram(datagram.data(), messageSize);
     }
 
-    if (messageSize == sizeof(UDPTelemetryMessageV4))
+    if (messageSize == sizeof(UDPTelemetryMessageV4) &&
+            (_telemetryDataFormat != UAVTelemetryDataFormats::UAVTelemetryFormatV4_1) )
         _telemetryDataFormat = UAVTelemetryDataFormats::UAVTelemetryFormatV4;
     //else the same UnknownFormat
 }

@@ -65,7 +65,8 @@ const QMap<int, QString> ConstantNames::OVRGimbalIndicatorTypeCaptions()
 const QMap<int, QString> ConstantNames::UAVTelemetryFormatCaptions()
 {
     static const QMap<int, QString> mapUAVTelemetryFormatCaptions {
-        { UAVTelemetryDataFormats::UAVTelemetryFormatV4, tr("V4") }
+        { UAVTelemetryDataFormats::UAVTelemetryFormatV4, tr("V4") },
+        { UAVTelemetryDataFormats::UAVTelemetryFormatV4_1, tr("V4.1") }
     };
     return mapUAVTelemetryFormatCaptions;
 }

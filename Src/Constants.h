@@ -41,6 +41,7 @@ enum UAVTelemetryDataFormats
     UAVTelemetryFormatV2,
     UAVTelemetryFormatV3,
     UAVTelemetryFormatV4,
+    UAVTelemetryFormatV4_1,
     UAVTelemetryFormatUnknown
 };
 
