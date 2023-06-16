@@ -49,6 +49,7 @@ public:
 
     quint32 magnifierSize();
     qreal magnifierScale();
+    void incMagnifierScale(qreal delta);
 
     void getScreenPointAnglesRad(const quint32 zoom, const qint32 screenX, const qint32 screenY, double &angleXRad, double &angleYRad);
     void getScreenPointAnglesDegree(const quint32 zoom, const qint32 screenX, const qint32 screenY, double &angleXDegree, double &angleYDegree);

@@ -99,6 +99,11 @@ qreal CamPreferences::magnifierScale()
     return _magnifierScale;
 }
 
+void CamPreferences::incMagnifierScale(qreal delta)
+{
+    _magnifierScale = qBound(1.1, _magnifierScale + delta, 5.0);
+}
+
 quint32 CamPreferences::zoomMin()
 {
     return _zoomMin;

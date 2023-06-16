@@ -133,6 +133,8 @@ void VideoDisplayWidget::saveSettings()
     cameraSettings->DigitalZoom = _digitalZoom;
     cameraSettings->UseBluredBorders = _useBluredBorders;
     cameraSettings->UseGimbalTelemetryOnly = TelemetryDataFrame::UseGimbalTelemetryOnlyForCalculation;
+    cameraSettings->MagnifierScale =  _camAssemblyPreferences->device(1)->magnifierScale();
+    cameraSettings->MagnifierScale2 =  _camAssemblyPreferences->device(2)->magnifierScale();
 }
 
 void VideoDisplayWidget::setData(const TelemetryDataFrame &telemetryFrame, const QImage &frame)
@@ -284,8 +286,8 @@ void VideoDisplayWidget::drawMagnifier(QPainter &painter)
         return;
 
     auto camPreferences = _camAssemblyPreferences->device(_telemetryFrame.OpticalSystemId);
-    quint32 srcSizeR = camPreferences->magnifierSize();
-    quint32 destSizeR = srcSizeR * camPreferences->magnifierScale();
+    quint32 destSizeR = camPreferences->magnifierSize();
+    quint32 srcSizeR = destSizeR / camPreferences->magnifierScale();
 
     QPoint mCenter;
     bool needDraw = false;
@@ -945,4 +947,11 @@ void VideoDisplayWidget::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
         lockTargetOnClick(event->pos());
+}
+
+void VideoDisplayWidget::wheelEvent(QWheelEvent *event)
+{
+    auto camPreferences = _camAssemblyPreferences->device(_telemetryFrame.OpticalSystemId);
+    if (camPreferences != nullptr)
+        camPreferences->incMagnifierScale(0.005 * event->delta());
 }

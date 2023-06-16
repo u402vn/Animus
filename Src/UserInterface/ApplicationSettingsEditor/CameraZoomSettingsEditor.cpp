@@ -15,6 +15,8 @@ CameraZoomSettingsEditor::CameraZoomSettingsEditor(QWidget *parent, const qint32
 
 void CameraZoomSettingsEditor::accept()
 {
+    EnterProcStart("CameraZoomSettingsEditor::accept");
+
     saveSettings();
     //???    emit onCamInfoUpdated();
     done(QDialog::Accepted);
@@ -22,6 +24,8 @@ void CameraZoomSettingsEditor::accept()
 
 QWidget *CameraZoomSettingsEditor::createZoomGrid()
 {
+    EnterProcStart("CameraZoomSettingsEditor::createZoomGrid");
+
     auto scrolledWidget = CommonWidgetUtils::createScrolledWidget(this);
 
     auto lblZoom = new QLabel(tr("Zoom"), this);
@@ -86,6 +90,8 @@ QWidget *CameraZoomSettingsEditor::createZoomGrid()
 
 QWidget *CameraZoomSettingsEditor::createImageParams()
 {
+    EnterProcStart("CameraZoomSettingsEditor::createImageParams");
+
     auto imageParamsWidget = new QWidget(this);
     auto imageParamsGrid = new QGridLayout(imageParamsWidget);
 
@@ -99,8 +105,6 @@ QWidget *CameraZoomSettingsEditor::createImageParams()
 
     auto lblMagnifier = new QLabel(tr("Magnifier"), this);
     _sbMagnifierSourceSize = CommonWidgetUtils::createRangeSpinbox(this, 50, 250);
-    _sbMagnifierScale = CommonWidgetUtils::createDoubleRangeSpinbox(this, 1.5, 3, 0.1, 1);
-
 
     int row = 0;
 
@@ -117,7 +121,6 @@ QWidget *CameraZoomSettingsEditor::createImageParams()
 
     imageParamsGrid->addWidget(lblMagnifier,                  row, 0, 1, 1);
     imageParamsGrid->addWidget(_sbMagnifierSourceSize,        row, 2, 1, 1);
-    imageParamsGrid->addWidget(_sbMagnifierScale,             row, 3, 1, 1);
     imageParamsGrid->setRowStretch(row, 0);
     row++;
 
@@ -126,6 +129,8 @@ QWidget *CameraZoomSettingsEditor::createImageParams()
 
 void CameraZoomSettingsEditor::initWidgets()
 {
+    EnterProcStart("CameraZoomSettingsEditor::initWidgets");
+
     this->setWindowTitle(tr("Optical parameters of camera # %1.%2").arg(_camIdx).arg(_opticalSystemNumber));
     this->setModal(true);
     CommonWidgetUtils::updateWidgetGeometry(this, 850);
@@ -158,7 +163,6 @@ void CameraZoomSettingsEditor::initWidgets()
         _association.addBinding(&(cameraSettings->UseVerticalFrameMirrororing),         _chkVerticalMirror);
 
         _association.addBinding(&(cameraSettings->MagnifierSourceSize),                 _sbMagnifierSourceSize);
-        _association.addBinding(&(cameraSettings->MagnifierScale),                      _sbMagnifierScale);
     }
     else if (_opticalSystemNumber == 2)
     {
@@ -174,7 +178,6 @@ void CameraZoomSettingsEditor::initWidgets()
         _association.addBinding(&(cameraSettings->UseVerticalFrameMirrororing2),         _chkVerticalMirror);
 
         _association.addBinding(&(cameraSettings->MagnifierSourceSize2),                 _sbMagnifierSourceSize);
-        _association.addBinding(&(cameraSettings->MagnifierScale2),                      _sbMagnifierScale);
     }
     else
         Q_ASSERT(false);
@@ -226,6 +229,8 @@ void CameraZoomSettingsEditor::recalculateRow(int zoom)
 
 void CameraZoomSettingsEditor::onAutoFillTableClicked()
 {
+    EnterProcStart("CameraZoomSettingsEditor::onAutoFillTableClicked");
+
     auto menu = new QMenu(this);
     QAction *acFillNonlinearScale = nullptr;//CommonWidgetUtils::createMenuAction(tr("Fill Nonlinear Zoom (Scale Only)"), menu);
     QAction *acFillLinearScale = CommonWidgetUtils::createMenuAction(tr("Fill Linear Zoom (Scale Only)"), menu);

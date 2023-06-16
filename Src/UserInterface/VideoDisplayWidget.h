@@ -114,6 +114,7 @@ protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void wheelEvent(QWheelEvent *event) Q_DECL_OVERRIDE;
 public:
     explicit VideoDisplayWidget(QWidget *parent, VoiceInformant *voiceInformant);
 
