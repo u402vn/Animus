@@ -309,6 +309,10 @@ void VideoDisplayWidget::drawMagnifier(QPainter &painter)
         QRect destRect = alignRect(QRect(mCenter - QPoint(destSize.width() / 2, destSize.height() / 2), destSize));
 
         painter.drawImage(destRect, _frame, srcRect);
+
+        updatePen(painter, _osdMarkColor);
+
+        painter.drawRect(destRect);
     }
 }
 
