@@ -55,6 +55,7 @@ struct TelemetryDataFrame final
     double CalculatedTrackedTargetGPSHmsl;
 
     qint32 VideoFPS;
+    qint32 TelemetryFPS;
 
     static bool UseGimbalTelemetryOnlyForCalculation;
 

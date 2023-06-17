@@ -66,7 +66,9 @@ HardwareLink::HardwareLink(QObject *parent) : VideoLink(parent)
     _useExtTelemetryUDP = applicationSettings.UseExtTelemetryUDP;
     _udpExtTelemetryPort = applicationSettings.ExtTelemetryUDPPort;
 
-    _videoLagFromTelemetry = applicationSettings.VideoLagFromTelemetry;
+    _delayTelemetryDataFrames = new TelemetryDelayLine(this, applicationSettings.VideoLagFromTelemetry);
+    connect(_delayTelemetryDataFrames, &TelemetryDelayLine::dequeue, this, &HardwareLink::onTelemetryDelayLineDequeue, Qt::DirectConnection);
+
 
     _commandTransports = applicationSettings.CommandTransport;
     _udpCommandAddress = QHostAddress(applicationSettings.CommandUDPAddress);
@@ -93,6 +95,7 @@ HardwareLink::HardwareLink(QObject *parent) : VideoLink(parent)
 
     _bombingPlacePos.setIncorrect();
 
+
     connect(&_udpUAVTelemetrySocket, &QUdpSocket::readyRead, this, &HardwareLink::processUAVTelemetryPendingDatagrams, Qt::ANIMUS_CONNECTION_TYPE);
 
     connect(&_udpCamTelemetrySocket, &QUdpSocket::readyRead, this, &HardwareLink::processCamTelemetryPendingDatagrams, Qt::ANIMUS_CONNECTION_TYPE);
@@ -104,8 +107,11 @@ HardwareLink::HardwareLink(QObject *parent) : VideoLink(parent)
     _fpsTimer = new QTimer(this);
     connect(_fpsTimer, &QTimer::timeout, [&]()
     {
-        _receivedFrameCountPrevSec = _videoFrameNumber - _videoFrameNumberPrevSec;
+        _receivedVideoFrameCountPrevSec = _videoFrameNumber - _videoFrameNumberPrevSec;
         _videoFrameNumberPrevSec = _videoFrameNumber;
+
+        _receivedTelemetryFrameCountPrevSec = _telemetryFrameNumber - _telemetryFrameNumberPrevSec;
+        _telemetryFrameNumberPrevSec = _telemetryFrameNumber;
     });
     _fpsTimer->start(1000);
 
@@ -224,9 +230,9 @@ void HardwareLink::doActivateCatapult()
     }
 }
 
-void HardwareLink::doProcessTelemetryDataFrameQueue()
+void HardwareLink::onTelemetryDelayLineDequeue(const TelemetryDataFrame &value)
 {
-    _currentTelemetryDataFrame = _incommingFrames.dequeue();
+    _currentTelemetryDataFrame = value;
     notifyDataReceived();
 }
 
@@ -309,25 +315,12 @@ void HardwareLink::sendCommand(const BinaryContent &commandContent, const QStrin
     }
 }
 
-void HardwareLink::delayedTelemetryDataFrameProcessing(const TelemetryDataFrame &telemetryDataFrame)
-{
-    if (_videoLagFromTelemetry <= 0)
-    {
-        _currentTelemetryDataFrame = telemetryDataFrame;
-        notifyDataReceived();
-    }
-    else
-    {
-        _incommingFrames.enqueue(telemetryDataFrame);
-        QTimer::singleShot(_videoLagFromTelemetry, Qt::PreciseTimer, this, &HardwareLink::doProcessTelemetryDataFrameQueue);
-    }
-}
-
 void HardwareLink::notifyDataReceived()
 {
     _currentTelemetryDataFrame.VideoFrameNumber = _videoFrameNumber;
     _currentTelemetryDataFrame.SessionTimeMs = getSessionTimeMs();
-    _currentTelemetryDataFrame.VideoFPS = _receivedFrameCountPrevSec;
+    _currentTelemetryDataFrame.VideoFPS = _receivedVideoFrameCountPrevSec;
+    _currentTelemetryDataFrame.TelemetryFPS = _receivedTelemetryFrameCountPrevSec;
 
     updateTrackerValues(_currentTelemetryDataFrame);
 
@@ -362,7 +355,7 @@ void HardwareLink::updateTelemetryValues(TelemetryDataFrame &telemetryDataFrame)
 
     //Update camera telemetry from other UDP stream
     if (_useCamTelemetryUDP || (_commandTransports == CommandTransports::Serial)) //???todo refactor
-        _cameraTelemetryDataFrame.applyToTelemetryDataFrame(telemetryDataFrame);
+        _currentCameraDataFrame.applyToTelemetryDataFrame(telemetryDataFrame);
 
     if (_useExtTelemetryUDP)
         _extendedTelemetryDataFrame.applyToTelemetryDataFrame(telemetryDataFrame);
@@ -424,10 +417,12 @@ void HardwareLink::open()
     _videoFrameNumber = 0;
     _telemetryFrameNumber = 0;
     _currentTelemetryDataFrame.clear();
-    _cameraTelemetryDataFrame.clear();
+    _currentCameraDataFrame.clear();
 
     _videoFrameNumberPrevSec = 0;
-    _receivedFrameCountPrevSec = 0;
+    _receivedVideoFrameCountPrevSec = 0;
+    _telemetryFrameNumberPrevSec = 0;
+    _receivedTelemetryFrameCountPrevSec = 0;
 
     _emulatorTelemetryDataFrame.applyToTelemetryDataFrame(_currentTelemetryDataFrame);
     updateTelemetryValues(_currentTelemetryDataFrame);
@@ -693,7 +688,7 @@ void HardwareLink::processCamTelemetryPendingDatagrams()
         QByteArray rawData(messageSize, 0);
         _udpCamTelemetrySocket.readDatagram(rawData.data(), messageSize);
         updateCameraTelemetryDataFrame(rawData);
-        _cameraTelemetryDataFrame.applyToTelemetryDataFrame(_currentTelemetryDataFrame);
+        _currentCameraDataFrame.applyToTelemetryDataFrame(_currentTelemetryDataFrame);
 
         _telemetryConnectionByteCounter += rawData.size();
         emit onTelemetryReceived(rawData.toHex());
@@ -708,7 +703,7 @@ void HardwareLink::processCamTelemetryPendingDatagrams()
         //magic numbers for camera testing
         _emulatorTelemetryDataFrame.applyToTelemetryDataFrame(telemetryDataFrame);
         updateTelemetryValues(telemetryDataFrame);
-        delayedTelemetryDataFrameProcessing(telemetryDataFrame);
+        _delayTelemetryDataFrames->enqueue(telemetryDataFrame);
     }
 }
 
@@ -755,24 +750,24 @@ void HardwareLink::updateCameraTelemetryDataFrame(const QByteArray &rawData)
     protocolMUSV.DecodingData();
     protocolName::InputData *info = protocolMUSV.GetData();
 
-    _cameraTelemetryDataFrame.CamRoll = static_cast<double>(info->angles.roll);
-    _cameraTelemetryDataFrame.CamPitch = static_cast<double>(info->angles.pitch);
-    _cameraTelemetryDataFrame.CamYaw = static_cast<double>(info->angles.yaw);
-    _cameraTelemetryDataFrame.CamZoom = static_cast<double>(info->ZoomAll);
+    _currentCameraDataFrame.CamRoll = static_cast<double>(info->angles.roll);
+    _currentCameraDataFrame.CamPitch = static_cast<double>(info->angles.pitch);
+    _currentCameraDataFrame.CamYaw = static_cast<double>(info->angles.yaw);
+    _currentCameraDataFrame.CamZoom = static_cast<double>(info->ZoomAll);
 
-    _cameraTelemetryDataFrame.CamEncoderRoll = info->Encoders[0];
-    _cameraTelemetryDataFrame.CamEncoderPitch = info->Encoders[1];
-    _cameraTelemetryDataFrame.CamEncoderYaw = info->Encoders[2];
+    _currentCameraDataFrame.CamEncoderRoll = info->Encoders[0];
+    _currentCameraDataFrame.CamEncoderPitch = info->Encoders[1];
+    _currentCameraDataFrame.CamEncoderYaw = info->Encoders[2];
 
     if (_isRangefinderEnabled)
     {
-        _cameraTelemetryDataFrame.RangefinderDistance = info->LdDistance;
-        _cameraTelemetryDataFrame.RangefinderTemperature = info->LdTemperature;
+        _currentCameraDataFrame.RangefinderDistance = info->LdDistance;
+        _currentCameraDataFrame.RangefinderTemperature = info->LdTemperature;
     }
     else
     {
-        _cameraTelemetryDataFrame.RangefinderDistance = 0;
-        _cameraTelemetryDataFrame.RangefinderTemperature = 0;
+        _currentCameraDataFrame.RangefinderDistance = 0;
+        _currentCameraDataFrame.RangefinderTemperature = 0;
     }
 }
 
@@ -791,7 +786,7 @@ void HardwareLink::readSerialPortMUSVData()
 
     _telemetryConnectionByteCounter += rawData.size();
 
-    delayedTelemetryDataFrameProcessing(telemetryDataFrame);
+    _delayTelemetryDataFrames->enqueue(telemetryDataFrame);
     emit onTelemetryReceived(rawData.toHex());
 }
 
@@ -861,7 +856,7 @@ bool HardwareLink::processTelemetryPendingDatagramsV4()
 
         _telemetryConnectionByteCounter += sizeof(udpTelemetryMessage);
 
-        delayedTelemetryDataFrameProcessing(telemetryDataFrame);
+        _delayTelemetryDataFrames->enqueue(telemetryDataFrame);
 
         QByteArray rawData = QByteArray((char*)&udpTelemetryMessage, messageSize);
         emit onTelemetryReceived(rawData.toHex());

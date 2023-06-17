@@ -33,7 +33,7 @@ class DashboardWidget final: public QWidget
                             RowCalculatedRangefinderGPSLat, RowCalculatedRangefinderGPSLon, RowCalculatedRangefinderGPSHmsl,
                             RowCalculatedGroundLevel, RowOpticalSystem,
                             RowRangefinderTemperature, RowAtmosphereTemperature, RowAtmospherePressure,
-                            RowVideoFPS,
+                            RowVideoFPS, RowTelemetryFPS,
                             RowLast
                            };
 

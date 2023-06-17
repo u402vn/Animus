@@ -18,6 +18,7 @@
 #include "ApplicationSettings.h"
 #include "Common/CommonUtils.h"
 #include "Common/BinaryContent.h"
+#include "DelayLine.h"
 
 const int PRIMARY_OPTYCAL_SYSTEM_ID   = 1;
 const int SECONDARY_OPTYCAL_SYSTEM_ID = 2;
@@ -68,11 +69,11 @@ private:
     QTime _sessionTime;
     //quint32 _lastUpdatedTelemetryFrameNumber;
 
-    QQueue<TelemetryDataFrame> _incommingFrames;
-    TelemetryDataFrame _currentTelemetryDataFrame;
     QImage _videoFrame;
 
-    CameraTelemetryDataFrame _cameraTelemetryDataFrame;
+    QQueue<CameraTelemetryDataFrame> _incommingCameraDataFrames;
+    CameraTelemetryDataFrame _currentCameraDataFrame;
+
     EmulatorTelemetryDataFrame _emulatorTelemetryDataFrame;
     ExtendedTelemetryDataFrame _extendedTelemetryDataFrame;
     bool _isRangefinderEnabled;
@@ -80,11 +81,9 @@ private:
     quint32 _telemetryFrameNumber;
     quint32 _videoFrameNumber;
 
-    quint32 _videoLagFromTelemetry;
-
     QTimer *_fpsTimer;
-    quint32 _videoFrameNumberPrevSec;
-    quint32 _receivedFrameCountPrevSec;
+    quint32 _videoFrameNumberPrevSec, _receivedVideoFrameCountPrevSec;
+    quint32 _telemetryFrameNumberPrevSec, _receivedTelemetryFrameCountPrevSec;
 
     bool _isCameraFixed;
     double _fixedCamPitch, _fixedCamRoll, _fixedCamYaw;
@@ -109,13 +108,15 @@ private:
 
     WorldGPSCoord _bombingPlacePos;
 
+    TelemetryDataFrame _currentTelemetryDataFrame;
+    void notifyDataReceived();
+
+    TelemetryDelayLine *_delayTelemetryDataFrames;
+
     void timerEvent(QTimerEvent *event);
 
     void tryToSendCamPosition();
     void sendCommand(const BinaryContent &commandContent, const QString &commandDescription);
-
-    void delayedTelemetryDataFrameProcessing(const TelemetryDataFrame &telemetryDataFrame);
-    void notifyDataReceived();
 
     void forwardTelemetryDataFrame(const char *data, qint64 len);
 
@@ -175,7 +176,9 @@ private slots:
     void readSerialPortMUSVData();
     virtual void videoFrameReceivedInternal(const QImage &frame);
     void doActivateCatapult();
-    void doProcessTelemetryDataFrameQueue();
+
+
+    void onTelemetryDelayLineDequeue(const TelemetryDataFrame &value);
 
     void doOnCommandSent(const BinaryContent &commandContent, const QString &commandDescription);
 signals:
