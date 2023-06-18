@@ -8,7 +8,7 @@ QT       += core gui widgets svg multimedia multimediawidgets sql network concur
 
 TARGET = ANIMUS
 TEMPLATE = app
-VERSION = 1.4.5.63
+VERSION = 1.4.5.65
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 CONFIG   += precompile_header
@@ -28,6 +28,7 @@ SOURCES += main.cpp \
         UserInterface/Forms/EmulatorConsole.cpp \
         UserInterface/Forms/WeatherView.cpp \
         UserInterface/Instruments/qfi_PFD.cpp\
+        UserInterface/ConstantNames.cpp \
         UserInterface/ApplicationSettingsEditor/CameraListSettingsEditor.cpp \
         UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.cpp \
         UserInterface/ApplicationSettingsEditor/CameraZoomSettingsEditor.cpp \
@@ -95,6 +96,7 @@ SOURCES += main.cpp \
         HardwareLink/ExternalDataConsoleNotificator.cpp \	
         HardwareLink/VideoLink.cpp \
         HardwareLink/HardwareLink.cpp \
+        HardwareLink/DelayLine.cpp \
         HardwareLink/MUSVPhotoCommandBuilder.cpp \
         HardwareLink/OtusCommonCommandBuilder.cpp \
         HardwareLink/CommonCommandBuilder.cpp \
@@ -116,9 +118,7 @@ SOURCES += main.cpp \
         Common/CommonWidgets.cpp \
         Common/CommonData.cpp \
         Common/CommonUtils.cpp \
-        Common/BinaryContent.cpp \
-    UserInterface/ConstantNames.cpp \
-    HardwareLink/DelayLine.cpp
+        Common/BinaryContent.cpp
 
 
 HEADERS  += stable.h \
@@ -130,6 +130,7 @@ HEADERS  += stable.h \
         UserInterface/Forms/EmulatorConsole.h \
         UserInterface/Forms/WeatherView.h \
         UserInterface/Instruments/qfi_PFD.h\
+        UserInterface/ConstantNames.h \
         UserInterface/ApplicationSettingsEditor/CameraListSettingsEditor.h \
         UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.h \
         UserInterface/ApplicationSettingsEditor/CameraZoomSettingsEditor.h \
@@ -197,6 +198,7 @@ HEADERS  += stable.h \
         HardwareLink/ExternalDataConsoleNotificator.h \
         HardwareLink/VideoLink.h \
         HardwareLink/HardwareLink.h \
+        HardwareLink/DelayLine.h \
         HardwareLink/MUSVPhotoCommandBuilder.h \
         HardwareLink/OtusCommonCommandBuilder.h \
         HardwareLink/CommonCommandBuilder.h \
@@ -223,9 +225,7 @@ HEADERS  += stable.h \
         Common/CommonData.h \
         Common/CommonUtils.h \
         Constants.h \
-        Common/BinaryContent.h \
-    UserInterface/ConstantNames.h \
-    HardwareLink/DelayLine.h
+        Common/BinaryContent.h
 
 
 RESOURCES += \

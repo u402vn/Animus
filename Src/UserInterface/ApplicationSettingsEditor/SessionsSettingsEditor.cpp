@@ -315,6 +315,7 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     // Init Tracker section
 
     auto cmbObjectTrackerType = new QComboBoxExt(this, ConstantNames::ObjectTrackerTypeCaptions());
+    auto chkShowExternalTrackerRectangle = new QCheckBox(tr("Show External Tracker Cursor"), this);
 
     auto lblTrackerCommandUDP = new QLabel(tr("External Tracker Commands (UDP/IP)"), this);
     auto naeTrackerCommandUDP = new NetworkAddressEditor(this, &_association, &applicationSettings.TrackerCommandUDPAddress, &applicationSettings.TrackerCommandUDPPort);
@@ -328,6 +329,7 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     row = 0;
 
     trackerLayout->addWidget(cmbObjectTrackerType,                      row, 0, 1, 1);
+    trackerLayout->addWidget(chkShowExternalTrackerRectangle,           row, 1, 1, 2);
     row++;
 
     trackerLayout->addWidget(lblTrackerCommandUDP,                      row, 0, 1, 1);
@@ -405,6 +407,8 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     _association.addBinding(&applicationSettings.CommandProtocol,                   cbCommandProtocol);
 
     _association.addBinding(&applicationSettings.ObjectTrackerType,                 cmbObjectTrackerType);
+    _association.addBinding(&applicationSettings.ShowExternalTrackerRectangle,      chkShowExternalTrackerRectangle);
+
 }
 
 void SessionsSettingsEditor::onCurrentCameraChanged(int index)

@@ -235,6 +235,7 @@ public:
     ApplicationPreferenceInt ArtilleryMountTCPPort;
     ApplicationPreferenceInt ExternalDataConsoleUDPPort;
     ApplicationPreferenceEnum<ObjectTrackerTypeEnum> ObjectTrackerType;
+    ApplicationPreferenceBool ShowExternalTrackerRectangle;
     ApplicationPreferenceInt TrackerCommandUDPPort;
     ApplicationPreferenceString TrackerCommandUDPAddress;
     ApplicationPreferenceInt TrackerTelemetryUDPPort;

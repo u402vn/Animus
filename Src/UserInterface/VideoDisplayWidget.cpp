@@ -100,7 +100,8 @@ void VideoDisplayWidget::loadSettings()
     _gimbalIndicatorAngles = applicationSettings.OSDGimbalAngles;
     _gimbalIndicatorSize = applicationSettings.OSDGimbalIndicatorSize;
     _telemetryTimeFormat = applicationSettings.OVRTelemetryTimeFormat; //? make separate setting or use common with video recorder
-    _drawTargetRectangle = (applicationSettings.ObjectTrackerType.value()) != ObjectTrackerTypeEnum::External;
+    _drawTargetRectangle = ( ((applicationSettings.ObjectTrackerType.value()) != ObjectTrackerTypeEnum::External) ||
+                             applicationSettings.ShowExternalTrackerRectangle.value());
     _osdCursorColor = applicationSettings.OSDTargetTrackerCursor;
 
     QString serializedPreference = cameraSettings->BombingSightNumbers;
