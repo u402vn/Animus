@@ -424,7 +424,9 @@ void HardwareLink::open()
     _sessionTime.start();
     _videoFrameNumber = 0;
     _telemetryFrameNumber = 0;
+    _delayTelemetryDataFrames->clear();
     _currentTelemetryDataFrame.clear();
+    _delayCameraTelemetryDataFrames->clear();
     _currentCameraDataFrame.clear();
 
     _videoFrameNumberPrevSec = 0;

@@ -19,6 +19,7 @@ public:
     ~TelemetryDelayLine();
 
     void enqueue(const TelemetryDataFrame &value);
+    void clear();
 signals:
     void dequeue(const TelemetryDataFrame &value);
 private slots:
@@ -31,13 +32,14 @@ class CameraTelemetryDelayLine : public QObject
 {
     Q_OBJECT
     quint32 _delayMs;
-    QQueue<CameraTelemetryDataFrame> _framesTelemetryDataFrames;
+    QQueue<CameraTelemetryDataFrame> _frames;
 
 public:
     explicit CameraTelemetryDelayLine(QObject *parent, quint32 delayMs);
     ~CameraTelemetryDelayLine();
 
     void enqueue(const CameraTelemetryDataFrame &value);
+    void clear();
 signals:
     void dequeue(const CameraTelemetryDataFrame &value);
 private slots:

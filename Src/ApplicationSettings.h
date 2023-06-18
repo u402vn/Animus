@@ -221,6 +221,7 @@ public:
     ApplicationPreferenceBool UseExtTelemetryUDP;
     ApplicationPreferenceInt ExtTelemetryUDPPort;
     ApplicationPreferenceInt VideoLagFromTelemetry;
+    ApplicationPreferenceInt VideoLagFromCameraTelemetry;
     ApplicationPreferenceBool EnableForwarding;
     ApplicationPreferenceString VideoForwardingAddress;
     ApplicationPreferenceInt VideoForwardingPort;

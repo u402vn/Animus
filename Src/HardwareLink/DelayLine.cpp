@@ -24,10 +24,18 @@ void TelemetryDelayLine::enqueue(const TelemetryDataFrame &value)
     }
 }
 
+void TelemetryDelayLine::clear()
+{
+    _frames.clear();
+}
+
 void TelemetryDelayLine::onDelayTimer()
 {
-    auto value = _frames.dequeue();
-    emit dequeue(value);
+    if (!_frames.isEmpty())
+    {
+        auto value = _frames.dequeue();
+        emit dequeue(value);
+    }
 }
 
 //----------------------------------------------
@@ -50,13 +58,21 @@ void CameraTelemetryDelayLine::enqueue(const CameraTelemetryDataFrame &value)
     }
     else
     {
-        _framesTelemetryDataFrames.enqueue(value);
+        _frames.enqueue(value);
         QTimer::singleShot(_delayMs, Qt::PreciseTimer, this, &CameraTelemetryDelayLine::onDelayTimer);
     }
 }
 
+void CameraTelemetryDelayLine::clear()
+{
+    _frames.clear();
+}
+
 void CameraTelemetryDelayLine::onDelayTimer()
 {
-    auto value = _framesTelemetryDataFrames.dequeue();
-    emit dequeue(value);
+    if (!_frames.isEmpty())
+    {
+        auto value = _frames.dequeue();
+        emit dequeue(value);
+    }
 }

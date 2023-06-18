@@ -151,8 +151,11 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     connect(_cbCurrentCamera, static_cast<void(QComboBoxExt::*)(int)>(&QComboBoxExt::currentIndexChanged), this, &SessionsSettingsEditor::onCurrentCameraChanged);
     _lblCurrentCameraInfo = new QLabel(this);
 
-    auto lblVideoLagFromTelemetry = new QLabel(tr("Video Lag (ms)"), this);
-    auto sbVideoLagFromTelemetry = CommonWidgetUtils::createRangeSpinbox(this, 0, 5000);
+    auto lblTelemetryLag = new QLabel(tr("Telemetry Lag (ms)"), this);
+    auto sbTelemetryLag = CommonWidgetUtils::createRangeSpinbox(this, 0, 5000);
+
+    auto lblCameraTelemetryLag = new QLabel(tr("Camera Telemetry Lag (ms)"), this);
+    auto sbCameraTelemetryLag = CommonWidgetUtils::createRangeSpinbox(this, 0, 5000);
 
     auto spoilerDataReception = makeSessionsSpoilerGrid(tr("Data Reception"), this);
     auto dataReceptionLayout = spoilerDataReception->gridLayout();
@@ -185,8 +188,12 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     dataReceptionLayout->setRowMinimumHeight(row++, 3 * ROW_SEPARATOR_HEIGHT);
     row++;
 
-    dataReceptionLayout->addWidget(lblVideoLagFromTelemetry,        row, 0, 1, 1);
-    dataReceptionLayout->addWidget(sbVideoLagFromTelemetry,         row, 1, 1, 1);
+    dataReceptionLayout->addWidget(lblTelemetryLag,                 row, 0, 1, 1);
+    dataReceptionLayout->addWidget(sbTelemetryLag,                  row, 1, 1, 1);
+    row++;
+
+    dataReceptionLayout->addWidget(lblCameraTelemetryLag,           row, 0, 1, 1);
+    dataReceptionLayout->addWidget(sbCameraTelemetryLag,            row, 1, 1, 1);
     row++;
 
     // Init Data Sending Section
@@ -388,7 +395,8 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     _association.addBinding(&applicationSettings.UseCamTelemetryUDP,                chkCamTelemetryUDP);
     _association.addBinding(&applicationSettings.CamTelemetryUDPPort,               edCamTelemetryUDPPort);
 
-    _association.addBinding(&applicationSettings.VideoLagFromTelemetry,             sbVideoLagFromTelemetry);
+    _association.addBinding(&applicationSettings.VideoLagFromTelemetry,             sbTelemetryLag);
+    _association.addBinding(&applicationSettings.VideoLagFromCameraTelemetry,       sbCameraTelemetryLag);
 
     _association.addBinding(&applicationSettings.InstalledCameraIndex,              _cbCurrentCamera);
     _association.addBinding(&applicationSettings.CommandSendingInterval,            sbCommandSendingInterval);

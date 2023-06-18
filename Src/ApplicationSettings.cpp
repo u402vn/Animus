@@ -81,6 +81,7 @@ ApplicationSettings::ApplicationSettings() : ApplicationSettingsRoot(),
     ExtTelemetryUDPPort(this, "Sessions/ExtTelemetryUDPPort", 1122),
 
     VideoLagFromTelemetry(this, "Sessions/VideoLagFromTelemetry", 0),
+    VideoLagFromCameraTelemetry(this, "Sessions/VideoLagFromCameraTelemetry", 0),
     EnableForwarding(this, "Sessions/EnableForwarding", false),
     VideoForwardingAddress(this, "Sessions/VideoForwardingAddress", "192.168.1.100"),
     VideoForwardingPort(this, "Sessions/VideoForwardingPort", 51200),
