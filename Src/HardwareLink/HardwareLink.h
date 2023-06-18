@@ -71,9 +71,6 @@ private:
 
     QImage _videoFrame;
 
-    QQueue<CameraTelemetryDataFrame> _incommingCameraDataFrames;
-    CameraTelemetryDataFrame _currentCameraDataFrame;
-
     EmulatorTelemetryDataFrame _emulatorTelemetryDataFrame;
     ExtendedTelemetryDataFrame _extendedTelemetryDataFrame;
     bool _isRangefinderEnabled;
@@ -108,10 +105,13 @@ private:
 
     WorldGPSCoord _bombingPlacePos;
 
-    TelemetryDataFrame _currentTelemetryDataFrame;
-    void notifyDataReceived();
+    CameraTelemetryDelayLine *_delayCameraTelemetryDataFrames;
+    CameraTelemetryDataFrame _currentCameraDataFrame;
 
     TelemetryDelayLine *_delayTelemetryDataFrames;
+    TelemetryDataFrame _currentTelemetryDataFrame;
+
+    void notifyDataReceived();
 
     void timerEvent(QTimerEvent *event);
 
@@ -123,7 +123,7 @@ private:
     void updateTrackerValues(TelemetryDataFrame &telemetryDataFrame);
     void updateTelemetryValues(TelemetryDataFrame &telemetryDataFrame);
 
-    void updateCameraTelemetryDataFrame(const QByteArray &rawData);
+    void processNewCameraTelemetryDataFrame(const QByteArray &rawData);
 
     bool processTelemetryPendingDatagramsV4();
     void processTelemetryPendingDatagramsUnknownFormat();
@@ -177,8 +177,8 @@ private slots:
     virtual void videoFrameReceivedInternal(const QImage &frame);
     void doActivateCatapult();
 
-
     void onTelemetryDelayLineDequeue(const TelemetryDataFrame &value);
+    void onCameraTelemetryDelayLineDequeue(const CameraTelemetryDataFrame &value);
 
     void doOnCommandSent(const BinaryContent &commandContent, const QString &commandDescription);
 signals:

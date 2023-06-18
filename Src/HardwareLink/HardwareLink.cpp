@@ -69,6 +69,8 @@ HardwareLink::HardwareLink(QObject *parent) : VideoLink(parent)
     _delayTelemetryDataFrames = new TelemetryDelayLine(this, applicationSettings.VideoLagFromTelemetry);
     connect(_delayTelemetryDataFrames, &TelemetryDelayLine::dequeue, this, &HardwareLink::onTelemetryDelayLineDequeue, Qt::DirectConnection);
 
+    _delayCameraTelemetryDataFrames  = new CameraTelemetryDelayLine(this, applicationSettings.VideoLagFromCameraTelemetry);
+    connect(_delayCameraTelemetryDataFrames, &CameraTelemetryDelayLine::dequeue, this, &HardwareLink::onCameraTelemetryDelayLineDequeue, Qt::DirectConnection);
 
     _commandTransports = applicationSettings.CommandTransport;
     _udpCommandAddress = QHostAddress(applicationSettings.CommandUDPAddress);
@@ -234,6 +236,12 @@ void HardwareLink::onTelemetryDelayLineDequeue(const TelemetryDataFrame &value)
 {
     _currentTelemetryDataFrame = value;
     notifyDataReceived();
+}
+
+void HardwareLink::onCameraTelemetryDelayLineDequeue(const CameraTelemetryDataFrame &value)
+{
+    _currentCameraDataFrame = value;
+    _currentCameraDataFrame.applyToTelemetryDataFrame(_currentTelemetryDataFrame);
 }
 
 void HardwareLink::timerEvent(QTimerEvent *event)
@@ -687,8 +695,7 @@ void HardwareLink::processCamTelemetryPendingDatagrams()
         qint64 messageSize = _udpCamTelemetrySocket.pendingDatagramSize();
         QByteArray rawData(messageSize, 0);
         _udpCamTelemetrySocket.readDatagram(rawData.data(), messageSize);
-        updateCameraTelemetryDataFrame(rawData);
-        _currentCameraDataFrame.applyToTelemetryDataFrame(_currentTelemetryDataFrame);
+        processNewCameraTelemetryDataFrame(rawData);
 
         _telemetryConnectionByteCounter += rawData.size();
         emit onTelemetryReceived(rawData.toHex());
@@ -743,38 +750,42 @@ void HardwareLink::processExtTelemetryPendingDatagrams()
     }
 }
 
-void HardwareLink::updateCameraTelemetryDataFrame(const QByteArray &rawData)
+void HardwareLink::processNewCameraTelemetryDataFrame(const QByteArray &rawData)
 {
     static protocolName::protocol protocolMUSV;
     protocolMUSV.SetData(rawData);
     protocolMUSV.DecodingData();
     protocolName::InputData *info = protocolMUSV.GetData();
 
-    _currentCameraDataFrame.CamRoll = static_cast<double>(info->angles.roll);
-    _currentCameraDataFrame.CamPitch = static_cast<double>(info->angles.pitch);
-    _currentCameraDataFrame.CamYaw = static_cast<double>(info->angles.yaw);
-    _currentCameraDataFrame.CamZoom = static_cast<double>(info->ZoomAll);
+    CameraTelemetryDataFrame cameraDataFrame;
 
-    _currentCameraDataFrame.CamEncoderRoll = info->Encoders[0];
-    _currentCameraDataFrame.CamEncoderPitch = info->Encoders[1];
-    _currentCameraDataFrame.CamEncoderYaw = info->Encoders[2];
+    cameraDataFrame.CamRoll = static_cast<double>(info->angles.roll);
+    cameraDataFrame.CamPitch = static_cast<double>(info->angles.pitch);
+    cameraDataFrame.CamYaw = static_cast<double>(info->angles.yaw);
+    cameraDataFrame.CamZoom = static_cast<double>(info->ZoomAll);
+
+    cameraDataFrame.CamEncoderRoll = info->Encoders[0];
+    cameraDataFrame.CamEncoderPitch = info->Encoders[1];
+    cameraDataFrame.CamEncoderYaw = info->Encoders[2];
 
     if (_isRangefinderEnabled)
     {
-        _currentCameraDataFrame.RangefinderDistance = info->LdDistance;
-        _currentCameraDataFrame.RangefinderTemperature = info->LdTemperature;
+        cameraDataFrame.RangefinderDistance = info->LdDistance;
+        cameraDataFrame.RangefinderTemperature = info->LdTemperature;
     }
     else
     {
-        _currentCameraDataFrame.RangefinderDistance = 0;
-        _currentCameraDataFrame.RangefinderTemperature = 0;
+        cameraDataFrame.RangefinderDistance = 0;
+        cameraDataFrame.RangefinderTemperature = 0;
     }
+
+    _delayCameraTelemetryDataFrames->enqueue(cameraDataFrame);
 }
 
 void HardwareLink::readSerialPortMUSVData()
 {
     auto rawData = _serialCommandPort.readAll();
-    updateCameraTelemetryDataFrame(rawData);
+    processNewCameraTelemetryDataFrame(rawData);
 
     TelemetryDataFrame telemetryDataFrame;
     telemetryDataFrame.clear();
