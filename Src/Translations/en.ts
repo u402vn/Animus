@@ -1389,37 +1389,47 @@ Speed Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ConstantNames.cpp" line="150"/>
+        <location filename="../UserInterface/ConstantNames.cpp" line="143"/>
+        <source>Cross [2]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="144"/>
+        <source>Cross [3]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ConstantNames.cpp" line="152"/>
         <source>USB Camera</source>
         <translation type="unfinished">USB Camera</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ConstantNames.cpp" line="151"/>
+        <location filename="../UserInterface/ConstantNames.cpp" line="153"/>
         <source>X-Plane</source>
         <translation type="unfinished">X-Plane</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ConstantNames.cpp" line="152"/>
+        <location filename="../UserInterface/ConstantNames.cpp" line="154"/>
         <source>Yurion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ConstantNames.cpp" line="153"/>
+        <location filename="../UserInterface/ConstantNames.cpp" line="155"/>
         <source>Image File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ConstantNames.cpp" line="154"/>
+        <location filename="../UserInterface/ConstantNames.cpp" line="156"/>
         <source>Video File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ConstantNames.cpp" line="155"/>
+        <location filename="../UserInterface/ConstantNames.cpp" line="157"/>
         <source>RTSP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ConstantNames.cpp" line="156"/>
+        <location filename="../UserInterface/ConstantNames.cpp" line="158"/>
         <source>MUSV-2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3023,44 +3033,44 @@ Are you sure you want to deleted it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="512"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="513"/>
         <source>Height: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="674"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="697"/>
         <source>LAPEL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="695"/>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="725"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="718"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="748"/>
         <source>%1 m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="698"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="721"/>
         <source>%1 m/s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="721"/>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="732"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="744"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="755"/>
         <source>%1°</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="741"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="764"/>
         <source>Turn Right &gt;&gt;&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="743"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="766"/>
         <source>&lt;&lt;&lt; Turn Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="703"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="726"/>
         <source>M</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3070,7 +3080,7 @@ Are you sure you want to deleted it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="670"/>
+        <location filename="../UserInterface/VideoDisplayWidget.cpp" line="693"/>
         <source>DROP</source>
         <translation type="unfinished"></translation>
     </message>

@@ -518,8 +518,29 @@ void VideoDisplayWidget::drawFrameCenterMark(QPainter &painter)
 
         break;
     }
+    case OSDScreenCenterMarks::Cross2:
+    {
+        int r = width * 0.030;
+        QVector<QLineF> markLines;
+        markLines.append(QLine(x - r,       y,           x - r / 2,     y    ));
+        markLines.append(QLine(x + r / 2,   y,           x + r,         y    ));
+        markLines.append(QLine(x,           y - r,      x,              y - r / 2));
+        markLines.append(QLine(x,           y + r / 2,   x,             y + r));
+        painter.drawLines(markLines);
+        break;
     }
-
+    case OSDScreenCenterMarks::Cross3:
+    {
+        int r = width * 0.030;
+        QVector<QLineF> markLines;
+        markLines.append(QLine(x - r,       y - r,           x - r / 2,     y - r / 2 ));
+        markLines.append(QLine(x - r,       y + r,           x - r / 2,     y + r / 2 ));
+        markLines.append(QLine(x + r,       y - r,           x + r / 2,     y - r / 2 ));
+        markLines.append(QLine(x + r,       y + r,           x + r / 2,     y + r / 2 ));
+        painter.drawLines(markLines);
+        break;
+    }
+    }
 }
 
 const int TimeScaleRange = 10;

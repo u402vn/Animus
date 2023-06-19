@@ -81,7 +81,9 @@ enum OSDScreenCenterMarks
 {
     SimpleCross = 0,
     CircleCross,
-    CrossAndRulers
+    CrossAndRulers,
+    Cross2,
+    Cross3
 };
 
 enum OSDGimbalIndicatorType

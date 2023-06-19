@@ -139,7 +139,9 @@ const QMap<int, QString> ConstantNames::OSDScreenCenterMarkCaptions()
     static const QMap <int, QString> mapOSDScreenCenterMarkCaptions {
         { OSDScreenCenterMarks::SimpleCross,    tr("Cross in Center") },
         { OSDScreenCenterMarks::CircleCross,    tr("Circle in Center")},
-        { OSDScreenCenterMarks::CrossAndRulers, tr("Cross and Rulers")}
+        { OSDScreenCenterMarks::CrossAndRulers, tr("Cross and Rulers")},
+        { OSDScreenCenterMarks::Cross2,         tr("Cross [2]")},
+        { OSDScreenCenterMarks::Cross3,         tr("Cross [3]")}
     };
     return mapOSDScreenCenterMarkCaptions;
 }
