@@ -24,6 +24,7 @@
 #include "UserInterface/MarkerListWidget.h"
 #include "UserInterface/BombingWidget.h"
 #include "UserInterface/PatrolWidget.h"
+#include "UserInterface/AntennaControlWidget.h"
 #include "UserInterface/VideoDisplayWidget.h"
 #include "ImageProcessor/ImageProcessor.h"
 #include "HardwareLink/HardwareLink.h"
@@ -77,6 +78,7 @@ private:
     CamControlsWidget *_camControlsWidget;
     BombingWidget *_bombingWidget;
     PatrolWidget *_patrolWidget;
+    AntennaControlWidget *_antennaWidget;
     DashboardWidget *_dashboardWidget;
     MarkerListWidget *_markerListWidget;
 
@@ -101,7 +103,8 @@ private:
     void addWidgetsVideoDisplay();
     void initHidController(CamAssemblyPreferences *camPreferences);
 
-    void showModeSpecificWidgets(bool showCameraTab, bool showInstrumentsTab, bool showMarkersTab, bool showBombingTab, bool showPatrolTab, bool showTimeScale);
+    void showModeSpecificWidgets(bool showCameraTab, bool showInstrumentsTab, bool showMarkersTab, bool showBombingTab,
+                                 bool showPatrolTab, bool showAntennaTab, bool showTimeScale);
     void updateDashboardStatuses();
 protected:
     void virtual closeEvent(QCloseEvent *event);

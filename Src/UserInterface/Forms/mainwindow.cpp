@@ -157,7 +157,8 @@ void addWidgetToTab(QTabWidget *tabTools, QWidget *widget, const QIcon& icon, co
         tabTools->removeTab(tabIdx);
 }
 
-void MainWindow::showModeSpecificWidgets(bool showCameraTab, bool showInstrumentsTab, bool showMarkersTab, bool showBombingTab, bool showPatrolTab, bool showTimeScale)
+void MainWindow::showModeSpecificWidgets(bool showCameraTab, bool showInstrumentsTab, bool showMarkersTab, bool showBombingTab,
+                                         bool showPatrolTab, bool showAntennaTab, bool showTimeScale)
 {
     EnterProcStart("MainWindow::showModeSpecificWidgets");
 
@@ -174,6 +175,7 @@ void MainWindow::showModeSpecificWidgets(bool showCameraTab, bool showInstrument
     addWidgetToTab(_tabTools, _dashboardWidget, QIcon(":/tab_instr.png"), tr("Tools"), showInstrumentsTab);
     addWidgetToTab(_tabTools, _markerListWidget, QIcon(":/tab_marker.png"), tr("Markers"), showMarkersTab);
     addWidgetToTab(_tabTools, _patrolWidget, QIcon(":/tab_patrol.png"), tr("Patrol"), showPatrolTab);
+    addWidgetToTab(_tabTools, _antennaWidget, QIcon(":/tab_antenna.png"), tr("Antenna"), showAntennaTab);
 
     int selectedTabIndex = _tabTools->indexOf(selectedTab);
     if (selectedTabIndex >= 0)
@@ -423,8 +425,12 @@ void MainWindow::addTabWidgets()
 
     _bombingWidget = applicationSettings.isBombingTabLicensed() || applicationSettings.isTargetTabLicensed() ?
                 new BombingWidget(_tabTools, _hardwareLink, _artillerySpotter, _dataStorage) : nullptr;
+
     _patrolWidget = applicationSettings.isPatrolTabLicensed() ?
                 new PatrolWidget(_tabTools) : nullptr;
+
+    _antennaWidget = new AntennaControlWidget(this);
+
     _markerListWidget = applicationSettings.isMarkersTabLicensed() ?
                 new MarkerListWidget(_tabTools) : nullptr;
 }
@@ -712,6 +718,7 @@ void MainWindow::onDataReceived(const TelemetryDataFrame &telemetryFrame, const 
         _dashboardWidget->processTelemetry(telemetryFrame);
         if (_bombingWidget != nullptr)
             _bombingWidget->processTelemetry(telemetryFrame);
+        _antennaWidget->processTelemetry(telemetryFrame);
     }
 }
 
@@ -778,16 +785,17 @@ void MainWindow::workModeChanged()
     bool showMarkersTab = applicationSettings.MarkersTabAllowed;
     bool showToolsTab   = applicationSettings.ToolsTabAllowed;
     bool showPatrolTab  = applicationSettings.PatrolTabAllowed;
+    bool showAntennaTab = applicationSettings.AntennaTabAllowed;
 
     switch (_dataStorage->getWorkMode())
     {
     case TelemetryDataStorage::WorkMode::DisplayOnly:
-        showModeSpecificWidgets(true, showToolsTab, showMarkersTab, showBombingTab, showPatrolTab, false);
+        showModeSpecificWidgets(true, showToolsTab, showMarkersTab, showBombingTab, showPatrolTab, showAntennaTab, false);
         SetPlayStatus(PlayRealtime);
         _hardwareLink->open();
         break;
     case TelemetryDataStorage::WorkMode::PlayStored:
-        showModeSpecificWidgets(false, showToolsTab, showMarkersTab, false, false, true);
+        showModeSpecificWidgets(false, showToolsTab, showMarkersTab, false, false, false, true);
         SetPlayStatus(PlayHistory);
         _timeSlider->setMaximum(_dataStorage->getTelemetryDataFrameCount() - 1);
         if (_mapView != nullptr)
@@ -795,7 +803,7 @@ void MainWindow::workModeChanged()
         break;
     case TelemetryDataStorage::WorkMode::RecordAndDisplay:
         bool showTimeScale = applicationSettings.VideoFileFrameCount > 0;
-        showModeSpecificWidgets(true, showToolsTab, showMarkersTab, showBombingTab, showPatrolTab, showTimeScale);
+        showModeSpecificWidgets(true, showToolsTab, showMarkersTab, showBombingTab, showPatrolTab, showAntennaTab, showTimeScale);
         SetPlayStatus(PlayRealtime);
         _hardwareLink->open();
         break;

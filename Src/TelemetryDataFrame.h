@@ -83,6 +83,17 @@ struct TelemetryDataFrame final
 
     quint32 BombState;
 
+
+    double AntennaLatitude_GPS;
+    double AntennaLongitude_GPS;
+    double AntennaAltitude_GPS;
+
+    double AntennaElevation;
+    double AntennaAzimuth;
+
+    bool AntennaFanEnabled;
+    bool AntennaHeaterEnabled;
+
     quint32 TelemetryFrameNumber;
     quint32 VideoFrameNumber;
     quint32 SessionTimeMs;

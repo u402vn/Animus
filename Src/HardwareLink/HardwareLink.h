@@ -15,6 +15,7 @@
 #include "HardwareLink/VideoLink.h"
 #include "HardwareLink/CommonCommandBuilder.h"
 #include "HardwareLink/TrackerHardwareLink.h"
+#include "HardwareLink/AntennaHardwareLink.h"
 #include "ApplicationSettings.h"
 #include "Common/CommonUtils.h"
 #include "Common/BinaryContent.h"
@@ -60,6 +61,8 @@ private:
     quint32 _commandSendingInterval;
 
     TrackerHardwareLink *_trackerHardwareLink;
+
+    AntennaHardwareLink *_antennaHardwareLink;
 
     QString _catapultSerialPortName;
     QStringList _catapultCommands;
@@ -121,6 +124,7 @@ private:
     void forwardTelemetryDataFrame(const char *data, qint64 len);
 
     void updateTrackerValues(TelemetryDataFrame &telemetryDataFrame);
+    void updateAntennaValues(TelemetryDataFrame &telemetryDataFrame);
     void updateTelemetryValues(TelemetryDataFrame &telemetryDataFrame);
 
     void processNewCameraTelemetryDataFrame(const QByteArray &rawData);

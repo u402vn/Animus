@@ -23,6 +23,7 @@
 #include "CamControlsWidgetDials.h"
 #include "CamControlsWidgetKnob.h"
 #include "AutomaticTracer.h"
+#include "TelemetryDataFrame.h"
 
 class CamControlsWidget final : public QWidget
 {

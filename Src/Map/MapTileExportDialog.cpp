@@ -33,9 +33,15 @@ void MapTileExportDialog::initWidgets()
     int row = 0;
 
     _lblCoordLeftTop = new QLabelEx(this);
-    connect(_lblCoordLeftTop, &QLabelEx::clicked, this,  MapTileExportDialog::onCoordLeftTopClick);
+    connect(_lblCoordLeftTop, &QLabelEx::clicked, this,  [=]()
+    {
+        _coordLeftTopSelector->show(QCursor::pos(), _coordLeftTop, "");
+    });
     _lblCoordRightBottom = new QLabelEx(this);
-    connect(_lblCoordRightBottom, &QLabelEx::clicked, this,  MapTileExportDialog::onCoordRightBottomClick);
+    connect(_lblCoordRightBottom, &QLabelEx::clicked, this,  [=]()
+    {
+        _coordRightBottomSelector->show(QCursor::pos(), _coordRightBottom, "");
+    });
 
     mainGrid->addWidget(_lblCoordLeftTop,                row, 1, 1, 10);
     row++;
@@ -208,16 +214,6 @@ void MapTileExportDialog::onRightBottomCoordSelectorChanged(const WorldGPSCoord 
 {
     _coordRightBottom = gpsCoord;
     showCoordValues();
-}
-
-void MapTileExportDialog::onCoordLeftTopClick()
-{
-    _coordLeftTopSelector->show(QCursor::pos(), _coordLeftTop, "");
-}
-
-void MapTileExportDialog::onCoordRightBottomClick()
-{
-    _coordRightBottomSelector->show(QCursor::pos(), _coordRightBottom, "");
 }
 
 void MapTileExportDialog::onExportProcessChanged(double processedPrecent)

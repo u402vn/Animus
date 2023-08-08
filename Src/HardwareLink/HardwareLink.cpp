@@ -93,6 +93,8 @@ HardwareLink::HardwareLink(QObject *parent) : VideoLink(parent)
     else
         _trackerHardwareLink = nullptr;
 
+    _antennaHardwareLink = new AntennaHardwareLink(this);
+
     _camTracerMode = AutomaticTracerMode::atmSleep;
 
     _bombingPlacePos.setIncorrect();
@@ -331,6 +333,7 @@ void HardwareLink::notifyDataReceived()
     _currentTelemetryDataFrame.TelemetryFPS = _receivedTelemetryFrameCountPrevSec;
 
     updateTrackerValues(_currentTelemetryDataFrame);
+    updateAntennaValues(_currentTelemetryDataFrame);
 
     if (_opened && (_licenseState != AnimusLicenseState::Expired))
         emit dataReceived(_currentTelemetryDataFrame, _videoFrame);
@@ -352,6 +355,15 @@ void HardwareLink::updateTrackerValues(TelemetryDataFrame &telemetryDataFrame)
         telemetryDataFrame.TrackedTargetRectHeight = _trackerHardwareLink->trackingRectangleHeight();
         telemetryDataFrame.TrackedTargetState = _trackerHardwareLink->trackingState();
     }
+}
+
+void HardwareLink::updateAntennaValues(TelemetryDataFrame &telemetryDataFrame)
+{
+    telemetryDataFrame.AntennaElevation = _antennaHardwareLink->antennaElevation();
+    telemetryDataFrame.AntennaAzimuth = _antennaHardwareLink->antennaAzimuth();
+
+    telemetryDataFrame.AntennaFanEnabled = _antennaHardwareLink->antennaFanEnabled();
+    telemetryDataFrame.AntennaHeaterEnabled = _antennaHardwareLink->antennaHeaterEnabled();
 }
 
 void HardwareLink::updateTelemetryValues(TelemetryDataFrame &telemetryDataFrame)

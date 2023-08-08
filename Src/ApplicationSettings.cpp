@@ -128,6 +128,7 @@ ApplicationSettings::ApplicationSettings() : ApplicationSettingsRoot(),
     MarkersTabAllowed(this, "Interface/UseMarkersAllowed", true),
     ToolsTabAllowed(this, "Interface/UseToolsAllowed", true),
     PatrolTabAllowed(this, "Interface/PatrolTabAllowed", true),
+    AntennaTabAllowed(this, "Interface/AntennaTabAllowed", true),
     CamControlsTabCoordIndicatorAllowed(this,"Interface/CamControlsTabCoordIndicatorAllowed", true),
     VisibleTelemetryTableRows(this, "Interface/VisibleTelemetryTableRows", "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"),
 

@@ -8,6 +8,7 @@
 #include "EnterProc.h"
 #include "Map/MarkerStorage.h"
 #include "Common/CommonWidgets.h"
+#include "Common/CommonUtils.h"
 #include "ConstantNames.h"
 
 

@@ -8,7 +8,7 @@ QT       += core gui widgets svg multimedia multimediawidgets sql network concur
 
 TARGET = ANIMUS
 TEMPLATE = app
-VERSION = 1.4.5.65
+VERSION = 1.4.5.67
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 CONFIG   += precompile_header
@@ -51,6 +51,7 @@ SOURCES += main.cpp \
         UserInterface/DashboardWidget.cpp \
         UserInterface/BombingWidget.cpp \
         UserInterface/PatrolWidget.cpp \
+        UserInterface/AntennaControlWidget.cpp \
         UserInterface/FilePathSelector.cpp \        
         UserInterface/ConnectionsIndicator.cpp \
         UserInterface/VideoDisplayWidget.cpp \
@@ -110,6 +111,7 @@ SOURCES += main.cpp \
         HardwareLink/MUSV/protocol.cpp \        
         HardwareLink/MUSV2/CorrelationVideoTrackerProtocolParser.cpp \
         HardwareLink/MUSV2/VideoDataProtocolParser.cpp \
+        HardwareLink/AntennaHardwareLink.cpp \
         Joystick.cpp \
         CamPreferences.cpp \
         CoordinateCalculator.cpp \
@@ -153,6 +155,7 @@ HEADERS  += stable.h \
         UserInterface/DashboardWidget.h \
         UserInterface/BombingWidget.h \
         UserInterface/PatrolWidget.h \
+        UserInterface/AntennaControlWidget.h \
 	UserInterface/FilePathSelector.h \
         UserInterface/ConnectionsIndicator.h \
         UserInterface/VideoDisplayWidget.h \
@@ -216,6 +219,7 @@ HEADERS  += stable.h \
         HardwareLink/MUSV2/VideoDataProtocolParser.h \
         HardwareLink/MUSV2/VideoDataStructures.h \
         HardwareLink/MUSV2/VideoCodec.h \
+        HardwareLink/AntennaHardwareLink.h \
         Joystick.h \
         CamPreferences.h \
         CoordinateCalculator.h \

@@ -43,8 +43,6 @@ private slots:
 
     void onLeftTopCoordSelectorChanged(const WorldGPSCoord &gpsCoord, const QString &description);
     void onRightBottomCoordSelectorChanged(const WorldGPSCoord &gpsCoord, const QString &description);
-    void onCoordLeftTopClick();
-    void onCoordRightBottomClick();
 
     void onExportProcessChanged(double processedPrecent);
     void onExportProcessEnded();

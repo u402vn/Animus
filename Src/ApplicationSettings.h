@@ -270,6 +270,7 @@ public:
     ApplicationPreferenceBool MarkersTabAllowed;
     ApplicationPreferenceBool ToolsTabAllowed;
     ApplicationPreferenceBool PatrolTabAllowed;
+    ApplicationPreferenceBool AntennaTabAllowed;
     ApplicationPreferenceBool CamControlsTabCoordIndicatorAllowed;
     ApplicationPreferenceString VisibleTelemetryTableRows;
 
