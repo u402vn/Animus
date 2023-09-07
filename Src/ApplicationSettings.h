@@ -314,6 +314,8 @@ public:
     ApplicationPreferenceEnum<GlobalCoordSystem> UIPresentationCoordSystem;
     ApplicationPreferenceBool EnableComputingStatistics;
 
+    ApplicationPreferenceString LastAntennaCoord;
+
     ApplicationPreferenceDouble EmulatorConsoleUavRoll;
     ApplicationPreferenceDouble EmulatorConsoleUavPitch;
     ApplicationPreferenceDouble EmulatorConsoleUavYaw;

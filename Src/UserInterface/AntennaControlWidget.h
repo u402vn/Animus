@@ -5,6 +5,7 @@
 #include <QGridLayout>
 #include "Common/CommonWidgets.h"
 #include "Common/CommonUtils.h"
+#include "HardwareLink/HardwareLink.h"
 #include "UserInterface/GPSCoordSelector.h"
 #include "TelemetryDataFrame.h"
 #include "EnterProc.h"
@@ -13,6 +14,7 @@ class AntennaControlWidget final : public QWidget
 {
     Q_OBJECT
 
+    HardwareLink *_hardwareLink;
 
     QGridLayout *_mainLayout;
     QLabelEx *_lblAntennaCoord, *_lblUAVCoord;
@@ -26,8 +28,10 @@ class AntennaControlWidget final : public QWidget
 
     void initWidgets();
     void showCoordValues();
+
+    void applyState();
 public:
-    explicit AntennaControlWidget(QWidget *parent);
+    explicit AntennaControlWidget(QWidget *parent, HardwareLink *hardwareLink);
     ~AntennaControlWidget();
 
     void processTelemetry(const TelemetryDataFrame &telemetryFrame);

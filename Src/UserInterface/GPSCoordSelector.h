@@ -5,6 +5,7 @@
 #include <QFrame>
 #include <QSpinBox>
 #include <QTextEdit>
+#include <QLabel>
 #include "Common/CommonData.h"
 
 class GPSCoordSelector final : public QFrame
@@ -28,6 +29,7 @@ public:
     explicit GPSCoordSelector(QWidget *parent);
     ~GPSCoordSelector();
     void show(const QPoint &screenPos, const WorldGPSCoord &gpsCoord, const QString &description);
+    void show(const QLabel *label, const WorldGPSCoord &gpsCoord, const QString &description);
     void setDescriptionVisible(bool visible);
 signals:
     void onCoordSelectorChanged(const WorldGPSCoord &gpsCoord, const QString &description);

@@ -362,8 +362,8 @@ void HardwareLink::updateAntennaValues(TelemetryDataFrame &telemetryDataFrame)
     telemetryDataFrame.AntennaElevation = _antennaHardwareLink->antennaElevation();
     telemetryDataFrame.AntennaAzimuth = _antennaHardwareLink->antennaAzimuth();
 
-    telemetryDataFrame.AntennaFanEnabled = _antennaHardwareLink->antennaFanEnabled();
-    telemetryDataFrame.AntennaHeaterEnabled = _antennaHardwareLink->antennaHeaterEnabled();
+    telemetryDataFrame.AntennaFanEnabled = _antennaHardwareLink->fanEnabled();
+    telemetryDataFrame.AntennaHeaterEnabled = _antennaHardwareLink->heaterEnabled();
 }
 
 void HardwareLink::updateTelemetryValues(TelemetryDataFrame &telemetryDataFrame)
@@ -514,6 +514,11 @@ quint32 HardwareLink::getSessionTimeMs()
 {
     quint32 elapsedTime = (quint32)_sessionTime.elapsed();
     return elapsedTime;
+}
+
+AntennaHardwareLink *HardwareLink::antenna()
+{
+    return _antennaHardwareLink;
 }
 
 void HardwareLink::setHardwareCamStabilization(bool enabled)

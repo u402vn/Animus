@@ -175,6 +175,8 @@ ApplicationSettings::ApplicationSettings() : ApplicationSettingsRoot(),
 
     EnableComputingStatistics(this, "Statistics/EnableComputingStatistics", false),
 
+    LastAntennaCoord(this, "Antenna/LastAntennaCoord", ""),
+
     EmulatorConsoleUavRoll(this, "EmulatorConsoleUavRoll", 0),
     EmulatorConsoleUavPitch(this, "EmulatorConsoleUavPitch", 0),
     EmulatorConsoleUavYaw(this, "EmulatorConsoleUavYaw", 0),

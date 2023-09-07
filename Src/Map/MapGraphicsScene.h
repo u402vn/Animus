@@ -11,6 +11,7 @@
 #include "TelemetryDataFrame.h"
 #include "GSICommonObject.h"
 #include "GSIUAVMarker.h"
+#include "GSIAntennaMarker.h"
 #include "GSITrackedObject.h"
 #include "MapTileContainer.h"
 #include "MarkerStorage.h"
@@ -21,10 +22,12 @@ constexpr int MINIMAL_SCALED_MARKER_SIZE = 16;
 constexpr int UAV_MARKER_SIZE = 60;
 constexpr int WIND_MARKER_SIZE = 30;
 constexpr int WIND_MARKER_SHIFT = 100;
+constexpr int ANTENNA_MARKER_SIZE = 60;
 constexpr int TRACKED_OBJECT_MARKER_SIZE = 64;
-constexpr unsigned int DEFAULT_UAV_MARKER_Z_ORDER = 1000002;
-constexpr unsigned int DEFAULT_VIEW_FIELD_Z_ORDER = 1000001;
-constexpr unsigned int DEFAULT_TRAJECTORY_Z_ORDER = 1000001;
+constexpr unsigned int DEFAULT_UAV_MARKER_Z_ORDER     = 1000003;
+constexpr unsigned int DEFAULT_VIEW_FIELD_Z_ORDER     = 1000002;
+constexpr unsigned int DEFAULT_TRAJECTORY_Z_ORDER     = 1000002;
+constexpr unsigned int DEFAULT_ANTENNA_MARKER_Z_ORDER = 1000001;
 constexpr unsigned int DEFAULT_TRACKED_OBJECT_Z_ORDER = 1000000;
 
 class MapGraphicsScene final: public QGraphicsScene
@@ -45,6 +48,7 @@ private:
     QVector<GSICommonObject*> _allMarkerItems;
 
     GSIUAVMarker *_uavMarker;
+    GSIAntennaMarker *_antennaMarker;
     GSITrackedObject *_trackedObjectMarker;
 
     QList<double> _targetSizesForScales;

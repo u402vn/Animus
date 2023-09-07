@@ -78,7 +78,6 @@ GPSCoordSelector::~GPSCoordSelector()
 
 }
 
-
 void GPSCoordSelector::setupCoord(const WorldGPSCoord &gpsCoord, const QString &description)
 {
     _initInProgress++;
@@ -97,7 +96,6 @@ void GPSCoordSelector::setupCoord(const WorldGPSCoord &gpsCoord, const QString &
     _initInProgress--;
 }
 
-
 void GPSCoordSelector::show(const QPoint &screenPos, const WorldGPSCoord &gpsCoord, const QString &description)
 {
     setupCoord(gpsCoord, description);
@@ -107,6 +105,14 @@ void GPSCoordSelector::show(const QPoint &screenPos, const WorldGPSCoord &gpsCoo
     move(screenPos);
     QFrame::show();
 }
+
+void GPSCoordSelector::show(const QLabel *label, const WorldGPSCoord &gpsCoord, const QString &description)
+{
+    auto pos = label->pos() + QPoint(0, label->height());
+    auto screenPos = static_cast<QWidget*>(label->parent())->mapToGlobal(pos);
+    show(screenPos, gpsCoord, description);
+}
+
 
 void GPSCoordSelector::setDescriptionVisible(bool visible)
 {

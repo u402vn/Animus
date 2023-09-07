@@ -144,6 +144,8 @@ public:
 
     quint32 getSessionTimeMs();
 
+    AntennaHardwareLink *antenna();
+
     // Commands
     void setHardwareCamStabilization(bool enabled);
     void setCamPosition(float roll, float pitch, float yaw);

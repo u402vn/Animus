@@ -488,6 +488,15 @@ const WorldGPSCoord getUavCoordsFromTelemetry(const TelemetryDataFrame &telemetr
     return uavCoords;
 }
 
+const WorldGPSCoord getAntennaCoordsFromTelemetry(const TelemetryDataFrame &telemetryFrame)
+{
+    WorldGPSCoord antennaCoords(telemetryFrame.AntennaLatitude_GPS, telemetryFrame.AntennaLongitude_GPS, telemetryFrame.AntennaAltitude_GPS);
+    if (telemetryFrame.TelemetryFrameNumber <= 0)
+        antennaCoords.setIncorrect();
+    return antennaCoords;
+}
+
+
 const WorldGPSCoord getRangefinderCoordsFromTelemetry(const TelemetryDataFrame &telemetryFrame)
 {
     WorldGPSCoord rangefinderCoords(telemetryFrame.CalculatedRangefinderGPSLat,

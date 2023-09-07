@@ -51,6 +51,7 @@ void drawTargetRectangleOnVideo(QPainter &painter, const QRect &targetRect);
 const QPixmap changeImageColor(const QPixmap &srcImage, const QColor &newColor);
 
 const WorldGPSCoord getUavCoordsFromTelemetry(const TelemetryDataFrame &telemetryFrame);
+const WorldGPSCoord getAntennaCoordsFromTelemetry(const TelemetryDataFrame &telemetryFrame);
 const WorldGPSCoord getRangefinderCoordsFromTelemetry(const TelemetryDataFrame &telemetryFrame);
 const WorldGPSCoord getTrackedTargetCoordsFromTelemetry(const TelemetryDataFrame &telemetryFrame);
 const WorldGPSCoord getBombingPlaceCoordsFromTelemetry(const TelemetryDataFrame &telemetryFrame);

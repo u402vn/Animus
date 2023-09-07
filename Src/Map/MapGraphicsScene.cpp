@@ -350,6 +350,9 @@ MapGraphicsScene::MapGraphicsScene(QObject *parent) :
     _uavMarker = new GSIUAVMarker(this);
     _uavMarker->setImageName(":/plane_blue.png");
 
+    // init Antenna marker
+    _antennaMarker = new GSIAntennaMarker(this);
+
     // init tracked object marker
     _trackedObjectMarker = new GSITrackedObject(this);
     _trackedObjectMarker->setImageName(":/tracked_object.png");
@@ -489,14 +492,17 @@ void MapGraphicsScene::processTelemetry(const TelemetryDataFrame &telemetryFrame
     //1. draw UAV marker, laser line, view field on the map
     _uavMarker->updateForTelemetry(telemetryFrame);
 
-    //2. draw tracked object on the map
+    //2. draw Antenna marker on the map
+    _antennaMarker->updateForTelemetry(telemetryFrame);
+
+    //3. draw tracked object on the map
     _trackedObjectMarker->updateForTelemetry(telemetryFrame);
 
-    //3. update Markers
+    //4. update Markers
     foreach (auto item, _allMarkerItems)
         item->updateForTelemetry(telemetryFrame);
 
-    //4. try center on UAV
+    //5. try center on UAV
     if (_acFollowThePlane->isChecked())
         centerOnUAV();
 }

@@ -11,16 +11,23 @@ private:
     double _antennaElevation;
     double _antennaAzimuth;
 
-    bool _antennaFanEnabled;
-    bool _antennaHeaterEnabled;
+    bool _fanEnabled;
+    bool _heaterEnabled;
 public:
     explicit AntennaHardwareLink(QObject *parent);
 
     double antennaElevation();
     double antennaAzimuth();
 
-    bool antennaFanEnabled();
-    bool antennaHeaterEnabled();
+    void setFanEnabled(bool enabled);
+    bool fanEnabled();
+
+    void setHeaterEnabled(bool enabled);
+    bool heaterEnabled();
+
+
+
+
 signals:
 
 public slots:
