@@ -429,7 +429,7 @@ void MainWindow::addTabWidgets()
     _patrolWidget = applicationSettings.isPatrolTabLicensed() ?
                 new PatrolWidget(_tabTools) : nullptr;
 
-    _antennaWidget = new AntennaControlWidget(this);
+    _antennaWidget = new AntennaControlWidget(_tabTools, _hardwareLink);
 
     _markerListWidget = applicationSettings.isMarkersTabLicensed() ?
                 new MarkerListWidget(_tabTools) : nullptr;
@@ -510,6 +510,9 @@ void MainWindow::addWidgetsVideoDisplay()
     {
         connect(_videoWidget,       &VideoDisplayWidget::lockTarget,  _imageProcessor, &ImageProcessor::lockTarget);
     }
+
+    connect(_camControlsWidget, &CamControlsWidget::setTargetSize,               _videoWidget, &VideoDisplayWidget::setTargetSize);
+    _videoWidget->setTargetSize(_camControlsWidget->selectedTargetSize());
 
     connect(_camControlsWidget, &CamControlsWidget::enableSoftwareStabilization, _videoWidget, &VideoDisplayWidget::onEnableStabilization);
     if (_useMinimalisticDesign)

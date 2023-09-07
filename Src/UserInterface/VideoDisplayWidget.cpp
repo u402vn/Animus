@@ -25,7 +25,7 @@ VideoDisplayWidget::VideoDisplayWidget(QWidget *parent, VoiceInformant *voiceInf
 
     _osdActiveSightNumbers = -1;
 
-    _cursorMark = QRect(0, 0, 40, 40);
+    _cursorMark = QRect(-1, -1, 40, 40);
     _cursorMarkLastMove = QDateTime::currentDateTime();
 
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
@@ -142,6 +142,10 @@ void VideoDisplayWidget::setData(const TelemetryDataFrame &telemetryFrame, const
 {
     _frame = frame.copy();
     _telemetryFrame = telemetryFrame;
+
+    if (_cursorMark.left() < 0)
+        _cursorMark.moveCenter(QPointF(0.5 * _frame.width() , 0.5 * _frame.height() ));
+
     //this->update();
     this->repaint();
 }
@@ -189,7 +193,7 @@ void VideoDisplayWidget::onTargetLockCursorSpeedChange(float speedX, float speed
     else if (y > _frame.height() - _cursorMark.height() / 2 - 1)
         y = _frame.height() - _cursorMark.height() / 2 - 1;
 
-    _cursorMark.moveCenter(QPoint(x, y));
+    _cursorMark.moveCenter(QPointF(x, y));
 
     if ((speedX != 0) || (speedY != 0))
         _cursorMarkLastMove = QDateTime::currentDateTime();
@@ -198,12 +202,19 @@ void VideoDisplayWidget::onTargetLockCursorSpeedChange(float speedX, float speed
 void VideoDisplayWidget::onTargetLockInCursorClick()
 {
     _cursorMarkLastMove = QDateTime::currentDateTime();
-    emit lockTarget(_cursorMark.center());
+    emit lockTarget(_cursorMark.center().toPoint());
 }
 
 void VideoDisplayWidget::onMagnifierClick()
 {
     _showMagnifier = !_showMagnifier;
+}
+
+void VideoDisplayWidget::setTargetSize(int targetSize)
+{
+    _cursorMark.setSize(QSizeF(targetSize, targetSize));
+    if (!_frame.isNull())
+        _cursorMark.moveCenter(QPointF(0.5 * _frame.width(), 0.5 * _frame.height()));
 }
 
 void VideoDisplayWidget::onChangeBombingSightClicked()
@@ -256,12 +267,12 @@ QPointF VideoDisplayWidget::alignPoint(const QPointF &point)
 }
 
 
-QRect VideoDisplayWidget::alignRect(const QRect &rect)
+QRectF VideoDisplayWidget::alignRect(const QRectF &rect)
 {
-    QRect showedRect = rect;
+    QRectF showedRect = rect;
     QPointF pos = alignPoint(showedRect.center());
     showedRect.setSize(rect.size() * _scale);
-    showedRect.moveCenter(pos.toPoint());
+    showedRect.moveCenter(pos);
     return showedRect;
 }
 
@@ -290,7 +301,7 @@ void VideoDisplayWidget::drawMagnifier(QPainter &painter)
     quint32 destSizeR = camPreferences->magnifierSize();
     quint32 srcSizeR = destSizeR / camPreferences->magnifierScale();
 
-    QPoint mCenter;
+    QPointF mCenter;
     bool needDraw = false;
 
     QPoint mousePos = this->mapFromGlobal(QCursor::pos());
@@ -303,11 +314,11 @@ void VideoDisplayWidget::drawMagnifier(QPainter &painter)
 
     if (needDraw)
     {
-        QSize srcSize(srcSizeR, srcSizeR);
-        QSize destSize(destSizeR, destSizeR);
+        QSizeF srcSize(srcSizeR, srcSizeR);
+        QSizeF destSize(destSizeR, destSizeR);
 
-        QRect srcRect = QRect(mCenter - QPoint(srcSize.width() / 2, srcSize.height() / 2) , srcSize);
-        QRect destRect = alignRect(QRect(mCenter - QPoint(destSize.width() / 2, destSize.height() / 2), destSize));
+        QRectF srcRect = QRectF(mCenter - QPointF(0.5 * srcSize.width(), 0.5 * srcSize.height()) , srcSize);
+        QRectF destRect = alignRect(QRectF(mCenter - QPointF(0.5 * destSize.width(), 0.5 * destSize.height()), destSize));
 
         painter.drawImage(destRect, _frame, srcRect);
 
@@ -405,31 +416,35 @@ void VideoDisplayWidget::drawBluredBorders(QPainter &painter)
     }
 }
 
-void VideoDisplayWidget::drawRectangleOnFrame(QPainter &painter, const QRect &rect, const QColor &color)
+void VideoDisplayWidget::drawRectangleOnFrame(QPainter &painter, const QRectF &rect, const QColor &color)
 {
     if (rect.width() <= 0)
         return;
 
-    QRect showedRect = alignRect(rect);
+    QRectF showedRect = alignRect(rect);
     updatePen(painter, color);
 
-    drawTargetRectangleOnVideo(painter, showedRect);
+    drawTargetRectangleOnVideo(painter, showedRect.toRect());
 }
 
 void VideoDisplayWidget::drawFrameCenterMark(QPainter &painter)
 {
-    QRect centerMarkRect = QRect(0, 0, _sourceFrameRect.width(), _sourceFrameRect.height());
+    QRectF centerMarkRect = QRect(0, 0, _sourceFrameRect.width(), _sourceFrameRect.height());
     QPointF markPos = alignPoint(centerMarkRect.center());
 
-    int x = markPos.x();
-    int y = markPos.y();
-    int width = _screenViewRect.width();
+    qreal x = markPos.x();
+    qreal y = markPos.y();
+    qreal width = _screenViewRect.width();
+    qreal r = width * 0.030;
+
+    //QRectF testRect = QRectF(0, 0, 39 * _scale, 39 * _scale);
+    //testRect.moveCenter(markPos);
+    //drawTargetRectangleOnVideo(painter, testRect.toRect());
 
     switch (_markType)
     {
     case OSDScreenCenterMarks::SimpleCross:
     {
-        int r = width * 0.030;
         QVector<QLineF> markLines;
         markLines.append(QLine(x - r,   y,       x + r,   y    ));
         markLines.append(QLine(x,       y - r,   x,       y + r));
@@ -440,15 +455,14 @@ void VideoDisplayWidget::drawFrameCenterMark(QPainter &painter)
     {
         if (width < 700)
             width = 700; // don't draw very small mark
-        int d = width * 0.024;
-        int w = width * 0.050;
-        int r = width * 0.030;
+        qreal d = width * 0.024;
+        qreal w = width * 0.050;
 
         QVector<QLineF> markLines;
-        markLines.append(QLine(x + d,       y,   x + w,       y));
-        markLines.append(QLine(x,       y + d,       x,   y + w));
-        markLines.append(QLine(x - d,       y,   x - w,       y));
-        markLines.append(QLine(x,       y - d,       x,   y - w));
+        markLines.append(QLineF(x + d,       y,   x + w,       y));
+        markLines.append(QLineF(x,       y + d,       x,   y + w));
+        markLines.append(QLineF(x - d,       y,   x - w,       y));
+        markLines.append(QLineF(x,       y - d,       x,   y - w));
         painter.drawLines(markLines);
 
         painter.drawEllipse(markPos, r, r);
@@ -456,10 +470,9 @@ void VideoDisplayWidget::drawFrameCenterMark(QPainter &painter)
     }
     case OSDScreenCenterMarks::CrossAndRulers:
     {
-        int r = width * 0.300;
         QVector<QLineF> markLines;
-        markLines.append(QLine(x - r,   y,       x + r,   y    ));
-        markLines.append(QLine(x,       y - r,   x,       y + r));
+        markLines.append(QLineF(x - r,   y,       x + r,   y    ));
+        markLines.append(QLineF(x,       y - r,   x,       y + r));
         painter.drawLines(markLines);
 
         int minDashSize = (painter.pen().width() + 2) / 2;
@@ -520,23 +533,21 @@ void VideoDisplayWidget::drawFrameCenterMark(QPainter &painter)
     }
     case OSDScreenCenterMarks::Cross2:
     {
-        int r = width * 0.030;
         QVector<QLineF> markLines;
-        markLines.append(QLine(x - r,       y,           x - r / 2,     y    ));
-        markLines.append(QLine(x + r / 2,   y,           x + r,         y    ));
-        markLines.append(QLine(x,           y - r,      x,              y - r / 2));
-        markLines.append(QLine(x,           y + r / 2,   x,             y + r));
+        markLines.append(QLineF(x - r,       y,           x - r / 2,     y    ));
+        markLines.append(QLineF(x + r / 2,   y,           x + r,         y    ));
+        markLines.append(QLineF(x,           y - r,      x,              y - r / 2));
+        markLines.append(QLineF(x,           y + r / 2,   x,             y + r));
         painter.drawLines(markLines);
         break;
     }
     case OSDScreenCenterMarks::Cross3:
     {
-        int r = width * 0.030;
         QVector<QLineF> markLines;
-        markLines.append(QLine(x - r,       y - r,           x - r / 2,     y - r / 2 ));
-        markLines.append(QLine(x - r,       y + r,           x - r / 2,     y + r / 2 ));
-        markLines.append(QLine(x + r,       y - r,           x + r / 2,     y - r / 2 ));
-        markLines.append(QLine(x + r,       y + r,           x + r / 2,     y + r / 2 ));
+        markLines.append(QLineF(x - r,       y - r,           x - r / 2,     y - r / 2 ));
+        markLines.append(QLineF(x - r,       y + r,           x - r / 2,     y + r / 2 ));
+        markLines.append(QLineF(x + r,       y - r,           x + r / 2,     y - r / 2 ));
+        markLines.append(QLineF(x + r,       y + r,           x + r / 2,     y + r / 2 ));
         painter.drawLines(markLines);
         break;
     }
@@ -962,6 +973,8 @@ void VideoDisplayWidget::lockTargetOnClick(const QPoint &clickPos)
 
 bool VideoDisplayWidget::isCursorVisible()
 {
+//    return true;
+
     auto timeMs = _cursorMarkLastMove.msecsTo(QDateTime::currentDateTime());
     return (timeMs < 4000);
 }

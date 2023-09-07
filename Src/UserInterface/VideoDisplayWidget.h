@@ -45,7 +45,7 @@ class VideoDisplayWidget final : public QWidget
     quint32 _telemetryIndicatorFontSize;
 
     bool _drawTargetRectangle;
-    QRect _cursorMark;
+    QRectF _cursorMark;
     QDateTime _cursorMarkLastMove;
     bool _showMagnifier;
 
@@ -90,13 +90,13 @@ class VideoDisplayWidget final : public QWidget
     bool isCursorVisible();
 
     inline QPointF alignPoint(const QPointF &point);
-    inline QRect alignRect(const QRect &rect);
+    inline QRectF alignRect(const QRectF &rect);
 
     void updatePen(QPainter &painter, const QColor &color);
 
     void drawMagnifier(QPainter &painter);
     void drawBluredBorders(QPainter &painter);
-    void drawRectangleOnFrame(QPainter &painter, const QRect &rect, const QColor &color);
+    void drawRectangleOnFrame(QPainter &painter, const QRectF &rect, const QColor &color);
     void drawFrameCenterMark(QPainter &painter);
     void drawBombingSight_TimeScale(QPainter &painter, float remainingTime, bool isEnabledTimeScale);
     void drawBombingSight_Plane(QPainter &painter);
@@ -127,6 +127,8 @@ public slots:
     void onTargetLockCursorSpeedChange(float speedX, float speedY);
     void onTargetLockInCursorClick();
     void onMagnifierClick();
+
+    void setTargetSize(int targetSize);
 signals:
     void lockTarget(const QPoint &targetCenter);
 };
