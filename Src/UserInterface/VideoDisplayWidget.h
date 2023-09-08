@@ -47,6 +47,10 @@ class VideoDisplayWidget final : public QWidget
     bool _drawTargetRectangle;
     QRectF _cursorMark;
     QDateTime _cursorMarkLastMove;
+    qint32 _cursorMarkVisibilityTimeout;
+
+    quint32 CursorMarkVisibilityTimeout;
+
     bool _showMagnifier;
 
     int _defaultLineWidth;

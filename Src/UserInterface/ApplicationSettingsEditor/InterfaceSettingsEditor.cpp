@@ -167,6 +167,8 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
 
     auto lblOSDTargetTracker = new QLabel(tr("Target Tracker"));
     auto csbOSDTargetTrackerCursor = new SelectColorButton(tr("Cursor"), this);
+    auto chkOSDCursorMarkVisibility = new QCheckBox(tr("Visibility (ms)"), this);
+    auto sbOSDCursorMarkVisibilityTimeout = CommonWidgetUtils::createRangeSpinbox(this, 500, 1000);
 
     auto osdLayout = makeInterfaceSpoilerGridLayout();
     rowIndex = 0;
@@ -192,6 +194,8 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
 
     osdLayout->addWidget(lblOSDTargetTracker,                     rowIndex, 0, 1, 1);
     osdLayout->addWidget(csbOSDTargetTrackerCursor,               rowIndex, 1, 1, 1);
+    osdLayout->addWidget(chkOSDCursorMarkVisibility,           rowIndex, 2, 1, 1);
+    osdLayout->addWidget(sbOSDCursorMarkVisibilityTimeout,            rowIndex, 3, 1, 1);
     rowIndex++;
 
 
@@ -298,6 +302,8 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
     _association.addBinding(&applicationSettings.OSDGimbalIndicatorSize,                         sbOSDGimbalIndicatorSize);
     _association.addBinding(&applicationSettings.OSDTelemetryIndicatorFontSize,                  sbOSDTelemetryIndicatorFontSize);
     _association.addBinding(&applicationSettings.OSDTargetTrackerCursor,                         csbOSDTargetTrackerCursor);
+    _association.addBinding(&applicationSettings.OSDCursorMarkVisibility,                        chkOSDCursorMarkVisibility);
+    _association.addBinding(&applicationSettings.OSDCursorMarkVisibilityTimeout,                 sbOSDCursorMarkVisibilityTimeout);
     _association.addBinding(&applicationSettings.ViewFieldLineWidth,                             sbViewFieldLineWidth);
     _association.addBinding(&applicationSettings.ViewFieldLineColor,                             scbViewFieldLineColor);
     _association.addBinding(&applicationSettings.TrajectoryPathLineWidth,                        sbTrajectoryPathLineWidth);

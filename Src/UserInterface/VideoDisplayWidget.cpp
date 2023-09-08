@@ -31,6 +31,11 @@ VideoDisplayWidget::VideoDisplayWidget(QWidget *parent, VoiceInformant *voiceInf
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
     _camAssemblyPreferences = applicationSettings.getCurrentCamAssemblyPreferences();
 
+    if (!applicationSettings.OSDCursorMarkVisibility)
+        _cursorMarkVisibilityTimeout = -1;
+    else
+        _cursorMarkVisibilityTimeout = applicationSettings.OSDCursorMarkVisibilityTimeout;
+
     loadSettings();
     createMenu();
 }
@@ -973,10 +978,9 @@ void VideoDisplayWidget::lockTargetOnClick(const QPoint &clickPos)
 
 bool VideoDisplayWidget::isCursorVisible()
 {
-//    return true;
-
-    auto timeMs = _cursorMarkLastMove.msecsTo(QDateTime::currentDateTime());
-    return (timeMs < 4000);
+    if (_cursorMarkVisibilityTimeout <= 0)
+        return true;
+    return _cursorMarkLastMove.msecsTo(QDateTime::currentDateTime()) < _cursorMarkVisibilityTimeout;
 }
 
 void VideoDisplayWidget::resizeEvent(QResizeEvent *event)

@@ -259,6 +259,8 @@ public:
     ApplicationPreferenceBool OSDShowTelemetry;
     ApplicationPreferenceInt OSDTelemetryIndicatorFontSize;
     ApplicationPreferenceColor OSDTargetTrackerCursor;
+    ApplicationPreferenceBool OSDCursorMarkVisibility;
+    ApplicationPreferenceInt OSDCursorMarkVisibilityTimeout;
     ApplicationPreferenceBool SoftwareStabilizationEnabled;
     ApplicationPreferenceEnum<StabilizationType> VideoStabilizationType;
     ApplicationPreferenceEnum<ArtillerySpotterState> LastTargetArtillerySpotterState;
@@ -338,6 +340,7 @@ public:
     bool isDataForwardingLicensed();
     bool isCatapultLicensed();
     bool isArtillerySpotterLicensed();
+    bool isAntennaLicensed();
 };
 
 CameraSettingsNode *currCameraSettings();

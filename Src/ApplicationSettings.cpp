@@ -119,6 +119,8 @@ ApplicationSettings::ApplicationSettings() : ApplicationSettingsRoot(),
     OSDShowTelemetry(this, "Interface/OSDShowTelemetry", true),
     OSDTelemetryIndicatorFontSize(this, "Interface/OSDTelemetryIndicatorFontSize", 14),
     OSDTargetTrackerCursor(this, "Interface/OSDTargetTrackerCursor", QColor(Qt::green)),
+    OSDCursorMarkVisibility(this, "Interface/OSDCursorMarkVisibility", true),
+    OSDCursorMarkVisibilityTimeout(this, "Interface/OSDCursorMarkVisibilityTimeout", 4000),
     SoftwareStabilizationEnabled(this, "Interface/SoftwareStabilizationEnabled", true),
     VideoStabilizationType(this, "Interface/VideoStabilizationType", StabilizationType::StabilizationByFrame),
     LastTargetArtillerySpotterState(this, "Interface/LastTargetArtillerySpotterState", ArtillerySpotterState::Unspecified),
@@ -486,6 +488,11 @@ bool ApplicationSettings::isCatapultLicensed()
 }
 
 bool ApplicationSettings::isArtillerySpotterLicensed()
+{
+    return totalLicensed;
+}
+
+bool ApplicationSettings::isAntennaLicensed()
 {
     return totalLicensed;
 }
