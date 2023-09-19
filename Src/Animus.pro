@@ -8,7 +8,7 @@ QT       += core gui widgets svg multimedia multimediawidgets sql network concur
 
 TARGET = ANIMUS
 TEMPLATE = app
-VERSION = 1.4.5.67
+VERSION = 1.4.5.69
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 CONFIG   += precompile_header
@@ -69,6 +69,7 @@ SOURCES += main.cpp \
         Map/GSISAMObject.cpp \
         Map/GSIArealObject.cpp \
         Map/GSIUAVMarker.cpp \
+        Map/GSIAntennaMarker.cpp \
         Map/GSITrackedObject.cpp \
         Map/HeightMapContainer.cpp\
         Map/MapTileContainer.cpp\
@@ -173,6 +174,7 @@ HEADERS  += stable.h \
         Map/GSISAMObject.h \
         Map/GSIArealObject.h \
         Map/GSIUAVMarker.h \
+        Map/GSIAntennaMarker.h \
         Map/GSITrackedObject.h \
         Map/HeightMapContainer.h \
         Map/MapTileContainer.h\

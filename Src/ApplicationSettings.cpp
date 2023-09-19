@@ -1,5 +1,6 @@
 #include "ApplicationSettings.h"
 #include <QSerialPortInfo>
+#include <QFile>
 
 // https://habrahabr.ru/post/149085/
 
@@ -192,6 +193,23 @@ ApplicationSettings::ApplicationSettings() : ApplicationSettingsRoot(),
     _camAssemblyPreferences = nullptr;
     updateToCurrentVersion();
     checkPreferenceNames();
+
+    const QString licenseFileName = "modules.lic";
+
+    if (!QFile::exists(licenseFileName))
+        qDebug("The license file is not found.");
+    else
+    {
+        QFile licenseFile(licenseFileName);
+        if (!licenseFile.open(QIODevice::ReadOnly))
+            qDebug("Error license file opening.");
+        else
+        {
+            QTextStream licenseFileStream(&licenseFile);
+            auto content = licenseFileStream.readAll();
+            _licensedModules = content.split(QRegExp("[\r\n,; ]"),QString::SkipEmptyParts);
+        }
+    }
 }
 
 void ApplicationSettings::ensureHIDButtonPrefsLoaded()
@@ -440,61 +458,59 @@ void ApplicationSettings::setMapDatabaseFiles(const QStringList &files)
     }
 }
 
-const bool totalLicensed = true;
-
 bool ApplicationSettings::isStatisticViewLicensed()
 {
-    return totalLicensed;
+    return _licensedModules.contains("StatisticView", Qt::CaseInsensitive);
 }
 
 bool ApplicationSettings::isLaserRangefinderLicensed()
 {
-    return true;
+    return _licensedModules.contains("Rangefinder", Qt::CaseInsensitive);
 }
 
 bool ApplicationSettings::isPhotographyLicensed()
 {
-    return totalLicensed;
+    return _licensedModules.contains("Photography", Qt::CaseInsensitive);
 }
 
 bool ApplicationSettings::isBombingTabLicensed()
 {
-    return totalLicensed;
+    return _licensedModules.contains("BombingTab", Qt::CaseInsensitive);
 }
 
 bool ApplicationSettings::isTargetTabLicensed()
 {
-    return true;
+    return _licensedModules.contains("TargetTab", Qt::CaseInsensitive);
 }
 
 bool ApplicationSettings::isPatrolTabLicensed()
 {
-    return totalLicensed;
+    return _licensedModules.contains("PatrolTab", Qt::CaseInsensitive);
 }
 
 bool ApplicationSettings::isMarkersTabLicensed()
 {
-    return totalLicensed;
+    return _licensedModules.contains("MarkersTab", Qt::CaseInsensitive);
 }
 
 bool ApplicationSettings::isDataForwardingLicensed()
-{
-    return totalLicensed;
+{    
+    return _licensedModules.contains("DataForwarding", Qt::CaseInsensitive);
 }
 
 bool ApplicationSettings::isCatapultLicensed()
 {
-    return totalLicensed;
+    return _licensedModules.contains("Catapult", Qt::CaseInsensitive);
 }
 
 bool ApplicationSettings::isArtillerySpotterLicensed()
 {
-    return totalLicensed;
+    return _licensedModules.contains("ArtillerySpotter", Qt::CaseInsensitive);
 }
 
 bool ApplicationSettings::isAntennaLicensed()
 {
-    return totalLicensed;
+    return _licensedModules.contains("Antenna", Qt::CaseInsensitive);
 }
 
 //----------------------------------------------------------------------------------------------------------

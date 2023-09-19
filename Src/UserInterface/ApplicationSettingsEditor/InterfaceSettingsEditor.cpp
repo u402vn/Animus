@@ -109,7 +109,7 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
     auto chkMarkersTabAllowed       = applicationSettings.isMarkersTabLicensed() ? new QCheckBox(tr("Markers"), this) : nullptr;
     auto chkToolsTabAllowed         = new QCheckBox(tr("Tools"), this);
     auto chkPatrolTabAllowed        = applicationSettings.isPatrolTabLicensed() ? new QCheckBox(tr("Patrol"), this) : nullptr;
-    auto chkAntennaTabAllowed       = new QCheckBox(tr("Antenna"));
+    auto chkAntennaTabAllowed       = applicationSettings.isAntennaLicensed() ? new QCheckBox(tr("Antenna")) : nullptr;
 
     auto chkCamControlsTabCoordIndicatorAllowed = new QCheckBox(tr("Coord Indicator"), this);
 
@@ -141,8 +141,11 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
         rowIndex++;
     }
 
-    functionsLayout->addWidget(chkAntennaTabAllowed,                        rowIndex, 0, 1, 1);
-    rowIndex++;
+    if (chkAntennaTabAllowed != nullptr)
+    {
+        functionsLayout->addWidget(chkAntennaTabAllowed,                        rowIndex, 0, 1, 1);
+        rowIndex++;
+    }
 
     auto spoilerFunctions = new Spoiler(tr("Allowed Functions"), this);
     spoilerFunctions->setContentLayout(functionsLayout);
@@ -290,7 +293,8 @@ InterfaceSettingsEditor::InterfaceSettingsEditor(QWidget *parent):
     _association.addBinding(&applicationSettings.ToolsTabAllowed,                                chkToolsTabAllowed);
     if (chkPatrolTabAllowed != nullptr)
         _association.addBinding(&applicationSettings.PatrolTabAllowed,                           chkPatrolTabAllowed);
-    _association.addBinding(&applicationSettings.AntennaTabAllowed,                              chkAntennaTabAllowed);
+    if (chkAntennaTabAllowed != nullptr)
+        _association.addBinding(&applicationSettings.AntennaTabAllowed,                          chkAntennaTabAllowed);
 
     _association.addBinding(&applicationSettings.CamControlsTabCoordIndicatorAllowed,            chkCamControlsTabCoordIndicatorAllowed);
     _association.addBinding(&applicationSettings.UseFixedOSDLineWidth,                           chkUseFixedOSDLineWidth);

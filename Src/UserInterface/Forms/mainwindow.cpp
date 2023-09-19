@@ -175,7 +175,9 @@ void MainWindow::showModeSpecificWidgets(bool showCameraTab, bool showInstrument
     addWidgetToTab(_tabTools, _dashboardWidget, QIcon(":/tab_instr.png"), tr("Tools"), showInstrumentsTab);
     addWidgetToTab(_tabTools, _markerListWidget, QIcon(":/tab_marker.png"), tr("Markers"), showMarkersTab);
     addWidgetToTab(_tabTools, _patrolWidget, QIcon(":/tab_patrol.png"), tr("Patrol"), showPatrolTab);
-    addWidgetToTab(_tabTools, _antennaWidget, QIcon(":/tab_antenna.png"), tr("Antenna"), showAntennaTab);
+
+    if (applicationSettings.isAntennaLicensed())
+        addWidgetToTab(_tabTools, _antennaWidget, QIcon(":/tab_antenna.png"), tr("Antenna"), showAntennaTab);
 
     int selectedTabIndex = _tabTools->indexOf(selectedTab);
     if (selectedTabIndex >= 0)
@@ -429,7 +431,8 @@ void MainWindow::addTabWidgets()
     _patrolWidget = applicationSettings.isPatrolTabLicensed() ?
                 new PatrolWidget(_tabTools) : nullptr;
 
-    _antennaWidget = new AntennaControlWidget(_tabTools, _hardwareLink);
+    _antennaWidget = applicationSettings.isAntennaLicensed() ?
+                new AntennaControlWidget(_tabTools, _hardwareLink) : nullptr;
 
     _markerListWidget = applicationSettings.isMarkersTabLicensed() ?
                 new MarkerListWidget(_tabTools) : nullptr;
@@ -721,7 +724,8 @@ void MainWindow::onDataReceived(const TelemetryDataFrame &telemetryFrame, const 
         _dashboardWidget->processTelemetry(telemetryFrame);
         if (_bombingWidget != nullptr)
             _bombingWidget->processTelemetry(telemetryFrame);
-        _antennaWidget->processTelemetry(telemetryFrame);
+        if (_antennaWidget != nullptr)
+            _antennaWidget->processTelemetry(telemetryFrame);
     }
 }
 
@@ -784,11 +788,12 @@ void MainWindow::workModeChanged()
         _videoWidget->clear();
 
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
-    bool showBombingTab = applicationSettings.BombingTabAllowed;
-    bool showMarkersTab = applicationSettings.MarkersTabAllowed;
+    bool showBombingTab = (applicationSettings.isBombingTabLicensed() || applicationSettings.isTargetTabLicensed()) &&
+            applicationSettings.BombingTabAllowed;
+    bool showMarkersTab = applicationSettings.isMarkersTabLicensed() && applicationSettings.MarkersTabAllowed;
     bool showToolsTab   = applicationSettings.ToolsTabAllowed;
-    bool showPatrolTab  = applicationSettings.PatrolTabAllowed;
-    bool showAntennaTab = applicationSettings.AntennaTabAllowed;
+    bool showPatrolTab  = applicationSettings.isPatrolTabLicensed() && applicationSettings.PatrolTabAllowed;
+    bool showAntennaTab = applicationSettings.isAntennaLicensed() && applicationSettings.AntennaTabAllowed;
 
     switch (_dataStorage->getWorkMode())
     {

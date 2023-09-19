@@ -3,6 +3,7 @@
 
 #include <QColor>
 #include <QMap>
+#include <QStringList>
 #include "ApplicationSettingsImpl.h"
 #include "Common/CommonData.h"
 #include "CamPreferences.h"
@@ -161,6 +162,8 @@ private:
     CamAssemblyPreferences *_camAssemblyPreferences;
 
     QList<CameraSettingsNode*> _cameraSettings;
+
+    QStringList _licensedModules;
 
     bool _hidButtonPrefsLoaded;
     QMap<HIDButton, ApplicationPreferenceString*> _hidKeyboardPrefs;
