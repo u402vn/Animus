@@ -39,6 +39,7 @@ class MarkerTemplate final : public QObject
     QString _parentGUID;
     QString _GUID;
     QString _description;
+    QString _comments;
     QPixmap _image;
     QPixmap _highlightedImage;
     bool _useParty;
@@ -51,8 +52,13 @@ public:
     QList<MarkerTemplate *> *childItems();
 
     const QString GUID();
+    const QString parentGUID();
     const QString description();
+    void setDescription(const QString &value);
+    const QString comments();
+    void setComments(const QString &value);
     const QPixmap image();
+    void setImage(const QPixmap &image);
     const QPixmap highlightedImage();
     bool useParty();
     void addSAMinfo(double height, double minKillingRange, double maxKillingRange, double visibleRange);
@@ -91,8 +97,8 @@ public:
 
     void ImportAndReplaceFromXML(const QString &xmlFileName);
 
-    const QList<MarkerTemplate*> * getMarkerTemplates();
-    MarkerTemplate * getMarkerTemplateByGUID(const QString &GUID);
+    const QList<MarkerTemplate*> *getMarkerTemplates();
+    MarkerTemplate *getMarkerTemplateByGUID(const QString &GUID);
 signals:
 
 public slots:

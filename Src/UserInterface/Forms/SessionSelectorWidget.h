@@ -33,7 +33,7 @@ class SessionSelectorWidget : public QDialog
     void setSelectedSessionId(const QString &sessionId);
     QPushButtonEx *getButtonBySessionId(const QString & sessionId);
 public:
-    explicit SessionSelectorWidget(TelemetryDataStorage * telemetryDataStorage, QWidget *parent);
+    explicit SessionSelectorWidget(TelemetryDataStorage *telemetryDataStorage, QWidget *parent);
     ~SessionSelectorWidget();
     virtual void accept();
 private slots:

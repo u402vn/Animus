@@ -355,14 +355,39 @@ const QString MarkerTemplate::GUID()
     return _GUID;
 }
 
+const QString MarkerTemplate::parentGUID()
+{
+    return _parentGUID;
+}
+
 const QString MarkerTemplate::description()
 {
     return _description;
 }
 
+void MarkerTemplate::setDescription(const QString &value)
+{
+    _description = value;
+}
+
+const QString MarkerTemplate::comments()
+{
+    return _comments;
+}
+
+void MarkerTemplate::setComments(const QString &value)
+{
+    _comments = value;
+}
+
 const QPixmap MarkerTemplate::image()
 {
     return _image;
+}
+
+void MarkerTemplate::setImage(const QPixmap &image)
+{
+    _image = image;
 }
 
 const QPixmap MarkerTemplate::highlightedImage()

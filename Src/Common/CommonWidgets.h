@@ -142,8 +142,8 @@ class QPushButtonEx : public QPushButton
 {
     Q_OBJECT
 public:
-    void mouseDoubleClickEvent(QMouseEvent * event);
-    void mousePressEvent(QMouseEvent * event);
+    void mouseDoubleClickEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
     QPushButtonEx(const QString &text, QWidget *parent);
     ~QPushButtonEx();
 signals:

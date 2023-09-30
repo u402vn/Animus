@@ -128,14 +128,14 @@ void VideoImageTuner::onSetDefaultGammaClicked()
 
 QSlider *VideoImageTuner::addSlider(const QString &iconName, void (VideoImageTuner::*onIconClick)(), int row)
 {
-    QSlider * slider = new QSlider(this);
+    auto slider = new QSlider(this);
     slider->setOrientation(Qt::Horizontal);
     slider->setRange(SLIDER_MIN_VALUE, SLIDER_MAX_VALUE);
     slider->setValue(SLIDER_MIDDLE_VALUE);
     connect(slider, &QSlider::valueChanged, this, &VideoImageTuner::onSliderValueChanged);
 
     QPixmap pixmap(iconName);
-    QLabelEx *labelIcon = new QLabelEx(this);
+    auto labelIcon = new QLabelEx(this);
     labelIcon->setObjectName("VideoImageTunerIcon"); //used for stylesheet
     labelIcon->setPixmap(pixmap);
     connect(labelIcon, &QLabelEx::clicked, this, onIconClick);

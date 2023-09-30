@@ -168,7 +168,7 @@ void MapTileExportDialog::accept()
 
 void MapTileExportDialog::onSourceButtonClicked()
 {
-    QAction *action = _selectMenu->exec(QCursor::pos());
+    auto action = _selectMenu->exec(QCursor::pos());
     bool checked = (action == _acSelectAll);
 
     QPushButton * btnSource = qobject_cast<QPushButton *>(sender());
@@ -187,10 +187,10 @@ void MapTileExportDialog::onSourceButtonClicked()
 
 void MapTileExportDialog::onScaleButtonClicked()
 {
-    QAction *action = _selectMenu->exec(QCursor::pos());
+    auto action = _selectMenu->exec(QCursor::pos());
     bool checked = (action == _acSelectAll);
 
-    QPushButton * btnScale = qobject_cast<QPushButton *>(sender());
+    auto btnScale = qobject_cast<QPushButton *>(sender());
     int scale = btnScale->property(propertyTileScale).toInt();
 
     QList<QCheckBox *> checkBoxes = this->findChildren<QCheckBox *>();
