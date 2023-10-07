@@ -1943,12 +1943,12 @@ Are you sure you want to update it?</source>
         <translation>Активировать катапульту</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="99"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="101"/>
         <source>Parameter</source>
         <translation>Параметр</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="99"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="101"/>
         <source>Value</source>
         <translation>Значение</translation>
     </message>
@@ -2049,51 +2049,61 @@ Are you sure you want to update it?</source>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="76"/>
+        <source>Target Speed</source>
+        <translation>Скорость цели</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="77"/>
+        <source>Target Direction</source>
+        <translation>Направление цели</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="78"/>
         <source>Wind Direction</source>
         <translation>Направление ветра</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="77"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="79"/>
         <source>Wind Speed</source>
         <translation>Скорость ветра</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="78"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="80"/>
         <source>Atmosphere Temperature</source>
         <translation>Температура атмосферная</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="79"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="81"/>
         <source>Atmosphere Pressure</source>
         <translation>Давление атмосферное</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="80"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="82"/>
         <source>Stabilized Center X</source>
         <translation>Стаб. центр X</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="81"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="83"/>
         <source>Stabilized Center Y</source>
         <translation>Стаб. центр Y</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="82"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="84"/>
         <source>Stabilized Rotation Angle</source>
         <translation>Стаб. угол поворота</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="83"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="85"/>
         <source>Telemetry Frame</source>
         <translation>Кадр телеметрии</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="84"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="86"/>
         <source>Video Frame</source>
         <translation>Кадр видео</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="85"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="87"/>
         <source>Session Time</source>
         <translation>Время сессии</translation>
     </message>
@@ -2113,37 +2123,37 @@ Are you sure you want to update it?</source>
         <translation>Высота (Дальномер)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="86"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="88"/>
         <source>Telemetry FPS</source>
         <translation>Телеметрия FPS</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="87"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="89"/>
         <source>Video FPS</source>
         <translation>Видео FPS</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="88"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="90"/>
         <source>Ground Level</source>
         <translation>Уровень земли</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="89"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="91"/>
         <source>Optical System</source>
         <translation>Оптическая система</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="91"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="93"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="92"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="94"/>
         <source>Primary Flight Display</source>
         <translation>Основной дисплей полёта</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="94"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="96"/>
         <source>Coord Indicator</source>
         <translation>Индикатор координат</translation>
     </message>
@@ -2160,7 +2170,7 @@ Are you sure you want to update it?</source>
         <translation type="vanished">Запись</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="192"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="196"/>
         <source>Do you want to activate catapult?</source>
         <translation>Вы хотите активировать катапульту?</translation>
     </message>
@@ -3291,50 +3301,60 @@ Y:%6%7</translation>
 <context>
     <name>MarkerTemplateEditor</name>
     <message>
-        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="39"/>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="71"/>
         <source>Marker Template Editor</source>
         <translation>Редактор шаблонов маркеров</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="46"/>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="78"/>
         <source>Group</source>
         <translation>Группа</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="50"/>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="82"/>
         <source>Description</source>
         <translation>Описание</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="54"/>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="86"/>
         <source>Military</source>
         <translation>Военный</translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="56"/>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="88"/>
         <source>Commеnts</source>
         <translation>Комментарии</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="101"/>
+        <source>Select Marker Template Image</source>
+        <translation>Выберите изображение шаблона маркера</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="112"/>
+        <source>This image is not valid.</source>
+        <translation>Изображение не валидно.</translation>
     </message>
 </context>
 <context>
     <name>MarkerTemplateTreeWidget</name>
     <message>
-        <location filename="../UserInterface/MarkerListWidget.cpp" line="105"/>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="104"/>
         <source>Add Marker</source>
         <translation>Добавить маркер</translation>
     </message>
     <message>
-        <location filename="../UserInterface/MarkerListWidget.cpp" line="124"/>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="123"/>
         <source>Edit</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../UserInterface/MarkerListWidget.cpp" line="131"/>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="130"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../UserInterface/MarkerListWidget.cpp" line="135"/>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="134"/>
         <source>Do you wnt to remove marker template &apos;%1&apos;?</source>
         <translation>Вы хотите удалить шаблон маркера &apos;%1&apos;?</translation>
     </message>
@@ -3342,13 +3362,13 @@ Y:%6%7</translation>
 <context>
     <name>MarkerThesaurus</name>
     <message>
-        <location filename="../Map/MarkerThesaurus.cpp" line="30"/>
+        <location filename="../Map/MarkerThesaurus.cpp" line="26"/>
         <source>Unknown Object</source>
         <translation>Неизвестный объект</translation>
     </message>
     <message>
-        <location filename="../Map/MarkerThesaurus.cpp" line="284"/>
-        <location filename="../Map/MarkerThesaurus.cpp" line="288"/>
+        <location filename="../Map/MarkerThesaurus.cpp" line="286"/>
+        <location filename="../Map/MarkerThesaurus.cpp" line="290"/>
         <source>Target</source>
         <translation>Цель</translation>
     </message>
@@ -3931,7 +3951,7 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>TelemetryDataStorage</name>
     <message>
-        <location filename="../TelemetryDataStorage.cpp" line="732"/>
+        <location filename="../TelemetryDataStorage.cpp" line="744"/>
         <source>Recording video...</source>
         <translation>Запись видео...</translation>
     </message>

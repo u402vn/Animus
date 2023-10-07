@@ -73,6 +73,8 @@ DashboardWidget::DashboardWidget(QWidget *parent) : QWidget(parent)
         _paramNames[RowCalculatedRangefinderGPSLon] = tr("Longitude (Rangefinder)");
         _paramNames[RowCalculatedRangefinderGPSHmsl] = tr("Altitude (Rangefinder)");
     }
+    _paramNames[RowCalculatedTrackedTargetSpeed] = tr("Target Speed");
+    _paramNames[RowCalculatedTrackedTargetDirection] = tr("Target Direction");
     _paramNames[RowWindDirection] = tr("Wind Direction");
     _paramNames[RowWindSpeed] = tr("Wind Speed");
     _paramNames[RowAtmosphereTemperature] = tr("Atmosphere Temperature");
@@ -183,6 +185,8 @@ void DashboardWidget::processTelemetry(const TelemetryDataFrame &telemetryDataFr
     setTelemetryTableRowDoubleOrIncorrect(RowCalculatedRangefinderGPSLat, telemetryDataFrame.CalculatedRangefinderGPSLat, 6, INCORRECT_COORDINATE);
     setTelemetryTableRowDoubleOrIncorrect(RowCalculatedRangefinderGPSLon, telemetryDataFrame.CalculatedRangefinderGPSLon, 6, INCORRECT_COORDINATE);
     setTelemetryTableRowDoubleOrIncorrect(RowCalculatedRangefinderGPSHmsl, telemetryDataFrame.CalculatedRangefinderGPSHmsl, 1, INCORRECT_COORDINATE);
+    setTelemetryTableRowDouble(RowCalculatedTrackedTargetSpeed, telemetryDataFrame.CalculatedTrackedTargetSpeed, 0);
+    setTelemetryTableRowDouble(RowCalculatedTrackedTargetDirection, telemetryDataFrame.CalculatedTrackedTargetDirection, 0);
     setTelemetryTableRowDouble(RowCalculatedGroundLevel, telemetryDataFrame.CalculatedGroundLevel, 1);
     setTelemetryTableRowDouble(RowOpticalSystem, telemetryDataFrame.OpticalSystemId, 0);
 }

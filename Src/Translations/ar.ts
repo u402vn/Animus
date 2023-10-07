@@ -1506,12 +1506,12 @@ Speed Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="99"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="101"/>
         <source>Parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="99"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="101"/>
         <source>Value</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1612,51 +1612,61 @@ Speed Multiplier</source>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="76"/>
-        <source>Wind Direction</source>
+        <source>Target Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="77"/>
-        <source>Wind Speed</source>
+        <source>Target Direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="78"/>
-        <source>Atmosphere Temperature</source>
+        <source>Wind Direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="79"/>
-        <source>Atmosphere Pressure</source>
+        <source>Wind Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="80"/>
-        <source>Stabilized Center X</source>
+        <source>Atmosphere Temperature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="81"/>
-        <source>Stabilized Center Y</source>
+        <source>Atmosphere Pressure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="82"/>
-        <source>Stabilized Rotation Angle</source>
+        <source>Stabilized Center X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="83"/>
-        <source>Telemetry Frame</source>
+        <source>Stabilized Center Y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="84"/>
-        <source>Video Frame</source>
+        <source>Stabilized Rotation Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="85"/>
+        <source>Telemetry Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="86"/>
+        <source>Video Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="87"/>
         <source>Session Time</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1676,37 +1686,37 @@ Speed Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="86"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="88"/>
         <source>Telemetry FPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="87"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="89"/>
         <source>Video FPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="88"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="90"/>
         <source>Ground Level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="89"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="91"/>
         <source>Optical System</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="91"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="93"/>
         <source>Settings</source>
         <translation type="unfinished">الاعدادات</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="92"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="94"/>
         <source>Primary Flight Display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="94"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="96"/>
         <source>Coord Indicator</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1723,7 +1733,7 @@ Speed Multiplier</source>
         <translation type="obsolete">تسجيل</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="192"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="196"/>
         <source>Do you want to activate catapult?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2625,50 +2635,60 @@ Y:%6%7</source>
 <context>
     <name>MarkerTemplateEditor</name>
     <message>
-        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="39"/>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="71"/>
         <source>Marker Template Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="46"/>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="78"/>
         <source>Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="50"/>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="82"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="54"/>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="86"/>
         <source>Military</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="56"/>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="88"/>
         <source>Commеnts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="101"/>
+        <source>Select Marker Template Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/Forms/MarkerTemplateEditor.cpp" line="112"/>
+        <source>This image is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MarkerTemplateTreeWidget</name>
     <message>
-        <location filename="../UserInterface/MarkerListWidget.cpp" line="105"/>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="104"/>
         <source>Add Marker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/MarkerListWidget.cpp" line="124"/>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="123"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/MarkerListWidget.cpp" line="131"/>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="130"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/MarkerListWidget.cpp" line="135"/>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="134"/>
         <source>Do you wnt to remove marker template &apos;%1&apos;?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2676,13 +2696,13 @@ Y:%6%7</source>
 <context>
     <name>MarkerThesaurus</name>
     <message>
-        <location filename="../Map/MarkerThesaurus.cpp" line="30"/>
+        <location filename="../Map/MarkerThesaurus.cpp" line="26"/>
         <source>Unknown Object</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MarkerThesaurus.cpp" line="284"/>
-        <location filename="../Map/MarkerThesaurus.cpp" line="288"/>
+        <location filename="../Map/MarkerThesaurus.cpp" line="286"/>
+        <location filename="../Map/MarkerThesaurus.cpp" line="290"/>
         <source>Target</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3113,7 +3133,7 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>TelemetryDataStorage</name>
     <message>
-        <location filename="../TelemetryDataStorage.cpp" line="732"/>
+        <location filename="../TelemetryDataStorage.cpp" line="744"/>
         <source>Recording video...</source>
         <translation type="unfinished">تسجيل الفيديو</translation>
     </message>
