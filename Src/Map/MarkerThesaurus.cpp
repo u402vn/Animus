@@ -22,12 +22,11 @@ MarkerThesaurus::MarkerThesaurus(QObject *parent) : QObject(parent)
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
     QString databaseFile = applicationSettings.MarkerThesaurusDatabase;
 
-    QPixmap unknownMarkerImage;
-    unknownMarkerImage.load(":/unknown_marker.png");
-    unknownMarkerImage = unknownMarkerImage.scaled(DefaultMarkerSize, DefaultMarkerSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-    _unknownMarkerTemplate = new MarkerTemplate(this, UnknownMarkerTemplateGUID, UnknownMarkerTemplateGUID, \
-                                                tr("Unknown Object"), unknownMarkerImage, unknownMarkerImage, false);
+    _unknownMarkerTemplate = new MarkerTemplate(this, UnknownMarkerTemplateGUID, UnknownMarkerTemplateGUID);
+    _unknownMarkerTemplate->setDescription(tr("Unknown Object"));
+    //_unknownMarkerTemplate->setImage(unknownMarkerImage);
+    //_unknownMarkerTemplate->setHighlightedImage(unknownMarkerImage);
+    _unknownMarkerTemplate->setUseParty(false);
 
     _markerThesaurusDatabase = QSqlDatabase::addDatabase("QSQLITE", "ThesaurusDatabaseConnection");
     _markerThesaurusDatabase.setDatabaseName(databaseFile);
@@ -43,6 +42,7 @@ MarkerThesaurus::MarkerThesaurus(QObject *parent) : QObject(parent)
     //                                   "Level Integer, OrderNo Integer, DeletedDT REAL, MarkerImage BLOB)");
     EXEC_SQL(_markerThesaurusDatabase, "ALTER TABLE MarkerThesaurus ADD COLUMN UseParty INTEGER");
     EXEC_SQL(_markerThesaurusDatabase, "ALTER TABLE MarkerThesaurus ADD COLUMN SAMData BLOB");
+    EXEC_SQL(_markerThesaurusDatabase, "ALTER TABLE MarkerThesaurus ADD COLUMN Comments TEXT");
 }
 
 MarkerThesaurus::~MarkerThesaurus()
@@ -79,7 +79,6 @@ void MarkerThesaurus::ImportAndReplaceFromXML(const QString &xmlFileName)
     EnterProc("MarkerThesaurus::ImportAndReplaceFromXML");
 
     double deletedDT = GetCurrentDateTimeForDB();
-
     QSqlQuery deleteQuery(_markerThesaurusDatabase);
     deleteQuery.prepare("UPDATE MarkerThesaurus SET DeletedDT = ?");
     LOG_SQL_ERROR(deleteQuery);
@@ -88,7 +87,7 @@ void MarkerThesaurus::ImportAndReplaceFromXML(const QString &xmlFileName)
     LOG_SQL_ERROR(deleteQuery);
 
 
-    QFile* file = new QFile(xmlFileName);
+    auto file = new QFile(xmlFileName);
     if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
         return;
 
@@ -98,7 +97,7 @@ void MarkerThesaurus::ImportAndReplaceFromXML(const QString &xmlFileName)
     const QString samElementName = "SAMData";
 
     QByteArray rawSAMData;
-    QString markerGUID, parentGUID, description, rawImageName, imageName;
+    QString markerGUID, parentGUID, description, comments, rawImageName, imageName;
     int useParty = 0;
 
 
@@ -121,6 +120,7 @@ void MarkerThesaurus::ImportAndReplaceFromXML(const QString &xmlFileName)
                 if (parentGUID.isEmpty())
                     parentGUID = markerGUID;
                 description = attributes.value("Description").toString();
+                comments = attributes.value("Description").toString();
                 useParty = attributes.value("UseParty").toInt();
                 rawImageName =  attributes.value("Image").toString();
                 imageName = getImageFixedPath(xmlFileName, rawImageName);
@@ -132,7 +132,7 @@ void MarkerThesaurus::ImportAndReplaceFromXML(const QString &xmlFileName)
             else if (token == QXmlStreamReader::EndElement)
             {
                 QPixmap image(imageName);
-                saveMarkerTemplate(parentGUID, markerGUID, description, order, image, useParty == 1, rawSAMData);
+                saveMarkerTemplate(parentGUID, markerGUID, description, comments, image, useParty == 1, rawSAMData, order);
             }
         }
         else if (elementName.compare(samElementName, Qt::CaseInsensitive) == 0)
@@ -158,15 +158,45 @@ void MarkerThesaurus::ImportAndReplaceFromXML(const QString &xmlFileName)
     }
 }
 
+void MarkerThesaurus::saveMarkerTemplate(MarkerTemplate *markerTemplate)
+{
+    saveMarkerTemplate(
+                markerTemplate->parentGUID(), markerTemplate->GUID(),
+                markerTemplate->description(), markerTemplate->comments(),
+                markerTemplate->image(),
+                markerTemplate->useParty(), markerTemplate->getSAMInfoRaw(), markerTemplate->order());
+}
+
+MarkerTemplate *MarkerThesaurus::createNewMarkerTemplate(QString parentGUID)
+{
+    QString templateGUID = QUuid::createUuid().toString();
+    if (parentGUID.isEmpty())
+        parentGUID = templateGUID;
+
+    auto markerTemplate = new MarkerTemplate(this, parentGUID, templateGUID);
+    return markerTemplate;
+}
+
 void MarkerThesaurus::saveMarkerTemplate(const QString &parentGUID, const QString &markerGUID,
-                                         const QString &description, int order, const QPixmap &image,
-                                         bool useParty, const QByteArray rawSAMData)
+                                         const QString &description, const QString &comments,
+                                         const QPixmap &image,
+                                         bool useParty, const QByteArray &rawSAMData, quint32 order)
 {
     EnterProc("MarkerThesaurus::saveMarkerTemplate");
+
+    double deletedDT = GetCurrentDateTimeForDB();
+    QSqlQuery deleteQuery(_markerThesaurusDatabase);
+    deleteQuery.prepare("UPDATE MarkerThesaurus SET DeletedDT = ? WHERE GUID = ?");
+    LOG_SQL_ERROR(deleteQuery);
+    deleteQuery.addBindValue(deletedDT);
+    deleteQuery.addBindValue(markerGUID);
+    deleteQuery.exec();
+    LOG_SQL_ERROR(deleteQuery);
+
     QSqlQuery insertQuery(_markerThesaurusDatabase);
     insertQuery.prepare("INSERT INTO MarkerThesaurus "
-                        "(GUID, ParentGUID, Description, OrderNo, DeletedDT, MarkerImage, UseParty, SAMData) "
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+                        "(GUID, ParentGUID, Description, Comments, OrderNo, DeletedDT, MarkerImage, UseParty, SAMData) "
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
                         );
     LOG_SQL_ERROR(insertQuery);
 
@@ -178,6 +208,7 @@ void MarkerThesaurus::saveMarkerTemplate(const QString &parentGUID, const QStrin
     insertQuery.addBindValue(markerGUID);
     insertQuery.addBindValue(parentGUID);
     insertQuery.addBindValue(description);
+    insertQuery.addBindValue(comments);
     insertQuery.addBindValue(order);
     insertQuery.addBindValue(QVariant::Double); //NULL to DeletedDT
     insertQuery.addBindValue(imageBuffer.data()); //? imageBytes
@@ -188,7 +219,7 @@ void MarkerThesaurus::saveMarkerTemplate(const QString &parentGUID, const QStrin
     LOG_SQL_ERROR(insertQuery);
 }
 
-void MarkerThesaurus::dleanupObsoleteMarkerTemplates()
+void MarkerThesaurus::cleanupObsoleteMarkerTemplates()
 {
     EnterProc("MarkerThesaurus::CleanupObsoleteMarkerTemplates");
 
@@ -217,49 +248,20 @@ MarkerTemplate *MarkerThesaurus::getUnknownMarkerTemplate()
 }
 
 void MarkerThesaurus::appendMarkerTemplateToHash(const QString &parentGUID, const QString &markerGUID, \
-                                                 const QString &description, const QPixmap &image, const QPixmap &highlightedImage,
-                                                 bool useParty, const QByteArray rawSAMData)
+                                                 const QString &description, const QString &comments,
+                                                 const QPixmap &image, const QPixmap &highlightedImage,
+                                                 bool useParty, const QByteArray rawSAMData,
+                                                 quint32 orderNo)
 {
-    auto markerTemplate = new MarkerTemplate(this, parentGUID, markerGUID, description, image, highlightedImage, useParty);
+    auto markerTemplate = new MarkerTemplate(this, parentGUID, markerGUID);
 
-    if (!rawSAMData.isEmpty())
-    {
-        quint32 version, rawSAMDataSize;
-        double height, minKillingRange, maxKillingRange, visibleRange;
-        const char * data, *nextData, *endData;
-
-        data = rawSAMData.data();
-        endData = data + rawSAMData.length();
-
-        while (endData > data)
-        {
-            memcpy(&rawSAMDataSize, data, sizeof(rawSAMDataSize));
-            nextData = data + rawSAMDataSize;
-            data += sizeof(rawSAMDataSize);
-
-            memcpy(&version, data, sizeof(version));
-            data += sizeof(version);
-
-            if (version == 1)
-            {
-                memcpy(&height, data, sizeof(height));
-                data += sizeof(height);
-
-                memcpy(&minKillingRange, data, sizeof(minKillingRange));
-                data += sizeof(minKillingRange);
-
-                memcpy(&maxKillingRange, data, sizeof(maxKillingRange));
-                data += sizeof(maxKillingRange);
-
-                memcpy(&visibleRange, data, sizeof(visibleRange));
-                data += sizeof(visibleRange);
-
-                markerTemplate->addSAMinfo(height, minKillingRange, maxKillingRange, visibleRange);
-            }
-
-            data = nextData;
-        }
-    }
+    markerTemplate->setDescription(description);
+    markerTemplate->setComments(comments);
+    markerTemplate->setImage(image);
+    markerTemplate->setHighlightedImage(highlightedImage);
+    markerTemplate->setUseParty(useParty);
+    markerTemplate->setSAMInfoRaw(rawSAMData);
+    markerTemplate->setOrder(orderNo);
 
     if (markerGUID == parentGUID)
         _markerTemplates.append(markerTemplate);
@@ -281,15 +283,15 @@ const QList<MarkerTemplate *> *MarkerThesaurus::getMarkerTemplates()
         return &_markerTemplates;
 
     appendMarkerTemplateToHash(TargetMarkerTemplateGUID, TargetMarkerTemplateGUID, \
-                               tr("Target"), QPixmap(":/target_marker.png"), QPixmap(":/highlighted_target_marker.png"), false,
-                               QByteArray());
+                               tr("Target"), tr("Target"), QPixmap(":/target_marker.png"), QPixmap(":/highlighted_target_marker.png"), false,
+                               QByteArray(), 0);
 
     appendMarkerTemplateToHash(ArtillerySalvoCenterMarkerTemplateGUID, ArtillerySalvoCenterMarkerTemplateGUID, \
-                               tr("Target"), QPixmap(":/highlighted_target_marker.png"), QPixmap(":/highlighted_target_marker.png"), false,
-                               QByteArray());
+                               tr("Target"), tr("Target"), QPixmap(":/highlighted_target_marker.png"), QPixmap(":/highlighted_target_marker.png"), false,
+                               QByteArray(), 0);
 
     QSqlQuery selectQuery = EXEC_SQL(_markerThesaurusDatabase,
-                                     "SELECT GUID, ParentGUID, Description, MarkerImage, UseParty, SAMData FROM "
+                                     "SELECT GUID, ParentGUID, Description, Comments, MarkerImage, UseParty, SAMData, OrderNo FROM "
                                      "MarkerThesaurus WHERE DeletedDT IS NULL ORDER BY OrderNo");
 
     while (selectQuery.next())
@@ -298,13 +300,15 @@ const QList<MarkerTemplate *> *MarkerThesaurus::getMarkerTemplates()
         QString markerGUID = selectQuery.value(pos++).toString();
         QString parentGUID = selectQuery.value(pos++).toString();
         QString description = selectQuery.value(pos++).toString();
+        QString comments = selectQuery.value(pos++).toString();
         QByteArray imageBytes = selectQuery.value(pos++).toByteArray();
         QPixmap image;
         image.loadFromData(imageBytes, "PNG");
         int useParty = selectQuery.value(pos++).toInt();
         QByteArray rawSAMData = selectQuery.value(pos++).toByteArray();
+        quint32 orderNo = selectQuery.value(pos++).toInt();
 
-        appendMarkerTemplateToHash(parentGUID, markerGUID, description, image, image, useParty == 1, rawSAMData);
+        appendMarkerTemplateToHash(parentGUID, markerGUID, description, comments, image, image, useParty == 1, rawSAMData, orderNo);
     }
 
     return &_markerTemplates;
@@ -328,16 +332,24 @@ MarkerTemplate *MarkerThesaurus::getMarkerTemplateByGUID(const QString &GUID)
 //----------------------------------
 
 
-MarkerTemplate::MarkerTemplate(QObject *parent, QString parentGUID, QString templateGUID, \
-                               const QString &description, const QPixmap &image, const QPixmap &highlightedImage,
-                               bool useParty) : QObject(parent)
+MarkerTemplate::MarkerTemplate(QObject *parent, QString parentGUID, QString templateGUID) : QObject(parent)
 {
     _parentGUID = parentGUID;
     _GUID = templateGUID;
-    _description = description;
-    _image = image;
-    _highlightedImage = highlightedImage;
-    _useParty = useParty;
+
+    static QPixmap _unknownMarkerImage;
+
+    if (_unknownMarkerImage.isNull())
+    {
+        _unknownMarkerImage.load(":/unknown_marker.png");
+        _unknownMarkerImage = _unknownMarkerImage.scaled(DefaultMarkerSize, DefaultMarkerSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    }
+    _image = _unknownMarkerImage;
+    _highlightedImage = _unknownMarkerImage;
+
+    _description = "";
+    _comments = "";
+    _useParty = false;
 }
 
 MarkerTemplate::~MarkerTemplate()
@@ -395,9 +407,29 @@ const QPixmap MarkerTemplate::highlightedImage()
     return _highlightedImage;
 }
 
+void MarkerTemplate::setHighlightedImage(const QPixmap &image)
+{
+    _highlightedImage = image;
+}
+
 bool MarkerTemplate::useParty()
 {
     return _useParty;
+}
+
+bool MarkerTemplate::setUseParty(bool value)
+{
+    _useParty = value;
+}
+
+quint32 MarkerTemplate::order()
+{
+    return _order;
+}
+
+void MarkerTemplate::setOrder(quint32 value)
+{
+    _order = value;
 }
 
 void MarkerTemplate::addSAMinfo(double height, double minKillingRange, double maxKillingRange, double visibleRange)
@@ -439,6 +471,55 @@ SAMInfo MarkerTemplate::getSAMinfo(double height)
     SAMInfo result(height, lowerInfo->minKillingRange(), lowerInfo->maxKillingRange(), lowerInfo->visibleRange());
 
     return result;
+}
+
+void MarkerTemplate::setSAMInfoRaw(const QByteArray &rawSAMData)
+{
+    _rawSAMData = rawSAMData; //todo don't save just recalculate
+
+    if (!rawSAMData.isEmpty())
+    {
+        quint32 version, rawSAMDataSize; //don't change type
+        double height, minKillingRange, maxKillingRange, visibleRange; //don't change type
+        const char *data, *nextData, *endData;
+
+        data = rawSAMData.data();
+        endData = data + rawSAMData.length();
+
+        while (endData > data)
+        {
+            memcpy(&rawSAMDataSize, data, sizeof(rawSAMDataSize));
+            nextData = data + rawSAMDataSize;
+            data += sizeof(rawSAMDataSize);
+
+            memcpy(&version, data, sizeof(version));
+            data += sizeof(version);
+
+            if (version == 1)
+            {
+                memcpy(&height, data, sizeof(height));
+                data += sizeof(height);
+
+                memcpy(&minKillingRange, data, sizeof(minKillingRange));
+                data += sizeof(minKillingRange);
+
+                memcpy(&maxKillingRange, data, sizeof(maxKillingRange));
+                data += sizeof(maxKillingRange);
+
+                memcpy(&visibleRange, data, sizeof(visibleRange));
+                data += sizeof(visibleRange);
+
+                addSAMinfo(height, minKillingRange, maxKillingRange, visibleRange);
+            }
+
+            data = nextData;
+        }
+    }
+}
+
+const QByteArray MarkerTemplate::getSAMInfoRaw()
+{
+    return _rawSAMData;
 }
 
 const QList<SAMInfo *> MarkerTemplate::samInfoList()

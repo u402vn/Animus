@@ -80,7 +80,6 @@ void MarkerTemplateTreeWidget::beginDrag(const QPoint &fromPoint)
     drag->setHotSpot(QPoint(pixmap.width() / 2, pixmap.height() / 2));
 
     drag->exec(Qt::CopyAction | Qt::MoveAction, Qt::CopyAction);
-
 }
 
 MarkerTemplate *MarkerTemplateTreeWidget::getItemTemplate(QTreeWidgetItem *item)
@@ -158,6 +157,7 @@ void MarkerTemplateTreeWidget::initItem(QTreeWidgetItem *item, MarkerTemplate *m
     item->setData(0, Qt::UserRole, markerTemplate->GUID());
     item->setText(0, markerTemplate->description());
     item->setIcon(1, QIcon(markerTemplate->image()));
+    item->setToolTip(0, markerTemplate->comments());
 }
 
 void MarkerTemplateTreeWidget::openMarkerTemplateEditor(QTreeWidgetItem *item)
@@ -177,6 +177,13 @@ void MarkerTemplateTreeWidget::openMarkerTemplateEditor(QTreeWidgetItem *item)
             editor->showNormal();
         }
     }
+}
+
+
+
+void MarkerTemplateTreeWidget::openNewMarkerTemplateEditor(QTreeWidgetItem *item, bool child)
+{
+
 }
 
 

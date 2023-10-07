@@ -33,6 +33,8 @@ class MarkerTemplate final : public QObject
 {
     Q_OBJECT
 
+    friend class MarkerThesaurus;
+
     QList<SAMInfo*> _samInfoList;
 
     QList<MarkerTemplate*> _childItems;
@@ -43,10 +45,12 @@ class MarkerTemplate final : public QObject
     QPixmap _image;
     QPixmap _highlightedImage;
     bool _useParty;
-public:
-    explicit MarkerTemplate(QObject *parent, QString parentGUID, QString templateGUID, \
-                            const QString &description, const QPixmap &image, const QPixmap &highlightedImage,
-                            bool useParty);
+    quint32 _order;
+
+    QByteArray _rawSAMData;
+
+    explicit MarkerTemplate(QObject *parent, QString parentGUID, QString templateGUID);
+public:    
     ~MarkerTemplate();
 
     QList<MarkerTemplate *> *childItems();
@@ -60,10 +64,17 @@ public:
     const QPixmap image();
     void setImage(const QPixmap &image);
     const QPixmap highlightedImage();
+    void setHighlightedImage(const QPixmap &image);
     bool useParty();
+    bool setUseParty(bool value);
+    quint32 order();
+    void setOrder(quint32 value);
+
+
+    void setSAMInfoRaw(const QByteArray &rawSAMData);
+    const QByteArray getSAMInfoRaw();
     void addSAMinfo(double height, double minKillingRange, double maxKillingRange, double visibleRange);
     SAMInfo getSAMinfo(double height);
-
     const QList<SAMInfo*> samInfoList();
 };
 
@@ -74,18 +85,19 @@ class MarkerThesaurus final : public QObject
     QList<MarkerTemplate *> _markerTemplates;
     QHash<QString, MarkerTemplate*> _markerTemplatesHash;
 
-    MarkerTemplate * _unknownMarkerTemplate;
+    MarkerTemplate *_unknownMarkerTemplate;
 private:
     void saveMarkerTemplate(const QString &parentGUID, const QString &markerGUID, \
-                            const QString &description, int order, const QPixmap &image,
-                            bool useParty, const QByteArray rawSAMData);
+                            const QString &description, const QString &comments, const QPixmap &image,
+                            bool useParty, const QByteArray &rawSAMData, quint32 order);
     void appendMarkerTemplateToHash(const QString &parentGUID, const QString &markerGUID, \
-                                    const QString &description, const QPixmap &image, const QPixmap &highlightedImage,
-                                    bool useParty, const QByteArray rawSAMData);
-    void dleanupObsoleteMarkerTemplates();
+                                    const QString &description, const QString &comments,
+                                    const QPixmap &image, const QPixmap &highlightedImage,
+                                    bool useParty, const QByteArray rawSAMData, quint32 orderNo);
+    void cleanupObsoleteMarkerTemplates();
 
     void clearLists();
-    MarkerTemplate * getUnknownMarkerTemplate();
+    MarkerTemplate *getUnknownMarkerTemplate();
 
     explicit MarkerThesaurus(QObject *parent);
     ~MarkerThesaurus();
@@ -96,6 +108,10 @@ public:
     static MarkerThesaurus& Instance();
 
     void ImportAndReplaceFromXML(const QString &xmlFileName);
+
+    void saveMarkerTemplate(MarkerTemplate *markerTemplate);
+
+    MarkerTemplate *createNewMarkerTemplate(QString parentGUID);
 
     const QList<MarkerTemplate*> *getMarkerTemplates();
     MarkerTemplate *getMarkerTemplateByGUID(const QString &GUID);

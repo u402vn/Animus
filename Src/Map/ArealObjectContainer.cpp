@@ -44,8 +44,8 @@ ArealObject *ArealObjectContainer::createNewArealObject()
 {
     EnterProc("ArealObjectContainer::createNewArealObject");
 
-    ArealObject * arealObject = addArealObjectToList(QUuid::createUuid().toString(), tr("New Zone"), true,
-                                                     QColor(255, 0, 0, 30), "");
+    auto arealObject = addArealObjectToList(QUuid::createUuid().toString(), tr("New Zone"), true,
+                                            QColor(255, 0, 0, 30), "");
 
     QSqlQuery insertQuery(_arealObjectDatabase);
     insertQuery.prepare("INSERT INTO ArealObjects (GUID, Description, IsVisible, Color) VALUES (?, ?, ?, ?)");
