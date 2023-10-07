@@ -127,6 +127,7 @@ void TelemetryDataStorage::openTelemetryFramesDatabase()
                                "StabilizedCenterX INTEGER, StabilizedCenterY INTEGER, "
                                "TargetCenterX INTEGER, TargetCenterY INTEGER, TargetRectWidth INTEGER, TargetRectHeight INTEGER, "
                                "CalculatedTargetGPSLat REAL, CalculatedTargetGPSLon REAL, CalculatedTargetGPSHmsl REAL, "
+                               "CalculatedTargetSpeed REAL, CalculatedTargetDirection  REAL, "
                                "TelemetryFrameNumber INTEGER, VideoFrameNumber INTEGER, SessionTimeMs INTEGER)");
 
     EXEC_SQL(_sessionDatabase, "CREATE TABLE IF NOT EXISTS ClientCommands ( "
@@ -161,6 +162,7 @@ void TelemetryDataStorage::flushTelemetryDataFrames()
                         "StabilizedCenterX, StabilizedCenterY, "
                         "TargetCenterX, TargetCenterY, TargetRectWidth, TargetRectHeight, "
                         "CalculatedTargetGPSLat, CalculatedTargetGPSLon, CalculatedTargetGPSHmsl, "
+                        "CalculatedTargetSpeed, CalculatedTargetDirection, "
                         "TelemetryFrameNumber, VideoFrameNumber, SessionTimeMs) "
                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                         );
@@ -203,7 +205,9 @@ void TelemetryDataStorage::flushTelemetryDataFrames()
         insertQuery.addBindValue(telemetryFrame.TrackedTargetRectHeight);
         insertQuery.addBindValue(telemetryFrame.CalculatedTrackedTargetGPSLat);
         insertQuery.addBindValue(telemetryFrame.CalculatedTrackedTargetGPSLon);
-        insertQuery.addBindValue(telemetryFrame.CalculatedTrackedTargetGPSHmsl);
+        insertQuery.addBindValue(telemetryFrame.CalculatedTrackedTargetGPSHmsl);        
+        insertQuery.addBindValue(telemetryFrame.CalculatedTrackedTargetSpeed);
+        insertQuery.addBindValue(telemetryFrame.CalculatedTrackedTargetDirection);
         insertQuery.addBindValue(telemetryFrame.TelemetryFrameNumber);
         insertQuery.addBindValue(telemetryFrame.VideoFrameNumber);
         insertQuery.addBindValue(telemetryFrame.SessionTimeMs);
@@ -347,7 +351,8 @@ void TelemetryDataStorage::readTelemetryFrames()
                    "BombState, RangefinderDistance, "
                    "StabilizedCenterX, StabilizedCenterY, "
                    "TargetCenterX, TargetCenterY, TargetRectWidth, TargetRectHeight, "
-                   "CalculatedTargetGPSLat, CalculatedTargetGPSLon, CalculatedTargetGPSHmsl "
+                   "CalculatedTargetGPSLat, CalculatedTargetGPSLon, CalculatedTargetGPSHmsl, "
+                   "CalculatedTargetSpeed, CalculatedTargetDirection, "
                    "TelemetryFrameNumber, VideoFrameNumber, SessionTimeMs "
                    "FROM TelemetryFrames";
 
@@ -395,6 +400,8 @@ void TelemetryDataStorage::readTelemetryFrames()
         frame.CalculatedTrackedTargetGPSLat = selectQuery.value(pos++).toDouble();
         frame.CalculatedTrackedTargetGPSLon = selectQuery.value(pos++).toDouble();
         frame.CalculatedTrackedTargetGPSHmsl = selectQuery.value(pos++).toDouble();
+        frame.CalculatedTrackedTargetSpeed = selectQuery.value(pos++).toDouble();
+        frame.CalculatedTrackedTargetDirection = selectQuery.value(pos++).toDouble();
 
         frame.TelemetryFrameNumber = selectQuery.value(pos++).toLongLong();
         frame.VideoFrameNumber = selectQuery.value(pos++).toLongLong();
@@ -429,7 +436,8 @@ bool TelemetryDataStorage::exportSessionToCSV(const QString &fileName)
                                      "WindDirection, WindSpeed, "
                                      "StabilizedCenterX, StabilizedCenterY, "
                                      "TargetCenterX, TargetCenterY, TargetRectWidth, TargetRectHeight, "
-                                     "CalculatedTargetGPSLat, CalculatedTargetGPSLon, CalculatedTargetGPSHmsl "
+                                     "CalculatedTargetGPSLat, CalculatedTargetGPSLon, CalculatedTargetGPSHmsl, "
+                                     "CalculatedTargetSpeed, CalculatedTargetDirection "
                                      "FROM TelemetryFrames "
                                      "ORDER BY TelemetryFrameNumber, VideoFrameNumber");
 
@@ -451,7 +459,8 @@ bool TelemetryDataStorage::exportSessionToCSV(const QString &fileName)
         "Altitude", "VSpeed", "AirSpeed", "GroundSpeed_GPS", "GroundSpeedNorth_GPS", "GroundSpeedEast_GPS",
         "WindDirection", "WindSpeed",
         "StabilizedCenterX", "StabilizedCenterY", "TargetCenterX", "TargetCenterY", "TargetRectWidth", "TargetRectHeight",
-        "CalculatedTargetGPSLat", "CalculatedTargetGPSLon", "CalculatedTargetGPSHmsl"
+        "CalculatedTargetGPSLat", "CalculatedTargetGPSLon", "CalculatedTargetGPSHmsl",
+        "CalculatedTargetSpeed", "CalculatedTargetDirection"
     };
 
     QString header = columnNames.join(separator) + "\n";
@@ -496,7 +505,10 @@ bool TelemetryDataStorage::exportSessionToCSV(const QString &fileName)
 
         stream << selectQuery.value(pos++).toDouble() << separator;    // CalculatedTargetGPSLat
         stream << selectQuery.value(pos++).toDouble() << separator;    // CalculatedTargetGPSLon
-        stream << selectQuery.value(pos++).toDouble() << "\n";         // CalculatedTargetGPSHmsl
+        stream << selectQuery.value(pos++).toDouble() << separator;    // CalculatedTargetGPSHmsl
+
+        stream << selectQuery.value(pos++).toDouble() << separator;    // CalculatedTargetSpeed
+        stream << selectQuery.value(pos++).toDouble() << "\n";    // CalculatedTargetDirection
     }
 
     file.close();

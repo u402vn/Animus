@@ -53,6 +53,8 @@ struct TelemetryDataFrame final
     double CalculatedTrackedTargetGPSLat;
     double CalculatedTrackedTargetGPSLon;
     double CalculatedTrackedTargetGPSHmsl;
+    float CalculatedTrackedTargetSpeed;
+    float CalculatedTrackedTargetDirection;
 
     qint32 VideoFPS;
     qint32 TelemetryFPS;
