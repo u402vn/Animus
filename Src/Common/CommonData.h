@@ -45,7 +45,7 @@ struct WorldGPSCoord final
     bool isIncorrect() const;
     void setIncorrect();
 
-    void getDistanceAzimuthTo(const WorldGPSCoord &toGPSCoord, double &distance, double &azimuth) const;
+    bool getDistanceAzimuthTo(const WorldGPSCoord &toGPSCoord, double &distance, double &azimuth) const;
     const WorldGPSCoord getBiasPoint(double distance, double azimut) const;
     const QMatrix4x4 lookAt(const WorldGPSCoord &toGPSCoord) const;
 

@@ -64,6 +64,9 @@ CoordinateCalculator::CoordinateCalculator(QObject *parent, HeightMapContainer *
     _useLaserRangefinderForGroundLevelCalculation =
             applicationSettings.UseLaserRangefinderForGroundLevelCalculation && applicationSettings.isLaserRangefinderLicensed();
     _useBombCaclulation = applicationSettings.isBombingTabLicensed();
+
+    _targetSpeedFrames = new TelemetryDelayLine(this, 1000); //???
+    //connect(_targetSpeedFrames, &TelemetryDelayLine::dequeue, this, &CoordinateCalculator::onTelemetryDelayLineDequeue, Qt::DirectConnection);
 }
 
 CoordinateCalculator::~CoordinateCalculator()
@@ -131,6 +134,21 @@ void CoordinateCalculator::updateTrackedTargetPosition()
     _telemetryFrame->CalculatedTrackedTargetGPSLat = coord.lat;
     _telemetryFrame->CalculatedTrackedTargetGPSLon = coord.lon;
     _telemetryFrame->CalculatedTrackedTargetGPSHmsl = coord.hmsl;
+
+    _telemetryFrame->CalculatedTrackedTargetSpeed = 0;
+    _telemetryFrame->CalculatedTrackedTargetDirection = 0;
+    if (!_targetSpeedFrames->isEmpty())
+    {
+        auto prevTelemetryFrame = _targetSpeedFrames->head();
+        auto prevCoord = getTrackedTargetCoordsFromTelemetry(prevTelemetryFrame);
+        double distance, azimut;
+        if (prevCoord.getDistanceAzimuthTo(coord, distance, azimut))
+        {
+            auto time = _telemetryFrame->SessionTimeMs - prevTelemetryFrame.SessionTimeMs;
+            _telemetryFrame->CalculatedTrackedTargetSpeed = distance / (0.001 * time);
+            _telemetryFrame->CalculatedTrackedTargetDirection = azimut;
+        }
+    }
 }
 
 void CoordinateCalculator::updateViewFieldBorderPoints()
@@ -247,6 +265,15 @@ void CoordinateCalculator::updateRemainingTimeToDropBomb()
     _telemetryFrame->RemainingTimeToDropBomb = timeToDrop;
 }
 
+void CoordinateCalculator::updateTargetSpeedFrames()
+{
+    if (_telemetryFrame->TelemetryFrameNumber <= 1)
+        _targetSpeedFrames->clear(); //clean collected data from previous session
+
+    if (!getTrackedTargetCoordsFromTelemetry(*_telemetryFrame).isIncorrect())
+        _targetSpeedFrames->enqueue(*_telemetryFrame);
+}
+
 void CoordinateCalculator::processTelemetryDataFrame(TelemetryDataFrame *telemetryFrame)
 {
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
@@ -260,4 +287,5 @@ void CoordinateCalculator::processTelemetryDataFrame(TelemetryDataFrame *telemet
     updateViewFieldBorderPoints();
     updateBombingData();
     updateRemainingTimeToDropBomb();
+    updateTargetSpeedFrames();
 }

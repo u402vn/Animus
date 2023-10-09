@@ -9,6 +9,7 @@
 #include "TelemetryDataFrame.h"
 #include "CamPreferences.h"
 #include "Map/HeightMapContainer.h"
+#include "HardwareLink/DelayLine.h"
 #include "ApplicationSettings.h"
 
 class CoordinateCalculator final: public QObject
@@ -22,6 +23,8 @@ class CoordinateCalculator final: public QObject
     bool _useLaserRangefinderForGroundLevelCalculation;
     bool _useBombCaclulation;
 
+    TelemetryDelayLine *_targetSpeedFrames;
+
     const WorldGPSCoord getScreenPointCoord(int x, int y) const;
 
     bool needUpdateBombingData();
@@ -31,6 +34,7 @@ class CoordinateCalculator final: public QObject
     void updateViewFieldBorderPoints();
     void updateBombingData();
     void updateRemainingTimeToDropBomb();
+    void updateTargetSpeedFrames();
 public:
     explicit CoordinateCalculator(QObject *parent, HeightMapContainer *heightMapContainer);
     ~CoordinateCalculator();

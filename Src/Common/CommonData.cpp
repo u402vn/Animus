@@ -35,8 +35,15 @@ void WorldGPSCoord::setIncorrect()
     hmsl = INCORRECT_COORDINATE;
 }
 
-void WorldGPSCoord::getDistanceAzimuthTo(const WorldGPSCoord &toGPSCoord, double &distance, double &azimuth) const
+bool WorldGPSCoord::getDistanceAzimuthTo(const WorldGPSCoord &toGPSCoord, double &distance, double &azimuth) const
 {
+    if (isIncorrect() || toGPSCoord.isIncorrect())
+    {
+        distance = 0;
+        azimuth = 0;
+        return false;
+    }
+
     double lat1 = lat * PI / 180;
     double lat2 = toGPSCoord.lat * PI / 180;
     double long1 = lon * PI / 180;
@@ -68,6 +75,8 @@ void WorldGPSCoord::getDistanceAzimuthTo(const WorldGPSCoord &toGPSCoord, double
     z2 = - z2 * PI / 180;
     double anglerad2 = z2 - ( (2 * PI) * floor((z2 / (2 * PI))) );
     azimuth = anglerad2 * 180.0 / PI;
+
+    return true;
 }
 
 const WorldGPSCoord WorldGPSCoord::getBiasPoint(double distance, double azimut) const

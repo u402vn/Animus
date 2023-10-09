@@ -20,6 +20,9 @@ public:
 
     void enqueue(const TelemetryDataFrame &value);
     void clear();
+
+    bool isEmpty();
+    const TelemetryDataFrame head();
 signals:
     void dequeue(const TelemetryDataFrame &value);
 private slots:

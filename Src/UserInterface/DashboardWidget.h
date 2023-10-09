@@ -35,6 +35,7 @@ class DashboardWidget final: public QWidget
                             RowRangefinderTemperature, RowAtmosphereTemperature, RowAtmospherePressure,
                             RowVideoFPS, RowTelemetryFPS,
                             RowCalculatedTrackedTargetSpeed, RowCalculatedTrackedTargetDirection,
+                            RowCalculatedTrackedTargetGPSLat, RowCalculatedTrackedTargetGPSLon, RowCalculatedTrackedTargetGPSHmsl,
                             //insert items before this line. Don't change the order of the items
                             RowLast
                            };

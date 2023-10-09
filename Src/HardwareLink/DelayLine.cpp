@@ -29,6 +29,16 @@ void TelemetryDelayLine::clear()
     _frames.clear();
 }
 
+bool TelemetryDelayLine::isEmpty()
+{
+    return _frames.isEmpty();
+}
+
+const TelemetryDataFrame TelemetryDelayLine::head()
+{
+    return _frames.head();
+}
+
 void TelemetryDelayLine::onDelayTimer()
 {
     if (!_frames.isEmpty())
