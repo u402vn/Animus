@@ -13,6 +13,7 @@ class TelemetryDelayLine : public QObject
     Q_OBJECT
     quint32 _delayMs;
     QQueue<TelemetryDataFrame> _frames;
+    TelemetryDataFrame _tail;
 
 public:
     explicit TelemetryDelayLine(QObject *parent, quint32 delayMs);
@@ -23,6 +24,7 @@ public:
 
     bool isEmpty();
     const TelemetryDataFrame head();
+    const TelemetryDataFrame tail();
 signals:
     void dequeue(const TelemetryDataFrame &value);
 private slots:

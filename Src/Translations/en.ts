@@ -1508,12 +1508,12 @@ Speed Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="101"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="104"/>
         <source>Parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="101"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="104"/>
         <source>Value</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1624,51 +1624,66 @@ Speed Multiplier</source>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="78"/>
-        <source>Wind Direction</source>
+        <source>Target Latitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="79"/>
-        <source>Wind Speed</source>
+        <source>Target Longitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="80"/>
-        <source>Atmosphere Temperature</source>
+        <source>Target Altitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="81"/>
-        <source>Atmosphere Pressure</source>
+        <source>Wind Direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="82"/>
-        <source>Stabilized Center X</source>
+        <source>Wind Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="83"/>
-        <source>Stabilized Center Y</source>
+        <source>Atmosphere Temperature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="84"/>
-        <source>Stabilized Rotation Angle</source>
+        <source>Atmosphere Pressure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="85"/>
-        <source>Telemetry Frame</source>
+        <source>Stabilized Center X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="86"/>
-        <source>Video Frame</source>
+        <source>Stabilized Center Y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="87"/>
+        <source>Stabilized Rotation Angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="88"/>
+        <source>Telemetry Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="89"/>
+        <source>Video Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="90"/>
         <source>Session Time</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1688,37 +1703,37 @@ Speed Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="88"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="91"/>
         <source>Telemetry FPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="89"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="92"/>
         <source>Video FPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="90"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="93"/>
         <source>Ground Level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="91"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="94"/>
         <source>Optical System</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="93"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="96"/>
         <source>Settings</source>
         <translation type="unfinished">Settings</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="94"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="97"/>
         <source>Primary Flight Display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="96"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="99"/>
         <source>Coord Indicator</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1735,7 +1750,7 @@ Speed Multiplier</source>
         <translation type="obsolete">Record</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="196"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="202"/>
         <source>Do you want to activate catapult?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2812,22 +2827,22 @@ Y:%6%7</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../Common/CommonData.cpp" line="374"/>
+        <location filename="../Common/CommonData.cpp" line="383"/>
         <source>N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Common/CommonData.cpp" line="380"/>
+        <location filename="../Common/CommonData.cpp" line="389"/>
         <source>S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Common/CommonData.cpp" line="386"/>
+        <location filename="../Common/CommonData.cpp" line="395"/>
         <source>W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Common/CommonData.cpp" line="392"/>
+        <location filename="../Common/CommonData.cpp" line="401"/>
         <source>E</source>
         <translation type="unfinished"></translation>
     </message>

@@ -13,6 +13,8 @@ TelemetryDelayLine::~TelemetryDelayLine()
 
 void TelemetryDelayLine::enqueue(const TelemetryDataFrame &value)
 {
+    _tail = value;
+
     if (_delayMs <= 0)
     {
         emit dequeue(value);
@@ -27,6 +29,7 @@ void TelemetryDelayLine::enqueue(const TelemetryDataFrame &value)
 void TelemetryDelayLine::clear()
 {
     _frames.clear();
+    _tail.clear();
 }
 
 bool TelemetryDelayLine::isEmpty()
@@ -37,6 +40,11 @@ bool TelemetryDelayLine::isEmpty()
 const TelemetryDataFrame TelemetryDelayLine::head()
 {
     return _frames.head();
+}
+
+const TelemetryDataFrame TelemetryDelayLine::tail()
+{
+    return _tail;
 }
 
 void TelemetryDelayLine::onDelayTimer()

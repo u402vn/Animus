@@ -48,11 +48,11 @@ WorldGPSCoord CalculatePointPosition(const TelemetryDataFrame &telemetryDataFram
 
 //---------------------------------------------------------------------------------------
 
-const WorldGPSCoord CoordinateCalculator::getScreenPointCoord(int x, int y) const
+const WorldGPSCoord CoordinateCalculator::getScreenPointCoord(TelemetryDataFrame *telemetryFrame, int x, int y) const
 {
-    double groundLevel = _telemetryFrame->CalculatedGroundLevel;
-    auto camPreferences = _camAssemblyPreferences->device(_telemetryFrame->OpticalSystemId);
-    WorldGPSCoord result = CalculatePointPosition(*_telemetryFrame, camPreferences, x, y, groundLevel);
+    double groundLevel = telemetryFrame->CalculatedGroundLevel;
+    auto camPreferences = _camAssemblyPreferences->device(telemetryFrame->OpticalSystemId);
+    WorldGPSCoord result = CalculatePointPosition(*telemetryFrame, camPreferences, x, y, groundLevel);
     return result;
 }
 
@@ -65,8 +65,10 @@ CoordinateCalculator::CoordinateCalculator(QObject *parent, HeightMapContainer *
             applicationSettings.UseLaserRangefinderForGroundLevelCalculation && applicationSettings.isLaserRangefinderLicensed();
     _useBombCaclulation = applicationSettings.isBombingTabLicensed();
 
+    _trackedTargetSpeed = 0;
+    _trackedTargetDirection = 0;
     _targetSpeedFrames = new TelemetryDelayLine(this, 1000); //???
-    //connect(_targetSpeedFrames, &TelemetryDelayLine::dequeue, this, &CoordinateCalculator::onTelemetryDelayLineDequeue, Qt::DirectConnection);
+    startTimer(1000);
 }
 
 CoordinateCalculator::~CoordinateCalculator()
@@ -74,84 +76,97 @@ CoordinateCalculator::~CoordinateCalculator()
 
 }
 
-void CoordinateCalculator::updateLaserRangefinderPosition()
+void CoordinateCalculator::updateLaserRangefinderPosition(TelemetryDataFrame *telemetryFrame)
 {
-    _telemetryFrame->CalculatedRangefinderGPSLat = _telemetryFrame->UavLatitude_GPS;
-    _telemetryFrame->CalculatedRangefinderGPSLon = _telemetryFrame->UavLongitude_GPS;
-    _telemetryFrame->CalculatedRangefinderGPSHmsl = _telemetryFrame->UavAltitude_GPS;
+    telemetryFrame->CalculatedRangefinderGPSLat = telemetryFrame->UavLatitude_GPS;
+    telemetryFrame->CalculatedRangefinderGPSLon = telemetryFrame->UavLongitude_GPS;
+    telemetryFrame->CalculatedRangefinderGPSHmsl = telemetryFrame->UavAltitude_GPS;
 
-    bool validRangefinderDistance = (_telemetryFrame->RangefinderDistance > 0);
+    bool validRangefinderDistance = (telemetryFrame->RangefinderDistance > 0);
 
     if (validRangefinderDistance)
     {
-        const QQuaternion camQ = _telemetryFrame->getCamQuaternion();
-        QVector3D v(0, 0, _telemetryFrame->RangefinderDistance);
+        const QQuaternion camQ = telemetryFrame->getCamQuaternion();
+        QVector3D v(0, 0, telemetryFrame->RangefinderDistance);
         v = camQ * v;
-        _telemetryFrame->CalculatedRangefinderGPSLat += v.x() * 180 / (EARTH_RADIUS_M * PI);
-        _telemetryFrame->CalculatedRangefinderGPSLon += v.y() * 180 / (cos(_telemetryFrame->UavLatitude_GPS * PI / 180) * EARTH_RADIUS_M * PI);
-        _telemetryFrame->CalculatedRangefinderGPSHmsl -= v.z();
+        telemetryFrame->CalculatedRangefinderGPSLat += v.x() * 180 / (EARTH_RADIUS_M * PI);
+        telemetryFrame->CalculatedRangefinderGPSLon += v.y() * 180 / (cos(telemetryFrame->UavLatitude_GPS * PI / 180) * EARTH_RADIUS_M * PI);
+        telemetryFrame->CalculatedRangefinderGPSHmsl -= v.z();
     }
     else
-        _telemetryFrame->CalculatedRangefinderGPSHmsl = INCORRECT_COORDINATE; //ground level by default
+        telemetryFrame->CalculatedRangefinderGPSHmsl = INCORRECT_COORDINATE; //ground level by default
 
-    if (_telemetryFrame->TelemetryFrameNumber <= 0)
+    if (telemetryFrame->TelemetryFrameNumber <= 0)
     {
-        _telemetryFrame->CalculatedRangefinderGPSLat = INCORRECT_COORDINATE;
-        _telemetryFrame->CalculatedRangefinderGPSLon = INCORRECT_COORDINATE;
-        _telemetryFrame->CalculatedRangefinderGPSHmsl = INCORRECT_COORDINATE;
+        telemetryFrame->CalculatedRangefinderGPSLat = INCORRECT_COORDINATE;
+        telemetryFrame->CalculatedRangefinderGPSLon = INCORRECT_COORDINATE;
+        telemetryFrame->CalculatedRangefinderGPSHmsl = INCORRECT_COORDINATE;
     }
 }
 
-void CoordinateCalculator::updateGroundLevel()
+void CoordinateCalculator::updateGroundLevel(TelemetryDataFrame *telemetryFrame)
 {
     bool canCalculateFromRangefinder = _useLaserRangefinderForGroundLevelCalculation &&
-            (_telemetryFrame->CalculatedRangefinderGPSHmsl != INCORRECT_COORDINATE) &&
-            ( _telemetryFrame->CalculatedRangefinderGPSLat != INCORRECT_COORDINATE) &&
-            ( _telemetryFrame->CalculatedRangefinderGPSLon != INCORRECT_COORDINATE);
+            (telemetryFrame->CalculatedRangefinderGPSHmsl != INCORRECT_COORDINATE) &&
+            ( telemetryFrame->CalculatedRangefinderGPSLat != INCORRECT_COORDINATE) &&
+            ( telemetryFrame->CalculatedRangefinderGPSLon != INCORRECT_COORDINATE);
 
-    _telemetryFrame->CalculatedGroundLevel = 0;
+    telemetryFrame->CalculatedGroundLevel = 0;
 
     if (canCalculateFromRangefinder)
-        _telemetryFrame->CalculatedGroundLevel = _telemetryFrame->CalculatedRangefinderGPSHmsl;
+        telemetryFrame->CalculatedGroundLevel = telemetryFrame->CalculatedRangefinderGPSHmsl;
     else
     {
         double heightFromMap;
-        bool canCalulateFromMap = _heightMapContainer->GetHeight(_telemetryFrame->UavLatitude_GPS, _telemetryFrame->UavLongitude_GPS, heightFromMap);
+        bool canCalulateFromMap = _heightMapContainer->GetHeight(telemetryFrame->UavLatitude_GPS, telemetryFrame->UavLongitude_GPS, heightFromMap);
         if (canCalulateFromMap)
-            _telemetryFrame->CalculatedGroundLevel = heightFromMap;
+            telemetryFrame->CalculatedGroundLevel = heightFromMap;
     };
 }
 
-void CoordinateCalculator::updateTrackedTargetPosition()
+void CoordinateCalculator::updateTrackedTargetPosition(TelemetryDataFrame *telemetryFrame)
 {
     WorldGPSCoord coord;
-
-    if (_telemetryFrame->targetIsVisible())
-        coord = getScreenPointCoord(_telemetryFrame->TrackedTargetCenterX, _telemetryFrame->TrackedTargetCenterY);
+    if (telemetryFrame->targetIsVisible())
+        coord = getScreenPointCoord(telemetryFrame, telemetryFrame->TrackedTargetCenterX, telemetryFrame->TrackedTargetCenterY);
     else
         coord.setIncorrect();
 
-    _telemetryFrame->CalculatedTrackedTargetGPSLat = coord.lat;
-    _telemetryFrame->CalculatedTrackedTargetGPSLon = coord.lon;
-    _telemetryFrame->CalculatedTrackedTargetGPSHmsl = coord.hmsl;
+    telemetryFrame->CalculatedTrackedTargetGPSLat = coord.lat;
+    telemetryFrame->CalculatedTrackedTargetGPSLon = coord.lon;
+    telemetryFrame->CalculatedTrackedTargetGPSHmsl = coord.hmsl;
 
-    _telemetryFrame->CalculatedTrackedTargetSpeed = 0;
-    _telemetryFrame->CalculatedTrackedTargetDirection = 0;
-    if (!_targetSpeedFrames->isEmpty())
+    telemetryFrame->CalculatedTrackedTargetSpeed = _trackedTargetSpeed;
+    telemetryFrame->CalculatedTrackedTargetDirection = _trackedTargetDirection;
+}
+
+void CoordinateCalculator::updateTrackedTargetSpeed()
+{
+    _trackedTargetSpeed = 0;
+    _trackedTargetDirection = 0;
+
+    if (_targetSpeedFrames->isEmpty())
+        return;
+
+    auto headFrame = _targetSpeedFrames->head();
+    auto tailFrame = _targetSpeedFrames->tail();
+
+    if (!headFrame.targetIsVisible() || !tailFrame.targetIsVisible())
+        return;
+
+    auto headCoord = getTrackedTargetCoordsFromTelemetry(headFrame);
+    auto tailCoord = getTrackedTargetCoordsFromTelemetry(tailFrame);
+
+    double distance, azimut;
+    if (headCoord.getDistanceAzimuthTo(tailCoord, distance, azimut))
     {
-        auto prevTelemetryFrame = _targetSpeedFrames->head();
-        auto prevCoord = getTrackedTargetCoordsFromTelemetry(prevTelemetryFrame);
-        double distance, azimut;
-        if (prevCoord.getDistanceAzimuthTo(coord, distance, azimut))
-        {
-            auto time = _telemetryFrame->SessionTimeMs - prevTelemetryFrame.SessionTimeMs;
-            _telemetryFrame->CalculatedTrackedTargetSpeed = distance / (0.001 * time);
-            _telemetryFrame->CalculatedTrackedTargetDirection = azimut;
-        }
+        auto time = (tailFrame.SessionTimeMs - headFrame.SessionTimeMs) * 0.001;
+        _trackedTargetSpeed = distance / time;
+        _trackedTargetDirection = azimut;
     }
 }
 
-void CoordinateCalculator::updateViewFieldBorderPoints()
+void CoordinateCalculator::updateViewFieldBorderPoints(TelemetryDataFrame *telemetryFrame)
 {
     constexpr double ViewFieldBorderPoints[ViewFieldBorderPointsCount][2] = {
         {0.0, 0.0}, {0.1, 0.0}, {0.2, 0.0}, {0.3, 0.0}, {0.4, 0.0}, {0.5, 0.0}, {0.6, 0.0}, {0.7, 0.0}, {0.8, 0.0}, {0.9, 0.0},
@@ -159,79 +174,79 @@ void CoordinateCalculator::updateViewFieldBorderPoints()
         {1.1, 1.1}, {0.9, 1.1}, {0.8, 1.1}, {0.7, 1.1}, {0.6, 1.1}, {0.5, 1.1}, {0.4, 1.1}, {0.3, 1.1}, {0.2, 1.1}, {0.1, 1.1},
         {0.0, 1.1}, {0.0, 0.9}, {0.0, 0.8}, {0.0, 0.7}, {0.0, 0.6}, {0.0, 0.5}, {0.0, 0.4}, {0.0, 0.3}, {0.0, 0.2}, {0.0, 0.1}};
 
-    auto camPreferences = _camAssemblyPreferences->device(_telemetryFrame->OpticalSystemId);
+    auto camPreferences = _camAssemblyPreferences->device(telemetryFrame->OpticalSystemId);
     int imageWidth  = camPreferences->frameWidth();
     int imageHeight = camPreferences->frameHeight();
     for (int n = 0; n < ViewFieldBorderPointsCount; n++)
     {
-        auto point = getScreenPointCoord(ViewFieldBorderPoints[n][0] * imageWidth, ViewFieldBorderPoints[n][1] * imageHeight);
-        _telemetryFrame->ViewFieldBorderPointsLat[n] = point.lat;
-        _telemetryFrame->ViewFieldBorderPointsLon[n] = point.lon;
-        _telemetryFrame->ViewFieldBorderPointsHmsl[n] = point.hmsl;
+        auto point = getScreenPointCoord(telemetryFrame, ViewFieldBorderPoints[n][0] * imageWidth, ViewFieldBorderPoints[n][1] * imageHeight);
+        telemetryFrame->ViewFieldBorderPointsLat[n] = point.lat;
+        telemetryFrame->ViewFieldBorderPointsLon[n] = point.lon;
+        telemetryFrame->ViewFieldBorderPointsHmsl[n] = point.hmsl;
     }
 }
 
-bool CoordinateCalculator::needUpdateBombingData()
+bool CoordinateCalculator::needUpdateBombingData(TelemetryDataFrame *telemetryFrame)
 {
     bool needUpdate = _useBombCaclulation &&
-            !(  _telemetryFrame->TelemetryFrameNumber <= 0 ||
-                _telemetryFrame->UavLongitude_GPS == INCORRECT_COORDINATE ||
-                _telemetryFrame->UavLongitude_GPS == INCORRECT_COORDINATE ||
-                _telemetryFrame->UavAltitude_GPS == INCORRECT_COORDINATE ||
-                _telemetryFrame->BombingPlacePosLat == INCORRECT_COORDINATE ||
-                _telemetryFrame->BombingPlacePosLon == INCORRECT_COORDINATE ||
-                _telemetryFrame->BombingPlacePosHmsl == INCORRECT_COORDINATE);
+            !(  telemetryFrame->TelemetryFrameNumber <= 0 ||
+                telemetryFrame->UavLongitude_GPS == INCORRECT_COORDINATE ||
+                telemetryFrame->UavLongitude_GPS == INCORRECT_COORDINATE ||
+                telemetryFrame->UavAltitude_GPS == INCORRECT_COORDINATE ||
+                telemetryFrame->BombingPlacePosLat == INCORRECT_COORDINATE ||
+                telemetryFrame->BombingPlacePosLon == INCORRECT_COORDINATE ||
+                telemetryFrame->BombingPlacePosHmsl == INCORRECT_COORDINATE);
     return needUpdate;
 }
 
-void CoordinateCalculator::updateBombingData()
+void CoordinateCalculator::updateBombingData(TelemetryDataFrame *telemetryFrame)
 {
-    if (needUpdateBombingData())
+    if (needUpdateBombingData(telemetryFrame))
     {
         double distanceToTarget, azimuthToTarget;
-        WorldGPSCoord uavCoords(_telemetryFrame->UavLatitude_GPS, _telemetryFrame->UavLongitude_GPS, _telemetryFrame->UavAltitude_GPS);
-        WorldGPSCoord bombingPlaceCoords(_telemetryFrame->BombingPlacePosLat, _telemetryFrame->BombingPlacePosLon, _telemetryFrame->BombingPlacePosHmsl);
+        WorldGPSCoord uavCoords(telemetryFrame->UavLatitude_GPS, telemetryFrame->UavLongitude_GPS, telemetryFrame->UavAltitude_GPS);
+        WorldGPSCoord bombingPlaceCoords(telemetryFrame->BombingPlacePosLat, telemetryFrame->BombingPlacePosLon, telemetryFrame->BombingPlacePosHmsl);
         uavCoords.getDistanceAzimuthTo(bombingPlaceCoords, distanceToTarget, azimuthToTarget);
-        _telemetryFrame->DistanceToBombingPlace = distanceToTarget;
-        _telemetryFrame->AzimuthToBombingPlace = azimuthToTarget;
-        _telemetryFrame->AzimuthUAVToBombingPlace = constrainAngle180(azimuthToTarget - _telemetryFrame->Course_GPS);
+        telemetryFrame->DistanceToBombingPlace = distanceToTarget;
+        telemetryFrame->AzimuthToBombingPlace = azimuthToTarget;
+        telemetryFrame->AzimuthUAVToBombingPlace = constrainAngle180(azimuthToTarget - telemetryFrame->Course_GPS);
     }
     else
     {
-        _telemetryFrame->DistanceToBombingPlace = INCORRECT_DISTANCE;
-        _telemetryFrame->AzimuthToBombingPlace = 0;
-        _telemetryFrame->AzimuthUAVToBombingPlace = 0;
+        telemetryFrame->DistanceToBombingPlace = INCORRECT_DISTANCE;
+        telemetryFrame->AzimuthToBombingPlace = 0;
+        telemetryFrame->AzimuthUAVToBombingPlace = 0;
     }
 }
 
-void CoordinateCalculator::updateRemainingTimeToDropBomb()
+void CoordinateCalculator::updateRemainingTimeToDropBomb(TelemetryDataFrame *telemetryFrame)
 {
-    if (!needUpdateBombingData())
+    if (!needUpdateBombingData(telemetryFrame))
     {
-        _telemetryFrame->RemainingTimeToDropBomb = INCORRECT_TIME;
+        telemetryFrame->RemainingTimeToDropBomb = INCORRECT_TIME;
         return;
     }
 
     auto context = _scriptEngine.currentContext();
     auto activationObject = context->activationObject();
 
-    activationObject.setProperty("wind_direction", _telemetryFrame->WindDirection);
-    activationObject.setProperty("wind_speed",_telemetryFrame->WindSpeed);
+    activationObject.setProperty("wind_direction", telemetryFrame->WindDirection);
+    activationObject.setProperty("wind_speed",telemetryFrame->WindSpeed);
 
-    activationObject.setProperty("uav_lat", _telemetryFrame->UavLatitude_GPS);
-    activationObject.setProperty("uav_lon", _telemetryFrame->UavLongitude_GPS);
-    activationObject.setProperty("uav_hmsl", _telemetryFrame->UavAltitude_GPS);
-    activationObject.setProperty("uav_groundspeed", _telemetryFrame->GroundSpeed_GPS);
-    activationObject.setProperty("uav_airspeed", _telemetryFrame->AirSpeed);
-    activationObject.setProperty("uav_course", _telemetryFrame->Course_GPS);
-    activationObject.setProperty("uav_verticalspeed", _telemetryFrame->VerticalSpeed);
+    activationObject.setProperty("uav_lat", telemetryFrame->UavLatitude_GPS);
+    activationObject.setProperty("uav_lon", telemetryFrame->UavLongitude_GPS);
+    activationObject.setProperty("uav_hmsl", telemetryFrame->UavAltitude_GPS);
+    activationObject.setProperty("uav_groundspeed", telemetryFrame->GroundSpeed_GPS);
+    activationObject.setProperty("uav_airspeed", telemetryFrame->AirSpeed);
+    activationObject.setProperty("uav_course", telemetryFrame->Course_GPS);
+    activationObject.setProperty("uav_verticalspeed", telemetryFrame->VerticalSpeed);
 
-    activationObject.setProperty("target_lat", _telemetryFrame->BombingPlacePosLat);
-    activationObject.setProperty("target_lon", _telemetryFrame->BombingPlacePosLon);
-    activationObject.setProperty("target_hmsl", _telemetryFrame->BombingPlacePosHmsl);
+    activationObject.setProperty("target_lat", telemetryFrame->BombingPlacePosLat);
+    activationObject.setProperty("target_lon", telemetryFrame->BombingPlacePosLon);
+    activationObject.setProperty("target_hmsl", telemetryFrame->BombingPlacePosHmsl);
 
-    activationObject.setProperty("target_distance", _telemetryFrame->DistanceToBombingPlace);
-    activationObject.setProperty("target_azimuth", _telemetryFrame->AzimuthToBombingPlace);
+    activationObject.setProperty("target_distance", telemetryFrame->DistanceToBombingPlace);
+    activationObject.setProperty("target_azimuth", telemetryFrame->AzimuthToBombingPlace);
 
     activationObject.setProperty("droppoint_time", 0);
     activationObject.setProperty("droppoint_distance", 0);
@@ -250,7 +265,7 @@ void CoordinateCalculator::updateRemainingTimeToDropBomb()
     {
         QString info = scriptDebugInfoProperty.toString();
         if (!info.isEmpty())
-            qDebug() << "TFN: " << _telemetryFrame->TelemetryFrameNumber << " DebugInfo: " << info;
+            qDebug() << "TFN: " << telemetryFrame->TelemetryFrameNumber << " DebugInfo: " << info;
     }
 
     /*
@@ -262,30 +277,35 @@ void CoordinateCalculator::updateRemainingTimeToDropBomb()
     outPropertyToDebug(activationObject, "droppoint_distance");
     */
 
-    _telemetryFrame->RemainingTimeToDropBomb = timeToDrop;
+    telemetryFrame->RemainingTimeToDropBomb = timeToDrop;
 }
 
-void CoordinateCalculator::updateTargetSpeedFrames()
+void CoordinateCalculator::updateTargetSpeedFrames(TelemetryDataFrame *telemetryFrame)
 {
-    if (_telemetryFrame->TelemetryFrameNumber <= 1)
+    if (telemetryFrame->TelemetryFrameNumber <= 1)
         _targetSpeedFrames->clear(); //clean collected data from previous session
 
-    if (!getTrackedTargetCoordsFromTelemetry(*_telemetryFrame).isIncorrect())
-        _targetSpeedFrames->enqueue(*_telemetryFrame);
+    if (!getTrackedTargetCoordsFromTelemetry(*telemetryFrame).isIncorrect())
+        _targetSpeedFrames->enqueue(*telemetryFrame);
 }
 
-void CoordinateCalculator::processTelemetryDataFrame(TelemetryDataFrame *telemetryFrame)
+void CoordinateCalculator::timerEvent(QTimerEvent *event)
+{
+    updateTrackedTargetSpeed();
+}
+
+void CoordinateCalculator::processTelemetryDataFrame(TelemetryDataFrame *_telemetryFrame)
 {
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
 
-    _telemetryFrame = telemetryFrame;
+    //???_telemetryFrame = telemetryFrame;
     _camAssemblyPreferences = applicationSettings.getCurrentCamAssemblyPreferences();
 
-    updateLaserRangefinderPosition();
-    updateGroundLevel();
-    updateTrackedTargetPosition();
-    updateViewFieldBorderPoints();
-    updateBombingData();
-    updateRemainingTimeToDropBomb();
-    updateTargetSpeedFrames();
+    updateLaserRangefinderPosition(_telemetryFrame);
+    updateGroundLevel(_telemetryFrame);
+    updateTrackedTargetPosition(_telemetryFrame);
+    updateViewFieldBorderPoints(_telemetryFrame);
+    updateBombingData(_telemetryFrame);
+    updateRemainingTimeToDropBomb(_telemetryFrame);
+    updateTargetSpeedFrames(_telemetryFrame);
 }

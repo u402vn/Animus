@@ -17,29 +17,33 @@ class CoordinateCalculator final: public QObject
     Q_OBJECT
     QScriptEngine _scriptEngine;
     HeightMapContainer *_heightMapContainer;
-    TelemetryDataFrame *_telemetryFrame;
     CamAssemblyPreferences *_camAssemblyPreferences;
     QString _ballisticMacro;
     bool _useLaserRangefinderForGroundLevelCalculation;
     bool _useBombCaclulation;
 
+    double _trackedTargetSpeed, _trackedTargetDirection;
     TelemetryDelayLine *_targetSpeedFrames;
 
-    const WorldGPSCoord getScreenPointCoord(int x, int y) const;
+    const WorldGPSCoord getScreenPointCoord(TelemetryDataFrame *telemetryFrame, int x, int y) const;
 
-    bool needUpdateBombingData();
-    void updateLaserRangefinderPosition();
-    void updateGroundLevel();
-    void updateTrackedTargetPosition();
-    void updateViewFieldBorderPoints();
-    void updateBombingData();
-    void updateRemainingTimeToDropBomb();
-    void updateTargetSpeedFrames();
+    bool needUpdateBombingData(TelemetryDataFrame *telemetryFrame);
+    void updateLaserRangefinderPosition(TelemetryDataFrame *telemetryFrame);
+    void updateGroundLevel(TelemetryDataFrame *telemetryFrame);
+    void updateTrackedTargetPosition(TelemetryDataFrame *telemetryFrame);
+    void updateViewFieldBorderPoints(TelemetryDataFrame *telemetryFrame);
+    void updateBombingData(TelemetryDataFrame *telemetryFrame);
+    void updateRemainingTimeToDropBomb(TelemetryDataFrame *telemetryFrame);
+    void updateTargetSpeedFrames(TelemetryDataFrame *telemetryFrame);
+
+    void updateTrackedTargetSpeed();
+protected:
+    void timerEvent(QTimerEvent *event);
 public:
     explicit CoordinateCalculator(QObject *parent, HeightMapContainer *heightMapContainer);
     ~CoordinateCalculator();
 
-    void processTelemetryDataFrame(TelemetryDataFrame *telemetryFrame);
+    void processTelemetryDataFrame(TelemetryDataFrame *_telemetryFrame);
 };
 
 #endif // COORDINATECALCULATOR_H

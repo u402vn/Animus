@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QCloseEvent>
+#include <QTimerEvent>
 #include "MapGraphicsScene.h"
 #include "MapGraphicsView.h"
 
