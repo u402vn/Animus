@@ -8,7 +8,7 @@ QT       += core gui widgets svg multimedia multimediawidgets sql network concur
 
 TARGET = ANIMUS
 TEMPLATE = app
-VERSION = 1.4.7.01
+VERSION = 1.4.7.03
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 CONFIG   += precompile_header

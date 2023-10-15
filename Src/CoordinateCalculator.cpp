@@ -142,6 +142,8 @@ void CoordinateCalculator::updateTrackedTargetPosition(TelemetryDataFrame *telem
 
 void CoordinateCalculator::updateTrackedTargetSpeed()
 {
+    auto prevSpeed = _trackedTargetSpeed;
+
     _trackedTargetSpeed = 0;
     _trackedTargetDirection = 0;
 
@@ -157,12 +159,18 @@ void CoordinateCalculator::updateTrackedTargetSpeed()
     auto headCoord = getTrackedTargetCoordsFromTelemetry(headFrame);
     auto tailCoord = getTrackedTargetCoordsFromTelemetry(tailFrame);
 
-    double distance, azimut;
+    double distance, azimut, speed;
     if (headCoord.getDistanceAzimuthTo(tailCoord, distance, azimut))
     {
         auto time = (tailFrame.SessionTimeMs - headFrame.SessionTimeMs) * 0.001;
-        _trackedTargetSpeed = distance / time;
-        _trackedTargetDirection = azimut;
+        speed = distance / time;
+
+        if ( (prevSpeed == 0) || (qAbs(speed - prevSpeed) < 10) )
+        {
+            _trackedTargetSpeed = distance / time;
+            _trackedTargetDirection = azimut;
+        }
+
     }
 }
 

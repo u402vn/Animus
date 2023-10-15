@@ -325,7 +325,7 @@ const QString formatSingleCoordinate(double coord, const QString &siteText, Geog
 
 const QString WorldGPSCoord::EncodeLatitude(GeographicalCoordinatesFormat format) const
 {
-    return formatSingleCoordinate(lat, lat < 0 ? postfixS() :postfixN(), format);  //"ЮШ": "СШ";
+    return formatSingleCoordinate(lat, lat < 0 ? postfixS() : postfixN(), format);  //"ЮШ": "СШ";
 }
 
 const QString WorldGPSCoord::EncodeLongitude(GeographicalCoordinatesFormat format) const

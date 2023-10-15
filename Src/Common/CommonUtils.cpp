@@ -9,6 +9,10 @@
 #include <QtMath>
 #include "Common/CommonWidgets.h"
 
+constexpr QChar zeroChar = QChar('0');
+constexpr QChar spaceChar = QChar(' ');
+
+
 static QDateTime beginDateTime1900 = QDateTime::fromString("1.30.1", "M.d.s"); // dateTime is January 30 in 1900 at 00:00:01.
 double GetCurrentDateTimeForDB()
 {
@@ -35,7 +39,6 @@ const QString getTimeAsString(quint32 timeMs)
     quint32 min = totalSec / 60 % 60;
     quint32 hour = totalSec / 3600;
 
-    QChar zeroChar = QChar('0');
     QString result = QString("%1:%2:%3.%4").arg(hour, 2, 10, zeroChar).arg(min, 2, 10, zeroChar).arg(sec, 2, 10, zeroChar).arg(msec, 3, 10, zeroChar);
     return result;
 }
@@ -165,6 +168,8 @@ void drawTelemetryOnVideo(QPainter &painter, const TelemetryDataFrame &telemetry
     font.setPointSize(fontSize);
     painter.setFont(font);
 
+
+    //Left bottom part
     QString info;
     if (showRangefinderDistance)
     {
@@ -173,14 +178,13 @@ void drawTelemetryOnVideo(QPainter &painter, const TelemetryDataFrame &telemetry
 
         info = QString("S: %1 Y: %2 H: %3 \n" \
                        "LT: %4 LR: %5 \n" \
-                       "UAV: %6 \nTGT: %7 \nLSR: %8")
+                       "UAV: %6 \nLSR: %7")
                 .arg(telemetryFrame.GroundSpeed_GPS, 0, 'f', 1)
                 .arg(constrainAngle360(telemetryFrame.UavYaw), 0, 'f', 1)
                 .arg(telemetryFrame.UavAltitude_Barometric, 0, 'f', 1)
                 .arg(telemetryFrame.RangefinderTemperature, 0, 'f', 1)
                 .arg(rangefinderDistanceStr)
                 .arg(objectCoordinateAsStr(uavCoord))
-                .arg(objectCoordinateAsStr(trackedCoord))
                 .arg(objectCoordinateAsStr(laserCoord));
     }
     else
@@ -193,6 +197,9 @@ void drawTelemetryOnVideo(QPainter &painter, const TelemetryDataFrame &telemetry
     QPoint drawTelemetryPoint(5, painter.device()->height());
     CommonWidgetUtils::drawText(painter, drawTelemetryPoint, Qt::AlignBottom | Qt::AlignLeft, info, true);
 
+    //Right bottom part
+
+    QString sessinTimeStr;
 
     if (timeFormat == OSDTelemetryTimeFormat::SessionTime)
     {
@@ -203,22 +210,32 @@ void drawTelemetryOnVideo(QPainter &painter, const TelemetryDataFrame &telemetry
         int seconds = (telemetryFrame.SessionTimeMs - hoursMs - minutesMs) / 1000;
         int secondsMs = seconds * 1000;
         int mseconds = telemetryFrame.SessionTimeMs - hoursMs - minutesMs - secondsMs;
-        auto zeroChar = QLatin1Char('0');
-        QString sessinTimeStr = QString("%1:%2:%3:%4")
+        sessinTimeStr = QString("%1:%2:%3:%4")
                 .arg(hours, 2, 10,  zeroChar)
                 .arg(minutes, 2, 10,  zeroChar)
                 .arg(seconds, 2, 10,  zeroChar)
                 .arg(mseconds / 10, 2, 10, zeroChar);
-        QPoint drawSessionTimePoint(painter.device()->width() - 5, painter.device()->height());
-        CommonWidgetUtils::drawText(painter, drawSessionTimePoint, Qt::AlignBottom | Qt::AlignRight, sessinTimeStr, true);
     }
     else if (timeFormat == OSDTelemetryTimeFormat::CurrentDateTime)
     {
         QDateTime date = QDateTime::currentDateTime();
-        QString sessinTimeStr = QString("%1 FPS: %2").arg(date.toString("dd.MM.yy hh:mm:ss")).arg(telemetryFrame.VideoFPS);
-        QPoint drawSessionTimePoint(painter.device()->width() - 5, painter.device()->height());
-        CommonWidgetUtils::drawText(painter, drawSessionTimePoint, Qt::AlignBottom | Qt::AlignRight, sessinTimeStr, true);
+        sessinTimeStr = QString("%1 FPS: %2          ").arg(date.toString("dd.MM.yy hh:mm:ss")).arg(telemetryFrame.VideoFPS);
     }
+
+    info = trackedCoord.isIncorrect() ?
+                QString("TIME: %3").arg(sessinTimeStr) :
+                QString("TGT: %1\nTSPD: %2 m/s %3°\nTIME: %4")
+                .arg(objectCoordinateAsStr(trackedCoord))
+                .arg(int(telemetryFrame.CalculatedTrackedTargetSpeed), 3, 10, spaceChar)
+                .arg(int(telemetryFrame.CalculatedTrackedTargetDirection), 3, 10, spaceChar)
+                .arg(sessinTimeStr);
+
+    QFontMetrics fm = painter.fontMetrics();
+    QRect boundingRect = fm.boundingRect(QRect(0, 0, 1000, 100), Qt::TextWordWrap, info);
+
+    QPoint drawSessionTimePoint(painter.device()->width() - boundingRect.width(), painter.device()->height());
+    CommonWidgetUtils::drawText(painter, drawSessionTimePoint, Qt::AlignBottom | Qt::AlignLeft, info, true);
+
 }
 
 void drawTextInShadowRect(QPainter &painter, int centerX, int topY, const QString &text)

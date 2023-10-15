@@ -1506,238 +1506,259 @@ Speed Multiplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="104"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="59"/>
         <source>Parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="104"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="59"/>
         <source>Value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="51"/>
-        <source>UAV Roll</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="52"/>
-        <source>UAV Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="53"/>
-        <source>UAV Yaw</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="54"/>
-        <source>Latitude</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="55"/>
-        <source>Longitude</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="56"/>
-        <source>Altitude (GPS)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="57"/>
-        <source>Altitude (Barometric)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="58"/>
-        <source>Air Speed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="59"/>
-        <source>Ground Speed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="60"/>
-        <source>Course</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="61"/>
-        <source>Cam Roll</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="62"/>
-        <source>Cam Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="63"/>
-        <source>Cam Yaw</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="64"/>
-        <source>Cam Zoom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="65"/>
-        <source>Cam Roll (Encoder)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="66"/>
-        <source>Cam Pitch (Encoder)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="67"/>
-        <source>Cam Yaw (Encoder)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="70"/>
-        <source>Distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="71"/>
-        <source>Laser Temperature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="76"/>
-        <source>Target Speed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="77"/>
-        <source>Target Direction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="78"/>
-        <source>Target Latitude</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="79"/>
-        <source>Target Longitude</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="80"/>
-        <source>Target Altitude</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="81"/>
-        <source>Wind Direction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="82"/>
-        <source>Wind Speed</source>
+        <source>UAV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="83"/>
-        <source>Atmosphere Temperature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="84"/>
-        <source>Atmosphere Pressure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="85"/>
-        <source>Stabilized Center X</source>
+        <source>Target</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="86"/>
-        <source>Stabilized Center Y</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="87"/>
-        <source>Stabilized Rotation Angle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="88"/>
-        <source>Telemetry Frame</source>
+        <source>Weather</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="89"/>
-        <source>Video Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="90"/>
-        <source>Session Time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="72"/>
-        <source>Latitude (Rangefinder)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="73"/>
-        <source>Longitude (Rangefinder)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="74"/>
-        <source>Altitude (Rangefinder)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="91"/>
-        <source>Telemetry FPS</source>
+        <source>System</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="92"/>
-        <source>Video FPS</source>
+        <source>UAV Roll</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="93"/>
-        <source>Ground Level</source>
+        <source>UAV Pitch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="94"/>
-        <source>Optical System</source>
+        <source>UAV Yaw</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="95"/>
+        <source>Latitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="96"/>
-        <source>Settings</source>
-        <translation type="unfinished">الاعدادات</translation>
+        <source>Longitude</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="97"/>
-        <source>Primary Flight Display</source>
+        <source>Altitude (GPS)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="98"/>
+        <source>Altitude (Barometric)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface/DashboardWidget.cpp" line="99"/>
+        <source>Air Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="100"/>
+        <source>Ground Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="101"/>
+        <source>Course</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="104"/>
+        <source>Cam Roll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="105"/>
+        <source>Cam Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="106"/>
+        <source>Cam Yaw</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="107"/>
+        <source>Cam Zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="108"/>
+        <source>Cam Roll (Encoder)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="109"/>
+        <source>Cam Pitch (Encoder)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="110"/>
+        <source>Cam Yaw (Encoder)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="113"/>
+        <source>Distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="114"/>
+        <source>Laser Temperature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="119"/>
+        <source>Target Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="120"/>
+        <source>Target Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="121"/>
+        <source>Target Latitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="122"/>
+        <source>Target Longitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="123"/>
+        <source>Target Altitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="125"/>
+        <source>Wind Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="126"/>
+        <source>Wind Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="127"/>
+        <source>Atmosphere Temperature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="128"/>
+        <source>Atmosphere Pressure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="130"/>
+        <source>Stabilized Center X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="131"/>
+        <source>Stabilized Center Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="132"/>
+        <source>Stabilized Rotation Angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="133"/>
+        <source>Telemetry Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="134"/>
+        <source>Video Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="135"/>
+        <source>Session Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="115"/>
+        <source>Latitude (Rangefinder)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="116"/>
+        <source>Longitude (Rangefinder)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="117"/>
+        <source>Altitude (Rangefinder)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="136"/>
+        <source>Telemetry FPS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="137"/>
+        <source>Video FPS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="102"/>
+        <source>Ground Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="138"/>
+        <source>Optical System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="51"/>
+        <source>Settings</source>
+        <translation type="unfinished">الاعدادات</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="52"/>
+        <source>Primary Flight Display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="54"/>
         <source>Coord Indicator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="80"/>
         <source>Camera</source>
-        <translation type="obsolete">كامرة</translation>
+        <translation type="unfinished">كامرة</translation>
     </message>
     <message>
         <source>Telemetry</source>
@@ -1748,7 +1769,7 @@ Speed Multiplier</source>
         <translation type="obsolete">تسجيل</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="202"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="207"/>
         <source>Do you want to activate catapult?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2860,17 +2881,17 @@ Y:%6%7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Common/CommonUtils.cpp" line="406"/>
+        <location filename="../Common/CommonUtils.cpp" line="423"/>
         <source>Animus license expires in %1 day(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Common/CommonUtils.cpp" line="407"/>
+        <location filename="../Common/CommonUtils.cpp" line="424"/>
         <source>Animus license expired %1 day(s) ago.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Common/CommonUtils.cpp" line="410"/>
+        <location filename="../Common/CommonUtils.cpp" line="427"/>
         <source>Animus has unlimited license.</source>
         <translation type="unfinished"></translation>
     </message>

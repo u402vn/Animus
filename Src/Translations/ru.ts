@@ -1943,238 +1943,259 @@ Are you sure you want to update it?</source>
         <translation>Активировать катапульту</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="104"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="59"/>
         <source>Parameter</source>
         <translation>Параметр</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="104"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="59"/>
         <source>Value</source>
         <translation>Значение</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="51"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="77"/>
+        <source>UAV</source>
+        <translation>БЛА</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="83"/>
+        <source>Target</source>
+        <translation>Цель</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="86"/>
+        <source>Weather</source>
+        <translation>Погода</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="89"/>
+        <source>System</source>
+        <translation>Система</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="92"/>
         <source>UAV Roll</source>
         <translation>Крен БЛА</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="52"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="93"/>
         <source>UAV Pitch</source>
         <translation>Тангаж БЛА</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="53"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="94"/>
         <source>UAV Yaw</source>
         <translation>Рысканье БЛА</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="54"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="95"/>
         <source>Latitude</source>
         <translation>Широта</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="55"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="96"/>
         <source>Longitude</source>
         <translation>Долгота</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="56"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="97"/>
         <source>Altitude (GPS)</source>
         <translation>Высота (GPS)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="57"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="98"/>
         <source>Altitude (Barometric)</source>
         <translation>Высота (барометрическая)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="58"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="99"/>
         <source>Air Speed</source>
         <translation>Воздушная скорость</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="59"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="100"/>
         <source>Ground Speed</source>
         <translation>Наземная скорость</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="60"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="101"/>
         <source>Course</source>
         <translation>Курс</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="61"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="104"/>
         <source>Cam Roll</source>
         <translation>Крен камеры</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="62"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="105"/>
         <source>Cam Pitch</source>
         <translation>Тангаж камеры</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="63"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="106"/>
         <source>Cam Yaw</source>
         <translation>Рысканье камеры</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="64"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="107"/>
         <source>Cam Zoom</source>
         <translation>Зум камеры</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="65"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="108"/>
         <source>Cam Roll (Encoder)</source>
         <translation>Крен камеры (энкодер)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="66"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="109"/>
         <source>Cam Pitch (Encoder)</source>
         <translation>Тангаж камеры (энкодер)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="67"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="110"/>
         <source>Cam Yaw (Encoder)</source>
         <translation>Рысканье БЛА (энкодер)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="70"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="113"/>
         <source>Distance</source>
         <translation>Дистанция</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="71"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="114"/>
         <source>Laser Temperature</source>
         <translation>Температура лазера</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="76"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="119"/>
         <source>Target Speed</source>
         <translation>Скорость цели</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="77"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="120"/>
         <source>Target Direction</source>
         <translation>Направление цели</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="78"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="121"/>
         <source>Target Latitude</source>
         <translation>Широта цели</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="79"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="122"/>
         <source>Target Longitude</source>
         <translation>Долгота цели</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="80"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="123"/>
         <source>Target Altitude</source>
         <translation>Высота цели</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="81"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="125"/>
         <source>Wind Direction</source>
         <translation>Направление ветра</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="82"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="126"/>
         <source>Wind Speed</source>
         <translation>Скорость ветра</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="83"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="127"/>
         <source>Atmosphere Temperature</source>
         <translation>Температура атмосферная</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="84"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="128"/>
         <source>Atmosphere Pressure</source>
         <translation>Давление атмосферное</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="85"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="130"/>
         <source>Stabilized Center X</source>
         <translation>Стаб. центр X</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="86"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="131"/>
         <source>Stabilized Center Y</source>
         <translation>Стаб. центр Y</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="87"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="132"/>
         <source>Stabilized Rotation Angle</source>
         <translation>Стаб. угол поворота</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="88"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="133"/>
         <source>Telemetry Frame</source>
         <translation>Кадр телеметрии</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="89"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="134"/>
         <source>Video Frame</source>
         <translation>Кадр видео</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="90"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="135"/>
         <source>Session Time</source>
         <translation>Время сессии</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="72"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="115"/>
         <source>Latitude (Rangefinder)</source>
         <translation>Широта (Дальномер)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="73"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="116"/>
         <source>Longitude (Rangefinder)</source>
         <translation>Долгота (Дальномер)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="74"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="117"/>
         <source>Altitude (Rangefinder)</source>
         <translation>Высота (Дальномер)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="91"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="136"/>
         <source>Telemetry FPS</source>
         <translation>Телеметрия FPS</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="92"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="137"/>
         <source>Video FPS</source>
         <translation>Видео FPS</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="93"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="102"/>
         <source>Ground Level</source>
         <translation>Уровень земли</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="94"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="138"/>
         <source>Optical System</source>
         <translation>Оптическая система</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="96"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="51"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="97"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="52"/>
         <source>Primary Flight Display</source>
         <translation>Основной дисплей полёта</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="99"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="54"/>
         <source>Coord Indicator</source>
         <translation>Индикатор координат</translation>
     </message>
     <message>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="80"/>
         <source>Camera</source>
-        <translation type="vanished">Камера</translation>
+        <translation>Камера</translation>
     </message>
     <message>
         <source>Telemetry</source>
@@ -2185,7 +2206,7 @@ Are you sure you want to update it?</source>
         <translation type="vanished">Запись</translation>
     </message>
     <message>
-        <location filename="../UserInterface/DashboardWidget.cpp" line="202"/>
+        <location filename="../UserInterface/DashboardWidget.cpp" line="207"/>
         <source>Do you want to activate catapult?</source>
         <translation>Вы хотите активировать катапульту?</translation>
     </message>
@@ -3565,17 +3586,17 @@ Y:%6%7</translation>
         <translation>ВД</translation>
     </message>
     <message>
-        <location filename="../Common/CommonUtils.cpp" line="406"/>
+        <location filename="../Common/CommonUtils.cpp" line="423"/>
         <source>Animus license expires in %1 day(s).</source>
         <translation>Лицензия Анимуса истекает через %1 день(дней).</translation>
     </message>
     <message>
-        <location filename="../Common/CommonUtils.cpp" line="407"/>
+        <location filename="../Common/CommonUtils.cpp" line="424"/>
         <source>Animus license expired %1 day(s) ago.</source>
         <translation>Лицензия Анимуса истекла %1 день(дней) назад.</translation>
     </message>
     <message>
-        <location filename="../Common/CommonUtils.cpp" line="410"/>
+        <location filename="../Common/CommonUtils.cpp" line="427"/>
         <source>Animus has unlimited license.</source>
         <translation>Анимус имеет неограниченную лицензию.</translation>
     </message>

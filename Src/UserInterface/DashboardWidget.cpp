@@ -76,23 +76,18 @@ DashboardWidget::DashboardWidget(QWidget *parent) : QWidget(parent)
 
     auto submenuUAV = new CheckableMenu(tr("UAV"), this);
     _menu->addMenu(submenuUAV);
-    //CommonWidgetUtils::createMenuAction(tr("UAV"), _menu)->setMenu(submenuUAV);
 
     auto submenuCamera = new CheckableMenu(tr("Camera"), this);
     _menu->addMenu(submenuCamera);
-    //CommonWidgetUtils::createMenuAction(tr("Camera"), _menu)->setMenu(submenuCamera);
 
     auto submenuTarget = new CheckableMenu(tr("Target"), this);
     _menu->addMenu(submenuTarget);
-    //CommonWidgetUtils::createMenuAction(tr("Target"), _menu)->setMenu(submenuTarget);
 
     auto submenuWeather = new CheckableMenu(tr("Weather"), this);
     _menu->addMenu(submenuWeather);
-    //CommonWidgetUtils::createMenuAction(tr("Weather"), _menu)->setMenu(submenuWeather);
 
-    auto submenuSystem = new QMenu(tr("System"), this);
+    auto submenuSystem = new CheckableMenu(tr("System"), this);
     _menu->addMenu(submenuSystem);
-    //CommonWidgetUtils::createMenuAction(tr("System"), _menu)->setMenu(submenuSystem);
 
     addParameter(RowUavRoll, tr("UAV Roll"), submenuUAV);
     addParameter(RowUavPitch, tr("UAV Pitch"), submenuUAV);
