@@ -48,51 +48,6 @@ DashboardWidget::DashboardWidget(QWidget *parent) : QWidget(parent)
     connect(btnCatapultLauncher, &QPushButton::clicked, this, &DashboardWidget::onActivateCatapultClicked);
     btnCatapultLauncher->setVisible(applicationSettings.UseCatapultLauncher.value());
 
-    _paramNames[RowUavRoll] = tr("UAV Roll");
-    _paramNames[RowUavPitch] = tr("UAV Pitch");
-    _paramNames[RowUavYaw] = tr("UAV Yaw");
-    _paramNames[RowUavLatitude_GPS] = tr("Latitude");
-    _paramNames[RowUavLongitude_GPS] = tr("Longitude");
-    _paramNames[RowUavAltitude_GPS] = tr("Altitude (GPS)");
-    _paramNames[RowUavAltitude_Barometric] = tr("Altitude (Barometric)");
-    _paramNames[RowAirSpeed] = tr("Air Speed");
-    _paramNames[RowGroundSpeed_GPS] = tr("Ground Speed");
-    _paramNames[RowCourse_GPS] = tr("Course");
-    _paramNames[RowCamRoll] = tr("Cam Roll");
-    _paramNames[RowCamPitch] = tr("Cam Pitch");
-    _paramNames[RowCamYaw] = tr("Cam Yaw");
-    _paramNames[RowCamZoom] = tr("Cam Zoom");
-    _paramNames[RowCamEncoderRoll] = tr("Cam Roll (Encoder)");
-    _paramNames[RowCamEncoderPitch] = tr("Cam Pitch (Encoder)");
-    _paramNames[RowCamEncoderYaw] = tr("Cam Yaw (Encoder)");
-    if (applicationSettings.isLaserRangefinderLicensed())
-    {
-        _paramNames[RowRangefinderDistance] = tr("Distance");
-        _paramNames[RowRangefinderTemperature] = tr("Laser Temperature");
-        _paramNames[RowCalculatedRangefinderGPSLat] = tr("Latitude (Rangefinder)");
-        _paramNames[RowCalculatedRangefinderGPSLon] = tr("Longitude (Rangefinder)");
-        _paramNames[RowCalculatedRangefinderGPSHmsl] = tr("Altitude (Rangefinder)");
-    }
-    _paramNames[RowCalculatedTrackedTargetSpeed] = tr("Target Speed");
-    _paramNames[RowCalculatedTrackedTargetDirection] = tr("Target Direction");
-    _paramNames[RowCalculatedTrackedTargetGPSLat] = tr("Target Latitude");
-    _paramNames[RowCalculatedTrackedTargetGPSLon] = tr("Target Longitude");
-    _paramNames[RowCalculatedTrackedTargetGPSHmsl] = tr("Target Altitude");
-    _paramNames[RowWindDirection] = tr("Wind Direction");
-    _paramNames[RowWindSpeed] = tr("Wind Speed");
-    _paramNames[RowAtmosphereTemperature] = tr("Atmosphere Temperature");
-    _paramNames[RowAtmospherePressure] = tr("Atmosphere Pressure");
-    _paramNames[RowStabilizedCenterX] = tr("Stabilized Center X");
-    _paramNames[RowStabilizedCenterY] = tr("Stabilized Center Y");
-    _paramNames[RowStabilizedRotationAngle] = tr("Stabilized Rotation Angle");
-    _paramNames[RowTelemetryFrameNumber] = tr("Telemetry Frame");
-    _paramNames[RowVideoFrameNumber] = tr("Video Frame");
-    _paramNames[RowSessionTime] = tr("Session Time");
-    _paramNames[RowTelemetryFPS] = tr("Telemetry FPS");
-    _paramNames[RowVideoFPS] = tr("Video FPS");
-    _paramNames[RowCalculatedGroundLevel] = tr("Ground Level");
-    _paramNames[RowOpticalSystem] = tr("Optical System");
-
     _menu = new CheckableMenu(tr("Settings"), this);
     auto action = CommonWidgetUtils::createCheckableMenuSingleAction(tr("Primary Flight Display"), true, _menu);
     action->setData(PrimaryFlightDisplayActionId);
@@ -119,20 +74,75 @@ DashboardWidget::DashboardWidget(QWidget *parent) : QWidget(parent)
     connect(_telemetryTable, &QTableWidget::customContextMenuRequested, this, &DashboardWidget::onTelemetryTableContextMenuRequested, Qt::DirectConnection);
     connect(_PFD, &PFD::customContextMenuRequested, this, &DashboardWidget::onTelemetryTableContextMenuRequested, Qt::DirectConnection);
 
-    QMapIterator<TelemetryTableRow, QString> paramName(_paramNames);
-    while (paramName.hasNext())
-    {
-        paramName.next();
-        TelemetryTableRow tableRow = paramName.key();
-        QString paramName = _paramNames[tableRow];
-        _telemetryTable->setItem(tableRow, 0, new QTableWidgetItem(paramName));
-        auto item = new QTableWidgetItem("");
-        item->setTextAlignment(Qt::AlignRight);
-        _telemetryTable->setItem(tableRow, 1, item);
+    auto submenuUAV = new CheckableMenu(tr("UAV"), this);
+    _menu->addMenu(submenuUAV);
+    //CommonWidgetUtils::createMenuAction(tr("UAV"), _menu)->setMenu(submenuUAV);
 
-        auto action = CommonWidgetUtils::createCheckableMenuSingleAction(paramName, true, _menu);
-        action->setData(tableRow);
+    auto submenuCamera = new CheckableMenu(tr("Camera"), this);
+    _menu->addMenu(submenuCamera);
+    //CommonWidgetUtils::createMenuAction(tr("Camera"), _menu)->setMenu(submenuCamera);
+
+    auto submenuTarget = new CheckableMenu(tr("Target"), this);
+    _menu->addMenu(submenuTarget);
+    //CommonWidgetUtils::createMenuAction(tr("Target"), _menu)->setMenu(submenuTarget);
+
+    auto submenuWeather = new CheckableMenu(tr("Weather"), this);
+    _menu->addMenu(submenuWeather);
+    //CommonWidgetUtils::createMenuAction(tr("Weather"), _menu)->setMenu(submenuWeather);
+
+    auto submenuSystem = new QMenu(tr("System"), this);
+    _menu->addMenu(submenuSystem);
+    //CommonWidgetUtils::createMenuAction(tr("System"), _menu)->setMenu(submenuSystem);
+
+    addParameter(RowUavRoll, tr("UAV Roll"), submenuUAV);
+    addParameter(RowUavPitch, tr("UAV Pitch"), submenuUAV);
+    addParameter(RowUavYaw, tr("UAV Yaw"), submenuUAV);
+    addParameter(RowUavLatitude_GPS, tr("Latitude"), submenuUAV);
+    addParameter(RowUavLongitude_GPS, tr("Longitude"), submenuUAV);
+    addParameter(RowUavAltitude_GPS, tr("Altitude (GPS)"), submenuUAV);
+    addParameter(RowUavAltitude_Barometric, tr("Altitude (Barometric)"), submenuUAV);
+    addParameter(RowAirSpeed, tr("Air Speed"), submenuUAV);
+    addParameter(RowGroundSpeed_GPS, tr("Ground Speed"), submenuUAV);
+    addParameter(RowCourse_GPS, tr("Course"), submenuUAV);
+    addParameter(RowCalculatedGroundLevel, tr("Ground Level"), submenuUAV);
+
+    addParameter(RowCamRoll, tr("Cam Roll"), submenuCamera);
+    addParameter(RowCamPitch, tr("Cam Pitch"), submenuCamera);
+    addParameter(RowCamYaw, tr("Cam Yaw"), submenuCamera);
+    addParameter(RowCamZoom, tr("Cam Zoom"), submenuCamera);
+    addParameter(RowCamEncoderRoll, tr("Cam Roll (Encoder)"), submenuCamera);
+    addParameter(RowCamEncoderPitch, tr("Cam Pitch (Encoder)"), submenuCamera);
+    addParameter(RowCamEncoderYaw, tr("Cam Yaw (Encoder)"), submenuCamera);
+    if (applicationSettings.isLaserRangefinderLicensed())
+    {
+        addParameter(RowRangefinderDistance, tr("Distance"), submenuCamera);
+        addParameter(RowRangefinderTemperature, tr("Laser Temperature"), submenuCamera);
+        addParameter(RowCalculatedRangefinderGPSLat, tr("Latitude (Rangefinder)"), submenuCamera);
+        addParameter(RowCalculatedRangefinderGPSLon, tr("Longitude (Rangefinder)"), submenuCamera);
+        addParameter(RowCalculatedRangefinderGPSHmsl, tr("Altitude (Rangefinder)"), submenuCamera);
     }
+    addParameter(RowCalculatedTrackedTargetSpeed, tr("Target Speed"), submenuTarget);
+    addParameter(RowCalculatedTrackedTargetDirection, tr("Target Direction"), submenuTarget);
+    addParameter(RowCalculatedTrackedTargetGPSLat, tr("Target Latitude"), submenuTarget);
+    addParameter(RowCalculatedTrackedTargetGPSLon, tr("Target Longitude"), submenuTarget);
+    addParameter(RowCalculatedTrackedTargetGPSHmsl, tr("Target Altitude"), submenuTarget);
+
+    addParameter(RowWindDirection, tr("Wind Direction"), submenuWeather);
+    addParameter(RowWindSpeed, tr("Wind Speed"), submenuWeather);
+    addParameter(RowAtmosphereTemperature, tr("Atmosphere Temperature"), submenuWeather);
+    addParameter(RowAtmospherePressure, tr("Atmosphere Pressure"), submenuWeather);
+
+    addParameter(RowStabilizedCenterX, tr("Stabilized Center X"), submenuSystem);
+    addParameter(RowStabilizedCenterY, tr("Stabilized Center Y"), submenuSystem);
+    addParameter(RowStabilizedRotationAngle, tr("Stabilized Rotation Angle"), submenuSystem);
+    addParameter(RowTelemetryFrameNumber, tr("Telemetry Frame"), submenuSystem);
+    addParameter(RowVideoFrameNumber, tr("Video Frame"), submenuSystem);
+    addParameter(RowSessionTime, tr("Session Time"), submenuSystem);
+    addParameter(RowTelemetryFPS, tr("Telemetry FPS"), submenuSystem);
+    addParameter(RowVideoFPS, tr("Video FPS"), submenuSystem);
+    addParameter(RowOpticalSystem, tr("Optical System"), submenuSystem);
+
+
     _telemetryTable->resizeColumnsToContents();
     updateItemsVisibility();
 
@@ -210,7 +220,7 @@ void DashboardWidget::onTelemetryTableContextMenuRequested(const QPoint &pos)
 
     auto visibleRowsStr = applicationSettings.VisibleTelemetryTableRows.value().split(",", QString::SkipEmptyParts);
 
-    foreach (auto action, _menu->actions())
+    foreach (auto action, _checkableItems)
     {
         auto actionRowStr = action->data().toString();
         action->setChecked(visibleRowsStr.contains(actionRowStr));
@@ -219,7 +229,7 @@ void DashboardWidget::onTelemetryTableContextMenuRequested(const QPoint &pos)
     _menu->exec(_telemetryTable->mapToGlobal(pos));
 
     visibleRowsStr.clear();
-    foreach (auto action, _menu->actions())
+    foreach (auto action, _checkableItems)
         if (action->isCheckable())
         {
             if (action->isChecked())
@@ -246,4 +256,20 @@ void DashboardWidget::updateItemsVisibility()
 
     _PFD->setVisible(visibleRowsStr.contains(PrimaryFlightDisplayActionId));
     _coordIndicator->setVisible(visibleRowsStr.contains(CoordIndicatorDisplayActionId));
+}
+
+void DashboardWidget::addParameter(DashboardWidget::TelemetryTableRow tableRow, const QString &name, QMenu *menu)
+{
+    auto itemName = new QTableWidgetItem(name);
+    itemName->setToolTip(name);
+    _telemetryTable->setItem(tableRow, 0, itemName);
+
+    auto itemValue = new QTableWidgetItem("");
+    itemValue->setTextAlignment(Qt::AlignRight);
+    _telemetryTable->setItem(tableRow, 1, itemValue);
+
+    auto action = CommonWidgetUtils::createCheckableMenuSingleAction(name, true, menu);
+    action->setData(tableRow);
+
+    _checkableItems.append(action);
 }

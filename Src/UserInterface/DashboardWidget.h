@@ -8,6 +8,7 @@
 #include <QLineEdit>
 #include <QMap>
 #include <QString>
+#include <QList>
 #include "GPSCoordIndicator.h"
 #include "UserInterface/PFD.h"
 
@@ -40,11 +41,13 @@ class DashboardWidget final: public QWidget
                             RowLast
                            };
 
-    QMap<TelemetryTableRow, QString> _paramNames;
+    QList<QAction*> _checkableItems;
 
     void setTelemetryTableRowDouble(int rowId, double value, int precision);
     void setTelemetryTableRowDoubleOrIncorrect(int rowId, double value, int precision, double incorrectValue);
     void updateItemsVisibility();
+
+    void addParameter(TelemetryTableRow tableRow, const QString &name, QMenu *menu);
 public:
     explicit DashboardWidget(QWidget *parent);
     void processTelemetry(const TelemetryDataFrame &telemetryDataFrame);
