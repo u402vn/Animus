@@ -19,6 +19,7 @@ public:
     void saveSettings();
 private slots:
     void onImportThesauruasFromXMLCicked();
+    void onCleanupMarkerThesaurusCicked();
     void onEditArealObjectsCicked();
 };
 

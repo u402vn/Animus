@@ -155,7 +155,7 @@ MarkerTemplateEditor::MarkerTemplateEditor(QWidget *parent, const QString &marke
 
     MarkerThesaurus& markerThesaurus = MarkerThesaurus::Instance();
     _markerTemplate = markerGUID != "" ? markerThesaurus.getMarkerTemplateByGUID(markerGUID) : nullptr ;
-    _parentTemplate = markerGUID != "" ? markerThesaurus.getMarkerTemplateByGUID(parentGUID) : nullptr ;
+    _parentTemplate = parentGUID != "" ? markerThesaurus.getMarkerTemplateByGUID(parentGUID) : nullptr ;
 
     initWidgets();
     fillControls();

@@ -13,10 +13,13 @@ class MarkerTemplateTreeWidget final : public QTreeWidget
 
     MarkerTemplate *getItemTemplate(QTreeWidgetItem *item);
     void openMarkerTemplateEditor(QTreeWidgetItem *item);
-    void openNewMarkerTemplateEditor(QTreeWidgetItem *item, bool child);
+    void openNewMarkerTemplateEditor(QTreeWidgetItem *item);
 protected:
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseDoubleClickEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void dragEnterEvent(QDragEnterEvent *event) Q_DECL_OVERRIDE;
+    void dragMoveEvent(QDragMoveEvent *event) Q_DECL_OVERRIDE;
+    void dropEvent(QDropEvent *event) Q_DECL_OVERRIDE;
 public:
     void initItem(QTreeWidgetItem *item, MarkerTemplate *markerTemplate);
     explicit MarkerTemplateTreeWidget(QWidget *parent);

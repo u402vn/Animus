@@ -6,14 +6,18 @@
 #include <QMouseEvent>
 #include <QMenu>
 #include <QDrag>
+#include "EnterProc.h"
 #include "Common/CommonWidgets.h"
 #include "UserInterface/Forms/MarkerTemplateEditor.h"
 
 //http://blog.kislenko.net/show.php?id=1509
 //http://stackoverflow.com/questions/12316309/how-to-set-an-image-for-a-row
 
+const QString EmptyGUID = QString("");
+
 MarkerListWidget::MarkerListWidget(QWidget *parent) : QWidget(parent)
 {
+    EnterProc("MarkerListWidget::MarkerListWidget");
     auto verticalWindowLayout = new QVBoxLayout(this);
     verticalWindowLayout->setMargin(0);
     verticalWindowLayout->setSpacing(0);
@@ -35,6 +39,7 @@ MarkerListWidget::MarkerListWidget(QWidget *parent) : QWidget(parent)
 
 void MarkerListWidget::addMarkerTemplateToList(MarkerTemplate *markerTemplate, QTreeWidgetItem * parentItem)
 {
+    EnterProc("MarkerListWidget::addMarkerTemplateToList");
     auto newItem = new QTreeWidgetItem;
 
     if (parentItem == nullptr)
@@ -51,6 +56,7 @@ void MarkerListWidget::addMarkerTemplateToList(MarkerTemplate *markerTemplate, Q
 
 void MarkerListWidget::loadMarkerThesaurus()
 {
+    EnterProc("MarkerListWidget::loadMarkerThesaurus");
     MarkerThesaurus& markerThesaurus = MarkerThesaurus::Instance();
     _markerTree->clear();
     auto markerTemplates = *(markerThesaurus.getMarkerTemplates());
@@ -96,25 +102,29 @@ MarkerTemplate *MarkerTemplateTreeWidget::getItemTemplate(QTreeWidgetItem *item)
 
 void MarkerTemplateTreeWidget::mousePressEvent(QMouseEvent *event)
 {
+    EnterProc("MarkerListWidget::mousePressEvent");
     QTreeWidget::mousePressEvent(event);
 
     if (event->button() == Qt::RightButton)
     {
+        auto item = this->itemAt(event->pos());
+
         auto menu = new QMenu(this);
-        auto acAddMarker = CommonWidgetUtils::createMenuAction(tr("Add Marker"), menu);
+        auto acAddMarker = CommonWidgetUtils::createMenuAction(tr("Add item"), menu);
         connect(acAddMarker, &QAction::triggered, this, [=]()
         {
-            auto item = this->itemAt(event->pos());
-            auto markerTemplate = getItemTemplate(item);
-            MarkerTemplateEditor *editor;
-            if (markerTemplate == nullptr)
-                editor = new MarkerTemplateEditor(this, "", "");
-            else
-                editor = new MarkerTemplateEditor(this, "", markerTemplate->GUID());
-            editor->showNormal();
+            openNewMarkerTemplateEditor(item);
         });
 
-        auto item = this->itemAt(event->pos());
+        if (item != nullptr)
+        {
+            auto acAddMarker = CommonWidgetUtils::createMenuAction(tr("Add child item"), menu);
+            connect(acAddMarker, &QAction::triggered, this, [=]()
+            {
+                openNewMarkerTemplateEditor(item->parent());
+            });
+        }
+
         auto markerTemplate = getItemTemplate(item);
         if (markerTemplate != nullptr)
         {
@@ -148,8 +158,77 @@ void MarkerTemplateTreeWidget::mousePressEvent(QMouseEvent *event)
 
 void MarkerTemplateTreeWidget::mouseDoubleClickEvent(QMouseEvent *event)
 {
+    EnterProc("MarkerListWidget::mouseDoubleClickEvent");
     auto item = this->itemAt(event->pos());
     openMarkerTemplateEditor(item);
+}
+
+void MarkerTemplateTreeWidget::dragEnterEvent(QDragEnterEvent *event)
+{
+    if (event->mimeData()->hasFormat(MarkerTemplateMIMEFormat))
+    {
+        event->acceptProposedAction();
+    }
+    else
+    {
+        event->ignore();
+    }
+}
+
+void MarkerTemplateTreeWidget::dragMoveEvent(QDragMoveEvent *event)
+{
+    if (event->mimeData()->hasFormat(MarkerTemplateMIMEFormat))
+    {
+        event->acceptProposedAction();
+    }
+    else
+    {
+        event->ignore();
+    }
+}
+
+void MarkerTemplateTreeWidget::dropEvent(QDropEvent *event)
+{
+    EnterProc("MapGraphicsView::dropEvent");
+
+    if (event->mimeData()->hasFormat(MarkerTemplateMIMEFormat))
+    {
+        auto destItem = this->itemAt(event->pos());
+        auto destMarkerTemplate = getItemTemplate(destItem);
+
+
+        QByteArray itemData = event->mimeData()->data(MarkerTemplateMIMEFormat);
+        QDataStream dataStream(&itemData, QIODevice::ReadOnly);
+        QString markerTemplateGUID;
+        dataStream >> markerTemplateGUID;
+
+        if (destMarkerTemplate->GUID() == markerTemplateGUID)
+        {
+            QTreeWidget::dropEvent(event);
+            return;
+        }
+
+
+        return; //???
+
+        QMessageBox msgBox;
+        msgBox.setText(tr("Confirm?"));
+        QAbstractButton* pButtonYes = msgBox.addButton(tr("Yeah 1!"), QMessageBox::YesRole);
+        QAbstractButton* pButtonYes2 = msgBox.addButton(tr("Yeah 2!"), QMessageBox::YesRole);
+        msgBox.addButton(tr("Nope"), QMessageBox::NoRole);
+        msgBox.exec();
+
+        if (msgBox.clickedButton() == pButtonYes)
+        {
+
+            //Execute command
+        }
+
+        //QPointF posOnScene = this->mapToScene(event->pos());
+
+
+    }
+    //QTreeWidget::dropEvent(event);
 }
 
 void MarkerTemplateTreeWidget::initItem(QTreeWidgetItem *item, MarkerTemplate *markerTemplate)
@@ -162,6 +241,7 @@ void MarkerTemplateTreeWidget::initItem(QTreeWidgetItem *item, MarkerTemplate *m
 
 void MarkerTemplateTreeWidget::openMarkerTemplateEditor(QTreeWidgetItem *item)
 {
+    EnterProc("MarkerListWidget::openMarkerTemplateEditor");
     auto markerTemplate = getItemTemplate(item);
     if (markerTemplate != nullptr)
     {
@@ -181,14 +261,22 @@ void MarkerTemplateTreeWidget::openMarkerTemplateEditor(QTreeWidgetItem *item)
 
 
 
-void MarkerTemplateTreeWidget::openNewMarkerTemplateEditor(QTreeWidgetItem *item, bool child)
-{
-
+void MarkerTemplateTreeWidget::openNewMarkerTemplateEditor(QTreeWidgetItem *item)
+{    
+    EnterProc("MarkerListWidget::openNewMarkerTemplateEditor");
+    auto markerTemplate = getItemTemplate(item);
+    MarkerTemplateEditor *editor;
+    if (markerTemplate == nullptr)
+        editor = new MarkerTemplateEditor(this, EmptyGUID, EmptyGUID);
+    else
+        editor = new MarkerTemplateEditor(this, EmptyGUID, markerTemplate->GUID());
+    editor->showNormal();
 }
 
 
 
 MarkerTemplateTreeWidget::MarkerTemplateTreeWidget(QWidget *parent) : QTreeWidget(parent)
 {
-
+    this->setDragDropMode(QAbstractItemView::InternalMove);
+    //this->setAcceptDrops(true);
 }

@@ -2696,23 +2696,48 @@ Y:%6%7</source>
 <context>
     <name>MarkerTemplateTreeWidget</name>
     <message>
-        <location filename="../UserInterface/MarkerListWidget.cpp" line="104"/>
-        <source>Add Marker</source>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="113"/>
+        <source>Add item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/MarkerListWidget.cpp" line="123"/>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="121"/>
+        <source>Add child item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="133"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/MarkerListWidget.cpp" line="130"/>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="140"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/MarkerListWidget.cpp" line="134"/>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="144"/>
         <source>Do you wnt to remove marker template &apos;%1&apos;?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="213"/>
+        <source>Confirm?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="214"/>
+        <source>Yeah 1!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="215"/>
+        <source>Yeah 2!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/MarkerListWidget.cpp" line="216"/>
+        <source>Nope</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2724,8 +2749,8 @@ Y:%6%7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Map/MarkerThesaurus.cpp" line="286"/>
-        <location filename="../Map/MarkerThesaurus.cpp" line="290"/>
+        <location filename="../Map/MarkerThesaurus.cpp" line="289"/>
+        <location filename="../Map/MarkerThesaurus.cpp" line="293"/>
         <source>Target</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2733,66 +2758,76 @@ Y:%6%7</source>
 <context>
     <name>MarkersSettingsEditor</name>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="21"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="24"/>
         <source>Marker Thesaurus</source>
         <translation type="unfinished">Marker Thesaurus</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="21"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="24"/>
         <source>Select Marker Thesaurus File</source>
         <translation type="unfinished">Select Marker Thesaurus File</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="21"/>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="27"/>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="40"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="24"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="32"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="48"/>
         <source>Database Files (*.db)</source>
         <translation type="unfinished">Database Files (*.db)</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="23"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="26"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="24"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="27"/>
         <source>Import Thesaurus From XML File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="27"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="29"/>
+        <source>Clean up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="32"/>
         <source>Marker Storage</source>
         <translation type="unfinished">Marker Storage</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="27"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="32"/>
         <source>Select Marker Storage File</source>
         <translation type="unfinished">Select Marker Storage File</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="40"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="48"/>
         <source>Areal Object Database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="40"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="48"/>
         <source>Select Areal Object Database File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="41"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="50"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="68"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="78"/>
         <source>Open Thesaurus XML File for import</source>
         <translation type="unfinished">Open Thesaurus XML File for import</translation>
     </message>
     <message>
-        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="68"/>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="78"/>
         <source>XML Files (*.xml)</source>
         <translation type="unfinished">XML Files (*.xml)</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/ApplicationSettingsEditor/MarkersSettingsEditor.cpp" line="87"/>
+        <source>Do you want to clean up the thesaurus and remove obsolete marker templates?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
