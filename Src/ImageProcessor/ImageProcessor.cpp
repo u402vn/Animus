@@ -151,10 +151,23 @@ void ImageProcessorThread::run()
             if (_imageTracker != nullptr)
             {
                 QRect targetRect = _imageTracker->processFrame(frameMat, frameShift);
-                telemetryFrame.TrackedTargetCenterX = targetRect.center().x();
-                telemetryFrame.TrackedTargetCenterY = targetRect.center().y();
-                telemetryFrame.TrackedTargetRectWidth = targetRect.width();
-                telemetryFrame.TrackedTargetRectHeight = targetRect.height();
+
+                telemetryFrame.TrackedTargetState = targetRect.width() > 0 ? 1 : 0;
+
+                if (telemetryFrame.TrackedTargetState > 0)
+                {
+                    telemetryFrame.TrackedTargetCenterX = targetRect.center().x();
+                    telemetryFrame.TrackedTargetCenterY = targetRect.center().y();
+                    telemetryFrame.TrackedTargetRectWidth = targetRect.width();
+                    telemetryFrame.TrackedTargetRectHeight = targetRect.height();
+                }
+                else
+                {
+                    telemetryFrame.TrackedTargetCenterX = 0;
+                    telemetryFrame.TrackedTargetCenterY = 0;
+                    telemetryFrame.TrackedTargetRectWidth = 0;
+                    telemetryFrame.TrackedTargetRectHeight = 0;
+                }
             }
 
             if ((_stabilizationType == StabilizationType::StabilizationByTarget) && telemetryFrame.targetIsVisible())
@@ -169,7 +182,6 @@ void ImageProcessorThread::run()
                 telemetryFrame.StabilizedCenterY = frameMat.rows / 2 + correctionFrameShift.Y;
                 telemetryFrame.StabilizedRotationAngle = correctionFrameShift.A;
             }
-
         }
         emit dataProcessedInThread(telemetryFrame, videoFrame);
     }

@@ -122,6 +122,12 @@ DashboardWidget::DashboardWidget(QWidget *parent) : QWidget(parent)
     addParameter(RowCalculatedTrackedTargetGPSLon, tr("Target Longitude"), submenuTarget);
     addParameter(RowCalculatedTrackedTargetGPSHmsl, tr("Target Altitude"), submenuTarget);
 
+    addParameter(RowTrackedTargetCenterX, tr("Target Center X"), submenuTarget);
+    addParameter(RowTrackedTargetCenterY, tr("Target Center Y"), submenuTarget);
+    addParameter(RowTrackedTargetRectWidth, tr("Target Rectangle Width"), submenuTarget);
+    addParameter(RowTrackedTargetRectHeight, tr("Target Rectangle Height"), submenuTarget);
+    addParameter(RowTrackedTargetState, tr("Target State"), submenuTarget);
+
     addParameter(RowWindDirection, tr("Wind Direction"), submenuWeather);
     addParameter(RowWindSpeed, tr("Wind Speed"), submenuWeather);
     addParameter(RowAtmosphereTemperature, tr("Atmosphere Temperature"), submenuWeather);
@@ -198,6 +204,11 @@ void DashboardWidget::processTelemetry(const TelemetryDataFrame &telemetryDataFr
     setTelemetryTableRowDouble(RowCalculatedTrackedTargetGPSLat, telemetryDataFrame.CalculatedTrackedTargetGPSLat, 0);
     setTelemetryTableRowDouble(RowCalculatedTrackedTargetGPSLon, telemetryDataFrame.CalculatedTrackedTargetGPSLon, 0);
     setTelemetryTableRowDouble(RowCalculatedTrackedTargetGPSHmsl, telemetryDataFrame.CalculatedTrackedTargetGPSHmsl, 0);
+    setTelemetryTableRowDouble(RowTrackedTargetCenterX, telemetryDataFrame.TrackedTargetCenterX, 0);
+    setTelemetryTableRowDouble(RowTrackedTargetCenterY, telemetryDataFrame.TrackedTargetCenterY, 0);
+    setTelemetryTableRowDouble(RowTrackedTargetRectWidth, telemetryDataFrame.TrackedTargetRectWidth, 0);
+    setTelemetryTableRowDouble(RowTrackedTargetRectHeight, telemetryDataFrame.TrackedTargetRectHeight, 0);
+    setTelemetryTableRowDouble(RowTrackedTargetState, telemetryDataFrame.TrackedTargetState, 0);
     setTelemetryTableRowDouble(RowCalculatedGroundLevel, telemetryDataFrame.CalculatedGroundLevel, 1);
     setTelemetryTableRowDouble(RowOpticalSystem, telemetryDataFrame.OpticalSystemId, 0);
 }

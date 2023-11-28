@@ -37,6 +37,8 @@ class DashboardWidget final: public QWidget
                             RowVideoFPS, RowTelemetryFPS,
                             RowCalculatedTrackedTargetSpeed, RowCalculatedTrackedTargetDirection,
                             RowCalculatedTrackedTargetGPSLat, RowCalculatedTrackedTargetGPSLon, RowCalculatedTrackedTargetGPSHmsl,
+                            RowTrackedTargetCenterX, RowTrackedTargetCenterY, RowTrackedTargetRectWidth, RowTrackedTargetRectHeight,
+                            RowTrackedTargetState,
                             //insert items before this line. Don't change the order of the items
                             RowLast
                            };

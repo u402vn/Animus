@@ -22,6 +22,7 @@ public:
     static const QMap<int, QString> ApplicationLanguageCaptions();
     static const QMap<int, QString> ApplicationStyleCaptions();
     static const QMap<int, QString> CameraControlModeCaptions();
+    static const QMap<int, QString> PhisycalLensCountCaptions();
     static const QMap<int, QString> StabilizationTypeCaptions();
     static const QMap<int, QString> OSDScreenCenterMarkCaptions();
     static const QMap<int, QString> VideoFrameTrafficSourceCaptions();

@@ -125,6 +125,17 @@ const QMap<int, QString> ConstantNames::CameraControlModeCaptions()
 }
 
 
+const QMap<int, QString> ConstantNames::PhisycalLensCountCaptions()
+{
+    static const QMap <int, QString> mapCameraControlModeCaptions {
+        { 1, tr("Number of lens: 1") },
+        { 2, tr("Number of lens: 2") },
+        { 3, tr("Number of lens: 3") }
+    };
+    return mapCameraControlModeCaptions;
+}
+
+
 const QMap<int, QString> ConstantNames::StabilizationTypeCaptions()
 {
     static const QMap <int, QString> mapStabilizationTypeCaptions {
