@@ -117,7 +117,7 @@ enum HIDButton
     hidbtnChangeVideo2Map,
     hidbtnSelectSessions,
     hidbtnChangeActiveCam,
-    hidbtnEnableSoftwareStabilization,
+    hidbtnEnableSoftwareStab,
     hidbtnDriversOff,
     hidbtnFixedPosLanding,
     hidbtnFixedPosBegining,

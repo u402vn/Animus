@@ -39,6 +39,7 @@ class HIDController : public QObject
     CameraControlModes _controlMode;
 
     QList<HIDMapItem*> _HIDMap;
+    QList<HIDMapItem*> _forcedKeyboardHIDMapItems;
 
     quint32 _camZoomMin, _camZoomMax, _camZoom;
     qreal _prevJoystickZoom;
@@ -54,7 +55,8 @@ class HIDController : public QObject
     QTimer *_joystickFreqTimer;
     quint32 _joystickEventNumber, _joystickEventsCount;
 
-    void makeHIDMapItem(HIDButton prefIndex, void(HIDController::*onPressMethod)(), void(HIDController::*onReleaseMethod)(), bool processAutoRepeatKey);
+    HIDMapItem *makeHIDMapItem(HIDButton prefIndex, void(HIDController::*onPressMethod)(), void(HIDController::*onReleaseMethod)(),
+                               bool processAutoRepeatKey, bool forceUseKeyboard = false);
 
     bool processKeyboard(QKeyEvent *keyEvent, QObject *senderObj);
 
@@ -98,7 +100,7 @@ signals:
     void onSelectSessionsClicked();
 
     void onChangeActiveCamClicked();
-    void onEnableSoftwareStabilizationClicked();
+    void onEnableSoftwareStabClicked();
 
     void onCamDriversOffClicked();
     void onCamLandingPosClicked();

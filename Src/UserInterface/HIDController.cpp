@@ -61,53 +61,53 @@ HIDController::HIDController(QObject *parent) : QObject(parent)
     _joystickFreqTimer->start(1000);
 
 
-    makeHIDMapItem(hidbtnCamZoomIn,          &HIDController::processCamZoomUp,                     nullptr, true);
-    makeHIDMapItem(hidbtnCamZoomOut,         &HIDController::processCamZoomDown,                   nullptr, true);
-    makeHIDMapItem(hidbtnCamPitchUp,         &HIDController::processPitchUpPress,               &HIDController::processPitchUpRelease,   processAutoRepeatKeyForCamMoving);
-    makeHIDMapItem(hidbtnCamPitchDown,       &HIDController::processPitchDownPress,             &HIDController::processPitchDownRelease, processAutoRepeatKeyForCamMoving);
-    makeHIDMapItem(hidbtnCamRollUp,          &HIDController::processRollUpPress,                &HIDController::processRollUpRelease,    processAutoRepeatKeyForCamMoving);
-    makeHIDMapItem(hidbtnCamRollDown,        &HIDController::processRollDownPress,              &HIDController::processRollDownRelease,  processAutoRepeatKeyForCamMoving);
+    makeHIDMapItem(hidbtnCamZoomIn,          &HIDController::processCamZoomUp,                      nullptr, true);
+    makeHIDMapItem(hidbtnCamZoomOut,         &HIDController::processCamZoomDown,                    nullptr, true);
+    makeHIDMapItem(hidbtnCamPitchUp,         &HIDController::processPitchUpPress,                   &HIDController::processPitchUpRelease,   processAutoRepeatKeyForCamMoving);
+    makeHIDMapItem(hidbtnCamPitchDown,       &HIDController::processPitchDownPress,                 &HIDController::processPitchDownRelease, processAutoRepeatKeyForCamMoving);
+    makeHIDMapItem(hidbtnCamRollUp,          &HIDController::processRollUpPress,                    &HIDController::processRollUpRelease,    processAutoRepeatKeyForCamMoving);
+    makeHIDMapItem(hidbtnCamRollDown,        &HIDController::processRollDownPress,                  &HIDController::processRollDownRelease,  processAutoRepeatKeyForCamMoving);
 
-    makeHIDMapItem(hidbtnMapZoomIn,          &HIDController::onMapZoomInClicked,                nullptr, true);
-    makeHIDMapItem(hidbtnMapZoomOut,         &HIDController::onMapZoomOutClicked,               nullptr, true);
-    makeHIDMapItem(hidbtnFollowThePlane,     &HIDController::onFollowThePlaneClicked,           nullptr, false);
+    makeHIDMapItem(hidbtnMapZoomIn,          &HIDController::onMapZoomInClicked,                    nullptr, true);
+    makeHIDMapItem(hidbtnMapZoomOut,         &HIDController::onMapZoomOutClicked,                   nullptr, true);
+    makeHIDMapItem(hidbtnFollowThePlane,     &HIDController::onFollowThePlaneClicked,               nullptr, false);
 
-    makeHIDMapItem(hidbtnSettingsEditor,     &HIDController::onOpenApplicationSettingsEditorClicked,   nullptr, false);
-    makeHIDMapItem(hidbtnDataConsole,        &HIDController::onOpenDataConsoleClicked,          nullptr, false);
-    makeHIDMapItem(hidbtnEmulatorConsole,    &HIDController::onOpenEmulatorConsoleClicked,      nullptr, false);
-    makeHIDMapItem(hidbtnHelpViewer,         &HIDController::onOpenHelpViewerClicked,           nullptr, false);
-    makeHIDMapItem(hidbtnChangeVideo2Map,    &HIDController::onChangeVideo2MapClicked,          nullptr, false);
-    makeHIDMapItem(hidbtnNewSession,         &HIDController::onForceStartNewSessionClicked,     nullptr, false);
-    makeHIDMapItem(hidbtnSelectSessions,     &HIDController::onSelectSessionsClicked,           nullptr, false);
-    makeHIDMapItem(hidbtnDisplayOnly,        &HIDController::onForceDisplayOnlyClicked,         nullptr, false);
-    makeHIDMapItem(hidbtnChangeActiveCam,    &HIDController::onChangeActiveCamClicked,          nullptr, false);
-    makeHIDMapItem(hidbtnEnableSoftwareStabilization,    &HIDController::onEnableSoftwareStabilizationClicked,          nullptr, false);
-    makeHIDMapItem(hidbtnDriversOff,         &HIDController::onCamDriversOffClicked,            nullptr, false);
-    makeHIDMapItem(hidbtnFixedPosLanding,    &HIDController::onCamLandingPosClicked,            nullptr, false);
-    makeHIDMapItem(hidbtnFixedPosBegining,   &HIDController::onCamBeginingPosClicked,           nullptr, false);
-    makeHIDMapItem(hidbtnFixedPosVertical,   &HIDController::onCamVerticalPosClicked,           nullptr, false);
-    makeHIDMapItem(hidbtnColorModeUp,        &HIDController::onColorModeUpClicked,              nullptr, false);
-    makeHIDMapItem(hidbtnColorModeDown,      &HIDController::onColorModeDownClicked,            nullptr, false);
-    makeHIDMapItem(hidbtnLaserActivation,    &HIDController::onLaserActivationClicked,          nullptr, false);
+    makeHIDMapItem(hidbtnSettingsEditor,     &HIDController::onOpenApplicationSettingsEditorClicked,nullptr, false, true);
+    makeHIDMapItem(hidbtnDataConsole,        &HIDController::onOpenDataConsoleClicked,              nullptr, false, true);
+    makeHIDMapItem(hidbtnEmulatorConsole,    &HIDController::onOpenEmulatorConsoleClicked,          nullptr, false, true);
+    makeHIDMapItem(hidbtnHelpViewer,         &HIDController::onOpenHelpViewerClicked,               nullptr, false, true);
+    makeHIDMapItem(hidbtnChangeVideo2Map,    &HIDController::onChangeVideo2MapClicked,              nullptr, false);
+    makeHIDMapItem(hidbtnNewSession,         &HIDController::onForceStartNewSessionClicked,         nullptr, false);
+    makeHIDMapItem(hidbtnSelectSessions,     &HIDController::onSelectSessionsClicked,               nullptr, false);
+    makeHIDMapItem(hidbtnDisplayOnly,        &HIDController::onForceDisplayOnlyClicked,             nullptr, false);
+    makeHIDMapItem(hidbtnChangeActiveCam,    &HIDController::onChangeActiveCamClicked,              nullptr, false);
+    makeHIDMapItem(hidbtnEnableSoftwareStab, &HIDController::onEnableSoftwareStabClicked,           nullptr, false);
+    makeHIDMapItem(hidbtnDriversOff,         &HIDController::onCamDriversOffClicked,                nullptr, false);
+    makeHIDMapItem(hidbtnFixedPosLanding,    &HIDController::onCamLandingPosClicked,                nullptr, false);
+    makeHIDMapItem(hidbtnFixedPosBegining,   &HIDController::onCamBeginingPosClicked,               nullptr, false);
+    makeHIDMapItem(hidbtnFixedPosVertical,   &HIDController::onCamVerticalPosClicked,               nullptr, false);
+    makeHIDMapItem(hidbtnColorModeUp,        &HIDController::onColorModeUpClicked,                  nullptr, false);
+    makeHIDMapItem(hidbtnColorModeDown,      &HIDController::onColorModeDownClicked,                nullptr, false);
+    makeHIDMapItem(hidbtnLaserActivation,    &HIDController::onLaserActivationClicked,              nullptr, false);
 
-    makeHIDMapItem(hidbtnBombingSight,       &HIDController::onChangeBombingSightClicked,       nullptr, false);
-    makeHIDMapItem(hidbtnScreenshot,         &HIDController::onScreenshotClicked,               nullptr, true);
-    makeHIDMapItem(hidbtnSnapshot,           &HIDController::onSnapshotClicked,                 nullptr, true);
-    makeHIDMapItem(hidbtnSnapshotSeries,     &HIDController::onSnapshotSeriesClicked,           nullptr, false);
-    makeHIDMapItem(hidbtnTargetUnlock,       &HIDController::onTargetUnlockClicked,             nullptr, false);
-    makeHIDMapItem(hidbtnTargetLockInCursor, &HIDController::onTargetLockInCursorClick,         nullptr, false);
-    makeHIDMapItem(hidbtnMagnifier,          &HIDController::onMagnifierClick,                 nullptr, false);
+    makeHIDMapItem(hidbtnBombingSight,       &HIDController::onChangeBombingSightClicked,           nullptr, false);
+    makeHIDMapItem(hidbtnScreenshot,         &HIDController::onScreenshotClicked,                   nullptr, true);
+    makeHIDMapItem(hidbtnSnapshot,           &HIDController::onSnapshotClicked,                     nullptr, true);
+    makeHIDMapItem(hidbtnSnapshotSeries,     &HIDController::onSnapshotSeriesClicked,               nullptr, false);
+    makeHIDMapItem(hidbtnTargetUnlock,       &HIDController::onTargetUnlockClicked,                 nullptr, false);
+    makeHIDMapItem(hidbtnTargetLockInCursor, &HIDController::onTargetLockInCursorClick,             nullptr, false);
+    makeHIDMapItem(hidbtnMagnifier,          &HIDController::onMagnifierClick,                      nullptr, false);
 
 
-    makeHIDMapItem(hidbtnCamRecording,       &HIDController::onCamRecordingClicked,             nullptr, false);
-    makeHIDMapItem(hidbtnAutomaticTracer,    &HIDController::onEnableAutomaticTracerClicked,    nullptr, false);
-    makeHIDMapItem(hidbtnDropBomb,           &HIDController::onDropBombClicked,                 nullptr, true);
-    makeHIDMapItem(hidbtnSendHitCoordinates, &HIDController::onSendHitCoordinatesClicked,       nullptr, false);
-    makeHIDMapItem(hidbtnSendWeather,        &HIDController::onSendWeatherClicked,              nullptr, false);
+    makeHIDMapItem(hidbtnCamRecording,       &HIDController::onCamRecordingClicked,                 nullptr, false);
+    makeHIDMapItem(hidbtnAutomaticTracer,    &HIDController::onEnableAutomaticTracerClicked,        nullptr, false);
+    makeHIDMapItem(hidbtnDropBomb,           &HIDController::onDropBombClicked,                     nullptr, true);
+    makeHIDMapItem(hidbtnSendHitCoordinates, &HIDController::onSendHitCoordinatesClicked,           nullptr, false);
+    makeHIDMapItem(hidbtnSendWeather,        &HIDController::onSendWeatherClicked,                  nullptr, false);
 
-    makeHIDMapItem(hidbtnNewMarkerForTarget, &HIDController::onNewMarkerForTargetClicked,       nullptr, true);
-    makeHIDMapItem(hidbtnNewMarkerForLaser,  &HIDController::onNewMarkerForLaserClicked,        nullptr, true);
-    makeHIDMapItem(hidbtnNewMarkerForUAV,    &HIDController::onNewMarkerForUAVClicked,          nullptr, true);
+    makeHIDMapItem(hidbtnNewMarkerForTarget, &HIDController::onNewMarkerForTargetClicked,           nullptr, true);
+    makeHIDMapItem(hidbtnNewMarkerForLaser,  &HIDController::onNewMarkerForLaserClicked,            nullptr, true);
+    makeHIDMapItem(hidbtnNewMarkerForUAV,    &HIDController::onNewMarkerForUAVClicked,              nullptr, true);
 
     makeHIDMapItem(hidbtnNormalFlight,              &HIDController::onNormalFlightClicked,           nullptr, true);
     makeHIDMapItem(hidbtnPatrolMovingTargetMode,    &HIDController::onPatrolMovingTargetModeClicked, nullptr, true);
@@ -117,13 +117,16 @@ HIDController::HIDController(QObject *parent) : QObject(parent)
     CommonWidgetUtils::installEventFilterToApplication(this);
 }
 
-void HIDController::makeHIDMapItem(HIDButton prefIndex, void (HIDController::*onPressMethod)(), void (HIDController::*onReleaseMethod)(), bool processAutoRepeatKey)
+HIDMapItem *HIDController::makeHIDMapItem(HIDButton prefIndex, void (HIDController::*onPressMethod)(), void (HIDController::*onReleaseMethod)(),
+                                          bool processAutoRepeatKey, bool forceUseKeyboard)
 {
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
     auto item = new HIDMapItem(this, onPressMethod, onReleaseMethod,
                                applicationSettings.hidJoystickPref(prefIndex),
                                applicationSettings.hidKeyboardPref(prefIndex), processAutoRepeatKey);
     _HIDMap.append(item);
+    if (forceUseKeyboard)
+        _forcedKeyboardHIDMapItems.append(item);
 }
 
 void HIDController::setCamZoomRange(quint32 camZoomMin, quint32 camZoomMax)
@@ -220,14 +223,11 @@ bool HIDController::eventFilter(QObject *obj, QEvent *event)
 
 bool HIDController::processKeyboard(QKeyEvent *keyEvent, QObject *senderObj)
 {
-    if (!_keyboardUsing)
-        return false;
-
     //Exclude events from other windows
     const QString MainWindowSender = "MainWindowClassWindow";
     const QString MapViewSender = "MapViewClassWindow";
 
-    if (QWindow * sender = dynamic_cast<QWindow*> (senderObj))
+    if (auto sender = dynamic_cast<QWindow*> (senderObj))
     {
         QString senderName = sender->objectName();
         if (senderName != MainWindowSender && senderName != MapViewSender)
@@ -239,7 +239,8 @@ bool HIDController::processKeyboard(QKeyEvent *keyEvent, QObject *senderObj)
     bool keyProcessed = false;
 
     foreach (auto hidMapItem, _HIDMap)
-        keyProcessed = keyProcessed || hidMapItem->processKeyboard(keyEvent);
+        if (_keyboardUsing || _forcedKeyboardHIDMapItems.contains(hidMapItem))
+            keyProcessed = keyProcessed || hidMapItem->processKeyboard(keyEvent);
 
     return keyProcessed;
 }
@@ -452,7 +453,7 @@ bool HIDMapItem::processKeyboard(QKeyEvent *keyEvent)
             emit processReleaseEvent();
             return true;
         }
-
     }
+
     return false;
 }

@@ -229,7 +229,7 @@ void ApplicationSettings::ensureHIDButtonPrefsLoaded()
     addHIDButtonPrefs(hidbtnFollowThePlane, "Interface/MapFollowThePlaneKey", "",  "Interface/MapFollowThePlaneJoystickButton", -1, tr("Follow The Plane"));
 
     addHIDButtonPrefs(hidbtnChangeActiveCam, "CamControls/ChangeActiveCamKey", "V",  "CamControls/ChangeActiveCamJoystickButton", -1, tr("Change Active Camera"));
-    addHIDButtonPrefs(hidbtnEnableSoftwareStabilization, "CamControls/EnableSoftwareStabilizationKey", "C",  "CamControls/EnableSoftwareStabilizationJoystickButton", -1, tr("Stabilization On/Off"));
+    addHIDButtonPrefs(hidbtnEnableSoftwareStab, "CamControls/EnableSoftwareStabilizationKey", "C",  "CamControls/EnableSoftwareStabilizationJoystickButton", -1, tr("Stabilization On/Off"));
     addHIDButtonPrefs(hidbtnDriversOff, "CamControls/DriversOffKey", "", "CamControls/DriversOffJoystickButton", -1, tr("Cam Drivers Off"));
     addHIDButtonPrefs(hidbtnFixedPosLanding, "CamControls/FixedPosLandingKey", "", "CamControls/FixedPosLandingJoystickButton", -1, tr("Activate Landing Position"));
     addHIDButtonPrefs(hidbtnFixedPosBegining, "CamControls/FixedPosBeginingKey", "", "CamControls/FixedPosBeginingJoystickButton", -1, tr("Activate Begining Position"));
@@ -367,9 +367,9 @@ const QString ApplicationSettings::hidUIHint(HIDButton prefIndex)
     auto keyboardPref = hidKeyboardPref(prefIndex);
     auto joystickPref = hidJoystickPref(prefIndex);
 
-    if (keyboardPref != nullptr && !keyboardPref->value().isEmpty())
+    if (KeyboardUsing.value() && keyboardPref != nullptr && !keyboardPref->value().isEmpty())
         hint += tr("\n  Key %1").arg(keyboardPref->value());
-    if (joystickPref != nullptr && (joystickPref->value() >= 0) )
+    if (JoystickUsing.value() && joystickPref != nullptr && (joystickPref->value() >= 0) )
         hint += tr("\n  Button# %1").arg(joystickPref->value() + 1);
 
     return hint;
@@ -519,6 +519,7 @@ CameraSettingsNode::CameraSettingsNode(ApplicationSettingsImpl *parentSettings, 
     ApplicationSettingsNode(parentSettings, nodeName),
 
     CameraDescription(this, "CameraDescription",            "",     tr("Description")),
+    PhisycalLensCount(this, "PhisycalLensCount",             2,      tr("Phisycal Lens Count")),
     CameraSuspensionType(this, "CamControls/CameraSuspensionType",  CameraSuspensionTypes::RotatingCamera),
     CameraControlMode(this, "CamControls/CameraControlMode",        CameraControlModes::AbsolutePosition),
 

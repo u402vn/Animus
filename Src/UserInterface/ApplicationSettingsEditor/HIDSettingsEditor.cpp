@@ -182,7 +182,7 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
     rowIndex++;
 
     addHIDButtonBinding(hidbtnChangeActiveCam,                          rowIndex);
-    addHIDButtonBinding(hidbtnEnableSoftwareStabilization,              rowIndex);
+    addHIDButtonBinding(hidbtnEnableSoftwareStab,              rowIndex);
     addHIDButtonBinding(hidbtnDriversOff,                               rowIndex);
     addHIDButtonBinding(hidbtnFixedPosLanding,                          rowIndex);
     addHIDButtonBinding(hidbtnFixedPosBegining,                         rowIndex);
