@@ -2,7 +2,7 @@
 #include "ApplicationSettings.h"
 #include "EnterProc.h"
 #include "Map/MapTileContainer.h"
-#include "UserInterface/ConstantNames.h"
+#include "ConstantNames.h"
 
 MapSettingsEditor::MapSettingsEditor(QWidget *parent) :
     QWidget(parent),

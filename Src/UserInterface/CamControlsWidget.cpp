@@ -5,7 +5,7 @@
 #include <QKeyEvent>
 #include <QWindow>
 #include <QVector>
-#include "UserInterface/ConstantNames.h"
+#include "ConstantNames.h"
 #include "EnterProc.h"
 
 void CamControlsWidget::createTrackingButtons()
@@ -167,7 +167,7 @@ void CamControlsWidget::createCamZoomControls()
     auto hint = QString("%1\n%2").arg(applicationSettings.hidUIHint(hidbtnCamZoomOut)).arg(applicationSettings.hidUIHint(hidbtnCamZoomIn));
     //create controls
     _camZoom = new QSlider(this);
-    _camZoom->setRange(cameraSettings->CamZoomMin, cameraSettings->CamZoomMax);
+    _camZoom->setRange(cameraSettings->CamZoomMinA, cameraSettings->CamZoomMaxA); //???
     _camZoom->setTickPosition(QSlider::TicksBothSides);
     _camZoom->setTickInterval(1);
     _camZoom->setPageStep(1);
@@ -205,7 +205,7 @@ void CamControlsWidget::createCamViewControls()
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
 
     //create buttons
-    _btnEnableStabilization = createButton(applicationSettings.hidUIHint(hidbtnEnableSoftwareStabilization), true, ":/stabilization.png",
+    _btnEnableStabilization = createButton(applicationSettings.hidUIHint(hidbtnEnableSoftwareStab), true, ":/stabilization.png",
                                            &CamControlsWidget::onEnableStabilizationClick_Internal, &CamControlsWidget::onEnableStabilizationMenuClick);
     _btnEnableStabilization->setChecked(applicationSettings.SoftwareStabilizationEnabled);
     onEnableStabilizationClick_Internal();
@@ -229,8 +229,8 @@ void CamControlsWidget::createCamViewControls()
     btnCam1->setChecked(true);
 
     _grpCamButtons = new QButtonGroup(this);
-    _grpCamButtons->addButton(btnCam1, PRIMARY_OPTYCAL_SYSTEM_ID);
-    _grpCamButtons->addButton(btnCam2, SECONDARY_OPTYCAL_SYSTEM_ID);
+    _grpCamButtons->addButton(btnCam1, OPTYCAL_SYSTEM_1);
+    _grpCamButtons->addButton(btnCam2, OPTYCAL_SYSTEM_2);
     connect(_grpCamButtons, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this, &CamControlsWidget::onActiveCamClicked, Qt::DirectConnection);
 
     _imageTuner = new VideoImageTuner(_btnLiveViewSettings);
@@ -296,7 +296,7 @@ void CamControlsWidget::processCamMovingSpeedChange(float speedRoll, float speed
             // https://planetcalc.ru/5992/
             //qreal v = 0.207665288L - 0.160719196L * _camZoom->value();
             //qreal zoomScale = qExp(v);
-            qreal zoomScale = _camAssemblyPreferences->device(_opticalSystemId)->manualSpeedMultipliers(_camZoom->value());
+            qreal zoomScale = _camAssemblyPreferences->opticalDevice(_opticalSystemId)->manualSpeedMultipliers(_camZoom->value());
             speedRoll = speedRoll * zoomScale;
             speedPitch = speedPitch * zoomScale;
             speedYaw = speedYaw * zoomScale;
@@ -346,7 +346,7 @@ CamControlsWidget::CamControlsWidget(QWidget *parent, HardwareLink *hardwareLink
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
     auto cameraSettings = applicationSettings.installedCameraSettings();
     _camAssemblyPreferences = applicationSettings.getCurrentCamAssemblyPreferences();
-    _opticalSystemId = PRIMARY_OPTYCAL_SYSTEM_ID;
+    _opticalSystemId = OPTYCAL_SYSTEM_1;
 
     connect(_automaticTracer, &AutomaticTracer::onAutomaticCamMovingSpeedChange, this, &CamControlsWidget::onAutomaticCamMovingSpeedChange);
     connect(_automaticTracer, &AutomaticTracer::onTracerModeChanged, this, &CamControlsWidget::onTracerModeChanged);

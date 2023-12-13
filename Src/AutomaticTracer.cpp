@@ -68,7 +68,7 @@ void AutomaticTracer::moveToScreenPoint(const TelemetryDataFrame &telemetryFrame
     double angleXDegree, angleYDegree;
     qint32 zoom = telemetryFrame.CamZoom;
 
-    auto camPreferences = _camAssemblyPreferences->device(telemetryFrame.OpticalSystemId);
+    auto camPreferences = _camAssemblyPreferences->opticalDevice(telemetryFrame.OpticalSystemId);
     double automaticTracerMultiplier = camPreferences->automaticTracerSpeedMultiplier(zoom);
     camPreferences->getScreenPointAnglesDegree(zoom, screenPoint.x(), screenPoint.y(), angleXDegree, angleYDegree);
 

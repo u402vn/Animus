@@ -2,16 +2,16 @@
 #include "Common/CommonData.h"
 #include <QtMath>
 
-CamPreferences::CamPreferences(QObject *parent) : QObject(parent)
+OpticalDevicePreferences::OpticalDevicePreferences(QObject *parent) : QObject(parent)
 {
 }
 
-CamPreferences::~CamPreferences()
+OpticalDevicePreferences::~OpticalDevicePreferences()
 {
 
 }
 
-void CamPreferences::init(qint32 farmeWidth, qint32 frameHeight, quint32 zoomMinValue, quint32 zoomMaxValue,
+void OpticalDevicePreferences::init(qint32 farmeWidth, qint32 frameHeight, quint32 zoomMinValue, quint32 zoomMaxValue,
                           quint32 magnifierSize, qreal magnifierScale,
                           const QList<double> &fovHorizontalAngles, const QList<double> &fovVerticalAngles,
                           const QList<double> &automaticTracerSpeedMultipliers, const QList<double> &manualSpeedMultipliers)
@@ -32,7 +32,7 @@ void CamPreferences::init(qint32 farmeWidth, qint32 frameHeight, quint32 zoomMin
     //Q_ASSERT(_fovHorizontalAngles.count() == _manualSpeedMultipliers.count());
 }
 
-quint32 CamPreferences::zoomIndex(quint32 zoom)
+quint32 OpticalDevicePreferences::zoomIndex(quint32 zoom)
 {
     if (zoom > _zoomMax)
         zoom = _zoomMax;
@@ -42,37 +42,37 @@ quint32 CamPreferences::zoomIndex(quint32 zoom)
     return index;
 }
 
-double CamPreferences::fovHorizontalAngle(qint32 zoom)
+double OpticalDevicePreferences::fovHorizontalAngle(qint32 zoom)
 {
     return _fovHorizontalAngles.at(zoomIndex(zoom));
 }
 
-double CamPreferences::fovVerticalAngle(qint32 zoom)
+double OpticalDevicePreferences::fovVerticalAngle(qint32 zoom)
 {
     return _fovVerticalAngles.at(zoomIndex(zoom));
 }
 
-qint32 CamPreferences::frameWidth()
+qint32 OpticalDevicePreferences::frameWidth()
 {
     return _frameWidth;
 }
 
-qint32 CamPreferences::frameHeight()
+qint32 OpticalDevicePreferences::frameHeight()
 {
     return _frameHeight;
 }
 
-double CamPreferences::automaticTracerSpeedMultiplier(qint32 zoom)
+double OpticalDevicePreferences::automaticTracerSpeedMultiplier(qint32 zoom)
 {
     return _automaticTracerSpeedMultipliers.at(zoomIndex(zoom));
 }
 
-double CamPreferences::manualSpeedMultipliers(qint32 zoom)
+double OpticalDevicePreferences::manualSpeedMultipliers(qint32 zoom)
 {
     return _manualSpeedMultipliers.at(zoomIndex(zoom));
 }
 
-const QMatrix4x4 CamPreferences::projection(qint32 zoom)
+const QMatrix4x4 OpticalDevicePreferences::projection(qint32 zoom)
 {
     float verticalAngle = fovVerticalAngle(zoom);
     float aspectRatio = _frameWidth / _frameHeight;
@@ -84,27 +84,27 @@ const QMatrix4x4 CamPreferences::projection(qint32 zoom)
     return matrix;
 }
 
-quint32 CamPreferences::zoomMax()
+quint32 OpticalDevicePreferences::zoomMax()
 {
     return _zoomMax;
 }
 
-quint32 CamPreferences::magnifierSize()
+quint32 OpticalDevicePreferences::magnifierSize()
 {
     return _magnifierSize;
 }
 
-qreal CamPreferences::magnifierScale()
+qreal OpticalDevicePreferences::magnifierScale()
 {
     return _magnifierScale;
 }
 
-void CamPreferences::incMagnifierScale(qreal delta)
+void OpticalDevicePreferences::incMagnifierScale(qreal delta)
 {
     _magnifierScale = qBound(1.1, _magnifierScale + delta, 5.0);
 }
 
-quint32 CamPreferences::zoomMin()
+quint32 OpticalDevicePreferences::zoomMin()
 {
     return _zoomMin;
 }
@@ -117,13 +117,13 @@ inline double pointAngleRad(int screenSizePix, double screenSizeDegree, int scre
     return screenPosRad;
 }
 
-void CamPreferences::getScreenPointAnglesRad(const quint32 zoom, const qint32 screenX, const qint32 screenY, double &angleXRad, double &angleYRad)
+void OpticalDevicePreferences::getScreenPointAnglesRad(const quint32 zoom, const qint32 screenX, const qint32 screenY, double &angleXRad, double &angleYRad)
 {
     angleXRad = pointAngleRad(_frameWidth, fovHorizontalAngle(zoom), screenX);
     angleYRad = pointAngleRad(_frameHeight, fovVerticalAngle(zoom), screenY);
 }
 
-void CamPreferences::getScreenPointAnglesDegree(const quint32 zoom, const qint32 screenX, const qint32 screenY, double &angleXDegree, double &angleYDegree)
+void OpticalDevicePreferences::getScreenPointAnglesDegree(const quint32 zoom, const qint32 screenX, const qint32 screenY, double &angleXDegree, double &angleYDegree)
 {
     angleXDegree = pointAngleRad(_frameWidth, fovHorizontalAngle(zoom), screenX) * 180 / PI;
     angleYDegree = pointAngleRad(_frameHeight, fovVerticalAngle(zoom), screenY) * 180 / PI;
@@ -153,25 +153,25 @@ void CamAssemblyPreferences::initGimbal(double encoderAutomaticTracerMultiplier)
     _encoderAutomaticTracerMultiplier = encoderAutomaticTracerMultiplier;
 }
 
-void CamAssemblyPreferences::initCam(qint32 opticalSystemId, qint32 farmeWidth, qint32 frameHeight, quint32 zoomMinValue, quint32 zoomMaxValue,
+void CamAssemblyPreferences::initOpticalDevice(qint32 opticalSystemId, qint32 farmeWidth, qint32 frameHeight, quint32 zoomMinValue, quint32 zoomMaxValue,
                                      quint32 magnifierSize, qreal magnifierScale,
                                      const QList<double> &fovHorizontalAngles, const QList<double> &fovVerticalAngles,
                                      const QList<double> &automaticTracerSpeedMultipliers, const QList<double> &manualSpeedMultipliers)
 {
-    auto camPrefernces = _devices.value(opticalSystemId, nullptr);
-    if (camPrefernces == nullptr)
+    auto opticalDevice = _opticalDevices.value(opticalSystemId, nullptr);
+    if (opticalDevice == nullptr)
     {
-        camPrefernces = new CamPreferences(this);
-        _devices.insert(opticalSystemId, camPrefernces);
+        opticalDevice = new OpticalDevicePreferences(this);
+        _opticalDevices.insert(opticalSystemId, opticalDevice);
     }
-    camPrefernces->init(farmeWidth, frameHeight, zoomMinValue, zoomMaxValue, magnifierSize, magnifierScale,
+    opticalDevice->init(farmeWidth, frameHeight, zoomMinValue, zoomMaxValue, magnifierSize, magnifierScale,
                         fovHorizontalAngles, fovVerticalAngles,
                         automaticTracerSpeedMultipliers, manualSpeedMultipliers);
 }
 
-CamPreferences *CamAssemblyPreferences::device(qint32 opticalSystemId)
+OpticalDevicePreferences *CamAssemblyPreferences::opticalDevice(qint32 opticalDeviceId)
 {
-    auto camPrefernces = _devices.value(opticalSystemId, nullptr);
+    auto camPrefernces = _opticalDevices.value(opticalDeviceId, nullptr);
     return camPrefernces;
 }
 

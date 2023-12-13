@@ -58,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
 
     auto coordinateCalculator = new CoordinateCalculator(this, heightMapContainer);
 
-    _imageProcessor = new ImageProcessor(this, coordinateCalculator, cameraSettings->UseVerticalFrameMirrororing, applicationSettings.ObjectTrackerType);
+    _imageProcessor = new ImageProcessor(this, coordinateCalculator, cameraSettings->UseVerticalFrameMirrororingA, applicationSettings.ObjectTrackerType);
     _imageProcessor->setStabilizationType(applicationSettings.VideoStabilizationType);
 
     connect(_hardwareLink, &HardwareLink::onHardwareLinkStateChanged, this, &MainWindow::onHardwareLinkStateChanged);
@@ -345,7 +345,7 @@ void MainWindow::initHidController(CamAssemblyPreferences *camAssemblyPreference
 {
     EnterProcStart("MainWindow::initHidController");
     _hidController = new HIDController(this);
-    auto camPreferences = camAssemblyPreferences->device(PRIMARY_OPTYCAL_SYSTEM_ID);
+    auto camPreferences = camAssemblyPreferences->opticalDevice(OPTYCAL_SYSTEM_1);
     _hidController->setCamZoomRange(camPreferences->zoomMin(), camPreferences->zoomMax()); //???
     connect(_hidController, &HIDController::onOpenApplicationSettingsEditorClicked, this,               &MainWindow::onOpenApplicationSettingsEditorClicked, Qt::DirectConnection);
     connect(_hidController, &HIDController::onOpenDataConsoleClicked,               this,               &MainWindow::onOpenDataConsoleClicked, Qt::DirectConnection);
@@ -359,7 +359,7 @@ void MainWindow::initHidController(CamAssemblyPreferences *camAssemblyPreference
     connect(_hidController, &HIDController::onAbsoluteCamZoomChange,                _camControlsWidget, &CamControlsWidget::onAbsoluteCamZoomChange, Qt::DirectConnection);
     connect(_hidController, &HIDController::onCamMovingSpeedChange,                 _camControlsWidget, &CamControlsWidget::onManualCamMovingSpeedChange, Qt::DirectConnection);
     connect(_hidController, &HIDController::onChangeActiveCamClicked,               _camControlsWidget, &CamControlsWidget::onChangeActiveCamClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onEnableSoftwareStabClicked,   _camControlsWidget, &CamControlsWidget::onEnableSoftwareStabilizationClicked, Qt::DirectConnection);
+    connect(_hidController, &HIDController::onEnableSoftwareStabClicked,            _camControlsWidget, &CamControlsWidget::onEnableSoftwareStabilizationClicked, Qt::DirectConnection);
     connect(_hidController, &HIDController::onCamDriversOffClicked,                 _camControlsWidget, &CamControlsWidget::onCamDriversOffClicked, Qt::DirectConnection);
     connect(_hidController, &HIDController::onCamLandingPosClicked,                 _camControlsWidget, &CamControlsWidget::onCamLandingPosClicked, Qt::DirectConnection);
     connect(_hidController, &HIDController::onCamBeginingPosClicked,                _camControlsWidget, &CamControlsWidget::onCamBeginingPosClicked, Qt::DirectConnection);

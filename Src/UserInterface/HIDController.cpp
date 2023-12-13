@@ -24,14 +24,14 @@ HIDController::HIDController(QObject *parent) : QObject(parent)
     _prevJoystickZoom = 0;
     setCamZoomRange(1, 1);
 
-    _joystickCameraAxisMultiplier = applicationSettings.JoystickCameraAxisMultiplier;
-    _joystickCursorAxisMultiplier = applicationSettings.JoystickCursorAxisMultiplier;
-    _joystickCameraEmulationFromKeyboard = applicationSettings.JoystickCameraEmulationFromKeyboard;
-    _joystickCursorEmulationFromKeyboard = applicationSettings.JoystickCursorEmulationFromKeyboard;
-    _joystickCameraAxisSensitivity = applicationSettings.JoystickCameraAxisInsensitivity;
-    _joystickCursorAxisSensitivity = applicationSettings.JoystickCursorAxisInsensitivity;
+    _joystickCameraAxisMultiplier =         applicationSettings.JoystickCameraAxisMultiplier;
+    _joystickCursorAxisMultiplier =         applicationSettings.JoystickCursorAxisMultiplier;
+    _joystickCameraEmulationFromKeyboard =  applicationSettings.JoystickCameraEmulationFromKeyboard;
+    _joystickCursorEmulationFromKeyboard =  applicationSettings.JoystickCursorEmulationFromKeyboard;
+    _joystickCameraAxisSensitivity =        applicationSettings.JoystickCameraAxisInsensitivity;
+    _joystickCursorAxisSensitivity =        applicationSettings.JoystickCursorAxisInsensitivity;
 
-    _joystickAxisZoomIndex = applicationSettings.JoystickAxisZoomIndex;
+    _joystickAxisZoomIndex =    applicationSettings.JoystickAxisZoomIndex;
     _joystickAxisCameraXIndex = applicationSettings.JoystickAxisCameraXIndex;
     _joystickAxisCameraYIndex = applicationSettings.JoystickAxisCameraYIndex;
     _joystickAxisCursorXIndex = applicationSettings.JoystickAxisCursorXIndex;

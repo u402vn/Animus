@@ -31,23 +31,25 @@ class CameraSettingsEditor final : public QDialog
     bool _isBombingTabLicensed;
     bool _isPhotographyLicensed;
 
-    QComboBoxExt *_cbCameraSelector;
+    //QComboBoxExt *_cbCameraSelector;
+
+    QComboBoxExt *_cbOpticalDevicesCount;
     QLineEdit *_edtCamDescription;
 
-    QButtonGroupExt *_gbVideoSource;
-    QComboBoxExt *_cbUSBCamera;
+    //QButtonGroupExt *_gbVideoSource;
+    //QComboBoxExt *_cbUSBCamera;
 
-    NetworkAddressEditor *_naeXPlane;
+    //NetworkAddressEditor *_naeXPlane;
 
-    QLineEdit *_edYurionUDPPort;
-    QLabel *_lblYurionUDPPort;
-    QComboBoxExt *_cbCalibrationImagePath;
-    QLineEdit *_edRTSPUrl;
+    //QLineEdit *_edYurionUDPPort;
+    //QLabel *_lblYurionUDPPort;
+    //QComboBoxExt *_cbCalibrationImagePath;
+    //QLineEdit *_edRTSPUrl;
 
-    QLineEdit *_edMUSV2UDPPort;
-    QLabel *_lblMUSV2UDPPort;
+    //QLineEdit *_edMUSV2UDPPort;
+    //QLabel *_lblMUSV2UDPPort;
 
-    FilePathSelector *_fpsVideoFile;
+    //FilePathSelector *_fpsVideoFile;
 
     QCheckBox *_chkOnboardRecording;
     QCheckBox *_chkSnapshot;
@@ -87,11 +89,13 @@ class CameraSettingsEditor final : public QDialog
     void initWidgets();
 
     QWidget *createGimbalWidgets();
-    QWidget *createConnectionWidgets();
+    QWidget *createConnectionWidgets(int connectionId);
+
+
     QWidget *createFunctionsWidgets();
     void addSeparatorRow(QGridLayout *camControlsGrid, int &row);
 
-    QRadioButton *addVideoSourceRadioButton(VideoFrameTrafficSources source);
+    QRadioButton *addVideoSourceRadioButton(QButtonGroupExt *gbVideoSource, VideoFrameTrafficSources source);
 public:
     explicit CameraSettingsEditor(QWidget *parent, const qint32 camIdx);
     virtual void accept();
@@ -103,8 +107,9 @@ public:
 
     static const QString getCameraInfo(qint32 camIdx);
 private slots:
-    void onEditPrimaryCamSettingsClicked();
-    void onEditSecondaryCamSettingsClicked();
+    void onEditOpticalDeviceASettingsClicked();
+    void onEditOpticalDeviceBSettingsClicked();
+    void onEditOpticalDeviceCSettingsClicked();
     void onVideoSourceSelected(int id);
 signals:
     void onCamInfoUpdated();

@@ -15,6 +15,7 @@ class CameraZoomSettingsEditor final : public QDialog
     PreferenceAssociation _association;
 
     QList<QDoubleSpinBoxEx*> _scaleEditors, _verticalAngleEditors, _horizontalAngleEditors, _automaticTracerSpeedMultipliersEditors, _manualSpeedMultipliersEditors;
+    QComboBoxExt *_cbDeviceLink;
     QSpinBoxEx *_sbCamViewSizeHorizontal;
     QSpinBoxEx *_sbCamViewSizeVertical;
     QCheckBox *_chkCamViewSizeForceSet;

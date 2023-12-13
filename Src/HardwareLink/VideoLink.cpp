@@ -23,8 +23,9 @@ void VideoLink::openVideoSource()
 {
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
     auto cameraSettings = applicationSettings.installedCameraSettings();
+    auto videoConnectionSetting = cameraSettings->videoConnectionSetting(0);
 
-    VideoFrameTrafficSources videoTrafficSource = cameraSettings->VideoTrafficSource;
+    VideoFrameTrafficSources videoTrafficSource = videoConnectionSetting->VideoTrafficSource->value();
 
     switch(videoTrafficSource)
     {
@@ -32,14 +33,14 @@ void VideoLink::openVideoSource()
     {
         // https://stackoverflow.com/questions/57352688/camera-start-error-on-qt5-5-qcamera-libv4l2-error-set-fmt-gave-us-a-differe
 
-        auto cameraFrameGrabber = new CameraFrameGrabber(this, cameraSettings->UseVerticalFrameMirrororing);
-        QByteArray camName = cameraSettings->VideoFrameSourceCameraName.value().toLocal8Bit();
+        auto cameraFrameGrabber = new CameraFrameGrabber(this, cameraSettings->UseVerticalFrameMirrororingA);
+        QByteArray camName = cameraSettings->VideoFrameSourceCameraName1.value().toLocal8Bit();
         auto camera = new QCamera(camName, this);
 
-        if (cameraSettings->CamViewSizeForceSet.value())
+        if (cameraSettings->CamViewSizeForceSetA.value())
         {
             QCameraViewfinderSettings viewfinderSettings;
-            viewfinderSettings.setResolution(cameraSettings->CamViewSizeHorizontal, cameraSettings->CamViewSizeVertical);
+            viewfinderSettings.setResolution(cameraSettings->CamViewSizeHorizontalA, cameraSettings->CamViewSizeVerticalA);
             camera->setViewfinderSettings(viewfinderSettings);
         }
         connect(camera, static_cast<void(QCamera::*)(QCamera::Error)>(&QCamera::error), this, &VideoLink::usbCameraError);
@@ -55,12 +56,12 @@ void VideoLink::openVideoSource()
     } // case VideoFrameTrafficSources::USBCamera
     case VideoFrameTrafficSources::Yurion:
     {
-        auto yurionVideoReceiver = new YurionVideoReceiver(this, cameraSettings->UseVerticalFrameMirrororing,
-                                                           cameraSettings->VideoFrameSourceYurionUDPPort);
+        auto yurionVideoReceiver = new YurionVideoReceiver(this, cameraSettings->UseVerticalFrameMirrororingA,
+                                                           cameraSettings->VideoFrameSourceYurionUDPPort1);
         if (applicationSettings.EnableForwarding.value())
             yurionVideoReceiver->setVideoForwarding(applicationSettings.VideoForwardingAddress, applicationSettings.VideoForwardingPort);
-        if (cameraSettings->CamViewSizeForceSet.value())
-            yurionVideoReceiver->setResolution(cameraSettings->CamViewSizeHorizontal, cameraSettings->CamViewSizeVertical);
+        if (cameraSettings->CamViewSizeForceSetA.value())
+            yurionVideoReceiver->setResolution(cameraSettings->CamViewSizeHorizontalA, cameraSettings->CamViewSizeVerticalA);
 
         connect(yurionVideoReceiver, &YurionVideoReceiver::frameAvailable, this, &VideoLink::videoFrameReceivedInternal);
         _videoSource = yurionVideoReceiver;
@@ -68,37 +69,37 @@ void VideoLink::openVideoSource()
     } // case VideoFrameTrafficSources::Yurion
     case VideoFrameTrafficSources::XPlane:
     {
-        auto xPlaneVideoReceiver = new XPlaneVideoReceiver(this, cameraSettings->UseVerticalFrameMirrororing,
-                                                           QHostAddress(cameraSettings->VideoFrameSourceXPlaneAddress),
-                                                           static_cast<quint16>(cameraSettings->VideoFrameSourceXPlanePort));
+        auto xPlaneVideoReceiver = new XPlaneVideoReceiver(this, cameraSettings->UseVerticalFrameMirrororingA,
+                                                           QHostAddress(cameraSettings->VideoFrameSourceXPlaneAddress1),
+                                                           static_cast<quint16>(cameraSettings->VideoFrameSourceXPlanePort1));
         connect(xPlaneVideoReceiver, &XPlaneVideoReceiver::frameAvailable, this, &VideoLink::videoFrameReceivedInternal);
         _videoSource = xPlaneVideoReceiver;
         break;
     } // case VideoFrameTrafficSources::XPlane
     case VideoFrameTrafficSources::CalibrationImage:
     {
-        auto calibrationImageVideoReceiver = new CalibrationImageVideoReceiver(this, cameraSettings->CalibrationImagePath, DefaultCalibrationImagePath);
+        auto calibrationImageVideoReceiver = new CalibrationImageVideoReceiver(this, cameraSettings->CalibrationImagePath1, DefaultCalibrationImagePath);
         connect(calibrationImageVideoReceiver, &CalibrationImageVideoReceiver::frameAvailable, this, &VideoLink::videoFrameReceivedInternal);
         _videoSource = calibrationImageVideoReceiver;
         break;
     } // case VideoFrameTrafficSources::CalibrationImage
     case VideoFrameTrafficSources::VideoFile:
     {
-        QString filePath = cameraSettings->VideoFilePath;
-        openVideoSourceWithURL(QUrl::fromLocalFile(filePath), cameraSettings->UseVerticalFrameMirrororing);
+        QString filePath = cameraSettings->VideoFilePath1;
+        openVideoSourceWithURL(QUrl::fromLocalFile(filePath), cameraSettings->UseVerticalFrameMirrororingA);
         break;
     } // case VideoFrameTrafficSources::VideoFile
     case VideoFrameTrafficSources::RTSP:
     {
-        auto rtspVideoReceiver = new RTSPVideoReceiver(this, cameraSettings->UseVerticalFrameMirrororing,
-                                                       QUrl(cameraSettings->RTSPUrl));
+        auto rtspVideoReceiver = new RTSPVideoReceiver(this, cameraSettings->UseVerticalFrameMirrororingA,
+                                                       QUrl(cameraSettings->RTSPUrl1));
         connect(rtspVideoReceiver, &RTSPVideoReceiver::frameAvailable, this, &VideoLink::videoFrameReceivedInternal, Qt::DirectConnection);
         _videoSource = rtspVideoReceiver;
         break;
     }
     case VideoFrameTrafficSources::MUSV2:
     {
-        auto musv2VideoReceiver = new MUSV2VideoReceiver(this, cameraSettings->UseVerticalFrameMirrororing, cameraSettings->VideoFrameSourceMUSV2UDPPort);
+        auto musv2VideoReceiver = new MUSV2VideoReceiver(this, cameraSettings->UseVerticalFrameMirrororingA, cameraSettings->VideoFrameSourceMUSV2UDPPort1);
         _videoSource = musv2VideoReceiver;
         break;
     }

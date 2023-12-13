@@ -8,11 +8,10 @@
 
 const qint32 MAXIMAL_CAMERA_ZOOM = 100;
 
-class CamPreferences final : public QObject
+class OpticalDevicePreferences final : public QObject
 {
     Q_OBJECT
     friend class CamAssemblyPreferences;
-
 
     quint32 _zoomMin, _zoomMax;
     qint32 _frameWidth, _frameHeight;
@@ -25,8 +24,8 @@ class CamPreferences final : public QObject
 
     quint32 zoomIndex(quint32 zoom);
 public:
-    explicit CamPreferences(QObject *parent);
-    ~CamPreferences();
+    explicit OpticalDevicePreferences(QObject *parent);
+    ~OpticalDevicePreferences();
 
     void init(qint32 farmeWidth, qint32 frameHeight,
               quint32 zoomMinValue, quint32 zoomMaxValue,
@@ -59,7 +58,7 @@ class CamAssemblyPreferences final : public QObject
 {
     Q_OBJECT
 
-    QMap<qint32, CamPreferences*> _devices;
+    QMap<qint32, OpticalDevicePreferences*> _opticalDevices;
     double _encoderAutomaticTracerMultiplier = 0;
 public:
     explicit CamAssemblyPreferences(QObject *parent);
@@ -67,7 +66,7 @@ public:
 
     void initGimbal(double encoderAutomaticTracerMultiplier);
 
-    void initCam(qint32 opticalSystemId,
+    void initOpticalDevice(qint32 opticalSystemId,
                  qint32 farmeWidth, qint32 frameHeight,
                  quint32 zoomMinValue, quint32 zoomMaxValue, quint32 magnifierSize, qreal magnifierScale,
                  const QList<double> &fovHorizontalAngles,
@@ -75,7 +74,7 @@ public:
                  const QList<double> &automaticTracerSpeedMultipliers,
                  const QList<double> &manualSpeedMultipliers
                  );
-    CamPreferences *device(qint32 opticalSystemId);
+    OpticalDevicePreferences *opticalDevice(qint32 opticalDeviceId);
 
     double encoderAutomaticTracerMultiplier();
 };

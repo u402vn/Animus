@@ -1,5 +1,6 @@
 #include "CameraZoomSettingsEditor.h"
 #include "EnterProc.h"
+#include "ConstantNames.h"
 
 const char *BUTTON_ZOOM_VALUE = "BUTTON_ZOOM_VALUE";
 
@@ -95,6 +96,9 @@ QWidget *CameraZoomSettingsEditor::createImageParams()
     auto imageParamsWidget = new QWidget(this);
     auto imageParamsGrid = new QGridLayout(imageParamsWidget);
 
+    auto lblDeviceLink = new QLabel(tr("Connection"), this);
+    _cbDeviceLink = new QComboBoxExt(this, ConstantNames::OpticalDeviceLinkCaptions());
+
     auto lblCamViewSize = new QLabel(tr("Resolution"), this);
     _sbCamViewSizeHorizontal = CommonWidgetUtils::createRangeSpinbox(this, 320, 1920);
     _sbCamViewSizeVertical = CommonWidgetUtils::createRangeSpinbox(this, 240, 1080);
@@ -107,6 +111,10 @@ QWidget *CameraZoomSettingsEditor::createImageParams()
     _sbMagnifierSourceSize = CommonWidgetUtils::createRangeSpinbox(this, 50, 250);
 
     int row = 0;
+
+    imageParamsGrid->addWidget(lblDeviceLink,                   row, 0, 1, 1);
+    imageParamsGrid->addWidget(_cbDeviceLink,                   row, 2, 1, 1);
+    row++;
 
     imageParamsGrid->addWidget(lblCamViewSize,                  row, 0, 1, 1);
     imageParamsGrid->addWidget(_sbCamViewSizeHorizontal,        row, 2, 1, 1);
@@ -147,38 +155,57 @@ void CameraZoomSettingsEditor::initWidgets()
     mainLayout->addWidget(buttonBox, 0);
 
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
-    auto cameraSettings = applicationSettings.cameraSettings(_camIdx);
+    auto cameraSettings = applicationSettings.cameraPreferences(_camIdx);
 
     if (_opticalSystemNumber == 1)
-    {
-        _association.addBinding(&(cameraSettings->CamScaleCoefficient),                  &_scaleEditors);
-        _association.addBinding(&(cameraSettings->CamViewAnglesHorizontal),              &_horizontalAngleEditors);
-        _association.addBinding(&(cameraSettings->CamViewAnglesVertical),                &_verticalAngleEditors);
-        _association.addBinding(&(cameraSettings->CamAutomaticTracerSpeedMultipliers),   &_automaticTracerSpeedMultipliersEditors);
-        _association.addBinding(&(cameraSettings->CamManualSpeedMultipliers),            &_manualSpeedMultipliersEditors);
+    {        
+        //_association.addBinding(&(cameraSettings->DeviceLinkIdA),                         &_cbDeviceLink);
+        _association.addBinding(&(cameraSettings->CamScaleCoefficientA),                  &_scaleEditors);
+        _association.addBinding(&(cameraSettings->CamViewAnglesHorizontalA),              &_horizontalAngleEditors);
+        _association.addBinding(&(cameraSettings->CamViewAnglesVerticalA),                &_verticalAngleEditors);
+        _association.addBinding(&(cameraSettings->CamAutomaticTracerSpeedMultipliersA),   &_automaticTracerSpeedMultipliersEditors);
+        _association.addBinding(&(cameraSettings->CamManualSpeedMultipliersA),            &_manualSpeedMultipliersEditors);
 
-        _association.addBinding(&(cameraSettings->CamViewSizeHorizontal),               _sbCamViewSizeHorizontal);
-        _association.addBinding(&(cameraSettings->CamViewSizeVertical),                 _sbCamViewSizeVertical);
-        _association.addBinding(&(cameraSettings->CamViewSizeForceSet),                 _chkCamViewSizeForceSet);
-        _association.addBinding(&(cameraSettings->UseVerticalFrameMirrororing),         _chkVerticalMirror);
+        _association.addBinding(&(cameraSettings->CamViewSizeHorizontalA),               _sbCamViewSizeHorizontal);
+        _association.addBinding(&(cameraSettings->CamViewSizeVerticalA),                 _sbCamViewSizeVertical);
+        _association.addBinding(&(cameraSettings->CamViewSizeForceSetA),                 _chkCamViewSizeForceSet);
+        _association.addBinding(&(cameraSettings->UseVerticalFrameMirrororingA),         _chkVerticalMirror);
 
-        _association.addBinding(&(cameraSettings->MagnifierSourceSize),                 _sbMagnifierSourceSize);
+        _association.addBinding(&(cameraSettings->MagnifierSourceSizeA),                 _sbMagnifierSourceSize);
     }
     else if (_opticalSystemNumber == 2)
     {
-        _association.addBinding(&(cameraSettings->CamScaleCoefficient2),                  &_scaleEditors);
-        _association.addBinding(&(cameraSettings->CamViewAnglesHorizontal2),              &_horizontalAngleEditors);
-        _association.addBinding(&(cameraSettings->CamViewAnglesVertical2),                &_verticalAngleEditors);
-        _association.addBinding(&(cameraSettings->CamAutomaticTracerSpeedMultipliers2),   &_automaticTracerSpeedMultipliersEditors);
-        _association.addBinding(&(cameraSettings->CamManualSpeedMultipliers2),            &_manualSpeedMultipliersEditors);
+        //_association.addBinding(&(cameraSettings->DeviceLinkIdB),                         &_cbDeviceLink);
+        _association.addBinding(&(cameraSettings->CamScaleCoefficientB),                  &_scaleEditors);
+        _association.addBinding(&(cameraSettings->CamViewAnglesHorizontalB),              &_horizontalAngleEditors);
+        _association.addBinding(&(cameraSettings->CamViewAnglesVerticalB),                &_verticalAngleEditors);
+        _association.addBinding(&(cameraSettings->CamAutomaticTracerSpeedMultipliersB),   &_automaticTracerSpeedMultipliersEditors);
+        _association.addBinding(&(cameraSettings->CamManualSpeedMultipliersB),            &_manualSpeedMultipliersEditors);
 
-        _association.addBinding(&(cameraSettings->CamViewSizeHorizontal2),               _sbCamViewSizeHorizontal);
-        _association.addBinding(&(cameraSettings->CamViewSizeVertical2),                 _sbCamViewSizeVertical);
-        _association.addBinding(&(cameraSettings->CamViewSizeForceSet2),                 _chkCamViewSizeForceSet);
-        _association.addBinding(&(cameraSettings->UseVerticalFrameMirrororing2),         _chkVerticalMirror);
+        _association.addBinding(&(cameraSettings->CamViewSizeHorizontalB),               _sbCamViewSizeHorizontal);
+        _association.addBinding(&(cameraSettings->CamViewSizeVerticalB),                 _sbCamViewSizeVertical);
+        _association.addBinding(&(cameraSettings->CamViewSizeForceSetB),                 _chkCamViewSizeForceSet);
+        _association.addBinding(&(cameraSettings->UseVerticalFrameMirrororingB),         _chkVerticalMirror);
 
-        _association.addBinding(&(cameraSettings->MagnifierSourceSize2),                 _sbMagnifierSourceSize);
+        _association.addBinding(&(cameraSettings->MagnifierSourceSizeB),                 _sbMagnifierSourceSize);
     }
+    else if (_opticalSystemNumber == 3)
+    {
+        //_association.addBinding(&(cameraSettings->DeviceLinkIdC),                         &_cbDeviceLink);
+        _association.addBinding(&(cameraSettings->CamScaleCoefficientC),                  &_scaleEditors);
+        _association.addBinding(&(cameraSettings->CamViewAnglesHorizontalC),              &_horizontalAngleEditors);
+        _association.addBinding(&(cameraSettings->CamViewAnglesVerticalC),                &_verticalAngleEditors);
+        _association.addBinding(&(cameraSettings->CamAutomaticTracerSpeedMultipliersC),   &_automaticTracerSpeedMultipliersEditors);
+        _association.addBinding(&(cameraSettings->CamManualSpeedMultipliersC),            &_manualSpeedMultipliersEditors);
+
+        _association.addBinding(&(cameraSettings->CamViewSizeHorizontalC),               _sbCamViewSizeHorizontal);
+        _association.addBinding(&(cameraSettings->CamViewSizeVerticalC),                 _sbCamViewSizeVertical);
+        _association.addBinding(&(cameraSettings->CamViewSizeForceSetC),                 _chkCamViewSizeForceSet);
+        _association.addBinding(&(cameraSettings->UseVerticalFrameMirrororingC),         _chkVerticalMirror);
+
+        _association.addBinding(&(cameraSettings->MagnifierSourceSizeC),                 _sbMagnifierSourceSize);
+    }
+
     else
         Q_ASSERT(false);
 }

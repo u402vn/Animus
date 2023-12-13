@@ -1,6 +1,7 @@
 #include "ApplicationSettings.h"
 #include <QSerialPortInfo>
 #include <QFile>
+#include "ConstantNames.h"
 
 // https://habrahabr.ru/post/149085/
 
@@ -305,20 +306,29 @@ CamAssemblyPreferences *ApplicationSettings::getCurrentCamAssemblyPreferences()
         _camAssemblyPreferences = new CamAssemblyPreferences(this);
         _camAssemblyPreferences->initGimbal(cameraSettings->EncoderAutomaticTracerMultiplier);
 
-        _camAssemblyPreferences->initCam(1, // PRIMARY_OPTYCAL_SYSTEM_ID
-                                         cameraSettings->CamViewSizeHorizontal, cameraSettings->CamViewSizeVertical,
-                                         cameraSettings->CamZoomMin, cameraSettings->CamZoomMax,
-                                         cameraSettings->MagnifierSourceSize, cameraSettings->MagnifierScale,
-                                         cameraSettings->CamViewAnglesHorizontal, cameraSettings->CamViewAnglesVertical,
-                                         cameraSettings->CamAutomaticTracerSpeedMultipliers,
-                                         cameraSettings->CamManualSpeedMultipliers);
-        _camAssemblyPreferences->initCam(2, // SECONDARY_OPTYCAL_SYSTEM_ID
-                                         cameraSettings->CamViewSizeHorizontal2, cameraSettings->CamViewSizeVertical2,
-                                         cameraSettings->CamZoomMin, cameraSettings->CamZoomMax,
-                                         cameraSettings->MagnifierSourceSize2, cameraSettings->MagnifierScale2,
-                                         cameraSettings->CamViewAnglesHorizontal2, cameraSettings->CamViewAnglesVertical2,
-                                         cameraSettings->CamAutomaticTracerSpeedMultipliers2,
-                                         cameraSettings->CamManualSpeedMultipliers2);
+        _camAssemblyPreferences->initOpticalDevice(1,
+                                         cameraSettings->CamViewSizeHorizontalA, cameraSettings->CamViewSizeVerticalA,
+                                         cameraSettings->CamZoomMinA, cameraSettings->CamZoomMaxA,
+                                         cameraSettings->MagnifierSourceSizeA, cameraSettings->MagnifierScaleA,
+                                         cameraSettings->CamViewAnglesHorizontalA, cameraSettings->CamViewAnglesVerticalA,
+                                         cameraSettings->CamAutomaticTracerSpeedMultipliersA,
+                                         cameraSettings->CamManualSpeedMultipliersA);
+        _camAssemblyPreferences->initOpticalDevice(2,
+                                         cameraSettings->CamViewSizeHorizontalB, cameraSettings->CamViewSizeVerticalB,
+                                         cameraSettings->CamZoomMinB, cameraSettings->CamZoomMaxB,
+                                         cameraSettings->MagnifierSourceSizeB, cameraSettings->MagnifierScaleB,
+                                         cameraSettings->CamViewAnglesHorizontalB, cameraSettings->CamViewAnglesVerticalB,
+                                         cameraSettings->CamAutomaticTracerSpeedMultipliersB,
+                                         cameraSettings->CamManualSpeedMultipliersB);
+        _camAssemblyPreferences->initOpticalDevice(3,
+                                         cameraSettings->CamViewSizeHorizontalC, cameraSettings->CamViewSizeVerticalC,
+                                         cameraSettings->CamZoomMinC, cameraSettings->CamZoomMaxC,
+                                         cameraSettings->MagnifierSourceSizeC, cameraSettings->MagnifierScaleC,
+                                         cameraSettings->CamViewAnglesHorizontalC, cameraSettings->CamViewAnglesVerticalC,
+                                         cameraSettings->CamAutomaticTracerSpeedMultipliersC,
+                                         cameraSettings->CamManualSpeedMultipliersC);
+
+
     }
 
     return _camAssemblyPreferences;
@@ -326,10 +336,10 @@ CamAssemblyPreferences *ApplicationSettings::getCurrentCamAssemblyPreferences()
 
 CameraSettingsNode *ApplicationSettings::installedCameraSettings()
 {
-    return cameraSettings(InstalledCameraIndex);
+    return cameraPreferences(InstalledCameraIndex);
 }
 
-CameraSettingsNode *ApplicationSettings::cameraSettings(int index)
+CameraSettingsNode *ApplicationSettings::cameraPreferences(int index)
 {
     if (_cameraSettings.count() == 0)
     {
@@ -518,7 +528,7 @@ bool ApplicationSettings::isAntennaLicensed()
 CameraSettingsNode::CameraSettingsNode(ApplicationSettingsImpl *parentSettings, const QString &nodeName) :
     ApplicationSettingsNode(parentSettings, nodeName),
 
-    CameraDescription(this, "CameraDescription",            "",     tr("Description")),
+    UserDescription(this, "CameraDescription",            "",     tr("Description")),
     PhisycalLensCount(this, "PhisycalLensCount",             2,      tr("Phisycal Lens Count")),
     CameraSuspensionType(this, "CamControls/CameraSuspensionType",  CameraSuspensionTypes::RotatingCamera),
     CameraControlMode(this, "CamControls/CameraControlMode",        CameraControlModes::AbsolutePosition),
@@ -540,8 +550,6 @@ CameraSettingsNode::CameraSettingsNode(ApplicationSettingsImpl *parentSettings, 
     CamRollMax(this, "CamRollMax",                          90,     tr("Maximum Value of Camera Roll")),
     CamRollMin(this, "CamRollMin",                          -90,    tr("Minimum Value of Camera Roll")),
     CamAxisXInverse(this, "CamAxisXInverse",                true),
-    CamZoomMax(this, "CamZoomMax",                          1,      tr("Maximum Value of Camera Zoom")),
-    CamZoomMin(this, "CamZoomMin",                          1,      tr("Minimum Value of Camera Zoom")),
     EncoderAutomaticTracerMultiplier(this, "AutomaticTracerMultiplier", 1, tr("Automatic Tracer Multiplier")),
 
     FixedPosLandingYaw(this, "FixedPosLandingYaw",          -90,    tr("Value of Camera Yaw in Landing Position")),
@@ -560,51 +568,117 @@ CameraSettingsNode::CameraSettingsNode(ApplicationSettingsImpl *parentSettings, 
     FixedPosVerticalRoll(this, "FixedPosVerticalRoll",      0,      tr("Value of Camera Roll in Vertical Position")),
     FixedPosVerticalZoom(this, "FixedPosVerticalZoom",      1,      tr("Value of Camera Zoom in Vertical Position")),
 
-    CamScaleCoefficient(this, "CamScaleCoefficient",                         tr("Camera Scale Coefficient")),
-    CamViewAnglesHorizontal(this, "CamViewAnglesHorizontal",                 tr("Horizontal View Angle of Camera")),
-    CamViewAnglesVertical(this,   "CamViewAnglesVertical",                   tr("Vertical View Angle of Camera")),
-    CamAutomaticTracerSpeedMultipliers(this, "CamSpeedMultipliers",          tr("Automatic Tracer Speed Multiplier")),
-    CamManualSpeedMultipliers(this, "CamManualSpeedMultipliers",             tr("Manual Moving Speed Multipliers")),
-    CamViewSizeHorizontal(this, "CamViewSizeHorizontal",    720,             tr("Horizontal View Size of Camera")),
-    CamViewSizeVertical(this, "CamViewSizeVertical",        576,             tr("Vertical View Size of Camera")),
-    CamViewSizeForceSet(this, "CamViewSizeForceSet",        false),
-    UseVerticalFrameMirrororing(this, "UseVerticalImageMirror", true,       tr("Vertical Mirroring")),
-    MagnifierSourceSize(this, "MagnifierSourceSize",        150,            tr("Magnifier Source Size")),
-    MagnifierScale(this, "MagnifierScale",                    2,            tr("Magnifier Scale")),
+
+    DeviceLinkIdA(this, "DeviceLinkId",                      1,               tr("Device Link")),
+    CamZoomMaxA(this, "CamZoomMax",                          1,               tr("Maximum Value of Camera Zoom")),
+    CamZoomMinA(this, "CamZoomMin",                          1,               tr("Minimum Value of Camera Zoom")),
+    CamScaleCoefficientA(this, "CamScaleCoefficient",                         tr("Camera Scale Coefficient")),
+    CamViewAnglesHorizontalA(this, "CamViewAnglesHorizontal",                 tr("Horizontal View Angle of Camera")),
+    CamViewAnglesVerticalA(this,   "CamViewAnglesVertical",                   tr("Vertical View Angle of Camera")),
+    CamAutomaticTracerSpeedMultipliersA(this, "CamSpeedMultipliers",          tr("Automatic Tracer Speed Multiplier")),
+    CamManualSpeedMultipliersA(this, "CamManualSpeedMultipliers",             tr("Manual Moving Speed Multipliers")),
+    CamViewSizeHorizontalA(this, "CamViewSizeHorizontal",    720,             tr("Horizontal View Size of Camera")),
+    CamViewSizeVerticalA(this, "CamViewSizeVertical",        576,             tr("Vertical View Size of Camera")),
+    CamViewSizeForceSetA(this, "CamViewSizeForceSet",        false),
+    UseVerticalFrameMirrororingA(this, "UseVerticalImageMirror", true,        tr("Vertical Mirroring")),
+    MagnifierSourceSizeA(this, "MagnifierSourceSize",        150,             tr("Magnifier Source Size")),
+    MagnifierScaleA(this, "MagnifierScale",                    2,             tr("Magnifier Scale")),
+
+    DeviceLinkIdB(this, "DeviceLinkId2",                      1,               tr("Device Link")),
+    CamZoomMaxB(this, "CamZoomMax2",                          1,               tr("Maximum Value of Camera Zoom")),
+    CamZoomMinB(this, "CamZoomMin2",                          1,               tr("Minimum Value of Camera Zoom")),
+    CamScaleCoefficientB(this, "CamScaleCoefficient2",                         tr("Camera Scale Coefficient")),
+    CamViewAnglesHorizontalB(this, "CamViewAnglesHorizontal2",                 tr("Horizontal View Angle of Camera")),
+    CamViewAnglesVerticalB(this,   "CamViewAnglesVertical2",                   tr("Vertical View Angle of Camera")),
+    CamAutomaticTracerSpeedMultipliersB(this, "CamSpeedMultipliers2",          tr("Automatic Tracer Speed Multiplier")),
+    CamManualSpeedMultipliersB(this, "CamManualSpeedMultipliers2",             tr("Manual Moving Speed Multipliers")),
+    CamViewSizeHorizontalB(this, "CamViewSizeHorizontal2",    720,             tr("Horizontal View Size of Camera")),
+    CamViewSizeVerticalB(this, "CamViewSizeVertical2",        576,             tr("Vertical View Size of Camera")),
+    CamViewSizeForceSetB(this, "CamViewSizeForceSet2",        false),
+    UseVerticalFrameMirrororingB(this, "UseVerticalImageMirror2", true,        tr("Vertical Mirroring")),
+    MagnifierSourceSizeB(this, "MagnifierSourceSize2",        150,             tr("Magnifier Source Size")),
+    MagnifierScaleB(this, "MagnifierScale2",                    2,             tr("Magnifier Scale")),
 
 
-    CamScaleCoefficient2(this, "CamScaleCoefficient2",                         tr("Camera Scale Coefficient")),
-    CamViewAnglesHorizontal2(this, "CamViewAnglesHorizontal2",                 tr("Horizontal View Angle of Camera")),
-    CamViewAnglesVertical2(this,   "CamViewAnglesVertical2",                   tr("Vertical View Angle of Camera")),
-    CamAutomaticTracerSpeedMultipliers2(this, "CamSpeedMultipliers2",          tr("Automatic Tracer Speed Multiplier")),
-    CamManualSpeedMultipliers2(this, "CamManualSpeedMultipliers2",             tr("Manual Moving Speed Multipliers")),
-    CamViewSizeHorizontal2(this, "CamViewSizeHorizontal2",    720,             tr("Horizontal View Size of Camera")),
-    CamViewSizeVertical2(this, "CamViewSizeVertical2",        576,             tr("Vertical View Size of Camera")),
-    CamViewSizeForceSet2(this, "CamViewSizeForceSet2",        false),
-    UseVerticalFrameMirrororing2(this, "UseVerticalImageMirror2", true,        tr("Vertical Mirroring")),
-    MagnifierSourceSize2(this, "MagnifierSourceSize2",        150,             tr("Magnifier Source Size")),
-    MagnifierScale2(this, "MagnifierScale2",                    2,             tr("Magnifier Scale")),
+    DeviceLinkIdC(this, "DeviceLinkId3",                      1,               tr("Device Link")),
+    CamZoomMaxC(this, "CamZoomMax3",                          1,               tr("Maximum Value of Camera Zoom")),
+    CamZoomMinC(this, "CamZoomMin3",                          1,               tr("Minimum Value of Camera Zoom")),
+    CamScaleCoefficientC(this, "CamScaleCoefficient3",                         tr("Camera Scale Coefficient")),
+    CamViewAnglesHorizontalC(this, "CamViewAnglesHorizontal3",                 tr("Horizontal View Angle of Camera")),
+    CamViewAnglesVerticalC(this,   "CamViewAnglesVertical3",                   tr("Vertical View Angle of Camera")),
+    CamAutomaticTracerSpeedMultipliersC(this, "CamSpeedMultipliers3",          tr("Automatic Tracer Speed Multiplier")),
+    CamManualSpeedMultipliersC(this, "CamManualSpeedMultipliers3",             tr("Manual Moving Speed Multipliers")),
+    CamViewSizeHorizontalC(this, "CamViewSizeHorizontal3",    720,             tr("Horizontal View Size of Camera")),
+    CamViewSizeVerticalC(this, "CamViewSizeVertical3",        576,             tr("Vertical View Size of Camera")),
+    CamViewSizeForceSetC(this, "CamViewSizeForceSet3",        false),
+    UseVerticalFrameMirrororingC(this, "UseVerticalImageMirror3", true,        tr("Vertical Mirroring")),
+    MagnifierSourceSizeC(this, "MagnifierSourceSize3",        150,             tr("Magnifier Source Size")),
+    MagnifierScaleC(this, "MagnifierScale3",                    2,             tr("Magnifier Scale")),
 
-    VideoTrafficSource(this, "VideoTrafficSource", VideoFrameTrafficSources::USBCamera),
-    VideoFrameSourceCameraName(this, "VideoFrameSourceCameraName", ""),
-    VideoFrameSourceXPlaneAddress(this, "VideoFrameSourceXPlaneAddress", "192.168.1.235"),
-    VideoFrameSourceXPlanePort(this, "VideoFrameSourceXPlanePort", 51200),
-    VideoFrameSourceYurionUDPPort(this, "VideoFrameSourceDigitalChannelUDPPort", 5000),
-    CalibrationImagePath(this, "CalibrationImagePath", DefaultCalibrationImagePath),
-    VideoFilePath(this, "VideoFilePath", QString()),
-    RTSPUrl(this, "RTSPUrl", QString("rtsp://127.0.0.1:8899/UAV")),
 
-    VideoFrameSourceMUSV2UDPPort(this, "VideoFrameSourceMUSV2UDPPort", 50006),
+
+
+
+    VideoTrafficSource1(this, "VideoTrafficSource", VideoFrameTrafficSources::USBCamera),
+    VideoFrameSourceCameraName1(this, "VideoFrameSourceCameraName", ""),
+    VideoFrameSourceXPlaneAddress1(this, "VideoFrameSourceXPlaneAddress", "192.168.1.235"),
+    VideoFrameSourceXPlanePort1(this, "VideoFrameSourceXPlanePort", 51200),
+    VideoFrameSourceYurionUDPPort1(this, "VideoFrameSourceDigitalChannelUDPPort", 5000),
+    CalibrationImagePath1(this, "CalibrationImagePath", DefaultCalibrationImagePath),
+    VideoFilePath1(this, "VideoFilePath", QString()),
+    RTSPUrl1(this, "RTSPUrl", QString("rtsp://127.0.0.1:8899/UAV")),
+    VideoFrameSourceMUSV2UDPPort1(this, "VideoFrameSourceMUSV2UDPPort", 50006),
+
+
+    VideoTrafficSource2(this, "VideoTrafficSource2", VideoFrameTrafficSources::USBCamera),
+    VideoFrameSourceCameraName2(this, "VideoFrameSourceCameraName2", ""),
+    VideoFrameSourceXPlaneAddress2(this, "VideoFrameSourceXPlaneAddress2", "192.168.1.235"),
+    VideoFrameSourceXPlanePort2(this, "VideoFrameSourceXPlanePort2", 51200),
+    VideoFrameSourceYurionUDPPort2(this, "VideoFrameSourceDigitalChannelUDPPort2", 5000),
+    CalibrationImagePath2(this, "CalibrationImagePath2", DefaultCalibrationImagePath),
+    VideoFilePath2(this, "VideoFilePath2", QString()),
+    RTSPUrl2(this, "RTSPUrl2", QString("rtsp://127.0.0.1:8899/UAV")),
+    VideoFrameSourceMUSV2UDPPort2(this, "VideoFrameSourceMUSV2UDPPort2", 50006),
+
+
 
     BombingSightNumbers(this, "BombingSightNumbers", "")
 {
+    _videoConnectionSetting[0] = new VideoConnectionSetting(
+                &VideoTrafficSource1,
+                &VideoFrameSourceCameraName1,
+                &VideoFrameSourceXPlaneAddress1,
+                &VideoFrameSourceXPlanePort1,
+                &VideoFrameSourceYurionUDPPort1,
+                &CalibrationImagePath1,
+                &VideoFilePath1,
+                &RTSPUrl1,
+                &VideoFrameSourceMUSV2UDPPort1
+                );
 
+    _videoConnectionSetting[1] = new VideoConnectionSetting(
+                &VideoTrafficSource2,
+                &VideoFrameSourceCameraName2,
+                &VideoFrameSourceXPlaneAddress2,
+                &VideoFrameSourceXPlanePort2,
+                &VideoFrameSourceYurionUDPPort2,
+                &CalibrationImagePath2,
+                &VideoFilePath2,
+                &RTSPUrl2,
+                &VideoFrameSourceMUSV2UDPPort2
+                );
 }
 
 CameraSettingsNode::~CameraSettingsNode()
 {
-
+    delete _videoConnectionSetting[0];
 }
+
+VideoConnectionSetting *CameraSettingsNode::videoConnectionSetting(int idx)
+{
+    return _videoConnectionSetting[idx];
+}
+
 
 //-----------------------------------------------------------------------------------
 CameraSettingsNode *currCameraSettings()
@@ -612,4 +686,81 @@ CameraSettingsNode *currCameraSettings()
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
     auto cameraSettings = applicationSettings.installedCameraSettings();
     return cameraSettings;
+}
+
+VideoConnectionSetting::VideoConnectionSetting(
+        ApplicationPreferenceEnum<VideoFrameTrafficSources> *VideoTrafficSource,
+        ApplicationPreferenceString *VideoFrameSourceCameraName,
+        ApplicationPreferenceString *VideoFrameSourceXPlaneAddress,
+        ApplicationPreferenceInt *VideoFrameSourceXPlanePort,
+        ApplicationPreferenceInt *VideoFrameSourceYurionUDPPort,
+        ApplicationPreferenceString *CalibrationImagePath,
+        ApplicationPreferenceString *VideoFilePath,
+        ApplicationPreferenceString *RTSPUrl,
+        ApplicationPreferenceInt *VideoFrameSourceMUSV2UDPPort)
+{
+    this->VideoTrafficSource = VideoTrafficSource;
+    this->VideoFrameSourceCameraName = VideoFrameSourceCameraName;
+    this->VideoFrameSourceXPlaneAddress = VideoFrameSourceXPlaneAddress;
+    this->VideoFrameSourceXPlanePort = VideoFrameSourceXPlanePort;
+    this->VideoFrameSourceYurionUDPPort = VideoFrameSourceYurionUDPPort;
+    this->CalibrationImagePath = CalibrationImagePath;
+    this->VideoFilePath = VideoFilePath;
+    this->RTSPUrl = RTSPUrl;
+    this->VideoFrameSourceMUSV2UDPPort = VideoFrameSourceMUSV2UDPPort;
+}
+
+const QString VideoConnectionSetting::description()
+{
+    VideoFrameTrafficSources source = VideoTrafficSource->value();
+
+    QString desc;
+
+    switch(source)
+    {
+    case VideoFrameTrafficSources::USBCamera:
+    {
+        auto cameraName = VideoFrameSourceCameraName->value().toLocal8Bit();
+        QCameraInfo cameraInfo = QCameraInfo(cameraName);
+        if (cameraInfo.isNull())
+            desc = tr("Unknown camera");
+        else
+            desc = cameraInfo.description();
+        break;
+    }
+    case VideoFrameTrafficSources::XPlane:
+    {
+        desc = tr("URL: %1:%2").arg(VideoFrameSourceXPlaneAddress->value()).arg(VideoFrameSourceXPlanePort->value());
+        break;
+    }
+    case VideoFrameTrafficSources::Yurion:
+    {
+        desc = tr("Port: %1").arg(VideoFrameSourceYurionUDPPort->value());
+        break;
+    }
+    case VideoFrameTrafficSources::CalibrationImage:
+    {
+        desc = tr("%1").arg(CalibrationImagePath->value());
+        break;
+    }
+    case VideoFrameTrafficSources::VideoFile:
+    {
+        desc = tr("%1").arg(VideoFilePath->value());
+        break;
+    }
+    case VideoFrameTrafficSources::RTSP:
+    {
+        desc = tr("URL: %1").arg(RTSPUrl->value());
+        break;
+    }
+    case VideoFrameTrafficSources::MUSV2:
+    {
+        desc = tr("UDP Port: %1").arg(VideoFrameSourceMUSV2UDPPort->value());
+        break;
+    }
+    }
+
+    desc = QString("%1 %2").arg(ConstantNames::VideoFrameTrafficSourceCaptions()[source]).arg(desc);
+
+    return desc;
 }

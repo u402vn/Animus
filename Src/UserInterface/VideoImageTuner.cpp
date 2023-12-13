@@ -3,7 +3,7 @@
 #include <QDialogButtonBox>
 #include <QStyle>
 #include <QComboBox>
-#include "UserInterface/ConstantNames.h"
+#include "ConstantNames.h"
 #include "EnterProc.h"
 
 constexpr int SLIDER_MIN_VALUE = 0;

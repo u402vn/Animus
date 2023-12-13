@@ -161,7 +161,7 @@ HardwareLink::HardwareLink(QObject *parent) : VideoLink(parent)
 
     _isRangefinderEnabled = false;
 
-    _opticalSystemId = PRIMARY_OPTYCAL_SYSTEM_ID;
+    _opticalSystemId = OPTYCAL_SYSTEM_1;
     auto cameraSettings = applicationSettings.installedCameraSettings();
     _isCameraFixed = (cameraSettings->CameraSuspensionType == CameraSuspensionTypes::FixedCamera);
     _fixedCamPitch = cameraSettings->FixedCamPitch;
@@ -413,7 +413,7 @@ void HardwareLink::updateTelemetryValues(TelemetryDataFrame &telemetryDataFrame)
     if (telemetryDataFrame.CamZoom <= 0)
         telemetryDataFrame.CamZoom = _expectedCamZoom;
 
-    auto camPreferences = _camAssemblyPreferences->device(telemetryDataFrame.OpticalSystemId);
+    auto camPreferences = _camAssemblyPreferences->opticalDevice(telemetryDataFrame.OpticalSystemId);
     telemetryDataFrame.FOVHorizontalAngle = camPreferences->fovHorizontalAngle(telemetryDataFrame.CamZoom);
     telemetryDataFrame.FOVVerticalAngle = camPreferences->fovVerticalAngle(telemetryDataFrame.CamZoom);
 

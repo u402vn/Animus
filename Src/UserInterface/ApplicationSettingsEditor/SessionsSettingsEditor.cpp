@@ -10,7 +10,7 @@
 #include "UserInterface/ApplicationSettingsEditor/CameraSettingsEditor.h"
 #include "UserInterface/ApplicationSettingsEditor/NetworkInformationWidget.h"
 #include "UserInterface/ApplicationSettingsEditor/NetworkAddressEditor.h"
-#include "UserInterface/ConstantNames.h"
+#include "ConstantNames.h"
 #include "Common/CommonWidgets.h"
 
 const int SESSIONS_TAB_FIRST_COLUMN_WIDTH = 200;

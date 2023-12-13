@@ -5,13 +5,13 @@
 //https://coderoad.ru/17578881/%D0%9A%D0%B0%D0%BA-%D0%BF%D0%BE%D0%B2%D0%B5%D1%80%D0%BD%D1%83%D1%82%D1%8C-QQuaternion-%D0%BD%D0%B0-%D0%B4%D0%B2%D1%83%D1%85-%D0%BE%D1%81%D1%8F%D1%85
 //https://forum.qt.io/topic/106798/convention-for-qquaternion-conversion-to-from-euler-angles/6
 WorldGPSCoord CalculatePointPosition(const TelemetryDataFrame &telemetryDataFrame,
-                                     CamPreferences *camPreferences,
+                                     OpticalDevicePreferences *opticalDevice,
                                      const int screenX, const int screenY,
                                      const double groundLevel
                                      )
 {
     double angleXRad, angleYRad;
-    camPreferences->getScreenPointAnglesRad(telemetryDataFrame.CamZoom, screenX, screenY, angleXRad, angleYRad);
+    opticalDevice->getScreenPointAnglesRad(telemetryDataFrame.CamZoom, screenX, screenY, angleXRad, angleYRad);
     QQuaternion scrQ = QQuaternion::rotationTo(QVector3D(0, 0, 10), QVector3D(tan(angleYRad), -tan(angleXRad), 1));
     //    QQuaternion scrQ = QQuaternion::rotationTo(QVector3D(0, 0, 10), QVector3D(tan(angleXRad), tan(angleYRad), 1));
 
@@ -51,7 +51,7 @@ WorldGPSCoord CalculatePointPosition(const TelemetryDataFrame &telemetryDataFram
 const WorldGPSCoord CoordinateCalculator::getScreenPointCoord(TelemetryDataFrame *telemetryFrame, int x, int y) const
 {
     double groundLevel = telemetryFrame->CalculatedGroundLevel;
-    auto camPreferences = _camAssemblyPreferences->device(telemetryFrame->OpticalSystemId);
+    auto camPreferences = _camAssemblyPreferences->opticalDevice(telemetryFrame->OpticalSystemId);
     WorldGPSCoord result = CalculatePointPosition(*telemetryFrame, camPreferences, x, y, groundLevel);
     return result;
 }
@@ -182,7 +182,7 @@ void CoordinateCalculator::updateViewFieldBorderPoints(TelemetryDataFrame *telem
         {1.1, 1.1}, {0.9, 1.1}, {0.8, 1.1}, {0.7, 1.1}, {0.6, 1.1}, {0.5, 1.1}, {0.4, 1.1}, {0.3, 1.1}, {0.2, 1.1}, {0.1, 1.1},
         {0.0, 1.1}, {0.0, 0.9}, {0.0, 0.8}, {0.0, 0.7}, {0.0, 0.6}, {0.0, 0.5}, {0.0, 0.4}, {0.0, 0.3}, {0.0, 0.2}, {0.0, 0.1}};
 
-    auto camPreferences = _camAssemblyPreferences->device(telemetryFrame->OpticalSystemId);
+    auto camPreferences = _camAssemblyPreferences->opticalDevice(telemetryFrame->OpticalSystemId);
     int imageWidth  = camPreferences->frameWidth();
     int imageHeight = camPreferences->frameHeight();
     for (int n = 0; n < ViewFieldBorderPointsCount; n++)

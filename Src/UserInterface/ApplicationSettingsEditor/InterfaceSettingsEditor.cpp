@@ -6,7 +6,7 @@
 #include <QDir>
 #include "ApplicationSettings.h"
 #include "Common/CommonWidgets.h"
-#include "UserInterface/ConstantNames.h"
+#include "ConstantNames.h"
 #include "EnterProc.h"
 
 

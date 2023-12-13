@@ -21,8 +21,9 @@
 #include "Common/BinaryContent.h"
 #include "DelayLine.h"
 
-const int PRIMARY_OPTYCAL_SYSTEM_ID   = 1;
-const int SECONDARY_OPTYCAL_SYSTEM_ID = 2;
+const int OPTYCAL_SYSTEM_1   = 1;
+const int OPTYCAL_SYSTEM_2   = 2;
+const int OPTYCAL_SYSTEM_3   = 3;
 
 class HardwareLink final: public VideoLink
 {

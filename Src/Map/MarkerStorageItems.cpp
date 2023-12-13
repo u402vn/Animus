@@ -1,6 +1,6 @@
 #include "MarkerStorageItems.h"
 #include "Common/CommonUtils.h"
-#include "UserInterface/ConstantNames.h"
+#include "ConstantNames.h"
 
 int TargetMapMarker::_lastTargetNumber = 0;
 

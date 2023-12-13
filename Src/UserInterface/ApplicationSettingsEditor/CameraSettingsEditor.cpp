@@ -3,10 +3,11 @@
 #include <QRadioButton>
 #include <QCameraInfo>
 #include <QLineEdit>
+#include <QComboBox>
 #include <QDialogButtonBox>
 #include "EnterProc.h"
 #include "UserInterface/ApplicationSettingsEditor/CameraZoomSettingsEditor.h"
-#include "UserInterface/ConstantNames.h"
+#include "ConstantNames.h"
 
 QComboBoxExt *CameraSettingsEditor::createCamListCombo(QWidget *parent)
 {
@@ -14,8 +15,8 @@ QComboBoxExt *CameraSettingsEditor::createCamListCombo(QWidget *parent)
     auto cbCameras = new QComboBoxExt(parent);
     for (int i = 0; i < 10; i++)
     {
-        auto cameraSettings = applicationSettings.cameraSettings(i);
-        QString description = cameraSettings->CameraDescription;
+        auto cameraSettings = applicationSettings.cameraPreferences(i);
+        QString description = cameraSettings->UserDescription;
         description = description.isEmpty() ? description : " - " + description;
         cbCameras->addItem(tr("Camera %1 %2").arg(i).arg(description), i);
     }
@@ -66,14 +67,33 @@ void CameraSettingsEditor::initWidgets()
     auto lblCamDescription = new QLabel(tr("Description"), this);
     _edtCamDescription = new QLineEdit(this);
 
-    auto btnEditPrimaryCamSettings = new QPushButton(tr("Primary camera"), this);
-    connect(btnEditPrimaryCamSettings, &QPushButton::clicked, this, &CameraSettingsEditor::onEditPrimaryCamSettingsClicked);
+    //    connect(_lblImage, &QLabelEx::clicked, this,  [=]()
 
-    auto btnEditSecondaryCamSettings = new QPushButton(tr("Secondary camera"), this);
-    connect(btnEditSecondaryCamSettings, &QPushButton::clicked, this, &CameraSettingsEditor::onEditSecondaryCamSettingsClicked);
+
+    auto btnEditOpticalDeviceASettings = new QPushButton(tr("Optical Device A"), this);
+    connect(btnEditOpticalDeviceASettings, &QPushButton::clicked, this, &CameraSettingsEditor::onEditOpticalDeviceASettingsClicked);
+
+    auto btnEditOpticalDeviceBSettings = new QPushButton(tr("Optical Device B"), this);
+    connect(btnEditOpticalDeviceBSettings, &QPushButton::clicked, this, &CameraSettingsEditor::onEditOpticalDeviceBSettingsClicked);
+
+    auto btnEditOpticalDeviceCSettings = new QPushButton(tr("Optical Device C"), this);
+    connect(btnEditOpticalDeviceCSettings, &QPushButton::clicked, this, &CameraSettingsEditor::onEditOpticalDeviceCSettingsClicked);
+
+    _cbOpticalDevicesCount = new QComboBoxExt(this, ConstantNames::OpticalDevicesCountCaptions());
+    connect(_cbOpticalDevicesCount, static_cast<void(QComboBoxExt::*)(int)>(&QComboBoxExt::activated), this,  [=](int index)
+    {
+        Q_UNUSED(index)
+
+        auto numbers = _cbOpticalDevicesCount->currentData().toInt();
+
+        btnEditOpticalDeviceBSettings->setVisible(numbers > 1);
+        btnEditOpticalDeviceCSettings->setVisible(numbers > 2);
+    });
+
 
     auto gimbalWidgets = createGimbalWidgets();
-    auto connectionWidgets = createConnectionWidgets();
+    auto connectionWidgets1 = createConnectionWidgets(0);
+    auto connectionWidgets2 = createConnectionWidgets(1);
     auto functionsWidgets = createFunctionsWidgets();
 
     auto camControlsGrid = new QGridLayout(scrolledWidget);
@@ -81,17 +101,20 @@ void CameraSettingsEditor::initWidgets()
     int row = 0;
 
     camControlsGrid->addWidget(lblCamDescription,                row, 0, 1, 1);
-    camControlsGrid->addWidget(_edtCamDescription,               row, 1, 1, 2);
+    camControlsGrid->addWidget(_edtCamDescription,               row, 1, 1, 3);
     row++;
 
-    camControlsGrid->addWidget(btnEditPrimaryCamSettings,        row, 1, 1, 1);
-    camControlsGrid->addWidget(btnEditSecondaryCamSettings,      row, 2, 1, 1);
+    camControlsGrid->addWidget(_cbOpticalDevicesCount,                 row, 0, 1, 1);
+    camControlsGrid->addWidget(btnEditOpticalDeviceASettings,           row, 1, 1, 1);
+    camControlsGrid->addWidget(btnEditOpticalDeviceBSettings,           row, 2, 1, 1);
+    camControlsGrid->addWidget(btnEditOpticalDeviceCSettings,           row, 3, 1, 1);
     row++;
 
-    camControlsGrid->addWidget(gimbalWidgets,                    row++, 0, 1, 3);
-    camControlsGrid->addWidget(connectionWidgets,                row++, 0, 1, 3);
+    camControlsGrid->addWidget(gimbalWidgets,                    row++, 0, 1, 4);
+    camControlsGrid->addWidget(connectionWidgets1,               row++, 0, 1, 4);
+    camControlsGrid->addWidget(connectionWidgets2,               row++, 0, 1, 4);
     if (functionsWidgets != nullptr)
-        camControlsGrid->addWidget(functionsWidgets,             row++, 0, 1, 3);
+        camControlsGrid->addWidget(functionsWidgets,             row++, 0, 1, 4);
     camControlsGrid->setRowStretch(row++, 1);
 }
 
@@ -236,158 +259,128 @@ QWidget *CameraSettingsEditor::createGimbalWidgets()
 const QString CameraSettingsEditor::getCameraInfo(qint32 camIdx)
 {
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
-    auto cameraSettings = applicationSettings.cameraSettings(camIdx);
+    auto cameraSettings = applicationSettings.cameraPreferences(camIdx);
 
-    VideoFrameTrafficSources source = cameraSettings->VideoTrafficSource;
+    QString detail = cameraSettings->videoConnectionSetting(0)->description();
 
-    QString detail;
-
-    switch(source)
-    {
-    case VideoFrameTrafficSources::USBCamera:
-    {
-        auto cameraName = cameraSettings->VideoFrameSourceCameraName.value().toLocal8Bit();
-        QCameraInfo cameraInfo = QCameraInfo(cameraName);
-        if (cameraInfo.isNull())
-            detail = tr("Unknown camera");
-        else
-            detail = cameraInfo.description();
-        break;
-    }
-    case VideoFrameTrafficSources::XPlane:
-    {
-        detail = tr("URL: %1:%2").arg(cameraSettings->VideoFrameSourceXPlaneAddress).arg(cameraSettings->VideoFrameSourceXPlanePort);
-        break;
-    }
-    case VideoFrameTrafficSources::Yurion:
-    {
-        detail = tr("Port: %1").arg(cameraSettings->VideoFrameSourceYurionUDPPort);
-        break;
-    }
-    case VideoFrameTrafficSources::CalibrationImage:
-    {
-        detail = tr("%1").arg(cameraSettings->CalibrationImagePath);
-        break;
-    }
-    case VideoFrameTrafficSources::VideoFile:
-    {
-        detail = tr("%1").arg(cameraSettings->VideoFilePath);
-        break;
-    }
-    case VideoFrameTrafficSources::RTSP:
-    {
-        detail = tr("URL: %1").arg(cameraSettings->RTSPUrl);
-        break;
-    }
-    case VideoFrameTrafficSources::MUSV2:
-    {
-        detail = tr("UDP Port: %1").arg(cameraSettings->VideoFrameSourceMUSV2UDPPort);
-        break;
-    }
-    }
-
-    QString description = cameraSettings->CameraDescription;
+    QString description = cameraSettings->UserDescription;
     if (description.isEmpty())
         description = tr("Unnamed video source");
 
-    QString info = tr(" %1\n %2 \t %3x%4\n %5")
+    QString info = tr(" %1\n %2 \t %3x%4")
             .arg(description)
-            .arg(ConstantNames::VideoFrameTrafficSourceCaptions()[source])
-            .arg(cameraSettings->CamViewSizeHorizontal).arg(cameraSettings->CamViewSizeVertical)
-            .arg(detail);
+            .arg(detail)
+            .arg(cameraSettings->CamViewSizeHorizontalA).arg(cameraSettings->CamViewSizeVerticalA);
 
     return info;
 }
 
-void CameraSettingsEditor::onEditPrimaryCamSettingsClicked()
+void CameraSettingsEditor::onEditOpticalDeviceASettingsClicked()
 {
     auto cameraZoomSettingsEditor = new CameraZoomSettingsEditor(this, _camIdx, 1);
     //??? connect(cameraSettingsEditor, &CameraSettingsEditor::onCamInfoUpdated, this, &CameraListSettingsEditor::onCamInfoUpdated);
     cameraZoomSettingsEditor->showNormal();
 }
 
-void CameraSettingsEditor::onEditSecondaryCamSettingsClicked()
+void CameraSettingsEditor::onEditOpticalDeviceBSettingsClicked()
 {
     auto cameraZoomSettingsEditor = new CameraZoomSettingsEditor(this, _camIdx, 2);
     //??? connect(cameraSettingsEditor, &CameraSettingsEditor::onCamInfoUpdated, this, &CameraListSettingsEditor::onCamInfoUpdated);
     cameraZoomSettingsEditor->showNormal();
 }
 
-QRadioButton *CameraSettingsEditor::addVideoSourceRadioButton(VideoFrameTrafficSources source)
+void CameraSettingsEditor::onEditOpticalDeviceCSettingsClicked()
 {
-    return _gbVideoSource->appendButton(ConstantNames::VideoFrameTrafficSourceCaptions()[source], source);
+    auto cameraZoomSettingsEditor = new CameraZoomSettingsEditor(this, _camIdx, 3);
+    //??? connect(cameraSettingsEditor, &CameraSettingsEditor::onCamInfoUpdated, this, &CameraListSettingsEditor::onCamInfoUpdated);
+    cameraZoomSettingsEditor->showNormal();
 }
 
-QWidget *CameraSettingsEditor::createConnectionWidgets()
+QRadioButton *CameraSettingsEditor::addVideoSourceRadioButton(QButtonGroupExt *gbVideoSource, VideoFrameTrafficSources source)
+{
+    return gbVideoSource->appendButton(ConstantNames::VideoFrameTrafficSourceCaptions()[source], source);
+}
+
+QWidget *CameraSettingsEditor::createConnectionWidgets(int connectionId)
 {
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
-    auto cameraSettings = applicationSettings.cameraSettings(_camIdx);
+    auto cameraPrefenences = applicationSettings.cameraPreferences(_camIdx);
+    auto connectionSetting = cameraPrefenences->videoConnectionSetting(connectionId);
 
-    auto spoilerConnection = new SpoilerGrid(tr("Connection"), this);
+    auto spoilerConnection = new SpoilerGrid(tr("Connection %1").arg(connectionId + 1), this);
     auto connectionLayout = spoilerConnection->gridLayout();
 
-    _gbVideoSource = new QButtonGroupExt(this);
-    auto rbVideoSourceUSBCamera        = addVideoSourceRadioButton(VideoFrameTrafficSources::USBCamera);
-    auto rbVideoSourceXPlane           = addVideoSourceRadioButton(VideoFrameTrafficSources::XPlane);
-    auto rbVideoSourceYurion           = addVideoSourceRadioButton(VideoFrameTrafficSources::Yurion);
-    auto rbVideoSourceImageFile        = addVideoSourceRadioButton(VideoFrameTrafficSources::CalibrationImage);
-    auto rbVideoSourceVideoFile        = addVideoSourceRadioButton(VideoFrameTrafficSources::VideoFile);
-    auto rbVideoSourceRTSP             = addVideoSourceRadioButton(VideoFrameTrafficSources::RTSP);
-    auto rbVideoSourceNetworkCam       = addVideoSourceRadioButton(VideoFrameTrafficSources::MUSV2);
+    auto gbVideoSource = new QButtonGroupExt(this);
+    auto rbVideoSourceUSBCamera        = addVideoSourceRadioButton(gbVideoSource, VideoFrameTrafficSources::USBCamera);
+    auto rbVideoSourceXPlane           = addVideoSourceRadioButton(gbVideoSource, VideoFrameTrafficSources::XPlane);
+    auto rbVideoSourceYurion           = addVideoSourceRadioButton(gbVideoSource, VideoFrameTrafficSources::Yurion);
+    auto rbVideoSourceImageFile        = addVideoSourceRadioButton(gbVideoSource, VideoFrameTrafficSources::CalibrationImage);
+    auto rbVideoSourceVideoFile        = addVideoSourceRadioButton(gbVideoSource, VideoFrameTrafficSources::VideoFile);
+    auto rbVideoSourceRTSP             = addVideoSourceRadioButton(gbVideoSource, VideoFrameTrafficSources::RTSP);
+    auto rbVideoSourceNetworkCam       = addVideoSourceRadioButton(gbVideoSource, VideoFrameTrafficSources::MUSV2);
 
-    connect(_gbVideoSource, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this, &CameraSettingsEditor::onVideoSourceSelected);
+    connect(gbVideoSource, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this, &CameraSettingsEditor::onVideoSourceSelected);
 
-    _cbUSBCamera = new QComboBoxExt(this);
+    auto cbUSBCamera = new QComboBoxExt(this);
     foreach (const QCameraInfo &cameraInfo, QCameraInfo::availableCameras())
-        _cbUSBCamera->addItem(cameraInfo.description(), cameraInfo.deviceName());
+        cbUSBCamera->addItem(cameraInfo.description(), cameraInfo.deviceName());
 
-    _naeXPlane = new NetworkAddressEditor(this, &_association, &cameraSettings->VideoFrameSourceXPlaneAddress, &cameraSettings->VideoFrameSourceXPlanePort);
-    _lblYurionUDPPort = new QLabel(tr("UDP Port:"), this);
-    _edYurionUDPPort = CommonWidgetUtils::createPortEditor(this);
+//???    auto naeXPlane = new NetworkAddressEditor(this, &_association,  connectionSetting->VideoFrameSourceXPlaneAddress, connectionSettings->VideoFrameSourceXPlanePort);
+    auto lblYurionUDPPort = new QLabel(tr("UDP Port:"), this);
+    auto edYurionUDPPort = CommonWidgetUtils::createPortEditor(this);
 
-    _cbCalibrationImagePath = new QComboBoxExt(this);
-    _cbCalibrationImagePath->setEditable(true);
-    _cbCalibrationImagePath->addItem(DefaultCalibrationImagePath);
-    _cbCalibrationImagePath->addItem(":/CalibrationImages/Mira1.png");
+    auto cbCalibrationImagePath = new QComboBoxExt(this);
+    cbCalibrationImagePath->setEditable(true);
+    cbCalibrationImagePath->addItem(DefaultCalibrationImagePath);
+    cbCalibrationImagePath->addItem(":/CalibrationImages/Mira1.png");
 
-    _fpsVideoFile = new FilePathSelector(this, tr("Video File"), tr("Select Video File"), tr("Video Files (*.avi)"));
-    _fpsVideoFile->setLabelWidth(0);
+    auto fpsVideoFile = new FilePathSelector(this, tr("Video File"), tr("Select Video File"), tr("Video Files (*.avi)"));
+    fpsVideoFile->setLabelWidth(0);
 
-    _edRTSPUrl = new QLineEdit(this);
+    auto edRTSPUrl = new QLineEdit(this);
 
-    _lblMUSV2UDPPort = new QLabel(tr("UDP Port:"), this);
-    _edMUSV2UDPPort = CommonWidgetUtils::createPortEditor(this);
+    auto lblMUSV2UDPPort = new QLabel(tr("UDP Port:"), this);
+    auto edMUSV2UDPPort = CommonWidgetUtils::createPortEditor(this);
 
     int row = 0;
-    connectionLayout->addWidget(rbVideoSourceUSBCamera,          row, 0, 1, 1);
-    connectionLayout->addWidget(_cbUSBCamera,                    row, 1, 1, 5);
+    connectionLayout->addWidget(rbVideoSourceUSBCamera,         row, 0, 1, 1);
+    connectionLayout->addWidget(cbUSBCamera,                    row, 1, 1, 5);
     row++;
 
-    connectionLayout->addWidget(rbVideoSourceXPlane,             row, 0, 1, 1);
-    connectionLayout->addWidget(_naeXPlane,                      row, 1, 1, 2);
+    connectionLayout->addWidget(rbVideoSourceXPlane,            row, 0, 1, 1);
+    //???connectionLayout->addWidget(naeXPlane,                      row, 1, 1, 2);
     row++;
 
-    connectionLayout->addWidget(rbVideoSourceYurion,             row, 0, 1, 1);
-    connectionLayout->addWidget(_lblYurionUDPPort,               row, 1, 1, 1);
-    connectionLayout->addWidget(_edYurionUDPPort,                row, 2, 1, 1);
+    connectionLayout->addWidget(rbVideoSourceYurion,            row, 0, 1, 1);
+    connectionLayout->addWidget(lblYurionUDPPort,               row, 1, 1, 1);
+    connectionLayout->addWidget(edYurionUDPPort,                row, 2, 1, 1);
     row++;
 
-    connectionLayout->addWidget(rbVideoSourceImageFile,          row, 0, 1, 1);
-    connectionLayout->addWidget(_cbCalibrationImagePath,         row, 1, 1, 5);
+    connectionLayout->addWidget(rbVideoSourceImageFile,         row, 0, 1, 1);
+    connectionLayout->addWidget(cbCalibrationImagePath,         row, 1, 1, 5);
     row++;
 
-    connectionLayout->addWidget(rbVideoSourceVideoFile,          row, 0, 1, 1);
-    connectionLayout->addWidget(_fpsVideoFile,                   row, 1, 1, 5);
+    connectionLayout->addWidget(rbVideoSourceVideoFile,         row, 0, 1, 1);
+    connectionLayout->addWidget(fpsVideoFile,                   row, 1, 1, 5);
     row++;
 
-    connectionLayout->addWidget(rbVideoSourceRTSP,               row, 0, 1, 1);
-    connectionLayout->addWidget(_edRTSPUrl,                      row, 1, 1, 5);
+    connectionLayout->addWidget(rbVideoSourceRTSP,              row, 0, 1, 1);
+    connectionLayout->addWidget(edRTSPUrl,                      row, 1, 1, 5);
     row++;
 
-    connectionLayout->addWidget(rbVideoSourceNetworkCam,         row, 0, 1, 1);
-    connectionLayout->addWidget(_lblMUSV2UDPPort,                row, 1, 1, 1);
-    connectionLayout->addWidget(_edMUSV2UDPPort,                 row, 2, 1, 1);
+    connectionLayout->addWidget(rbVideoSourceNetworkCam,        row, 0, 1, 1);
+    connectionLayout->addWidget(lblMUSV2UDPPort,                row, 1, 1, 1);
+    connectionLayout->addWidget(edMUSV2UDPPort,                 row, 2, 1, 1);
     row++;
+
+
+    _association.addBinding(connectionSetting->VideoTrafficSource,                  gbVideoSource);
+    _association.addBinding(connectionSetting->VideoFrameSourceCameraName,          cbUSBCamera);
+    _association.addBinding(connectionSetting->VideoFrameSourceYurionUDPPort,       edYurionUDPPort);
+    _association.addBinding(connectionSetting->CalibrationImagePath,                cbCalibrationImagePath);
+    _association.addBinding(connectionSetting->VideoFilePath,                       fpsVideoFile);
+    _association.addBinding(connectionSetting->RTSPUrl,                             edRTSPUrl);
+    _association.addBinding(connectionSetting->VideoFrameSourceMUSV2UDPPort,        edMUSV2UDPPort);
 
     return spoilerConnection;
 }
@@ -441,9 +434,11 @@ QWidget *CameraSettingsEditor::createFunctionsWidgets()
 void CameraSettingsEditor::initBindings()
 {
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
-    auto cameraSettings = applicationSettings.cameraSettings(_camIdx);
+    auto cameraSettings = applicationSettings.cameraPreferences(_camIdx);
 
-    _association.addBinding(&(cameraSettings->CameraDescription),                   _edtCamDescription);
+    _association.addBinding(&(cameraSettings->UserDescription),                   _edtCamDescription);
+    _association.addBinding(&(cameraSettings->PhisycalLensCount),                   _cbOpticalDevicesCount);
+
 
     if (_isPhotographyLicensed)
     {
@@ -464,8 +459,10 @@ void CameraSettingsEditor::initBindings()
     _association.addBinding(&(cameraSettings->CamRollMin),                          _sbCamRollMin);
     _association.addBinding(&(cameraSettings->CamRollMax),                          _sbCamRollMax);
     _association.addBinding(&(cameraSettings->CamAxisXInverse),                      _chkCamAxisXInverse);
-    _association.addBinding(&(cameraSettings->CamZoomMin),                          _sbCamZoomMin);
-    _association.addBinding(&(cameraSettings->CamZoomMax),                          _sbCamZoomMax);
+
+    //???
+    _association.addBinding(&(cameraSettings->CamZoomMinA),                          _sbCamZoomMin);
+    _association.addBinding(&(cameraSettings->CamZoomMaxA),                          _sbCamZoomMax);
 
     _association.addBinding(&(cameraSettings->FixedPosLandingYaw),                  _sbFixedPosLandingYaw);
     _association.addBinding(&(cameraSettings->FixedPosLandingPitch),                _sbFixedPosLandingPitch);
@@ -485,15 +482,15 @@ void CameraSettingsEditor::initBindings()
 
     _association.addBinding(&(cameraSettings->CameraControlMode),                   _cbCameraControlMode);
 
-    _association.addBinding(&(cameraSettings->VideoTrafficSource),                  _gbVideoSource);
-    _association.addBinding(&(cameraSettings->VideoFrameSourceCameraName),          _cbUSBCamera);
-    _association.addBinding(&(cameraSettings->VideoFrameSourceYurionUDPPort),       _edYurionUDPPort);
-    _association.addBinding(&(cameraSettings->CalibrationImagePath),                _cbCalibrationImagePath);
-    _association.addBinding(&(cameraSettings->VideoFilePath),                       _fpsVideoFile);
-    _association.addBinding(&(cameraSettings->RTSPUrl),                             _edRTSPUrl);
-
-    _association.addBinding(&(cameraSettings->VideoFrameSourceMUSV2UDPPort),        _edMUSV2UDPPort);
-
+    /*
+    _association.addBinding(&(cameraSettings->VideoTrafficSource1),                  _gbVideoSource);
+    _association.addBinding(&(cameraSettings->VideoFrameSourceCameraName1),          _cbUSBCamera);
+    _association.addBinding(&(cameraSettings->VideoFrameSourceYurionUDPPort1),       _edYurionUDPPort);
+    _association.addBinding(&(cameraSettings->CalibrationImagePath1),                _cbCalibrationImagePath);
+    _association.addBinding(&(cameraSettings->VideoFilePath1),                       _fpsVideoFile);
+    _association.addBinding(&(cameraSettings->RTSPUrl1),                             _edRTSPUrl);
+    _association.addBinding(&(cameraSettings->VideoFrameSourceMUSV2UDPPort1),        _edMUSV2UDPPort);
+*/
     _bombingSightNumbers = &(cameraSettings->BombingSightNumbers);
 }
 
@@ -526,6 +523,8 @@ void CameraSettingsEditor::loadSettings()
             }
         }
     }
+
+    _cbOpticalDevicesCount->activated(_cbOpticalDevicesCount->currentIndex()); //activate siognal processing
 }
 
 void CameraSettingsEditor::saveSettings()
@@ -548,6 +547,7 @@ void CameraSettingsEditor::saveSettings()
 
 void CameraSettingsEditor::onVideoSourceSelected(int id)
 {
+    /*
     QList<QWidget*> disabledControls, enabledControls;
     disabledControls << _cbUSBCamera << _naeXPlane \
                      << _lblYurionUDPPort << _edYurionUDPPort << _cbCalibrationImagePath \
@@ -600,4 +600,5 @@ void CameraSettingsEditor::onVideoSourceSelected(int id)
     }
     foreach (auto widget, disabledControls)
         widget->setEnabled(false);
+        */
 }
