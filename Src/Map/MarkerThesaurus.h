@@ -94,8 +94,6 @@ private:
                                     const QString &description, const QString &comments,
                                     const QPixmap &image, const QPixmap &highlightedImage,
                                     bool useParty, const QByteArray rawSAMData, quint32 orderNo);
-    void cleanupObsoleteMarkerTemplates();
-
     void clearLists();
     MarkerTemplate *getUnknownMarkerTemplate();
 
@@ -107,7 +105,8 @@ private:
 public:
     static MarkerThesaurus& Instance();
 
-    void ImportAndReplaceFromXML(const QString &xmlFileName);
+    void importAndReplaceFromXML(const QString &xmlFileName);
+    void cleanUp();
 
     void saveMarkerTemplate(MarkerTemplate *markerTemplate);
 

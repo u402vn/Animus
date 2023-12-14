@@ -74,7 +74,7 @@ QString getImageFixedPath(const QString &xmlFile, const QString &imagePath)
     return QString("");
 }
 
-void MarkerThesaurus::ImportAndReplaceFromXML(const QString &xmlFileName)
+void MarkerThesaurus::importAndReplaceFromXML(const QString &xmlFileName)
 {
     EnterProc("MarkerThesaurus::ImportAndReplaceFromXML");
 
@@ -158,8 +158,16 @@ void MarkerThesaurus::ImportAndReplaceFromXML(const QString &xmlFileName)
     }
 }
 
+void MarkerThesaurus::cleanUp()
+{
+    EnterProc("MarkerThesaurus::CleanupObsoleteMarkerTemplates");
+    EXEC_SQL(_markerThesaurusDatabase, "DELETE FROM MarkerThesaurus WHERE DeletedDT IS NOT NULL");
+    EXEC_SQL(_markerThesaurusDatabase, "VACUUM");
+}
+
 void MarkerThesaurus::saveMarkerTemplate(MarkerTemplate *markerTemplate)
 {
+    EnterProc("MarkerThesaurus::saveMarkerTemplate");
     saveMarkerTemplate(
                 markerTemplate->parentGUID(), markerTemplate->GUID(),
                 markerTemplate->description(), markerTemplate->comments(),
@@ -169,6 +177,7 @@ void MarkerThesaurus::saveMarkerTemplate(MarkerTemplate *markerTemplate)
 
 MarkerTemplate *MarkerThesaurus::createNewMarkerTemplate(QString parentGUID)
 {
+    EnterProc("MarkerThesaurus::createNewMarkerTemplate");
     QString templateGUID = QUuid::createUuid().toString();
     if (parentGUID.isEmpty())
         parentGUID = templateGUID;
@@ -182,8 +191,7 @@ void MarkerThesaurus::saveMarkerTemplate(const QString &parentGUID, const QStrin
                                          const QPixmap &image,
                                          bool useParty, const QByteArray &rawSAMData, quint32 order)
 {
-    EnterProc("MarkerThesaurus::saveMarkerTemplate");
-
+    EnterProc("MarkerThesaurus::saveMarkerTemplate_2");
     double deletedDT = GetCurrentDateTimeForDB();
     QSqlQuery deleteQuery(_markerThesaurusDatabase);
     deleteQuery.prepare("UPDATE MarkerThesaurus SET DeletedDT = ? WHERE GUID = ?");
@@ -219,12 +227,6 @@ void MarkerThesaurus::saveMarkerTemplate(const QString &parentGUID, const QStrin
     LOG_SQL_ERROR(insertQuery);
 }
 
-void MarkerThesaurus::cleanupObsoleteMarkerTemplates()
-{
-    EnterProc("MarkerThesaurus::CleanupObsoleteMarkerTemplates");
-
-    EXEC_SQL(_markerThesaurusDatabase, "DELETE FROM MarkerThesaurus WHERE DeletedDT IS NOT NULL");
-}
 
 void MarkerThesaurus::clearLists()
 {
@@ -253,6 +255,7 @@ void MarkerThesaurus::appendMarkerTemplateToHash(const QString &parentGUID, cons
                                                  bool useParty, const QByteArray rawSAMData,
                                                  quint32 orderNo)
 {
+    EnterProc("MarkerThesaurus::appendMarkerTemplateToHash");
     auto markerTemplate = new MarkerTemplate(this, parentGUID, markerGUID);
 
     markerTemplate->setDescription(description);
