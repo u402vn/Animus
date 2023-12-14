@@ -67,9 +67,6 @@ void CameraSettingsEditor::initWidgets()
     auto lblCamDescription = new QLabel(tr("Description"), this);
     _edtCamDescription = new QLineEdit(this);
 
-    //    connect(_lblImage, &QLabelEx::clicked, this,  [=]()
-
-
     auto btnEditOpticalDeviceASettings = new QPushButton(tr("Optical Device A"), this);
     connect(btnEditOpticalDeviceASettings, &QPushButton::clicked, this, &CameraSettingsEditor::onEditOpticalDeviceASettingsClicked);
 
@@ -92,8 +89,8 @@ void CameraSettingsEditor::initWidgets()
 
 
     auto gimbalWidgets = createGimbalWidgets();
-    auto connectionWidgets1 = createConnectionWidgets(0);
-    auto connectionWidgets2 = createConnectionWidgets(1);
+    auto connectionWidgets1 = createConnectionWidgets(1);
+    auto connectionWidgets2 = createConnectionWidgets(2);
     auto functionsWidgets = createFunctionsWidgets();
 
     auto camControlsGrid = new QGridLayout(scrolledWidget);
@@ -138,11 +135,9 @@ QWidget *CameraSettingsEditor::createGimbalWidgets()
     auto lblFixedCamYaw = new QLabel(tr("Yaw"), this);
     auto lblFixedCamPitch = new QLabel(tr("Pitch"), this);
     auto lblFixedCamRoll =  new QLabel(tr("Roll"), this);
-    auto lblFixedCamZoom =  new QLabel(tr("Zoom"), this);
 
     _sbFixedCamPitch = CommonWidgetUtils::createRangeSpinbox(this, -180, +180);
     _sbFixedCamRoll  = CommonWidgetUtils::createRangeSpinbox(this, -180, +180);
-    _sbFixedCamZoom  = CommonWidgetUtils::createRangeSpinbox(this, 1, MAXIMAL_CAMERA_ZOOM);
 
     // Main Controls
     _cbCameraControlMode = new QComboBoxExt(this, ConstantNames::CameraControlModeCaptions());
@@ -150,12 +145,10 @@ QWidget *CameraSettingsEditor::createGimbalWidgets()
     auto lblCamHeaderMin = new QLabel(tr("Minimum Value"), this);
     _sbCamPitchMin = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);
     _sbCamRollMin = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);
-    _sbCamZoomMin = CommonWidgetUtils::createRangeSpinbox(this, 1, MAXIMAL_CAMERA_ZOOM);
 
     auto lblCamHeaderMax = new QLabel(tr("Maximum Value"), this);
     _sbCamPitchMax = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);
     _sbCamRollMax = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);
-    _sbCamZoomMax = CommonWidgetUtils::createRangeSpinbox(this, 1, MAXIMAL_CAMERA_ZOOM);
 
     _chkCamAxisXInverse = new QCheckBox(tr("Inverse Axis X"), this);
     _chkCamAxisYInverse = new QCheckBox(tr("Inverse Axis Y"), this);
@@ -167,20 +160,17 @@ QWidget *CameraSettingsEditor::createGimbalWidgets()
     _sbFixedPosLandingYaw = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);
     _sbFixedPosLandingPitch = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);
     _sbFixedPosLandingRoll  = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);
-    _sbFixedPosLandingZoom  = CommonWidgetUtils::createRangeSpinbox(this, 1, MAXIMAL_CAMERA_ZOOM);
     _chkFixedPosLandingCommand = new QCheckBox(tr("Special Command for Landing Position"), this);
 
     auto lblFixedPosBegining = new QLabel(tr("Begining Position"), this);
     _sbFixedPosBeginingYaw = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);
     _sbFixedPosBeginingPitch = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);
     _sbFixedPosBeginingRoll  = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);
-    _sbFixedPosBeginingZoom  = CommonWidgetUtils::createRangeSpinbox(this, 1, MAXIMAL_CAMERA_ZOOM);
 
     auto lblFixedPosVertical = new QLabel(tr("Vertical Position"), this);
     _sbFixedPosVerticalYaw = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);
     _sbFixedPosVerticalPitch = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);
     _sbFixedPosVerticalRoll  = CommonWidgetUtils::createRangeSpinbox(this, -720, +720);
-    _sbFixedPosVerticalZoom  = CommonWidgetUtils::createRangeSpinbox(this, 1, MAXIMAL_CAMERA_ZOOM);
 
     int row = 0;
 
@@ -188,32 +178,28 @@ QWidget *CameraSettingsEditor::createGimbalWidgets()
     gimbalLayout->addWidget(lblFixedCamYaw,                  row, 2, 1, 1);
     gimbalLayout->addWidget(lblFixedCamPitch,                row, 3, 1, 1);
     gimbalLayout->addWidget(lblFixedCamRoll,                 row, 4, 1, 1);
-    gimbalLayout->addWidget(lblFixedCamZoom,                 row, 5, 1, 1);
     gimbalLayout->setRowStretch(row, 0);
     row++;
 
     gimbalLayout->addWidget(_sbFixedCamPitch,                row, 3, 1, 1);
     gimbalLayout->addWidget(_sbFixedCamRoll,                 row, 4, 1, 1);
-    gimbalLayout->addWidget(_sbFixedCamZoom,                 row, 5, 1, 1);
     gimbalLayout->setRowStretch(row, 0);
     row++;
 
     gimbalLayout->addWidget(rbRotatingCamera,                row, 0, 1, 2);
-    gimbalLayout->addWidget(_cbCameraControlMode,            row, 2, 1, 4);
+    gimbalLayout->addWidget(_cbCameraControlMode,            row, 2, 1, 3);
     gimbalLayout->setRowStretch(row, 0);
     row++;
 
     gimbalLayout->addWidget(lblCamHeaderMin,                 row, 1, 1, 1);
     gimbalLayout->addWidget(_sbCamPitchMin,                  row, 3, 1, 1);
     gimbalLayout->addWidget(_sbCamRollMin,                   row, 4, 1, 1);
-    gimbalLayout->addWidget(_sbCamZoomMin,                   row, 5, 1, 1);
     gimbalLayout->setRowStretch(row, 0);
     row++;
 
     gimbalLayout->addWidget(lblCamHeaderMax,                 row, 1, 1, 1);
     gimbalLayout->addWidget(_sbCamPitchMax,                  row, 3, 1, 1);
     gimbalLayout->addWidget(_sbCamRollMax,                   row, 4, 1, 1);
-    gimbalLayout->addWidget(_sbCamZoomMax,                   row, 5, 1, 1);
     gimbalLayout->setRowStretch(row, 0);
     row++;
 
@@ -221,7 +207,6 @@ QWidget *CameraSettingsEditor::createGimbalWidgets()
     gimbalLayout->addWidget(_sbFixedPosLandingYaw,           row, 2, 1, 1);
     gimbalLayout->addWidget(_sbFixedPosLandingPitch,         row, 3, 1, 1);
     gimbalLayout->addWidget(_sbFixedPosLandingRoll,          row, 4, 1, 1);
-    gimbalLayout->addWidget(_sbFixedPosLandingZoom,          row, 5, 1, 1);
     row++;
 
     gimbalLayout->addWidget(_chkFixedPosLandingCommand,      row, 2, 1, 4);
@@ -231,7 +216,6 @@ QWidget *CameraSettingsEditor::createGimbalWidgets()
     gimbalLayout->addWidget(_sbFixedPosBeginingYaw,          row, 2, 1, 1);
     gimbalLayout->addWidget(_sbFixedPosBeginingPitch,        row, 3, 1, 1);
     gimbalLayout->addWidget(_sbFixedPosBeginingRoll,         row, 4, 1, 1);
-    gimbalLayout->addWidget(_sbFixedPosBeginingZoom,         row, 5, 1, 1);
     gimbalLayout->setRowStretch(row, 0);
     row++;
 
@@ -239,7 +223,6 @@ QWidget *CameraSettingsEditor::createGimbalWidgets()
     gimbalLayout->addWidget(_sbFixedPosVerticalYaw,          row, 2, 1, 1);
     gimbalLayout->addWidget(_sbFixedPosVerticalPitch,        row, 3, 1, 1);
     gimbalLayout->addWidget(_sbFixedPosVerticalRoll,         row, 4, 1, 1);
-    gimbalLayout->addWidget(_sbFixedPosVerticalZoom,         row, 5, 1, 1);
     gimbalLayout->setRowStretch(row, 0);
     row++;
 
@@ -259,19 +242,7 @@ QWidget *CameraSettingsEditor::createGimbalWidgets()
 const QString CameraSettingsEditor::getCameraInfo(qint32 camIdx)
 {
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
-    auto cameraSettings = applicationSettings.cameraPreferences(camIdx);
-
-    QString detail = cameraSettings->videoConnectionSetting(0)->description();
-
-    QString description = cameraSettings->UserDescription;
-    if (description.isEmpty())
-        description = tr("Unnamed video source");
-
-    QString info = tr(" %1\n %2 \t %3x%4")
-            .arg(description)
-            .arg(detail)
-            .arg(cameraSettings->CamViewSizeHorizontalA).arg(cameraSettings->CamViewSizeVerticalA);
-
+    auto info = applicationSettings.cameraPreferences(camIdx)->description();
     return info;
 }
 
@@ -307,7 +278,7 @@ QWidget *CameraSettingsEditor::createConnectionWidgets(int connectionId)
     auto cameraPrefenences = applicationSettings.cameraPreferences(_camIdx);
     auto connectionSetting = cameraPrefenences->videoConnectionSetting(connectionId);
 
-    auto spoilerConnection = new SpoilerGrid(tr("Connection %1").arg(connectionId + 1), this);
+    auto spoilerConnection = new SpoilerGrid(tr("Connection %1").arg(connectionId), this);
     auto connectionLayout = spoilerConnection->gridLayout();
 
     auto gbVideoSource = new QButtonGroupExt(this);
@@ -325,7 +296,8 @@ QWidget *CameraSettingsEditor::createConnectionWidgets(int connectionId)
     foreach (const QCameraInfo &cameraInfo, QCameraInfo::availableCameras())
         cbUSBCamera->addItem(cameraInfo.description(), cameraInfo.deviceName());
 
-//???    auto naeXPlane = new NetworkAddressEditor(this, &_association,  connectionSetting->VideoFrameSourceXPlaneAddress, connectionSettings->VideoFrameSourceXPlanePort);
+    auto naeXPlane = new NetworkAddressEditor(this, &_association,
+                                              connectionSetting->VideoFrameSourceXPlaneAddress, connectionSetting->VideoFrameSourceXPlanePort);
     auto lblYurionUDPPort = new QLabel(tr("UDP Port:"), this);
     auto edYurionUDPPort = CommonWidgetUtils::createPortEditor(this);
 
@@ -348,7 +320,7 @@ QWidget *CameraSettingsEditor::createConnectionWidgets(int connectionId)
     row++;
 
     connectionLayout->addWidget(rbVideoSourceXPlane,            row, 0, 1, 1);
-    //???connectionLayout->addWidget(naeXPlane,                      row, 1, 1, 2);
+    connectionLayout->addWidget(naeXPlane,                      row, 1, 1, 2);
     row++;
 
     connectionLayout->addWidget(rbVideoSourceYurion,            row, 0, 1, 1);
@@ -450,7 +422,6 @@ void CameraSettingsEditor::initBindings()
 
     _association.addBinding(&(cameraSettings->FixedCamPitch),                       _sbFixedCamPitch);
     _association.addBinding(&(cameraSettings->FixedCamRoll),                        _sbFixedCamRoll);
-    _association.addBinding(&(cameraSettings->FixedCamZoom),                        _sbFixedCamZoom);
 
     _association.addBinding(&(cameraSettings->CamPitchMin),                         _sbCamPitchMin);
     _association.addBinding(&(cameraSettings->CamPitchMax),                         _sbCamPitchMax);
@@ -460,37 +431,21 @@ void CameraSettingsEditor::initBindings()
     _association.addBinding(&(cameraSettings->CamRollMax),                          _sbCamRollMax);
     _association.addBinding(&(cameraSettings->CamAxisXInverse),                      _chkCamAxisXInverse);
 
-    //???
-    _association.addBinding(&(cameraSettings->CamZoomMinA),                          _sbCamZoomMin);
-    _association.addBinding(&(cameraSettings->CamZoomMaxA),                          _sbCamZoomMax);
 
     _association.addBinding(&(cameraSettings->FixedPosLandingYaw),                  _sbFixedPosLandingYaw);
     _association.addBinding(&(cameraSettings->FixedPosLandingPitch),                _sbFixedPosLandingPitch);
     _association.addBinding(&(cameraSettings->FixedPosLandingRoll),                 _sbFixedPosLandingRoll);
-    _association.addBinding(&(cameraSettings->FixedPosLandingZoom),                 _sbFixedPosLandingZoom);
     _association.addBinding(&(cameraSettings->FixedPosLandingCommand),              _chkFixedPosLandingCommand);
 
     _association.addBinding(&(cameraSettings->FixedPosBeginingYaw),                 _sbFixedPosBeginingYaw);
     _association.addBinding(&(cameraSettings->FixedPosBeginingPitch),               _sbFixedPosBeginingPitch);
     _association.addBinding(&(cameraSettings->FixedPosBeginingRoll),                _sbFixedPosBeginingRoll);
-    _association.addBinding(&(cameraSettings->FixedPosBeginingZoom),                _sbFixedPosBeginingZoom);
 
     _association.addBinding(&(cameraSettings->FixedPosVerticalYaw),                 _sbFixedPosVerticalYaw);
     _association.addBinding(&(cameraSettings->FixedPosVerticalPitch),               _sbFixedPosVerticalPitch);
     _association.addBinding(&(cameraSettings->FixedPosVerticalRoll),                _sbFixedPosVerticalRoll);
-    _association.addBinding(&(cameraSettings->FixedPosVerticalZoom),                _sbFixedPosVerticalZoom);
 
     _association.addBinding(&(cameraSettings->CameraControlMode),                   _cbCameraControlMode);
-
-    /*
-    _association.addBinding(&(cameraSettings->VideoTrafficSource1),                  _gbVideoSource);
-    _association.addBinding(&(cameraSettings->VideoFrameSourceCameraName1),          _cbUSBCamera);
-    _association.addBinding(&(cameraSettings->VideoFrameSourceYurionUDPPort1),       _edYurionUDPPort);
-    _association.addBinding(&(cameraSettings->CalibrationImagePath1),                _cbCalibrationImagePath);
-    _association.addBinding(&(cameraSettings->VideoFilePath1),                       _fpsVideoFile);
-    _association.addBinding(&(cameraSettings->RTSPUrl1),                             _edRTSPUrl);
-    _association.addBinding(&(cameraSettings->VideoFrameSourceMUSV2UDPPort1),        _edMUSV2UDPPort);
-*/
     _bombingSightNumbers = &(cameraSettings->BombingSightNumbers);
 }
 

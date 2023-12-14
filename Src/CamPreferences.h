@@ -21,6 +21,8 @@ class OpticalDevicePreferences final : public QObject
     QList<double> _fovVerticalAngles;
     QList<double> _automaticTracerSpeedMultipliers;
     QList<double> _manualSpeedMultipliers;
+    bool _forceSetResolution;
+    bool _useVerticalFrameMirrororing;
 
     quint32 zoomIndex(quint32 zoom);
 public:
@@ -33,7 +35,7 @@ public:
               const QList<double> &fovHorizontalAngles,
               const QList<double> &fovVerticalAngles,
               const QList<double> &automaticTracerSpeedMultipliers,
-              const QList<double> &manualSpeedMultipliers);
+              const QList<double> &manualSpeedMultipliers, bool forceSetResolution, bool useVerticalFrameMirrororing);
 
     double fovHorizontalAngle(qint32 zoom);
     double fovVerticalAngle(qint32 zoom);
@@ -45,6 +47,8 @@ public:
 
     quint32 zoomMin();
     quint32 zoomMax();
+    bool forceSetResolution();
+    bool useVerticalFrameMirrororing();
 
     quint32 magnifierSize();
     qreal magnifierScale();
@@ -72,8 +76,8 @@ public:
                  const QList<double> &fovHorizontalAngles,
                  const QList<double> &fovVerticalAngles,
                  const QList<double> &automaticTracerSpeedMultipliers,
-                 const QList<double> &manualSpeedMultipliers
-                 );
+                 const QList<double> &manualSpeedMultipliers,
+                 bool forceSetResolution, bool useVerticalFrameMirrororing);
     OpticalDevicePreferences *opticalDevice(qint32 opticalDeviceId);
 
     double encoderAutomaticTracerMultiplier();

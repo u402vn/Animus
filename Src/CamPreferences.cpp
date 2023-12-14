@@ -12,9 +12,10 @@ OpticalDevicePreferences::~OpticalDevicePreferences()
 }
 
 void OpticalDevicePreferences::init(qint32 farmeWidth, qint32 frameHeight, quint32 zoomMinValue, quint32 zoomMaxValue,
-                          quint32 magnifierSize, qreal magnifierScale,
-                          const QList<double> &fovHorizontalAngles, const QList<double> &fovVerticalAngles,
-                          const QList<double> &automaticTracerSpeedMultipliers, const QList<double> &manualSpeedMultipliers)
+                                    quint32 magnifierSize, qreal magnifierScale,
+                                    const QList<double> &fovHorizontalAngles, const QList<double> &fovVerticalAngles,
+                                    const QList<double> &automaticTracerSpeedMultipliers, const QList<double> &manualSpeedMultipliers,
+                                    bool forceSetResolution, bool useVerticalFrameMirrororing)
 {
     _frameWidth = farmeWidth;
     _frameHeight = frameHeight;
@@ -26,6 +27,8 @@ void OpticalDevicePreferences::init(qint32 farmeWidth, qint32 frameHeight, quint
     _fovVerticalAngles = fovVerticalAngles;
     _automaticTracerSpeedMultipliers = automaticTracerSpeedMultipliers;
     _manualSpeedMultipliers = manualSpeedMultipliers;
+    _forceSetResolution = forceSetResolution;
+    _useVerticalFrameMirrororing = useVerticalFrameMirrororing;
 
     //Q_ASSERT(_fovHorizontalAngles.count() == _fovVerticalAngles.count());
     //Q_ASSERT(_fovHorizontalAngles.count() == _automaticTracerSpeedMultipliers.count());
@@ -87,6 +90,16 @@ const QMatrix4x4 OpticalDevicePreferences::projection(qint32 zoom)
 quint32 OpticalDevicePreferences::zoomMax()
 {
     return _zoomMax;
+}
+
+bool OpticalDevicePreferences::forceSetResolution()
+{
+    return _forceSetResolution;
+}
+
+bool OpticalDevicePreferences::useVerticalFrameMirrororing()
+{
+    return _useVerticalFrameMirrororing;
 }
 
 quint32 OpticalDevicePreferences::magnifierSize()
@@ -154,9 +167,10 @@ void CamAssemblyPreferences::initGimbal(double encoderAutomaticTracerMultiplier)
 }
 
 void CamAssemblyPreferences::initOpticalDevice(qint32 opticalSystemId, qint32 farmeWidth, qint32 frameHeight, quint32 zoomMinValue, quint32 zoomMaxValue,
-                                     quint32 magnifierSize, qreal magnifierScale,
-                                     const QList<double> &fovHorizontalAngles, const QList<double> &fovVerticalAngles,
-                                     const QList<double> &automaticTracerSpeedMultipliers, const QList<double> &manualSpeedMultipliers)
+                                               quint32 magnifierSize, qreal magnifierScale,
+                                               const QList<double> &fovHorizontalAngles, const QList<double> &fovVerticalAngles,
+                                               const QList<double> &automaticTracerSpeedMultipliers, const QList<double> &manualSpeedMultipliers,
+                                               bool forceSetResolution, bool useVerticalFrameMirrororing)
 {
     auto opticalDevice = _opticalDevices.value(opticalSystemId, nullptr);
     if (opticalDevice == nullptr)
@@ -166,7 +180,8 @@ void CamAssemblyPreferences::initOpticalDevice(qint32 opticalSystemId, qint32 fa
     }
     opticalDevice->init(farmeWidth, frameHeight, zoomMinValue, zoomMaxValue, magnifierSize, magnifierScale,
                         fovHorizontalAngles, fovVerticalAngles,
-                        automaticTracerSpeedMultipliers, manualSpeedMultipliers);
+                        automaticTracerSpeedMultipliers, manualSpeedMultipliers,
+                        forceSetResolution, useVerticalFrameMirrororing);
 }
 
 OpticalDevicePreferences *CamAssemblyPreferences::opticalDevice(qint32 opticalDeviceId)

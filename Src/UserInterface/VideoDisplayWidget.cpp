@@ -139,8 +139,8 @@ void VideoDisplayWidget::saveSettings()
     cameraSettings->DigitalZoom = _digitalZoom;
     cameraSettings->UseBluredBorders = _useBluredBorders;
     cameraSettings->UseGimbalTelemetryOnly = TelemetryDataFrame::UseGimbalTelemetryOnlyForCalculation;
-    cameraSettings->MagnifierScaleA =  _camAssemblyPreferences->opticalDevice(1)->magnifierScale();
-    cameraSettings->MagnifierScaleB =  _camAssemblyPreferences->opticalDevice(2)->magnifierScale();
+    for (int opticalSystemId = 1; opticalSystemId <= 3; opticalSystemId++) //???todo strange ???
+        cameraSettings->opticalDeviceSetting(opticalSystemId)->MagnifierScale->setValue(_camAssemblyPreferences->opticalDevice(opticalSystemId)->magnifierScale());
 }
 
 void VideoDisplayWidget::setData(const TelemetryDataFrame &telemetryFrame, const QImage &frame)

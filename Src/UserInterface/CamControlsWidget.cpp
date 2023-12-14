@@ -167,7 +167,7 @@ void CamControlsWidget::createCamZoomControls()
     auto hint = QString("%1\n%2").arg(applicationSettings.hidUIHint(hidbtnCamZoomOut)).arg(applicationSettings.hidUIHint(hidbtnCamZoomIn));
     //create controls
     _camZoom = new QSlider(this);
-    _camZoom->setRange(cameraSettings->CamZoomMinA, cameraSettings->CamZoomMaxA); //???
+    _camZoom->setRange(cameraSettings->opticalDeviceSetting(1)->CamZoomMin->value(), cameraSettings->opticalDeviceSetting(1)->CamZoomMax->value()); //???todo
     _camZoom->setTickPosition(QSlider::TicksBothSides);
     _camZoom->setTickInterval(1);
     _camZoom->setPageStep(1);
@@ -188,13 +188,13 @@ void CamControlsWidget::createCamZoomControls()
     //init controls
     if ((cameraSettings->CameraSuspensionType == CameraSuspensionTypes::FixedCamera))
     {
-        _camZoom->setValue(cameraSettings->FixedCamZoom);
+        _camZoom->setValue(cameraSettings->opticalDeviceSetting(1)->FixedPosBeginingZoom->value()); //???todo
         _camZoom->setVisible(false);
         _camZoomIndicator->setVisible(false);
     }
     else
     {
-        _camZoom->setValue(cameraSettings->FixedPosBeginingZoom);
+        _camZoom->setValue(cameraSettings->opticalDeviceSetting(1)->FixedPosBeginingZoom->value()); //???todo
         _camZoom->setToolTip(hint);
         _camZoomIndicator->setToolTip(hint);
     }
@@ -598,7 +598,7 @@ void CamControlsWidget::onCamLandingPosClicked()
     {
         _btnAutomaticTracer->setChecked(false);
         _automaticTracer->followEncoderValues(cameraSettings->FixedPosLandingRoll, cameraSettings->FixedPosLandingPitch, cameraSettings->FixedPosLandingYaw);
-        onAbsoluteCamZoomChange(cameraSettings->FixedPosLandingZoom);
+        onAbsoluteCamZoomChange(cameraSettings->opticalDeviceSetting(1)->FixedPosLandingZoom->value()); //???todo
     }
 
     setCamControlsEnabled(false);

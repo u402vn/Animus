@@ -22,6 +22,12 @@ class CameraZoomSettingsEditor final : public QDialog
     QCheckBox *_chkVerticalMirror;
     QSpinBoxEx *_sbMagnifierSourceSize;
 
+    QSpinBoxEx *_sbCamZoomMin;
+    QSpinBoxEx *_sbCamZoomMax;
+    QSpinBoxEx *_sbFixedPosLandingZoom;
+    QSpinBoxEx *_sbFixedPosBeginingZoom;
+    QSpinBoxEx *_sbFixedPosVerticalZoom;
+
     qint32 _camIdx, _opticalSystemNumber;
 
     void recalculateRow(int zoom);

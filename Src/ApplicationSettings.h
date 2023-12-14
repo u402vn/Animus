@@ -15,20 +15,20 @@ const int ApplicationRestartExitCode = 1982;
 const QString DefaultCalibrationImagePath = ":/CalibrationImages/WorldMap1.jpg";
 
 
-class VideoConnectionSetting : public QObject
+class VideoConnectionSettings : public QObject
 {
     Q_OBJECT
 public:
-    VideoConnectionSetting(
-            ApplicationPreferenceEnum<VideoFrameTrafficSources> *VideoTrafficSource,
-            ApplicationPreferenceString *VideoFrameSourceCameraName,
-            ApplicationPreferenceString *VideoFrameSourceXPlaneAddress,
-            ApplicationPreferenceInt *VideoFrameSourceXPlanePort,
-            ApplicationPreferenceInt *VideoFrameSourceYurionUDPPort,
-            ApplicationPreferenceString *CalibrationImagePath,
-            ApplicationPreferenceString *VideoFilePath,
-            ApplicationPreferenceString *RTSPUrl,
-            ApplicationPreferenceInt *VideoFrameSourceMUSV2UDPPort);
+    VideoConnectionSettings(QObject *parent,
+                            ApplicationPreferenceEnum<VideoFrameTrafficSources> *VideoTrafficSource,
+                            ApplicationPreferenceString *VideoFrameSourceCameraName,
+                            ApplicationPreferenceString *VideoFrameSourceXPlaneAddress,
+                            ApplicationPreferenceInt *VideoFrameSourceXPlanePort,
+                            ApplicationPreferenceInt *VideoFrameSourceYurionUDPPort,
+                            ApplicationPreferenceString *CalibrationImagePath,
+                            ApplicationPreferenceString *VideoFilePath,
+                            ApplicationPreferenceString *RTSPUrl,
+                            ApplicationPreferenceInt *VideoFrameSourceMUSV2UDPPort);
 
     ApplicationPreferenceEnum<VideoFrameTrafficSources> *VideoTrafficSource;
     ApplicationPreferenceString *VideoFrameSourceCameraName;
@@ -43,6 +43,49 @@ public:
     const QString description();
 };
 
+class OpticalDeviceSettings : public QObject
+{
+    Q_OBJECT
+public:
+    OpticalDeviceSettings(QObject *parent,
+                          ApplicationPreferenceInt *DeviceLinkId,
+                          ApplicationPreferenceDouble *CamZoomMax,
+                          ApplicationPreferenceDouble *CamZoomMin,
+                          ApplicationPreferenceDouble *FixedPosLandingZoom,
+                          ApplicationPreferenceDouble *FixedPosBeginingZoom,
+                          ApplicationPreferenceDouble *FixedPosVerticalZoom,
+                          ApplicationPreferenceDoubleList *CamScaleCoefficient,
+                          ApplicationPreferenceDoubleList *CamViewAnglesHorizontal,
+                          ApplicationPreferenceDoubleList *CamViewAnglesVertical,
+                          ApplicationPreferenceDoubleList *CamAutomaticTracerSpeedMultipliers,
+                          ApplicationPreferenceDoubleList *CamManualSpeedMultipliers,
+                          ApplicationPreferenceInt *CamViewSizeHorizontal,
+                          ApplicationPreferenceInt *CamViewSizeVertical,
+                          ApplicationPreferenceBool *CamViewSizeForceSet,
+                          ApplicationPreferenceBool *UseVerticalFrameMirrororing,
+                          ApplicationPreferenceInt *MagnifierSourceSize,
+                          ApplicationPreferenceDouble *MagnifierScale);
+
+    ApplicationPreferenceInt *DeviceLinkId;
+    ApplicationPreferenceDouble *CamZoomMax;
+    ApplicationPreferenceDouble *CamZoomMin;
+    ApplicationPreferenceDouble *FixedPosLandingZoom;
+    ApplicationPreferenceDouble *FixedPosBeginingZoom;
+    ApplicationPreferenceDouble *FixedPosVerticalZoom;
+    ApplicationPreferenceDoubleList *CamScaleCoefficient;
+    ApplicationPreferenceDoubleList *CamViewAnglesHorizontal;
+    ApplicationPreferenceDoubleList *CamViewAnglesVertical;
+    ApplicationPreferenceDoubleList *CamAutomaticTracerSpeedMultipliers;
+    ApplicationPreferenceDoubleList *CamManualSpeedMultipliers;
+    ApplicationPreferenceInt *CamViewSizeHorizontal;
+    ApplicationPreferenceInt *CamViewSizeVertical;
+    ApplicationPreferenceBool *CamViewSizeForceSet;
+    ApplicationPreferenceBool *UseVerticalFrameMirrororing;
+    ApplicationPreferenceInt *MagnifierSourceSize;
+    ApplicationPreferenceDouble *MagnifierScale;
+
+    const QString description();
+};
 
 class CameraSettingsNode final : public ApplicationSettingsNode
 {
@@ -56,12 +99,17 @@ class CameraSettingsNode final : public ApplicationSettingsNode
     CameraSettingsNode(CameraSettingsNode const&) = delete;
     CameraSettingsNode& operator= (CameraSettingsNode const&) = delete;
 
-
+    // Video Connection 1
     ApplicationPreferenceEnum<VideoFrameTrafficSources> VideoTrafficSource1;
-
-
-
-
+    ApplicationPreferenceString VideoFrameSourceCameraName1;
+    ApplicationPreferenceString VideoFrameSourceXPlaneAddress1;
+    ApplicationPreferenceInt VideoFrameSourceXPlanePort1;
+    ApplicationPreferenceInt VideoFrameSourceYurionUDPPort1;
+    ApplicationPreferenceString CalibrationImagePath1;
+    ApplicationPreferenceString VideoFilePath1;
+    ApplicationPreferenceString RTSPUrl1;
+    ApplicationPreferenceInt VideoFrameSourceMUSV2UDPPort1;
+    // Video Connection 2
     ApplicationPreferenceEnum<VideoFrameTrafficSources> VideoTrafficSource2;
     ApplicationPreferenceString VideoFrameSourceCameraName2;
     ApplicationPreferenceString VideoFrameSourceXPlaneAddress2;
@@ -72,7 +120,63 @@ class CameraSettingsNode final : public ApplicationSettingsNode
     ApplicationPreferenceString RTSPUrl2;
     ApplicationPreferenceInt VideoFrameSourceMUSV2UDPPort2;
 
-    VideoConnectionSetting *_videoConnectionSetting[2];
+    // Optical system A
+    ApplicationPreferenceInt DeviceLinkIdA;
+    ApplicationPreferenceDouble CamZoomMaxA;
+    ApplicationPreferenceDouble CamZoomMinA;
+    ApplicationPreferenceDouble FixedPosLandingZoomA;
+    ApplicationPreferenceDouble FixedPosBeginingZoomA;
+    ApplicationPreferenceDouble FixedPosVerticalZoomA;
+    ApplicationPreferenceDoubleList CamScaleCoefficientA;
+    ApplicationPreferenceDoubleList CamViewAnglesHorizontalA;
+    ApplicationPreferenceDoubleList CamViewAnglesVerticalA;
+    ApplicationPreferenceDoubleList CamAutomaticTracerSpeedMultipliersA;
+    ApplicationPreferenceDoubleList CamManualSpeedMultipliersA;
+    ApplicationPreferenceInt CamViewSizeHorizontalA;
+    ApplicationPreferenceInt CamViewSizeVerticalA;
+    ApplicationPreferenceBool CamViewSizeForceSetA;
+    ApplicationPreferenceBool UseVerticalFrameMirrororingA;
+    ApplicationPreferenceInt MagnifierSourceSizeA;
+    ApplicationPreferenceDouble MagnifierScaleA;
+    // Optical system B
+    ApplicationPreferenceInt DeviceLinkIdB;
+    ApplicationPreferenceDouble CamZoomMaxB;
+    ApplicationPreferenceDouble CamZoomMinB;
+    ApplicationPreferenceDouble FixedPosLandingZoomB;
+    ApplicationPreferenceDouble FixedPosBeginingZoomB;
+    ApplicationPreferenceDouble FixedPosVerticalZoomB;
+    ApplicationPreferenceDoubleList CamScaleCoefficientB;
+    ApplicationPreferenceDoubleList CamViewAnglesHorizontalB;
+    ApplicationPreferenceDoubleList CamViewAnglesVerticalB;
+    ApplicationPreferenceDoubleList CamAutomaticTracerSpeedMultipliersB;
+    ApplicationPreferenceDoubleList CamManualSpeedMultipliersB;
+    ApplicationPreferenceInt CamViewSizeHorizontalB;
+    ApplicationPreferenceInt CamViewSizeVerticalB;
+    ApplicationPreferenceBool CamViewSizeForceSetB;
+    ApplicationPreferenceBool UseVerticalFrameMirrororingB;
+    ApplicationPreferenceInt MagnifierSourceSizeB;
+    ApplicationPreferenceDouble MagnifierScaleB;
+    // Optical system C
+    ApplicationPreferenceInt DeviceLinkIdC;
+    ApplicationPreferenceDouble CamZoomMaxC;
+    ApplicationPreferenceDouble CamZoomMinC;
+    ApplicationPreferenceDouble FixedPosLandingZoomC;
+    ApplicationPreferenceDouble FixedPosBeginingZoomC;
+    ApplicationPreferenceDouble FixedPosVerticalZoomC;
+    ApplicationPreferenceDoubleList CamScaleCoefficientC;
+    ApplicationPreferenceDoubleList CamViewAnglesHorizontalC;
+    ApplicationPreferenceDoubleList CamViewAnglesVerticalC;
+    ApplicationPreferenceDoubleList CamAutomaticTracerSpeedMultipliersC;
+    ApplicationPreferenceDoubleList CamManualSpeedMultipliersC;
+    ApplicationPreferenceInt CamViewSizeHorizontalC;
+    ApplicationPreferenceInt CamViewSizeVerticalC;
+    ApplicationPreferenceBool CamViewSizeForceSetC;
+    ApplicationPreferenceBool UseVerticalFrameMirrororingC;
+    ApplicationPreferenceInt MagnifierSourceSizeC;
+    ApplicationPreferenceDouble MagnifierScaleC;
+
+    QMap<qint32, VideoConnectionSettings*> _videoConnectionSettings;
+    QMap<qint32, OpticalDeviceSettings*> _opticalDeviceSettings;
 public:
     ApplicationPreferenceString UserDescription;
     ApplicationPreferenceInt PhisycalLensCount;
@@ -101,85 +205,22 @@ public:
     ApplicationPreferenceDouble FixedPosLandingYaw;
     ApplicationPreferenceDouble FixedPosLandingPitch;
     ApplicationPreferenceDouble FixedPosLandingRoll;
-    ApplicationPreferenceDouble FixedPosLandingZoom;
     ApplicationPreferenceBool   FixedPosLandingCommand;
 
     ApplicationPreferenceDouble FixedPosBeginingYaw;
     ApplicationPreferenceDouble FixedPosBeginingPitch;
     ApplicationPreferenceDouble FixedPosBeginingRoll;
-    ApplicationPreferenceDouble FixedPosBeginingZoom;
 
     ApplicationPreferenceDouble FixedPosVerticalYaw;
     ApplicationPreferenceDouble FixedPosVerticalPitch;
     ApplicationPreferenceDouble FixedPosVerticalRoll;
-    ApplicationPreferenceDouble FixedPosVerticalZoom;
-
-    // Optical system A
-    ApplicationPreferenceInt DeviceLinkIdA;
-    ApplicationPreferenceDouble CamZoomMaxA;
-    ApplicationPreferenceDouble CamZoomMinA;
-    ApplicationPreferenceDoubleList CamScaleCoefficientA;
-    ApplicationPreferenceDoubleList CamViewAnglesHorizontalA;
-    ApplicationPreferenceDoubleList CamViewAnglesVerticalA;
-    ApplicationPreferenceDoubleList CamAutomaticTracerSpeedMultipliersA;
-    ApplicationPreferenceDoubleList CamManualSpeedMultipliersA;
-    ApplicationPreferenceInt CamViewSizeHorizontalA;
-    ApplicationPreferenceInt CamViewSizeVerticalA;
-    ApplicationPreferenceBool CamViewSizeForceSetA;
-    ApplicationPreferenceBool UseVerticalFrameMirrororingA;
-    ApplicationPreferenceInt MagnifierSourceSizeA;
-    ApplicationPreferenceDouble MagnifierScaleA;
-
-    // Optical system B
-    ApplicationPreferenceInt DeviceLinkIdB;
-    ApplicationPreferenceDouble CamZoomMaxB;
-    ApplicationPreferenceDouble CamZoomMinB;
-    ApplicationPreferenceDoubleList CamScaleCoefficientB;
-    ApplicationPreferenceDoubleList CamViewAnglesHorizontalB;
-    ApplicationPreferenceDoubleList CamViewAnglesVerticalB;
-    ApplicationPreferenceDoubleList CamAutomaticTracerSpeedMultipliersB;
-    ApplicationPreferenceDoubleList CamManualSpeedMultipliersB;
-    ApplicationPreferenceInt CamViewSizeHorizontalB;
-    ApplicationPreferenceInt CamViewSizeVerticalB;
-    ApplicationPreferenceBool CamViewSizeForceSetB;
-    ApplicationPreferenceBool UseVerticalFrameMirrororingB;
-    ApplicationPreferenceInt MagnifierSourceSizeB;
-    ApplicationPreferenceDouble MagnifierScaleB;
-
-    // Optical system C
-    ApplicationPreferenceInt DeviceLinkIdC;
-    ApplicationPreferenceDouble CamZoomMaxC;
-    ApplicationPreferenceDouble CamZoomMinC;
-    ApplicationPreferenceDoubleList CamScaleCoefficientC;
-    ApplicationPreferenceDoubleList CamViewAnglesHorizontalC;
-    ApplicationPreferenceDoubleList CamViewAnglesVerticalC;
-    ApplicationPreferenceDoubleList CamAutomaticTracerSpeedMultipliersC;
-    ApplicationPreferenceDoubleList CamManualSpeedMultipliersC;
-    ApplicationPreferenceInt CamViewSizeHorizontalC;
-    ApplicationPreferenceInt CamViewSizeVerticalC;
-    ApplicationPreferenceBool CamViewSizeForceSetC;
-    ApplicationPreferenceBool UseVerticalFrameMirrororingC;
-    ApplicationPreferenceInt MagnifierSourceSizeC;
-    ApplicationPreferenceDouble MagnifierScaleC;
-
-
-
-
-
-    ApplicationPreferenceString VideoFrameSourceCameraName1;
-    ApplicationPreferenceString VideoFrameSourceXPlaneAddress1;
-    ApplicationPreferenceInt VideoFrameSourceXPlanePort1;
-    ApplicationPreferenceInt VideoFrameSourceYurionUDPPort1;
-    ApplicationPreferenceString CalibrationImagePath1;
-    ApplicationPreferenceString VideoFilePath1;
-    ApplicationPreferenceString RTSPUrl1;
-    ApplicationPreferenceInt VideoFrameSourceMUSV2UDPPort1;
-
-
-
-    VideoConnectionSetting *videoConnectionSetting(int idx);
 
     ApplicationPreferenceString BombingSightNumbers;
+
+    VideoConnectionSettings *videoConnectionSetting(int connectionId);
+    OpticalDeviceSettings *opticalDeviceSetting(int deviceId);
+
+    const QString description();
 };
 
 enum HIDButton

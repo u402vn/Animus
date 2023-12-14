@@ -31,25 +31,9 @@ class CameraSettingsEditor final : public QDialog
     bool _isBombingTabLicensed;
     bool _isPhotographyLicensed;
 
-    //QComboBoxExt *_cbCameraSelector;
 
     QComboBoxExt *_cbOpticalDevicesCount;
     QLineEdit *_edtCamDescription;
-
-    //QButtonGroupExt *_gbVideoSource;
-    //QComboBoxExt *_cbUSBCamera;
-
-    //NetworkAddressEditor *_naeXPlane;
-
-    //QLineEdit *_edYurionUDPPort;
-    //QLabel *_lblYurionUDPPort;
-    //QComboBoxExt *_cbCalibrationImagePath;
-    //QLineEdit *_edRTSPUrl;
-
-    //QLineEdit *_edMUSV2UDPPort;
-    //QLabel *_lblMUSV2UDPPort;
-
-    //FilePathSelector *_fpsVideoFile;
 
     QCheckBox *_chkOnboardRecording;
     QCheckBox *_chkSnapshot;
@@ -57,15 +41,11 @@ class CameraSettingsEditor final : public QDialog
     QButtonGroupExt *_gbCameraType;
     QSpinBoxEx *_sbFixedCamPitch;
     QSpinBoxEx *_sbFixedCamRoll;
-    QSpinBoxEx *_sbFixedCamZoom;
-
     QComboBoxExt *_cbCameraControlMode;
     QSpinBoxEx *_sbCamPitchMin;
     QSpinBoxEx *_sbCamRollMin;
-    QSpinBoxEx *_sbCamZoomMin;
     QSpinBoxEx *_sbCamPitchMax;
     QSpinBoxEx *_sbCamRollMax;
-    QSpinBoxEx *_sbCamZoomMax;
     QCheckBox *_chkCamAxisXInverse;
     QCheckBox *_chkCamAxisYInverse;
     QLabel *_lblEncoderAutomaticTracerMultiplie;
@@ -73,17 +53,13 @@ class CameraSettingsEditor final : public QDialog
     QSpinBoxEx *_sbFixedPosLandingYaw;
     QSpinBoxEx *_sbFixedPosLandingPitch;
     QSpinBoxEx *_sbFixedPosLandingRoll;
-    QSpinBoxEx *_sbFixedPosLandingZoom;
     QCheckBox *_chkFixedPosLandingCommand;
-
     QSpinBoxEx *_sbFixedPosBeginingYaw;
     QSpinBoxEx *_sbFixedPosBeginingPitch;
     QSpinBoxEx *_sbFixedPosBeginingRoll;
-    QSpinBoxEx *_sbFixedPosBeginingZoom;
     QSpinBoxEx *_sbFixedPosVerticalYaw;
     QSpinBoxEx *_sbFixedPosVerticalPitch;
     QSpinBoxEx *_sbFixedPosVerticalRoll;
-    QSpinBoxEx *_sbFixedPosVerticalZoom;
 
     void initBindings();
     void initWidgets();

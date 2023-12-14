@@ -58,7 +58,9 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
 
     auto coordinateCalculator = new CoordinateCalculator(this, heightMapContainer);
 
-    _imageProcessor = new ImageProcessor(this, coordinateCalculator, cameraSettings->UseVerticalFrameMirrororingA, applicationSettings.ObjectTrackerType);
+    _imageProcessor = new ImageProcessor(this, coordinateCalculator,
+                                         cameraSettings->opticalDeviceSetting(1)->UseVerticalFrameMirrororing, //todo set array for all optical systems [1, 2, 3]
+                                         applicationSettings.ObjectTrackerType);
     _imageProcessor->setStabilizationType(applicationSettings.VideoStabilizationType);
 
     connect(_hardwareLink, &HardwareLink::onHardwareLinkStateChanged, this, &MainWindow::onHardwareLinkStateChanged);

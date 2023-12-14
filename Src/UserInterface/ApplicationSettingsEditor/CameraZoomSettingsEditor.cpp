@@ -110,10 +110,30 @@ QWidget *CameraZoomSettingsEditor::createImageParams()
     auto lblMagnifier = new QLabel(tr("Magnifier"), this);
     _sbMagnifierSourceSize = CommonWidgetUtils::createRangeSpinbox(this, 50, 250);
 
+
+    auto lblCamZoomMin = new QLabel(tr("Minimum Value"), this);
+    _sbCamZoomMin = CommonWidgetUtils::createRangeSpinbox(this, 1, MAXIMAL_CAMERA_ZOOM);
+
+    auto lblCamZoomMax = new QLabel(tr("Maximum Value"), this);
+    _sbCamZoomMax = CommonWidgetUtils::createRangeSpinbox(this, 1, MAXIMAL_CAMERA_ZOOM);
+
+    auto lblFixedPosLandingZoom = new QLabel(tr("Landing Position"), this);
+    _sbFixedPosLandingZoom  = CommonWidgetUtils::createRangeSpinbox(this, 1, MAXIMAL_CAMERA_ZOOM);
+
+
+    auto lblFixedPosBeginingZoom = new QLabel(tr("Begining Position"), this);
+    _sbFixedPosBeginingZoom  = CommonWidgetUtils::createRangeSpinbox(this, 1, MAXIMAL_CAMERA_ZOOM);
+
+    auto lblFixedPosVerticalZoom = new QLabel(tr("Vertical Position"), this);
+    _sbFixedPosVerticalZoom  = CommonWidgetUtils::createRangeSpinbox(this, 1, MAXIMAL_CAMERA_ZOOM);
+
+
+
     int row = 0;
 
     imageParamsGrid->addWidget(lblDeviceLink,                   row, 0, 1, 1);
-    imageParamsGrid->addWidget(_cbDeviceLink,                   row, 2, 1, 1);
+    imageParamsGrid->addWidget(_cbDeviceLink,                   row, 2, 1, 2);
+    imageParamsGrid->addWidget(_chkVerticalMirror,              row, 4, 1, 2);
     row++;
 
     imageParamsGrid->addWidget(lblCamViewSize,                  row, 0, 1, 1);
@@ -123,9 +143,33 @@ QWidget *CameraZoomSettingsEditor::createImageParams()
     imageParamsGrid->setRowStretch(row, 0);
     row++;
 
-    imageParamsGrid->addWidget(_chkVerticalMirror,              row, 2, 1, 3);
+
+
+    imageParamsGrid->addWidget(lblCamZoomMin,                           row, 0, 1, 1);
+    imageParamsGrid->addWidget(_sbCamZoomMin,                           row, 2, 1, 1);
     imageParamsGrid->setRowStretch(row, 0);
     row++;
+
+    imageParamsGrid->addWidget(lblCamZoomMax,                           row, 0, 1, 1);
+    imageParamsGrid->addWidget(_sbCamZoomMax,                           row, 2, 1, 1);
+    imageParamsGrid->setRowStretch(row, 0);
+    row++;
+
+    imageParamsGrid->addWidget(lblFixedPosLandingZoom,                  row, 0, 1, 1);
+    imageParamsGrid->addWidget(_sbFixedPosLandingZoom,                  row, 2, 1, 1);
+    imageParamsGrid->setRowStretch(row, 0);
+    row++;
+
+    imageParamsGrid->addWidget(lblFixedPosBeginingZoom,                  row, 0, 1, 1);
+    imageParamsGrid->addWidget(_sbFixedPosBeginingZoom,                  row, 2, 1, 1);
+    imageParamsGrid->setRowStretch(row, 0);
+    row++;
+
+    imageParamsGrid->addWidget(lblFixedPosVerticalZoom,                  row, 0, 1, 1);
+    imageParamsGrid->addWidget(_sbFixedPosVerticalZoom,                  row, 2, 1, 1);
+    imageParamsGrid->setRowStretch(row, 0);
+    row++;
+
 
     imageParamsGrid->addWidget(lblMagnifier,                  row, 0, 1, 1);
     imageParamsGrid->addWidget(_sbMagnifierSourceSize,        row, 2, 1, 1);
@@ -155,59 +199,29 @@ void CameraZoomSettingsEditor::initWidgets()
     mainLayout->addWidget(buttonBox, 0);
 
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
+
     auto cameraSettings = applicationSettings.cameraPreferences(_camIdx);
+    auto opticalDeviceSetting = cameraSettings->opticalDeviceSetting(_opticalSystemNumber);
 
-    if (_opticalSystemNumber == 1)
-    {        
-        //_association.addBinding(&(cameraSettings->DeviceLinkIdA),                         &_cbDeviceLink);
-        _association.addBinding(&(cameraSettings->CamScaleCoefficientA),                  &_scaleEditors);
-        _association.addBinding(&(cameraSettings->CamViewAnglesHorizontalA),              &_horizontalAngleEditors);
-        _association.addBinding(&(cameraSettings->CamViewAnglesVerticalA),                &_verticalAngleEditors);
-        _association.addBinding(&(cameraSettings->CamAutomaticTracerSpeedMultipliersA),   &_automaticTracerSpeedMultipliersEditors);
-        _association.addBinding(&(cameraSettings->CamManualSpeedMultipliersA),            &_manualSpeedMultipliersEditors);
+    _association.addBinding(opticalDeviceSetting->DeviceLinkId,                        _cbDeviceLink);
+    _association.addBinding(opticalDeviceSetting->CamScaleCoefficient,                  &_scaleEditors);
+    _association.addBinding(opticalDeviceSetting->CamViewAnglesHorizontal,              &_horizontalAngleEditors);
+    _association.addBinding(opticalDeviceSetting->CamViewAnglesVertical,                &_verticalAngleEditors);
+    _association.addBinding(opticalDeviceSetting->CamAutomaticTracerSpeedMultipliers,   &_automaticTracerSpeedMultipliersEditors);
+    _association.addBinding(opticalDeviceSetting->CamManualSpeedMultipliers,            &_manualSpeedMultipliersEditors);
 
-        _association.addBinding(&(cameraSettings->CamViewSizeHorizontalA),               _sbCamViewSizeHorizontal);
-        _association.addBinding(&(cameraSettings->CamViewSizeVerticalA),                 _sbCamViewSizeVertical);
-        _association.addBinding(&(cameraSettings->CamViewSizeForceSetA),                 _chkCamViewSizeForceSet);
-        _association.addBinding(&(cameraSettings->UseVerticalFrameMirrororingA),         _chkVerticalMirror);
+    _association.addBinding(opticalDeviceSetting->CamViewSizeHorizontal,               _sbCamViewSizeHorizontal);
+    _association.addBinding(opticalDeviceSetting->CamViewSizeVertical,                 _sbCamViewSizeVertical);
+    _association.addBinding(opticalDeviceSetting->CamViewSizeForceSet,                 _chkCamViewSizeForceSet);
+    _association.addBinding(opticalDeviceSetting->UseVerticalFrameMirrororing,         _chkVerticalMirror);
 
-        _association.addBinding(&(cameraSettings->MagnifierSourceSizeA),                 _sbMagnifierSourceSize);
-    }
-    else if (_opticalSystemNumber == 2)
-    {
-        //_association.addBinding(&(cameraSettings->DeviceLinkIdB),                         &_cbDeviceLink);
-        _association.addBinding(&(cameraSettings->CamScaleCoefficientB),                  &_scaleEditors);
-        _association.addBinding(&(cameraSettings->CamViewAnglesHorizontalB),              &_horizontalAngleEditors);
-        _association.addBinding(&(cameraSettings->CamViewAnglesVerticalB),                &_verticalAngleEditors);
-        _association.addBinding(&(cameraSettings->CamAutomaticTracerSpeedMultipliersB),   &_automaticTracerSpeedMultipliersEditors);
-        _association.addBinding(&(cameraSettings->CamManualSpeedMultipliersB),            &_manualSpeedMultipliersEditors);
+    _association.addBinding(opticalDeviceSetting->CamZoomMin,                          _sbCamZoomMin);
+    _association.addBinding(opticalDeviceSetting->CamZoomMax,                          _sbCamZoomMax);
+    _association.addBinding(opticalDeviceSetting->FixedPosLandingZoom,                 _sbFixedPosLandingZoom);
+    _association.addBinding(opticalDeviceSetting->FixedPosBeginingZoom,                _sbFixedPosBeginingZoom);
+    _association.addBinding(opticalDeviceSetting->FixedPosVerticalZoom,                _sbFixedPosVerticalZoom);
 
-        _association.addBinding(&(cameraSettings->CamViewSizeHorizontalB),               _sbCamViewSizeHorizontal);
-        _association.addBinding(&(cameraSettings->CamViewSizeVerticalB),                 _sbCamViewSizeVertical);
-        _association.addBinding(&(cameraSettings->CamViewSizeForceSetB),                 _chkCamViewSizeForceSet);
-        _association.addBinding(&(cameraSettings->UseVerticalFrameMirrororingB),         _chkVerticalMirror);
-
-        _association.addBinding(&(cameraSettings->MagnifierSourceSizeB),                 _sbMagnifierSourceSize);
-    }
-    else if (_opticalSystemNumber == 3)
-    {
-        //_association.addBinding(&(cameraSettings->DeviceLinkIdC),                         &_cbDeviceLink);
-        _association.addBinding(&(cameraSettings->CamScaleCoefficientC),                  &_scaleEditors);
-        _association.addBinding(&(cameraSettings->CamViewAnglesHorizontalC),              &_horizontalAngleEditors);
-        _association.addBinding(&(cameraSettings->CamViewAnglesVerticalC),                &_verticalAngleEditors);
-        _association.addBinding(&(cameraSettings->CamAutomaticTracerSpeedMultipliersC),   &_automaticTracerSpeedMultipliersEditors);
-        _association.addBinding(&(cameraSettings->CamManualSpeedMultipliersC),            &_manualSpeedMultipliersEditors);
-
-        _association.addBinding(&(cameraSettings->CamViewSizeHorizontalC),               _sbCamViewSizeHorizontal);
-        _association.addBinding(&(cameraSettings->CamViewSizeVerticalC),                 _sbCamViewSizeVertical);
-        _association.addBinding(&(cameraSettings->CamViewSizeForceSetC),                 _chkCamViewSizeForceSet);
-        _association.addBinding(&(cameraSettings->UseVerticalFrameMirrororingC),         _chkVerticalMirror);
-
-        _association.addBinding(&(cameraSettings->MagnifierSourceSizeC),                 _sbMagnifierSourceSize);
-    }
-
-    else
-        Q_ASSERT(false);
+    _association.addBinding(opticalDeviceSetting->MagnifierSourceSize,                 _sbMagnifierSourceSize);
 }
 
 void CameraZoomSettingsEditor::loadSettings()
