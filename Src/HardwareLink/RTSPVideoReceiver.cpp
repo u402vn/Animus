@@ -4,14 +4,15 @@
 #include <QDebug>
 #include "opencv2/opencv.hpp"
 
-RTSPVideoReceiver::RTSPVideoReceiver(QObject *parent, bool verticalMirror, const QUrl url) : QObject(parent)
+RTSPVideoReceiver::RTSPVideoReceiver(QObject *parent, quint32 videoConnectionId, bool verticalMirror, const QUrl url) : QObject(parent)
 {
     EnterProcStart("RTSPVideoReceiver::RTSPVideoReceiver");
+    _videoConnectionId = videoConnectionId;
 
     //QProcessEnvironment::systemEnvironment().insert("OPENCV_FFMPEG_CAPTURE_OPTIONS", "timeout;3000");
 
     auto worker = new RTSPVideoReceiverWorker(nullptr, verticalMirror, url);
-    connect(worker, &RTSPVideoReceiverWorker::frameAvailable, this, &RTSPVideoReceiver::frameAvailableInternal, Qt::QueuedConnection);
+    connect(worker, &RTSPVideoReceiverWorker::workerFrameAvailable, this, &RTSPVideoReceiver::frameAvailableInternal, Qt::QueuedConnection);
     _thread = new QThread;
     worker->moveToThread(_thread);
     connect(_thread, &QThread::started,  worker, &RTSPVideoReceiverWorker::startProcessing);
@@ -32,7 +33,7 @@ RTSPVideoReceiver::~RTSPVideoReceiver()
 void RTSPVideoReceiver::frameAvailableInternal(const QImage &frame)
 {
     EnterProcStart("RTSPVideoReceiver::frameAvailableInternal");
-    emit frameAvailable(frame);
+    emit frameAvailable(frame, _videoConnectionId);
 }
 
 //--------------------------------------------------------------------------------
@@ -79,7 +80,7 @@ void RTSPVideoReceiverWorker::startProcessing()
                 rgb32Image = rgb32Image.copy();
 
             if (frameCount > 50)
-                emit frameAvailable(rgb32Image);
+                emit workerFrameAvailable(rgb32Image);
         }
         else
             qDebug() << "Cannot read RTSP video frame: " << path;

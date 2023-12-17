@@ -157,11 +157,9 @@ HardwareLink::HardwareLink(QObject *parent) : VideoLink(parent)
 
     _snapshotSeriesTimer = UNASSIGNED_TIMER;
 
-    _camAssemblyPreferences = applicationSettings.getCurrentCamAssemblyPreferences();
-
     _isRangefinderEnabled = false;
 
-    _opticalSystemId = OPTYCAL_SYSTEM_1;
+    setActiveOpticalSystemId(OPTYCAL_SYSTEM_1);
     auto cameraSettings = applicationSettings.installedCameraSettings();
     _isCameraFixed = (cameraSettings->CameraSuspensionType == CameraSuspensionTypes::FixedCamera);
     _fixedCamPitch = cameraSettings->FixedCamPitch;
@@ -381,7 +379,7 @@ void HardwareLink::updateTelemetryValues(TelemetryDataFrame &telemetryDataFrame)
         _extendedTelemetryDataFrame.applyToTelemetryDataFrame(telemetryDataFrame);
 
     //??? Update active optical system
-    telemetryDataFrame.OpticalSystemId = _opticalSystemId;
+    telemetryDataFrame.OpticalSystemId = activeOpticalSystemId();
 
     //Update Laser rangefinder
     if (_isRangefinderEnabled)
@@ -413,7 +411,7 @@ void HardwareLink::updateTelemetryValues(TelemetryDataFrame &telemetryDataFrame)
     if (telemetryDataFrame.CamZoom <= 0)
         telemetryDataFrame.CamZoom = _expectedCamZoom;
 
-    auto camPreferences = _camAssemblyPreferences->opticalDevice(telemetryDataFrame.OpticalSystemId);
+    auto camPreferences = camAssemblyPreferences()->opticalDevice(telemetryDataFrame.OpticalSystemId);
     telemetryDataFrame.FOVHorizontalAngle = camPreferences->fovHorizontalAngle(telemetryDataFrame.CamZoom);
     telemetryDataFrame.FOVVerticalAngle = camPreferences->fovVerticalAngle(telemetryDataFrame.CamZoom);
 
@@ -556,13 +554,13 @@ void HardwareLink::setCamMotorStatus(bool enabled)
     sendCommand(_commandBuilder->SetupCamMotorStatusCommand(enabled), description);
 }
 
-void HardwareLink::selectActiveCam(int camId)
+void HardwareLink::setActiveOpticalSystemId(quint32 camId)
 {
     EnterProc("HardwareLink::selectActiveCam");
     auto description = QString("selectActiveCam: %1").arg(camId);
     sendCommand(_commandBuilder->SelectActiveCamCommand(camId), description);
 
-    VideoLink::selectActiveCam(camId);
+    VideoLink::setActiveOpticalSystemId(camId);
     //_opticalSystemId = camId;
 }
 
@@ -917,17 +915,9 @@ void HardwareLink::processTelemetryPendingDatagramsUnknownFormat()
     //else the same UnknownFormat
 }
 
-void HardwareLink::videoFrameReceivedInternal(const QImage &frame)
+void HardwareLink::videoFrameReceivedInternal(const QImage &frame, quint32 videoConnectionId)
 {
-    auto videoConnectionId = _camAssemblyPreferences->opticalDevice(_opticalSystemId)->videoConnectionId();
-    auto s = _videoSources.value(videoConnectionId, nullptr);
-    if (s == nullptr)
-        return;
-
-    QObject *activeVideoSource = qobject_cast<QObject*>(s);
-    QObject *senderVideoSource = qobject_cast<QObject*>(sender());
-
-    if (senderVideoSource != activeVideoSource)
+    if (videoConnectionId != activeVideoConnectionId())
         return;
 
     _camConnectionByteCounter += frame.byteCount();

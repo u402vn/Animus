@@ -43,20 +43,21 @@ public slots:
     void socketConnected();
     void socketDisconnected();
 signals:
-    void frameAvailable(const QImage &frame);
+    void workerFrameAvailable(const QImage &frame);
 };
 
 class XPlaneVideoReceiver final : public QObject
 {
     Q_OBJECT
     QThread * _thread;
+    quint32 _videoConnectionId;
 public:
-    explicit XPlaneVideoReceiver(QObject *parent, bool verticalMirror, QHostAddress addr, quint16 port);
+    explicit XPlaneVideoReceiver(QObject *parent, quint32 videoConnectionId, bool verticalMirror, QHostAddress addr, quint16 port);
     ~XPlaneVideoReceiver();
 private slots:
     void frameAvailableInternal(const QImage &frame);
 signals:
-    void frameAvailable(const QImage &frame);
+    void frameAvailable(const QImage &frame, quint32 videoConnectionId);
 };
 
 #endif // XPLANEVIDEORECEIVER_H

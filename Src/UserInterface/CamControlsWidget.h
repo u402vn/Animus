@@ -150,7 +150,7 @@ private slots:
     void onAutomaticTracerClicked_Internal();
     void onCamRecordingClicked_Internal();
 
-    void onActiveCamClicked(int id);
+    void onActiveOpticalSystemClicked(quint32 id);
     void onChangeColorMode(int colorMode);
 
     void onTracerModeChanged(const AutomaticTracerMode tracerMode);

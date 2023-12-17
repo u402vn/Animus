@@ -3,11 +3,13 @@
 #include "lz4.h"
 #include "EnterProc.h"
 
-XPlaneVideoReceiver::XPlaneVideoReceiver(QObject *parent, bool verticalMirror, QHostAddress addr, quint16 udpPort) : QObject(parent)
+XPlaneVideoReceiver::XPlaneVideoReceiver(QObject *parent, quint32 videoConnectionId, bool verticalMirror, QHostAddress addr, quint16 udpPort) : QObject(parent)
 {
     EnterProcStart("XPlaneVideoReceiver::XPlaneVideoReceiver");
+    _videoConnectionId = videoConnectionId;
+
     XPlaneVideoReceiverWorker * worker = new XPlaneVideoReceiverWorker(nullptr, verticalMirror, addr, udpPort);
-    connect(worker, &XPlaneVideoReceiverWorker::frameAvailable, this, &XPlaneVideoReceiver::frameAvailableInternal, Qt::QueuedConnection);
+    connect(worker, &XPlaneVideoReceiverWorker::workerFrameAvailable, this, &XPlaneVideoReceiver::frameAvailableInternal, Qt::QueuedConnection);
     _thread = new QThread;
     worker->moveToThread(_thread);
     connect(_thread, &QThread::started, worker, &XPlaneVideoReceiverWorker::startProcessing);
@@ -27,7 +29,7 @@ XPlaneVideoReceiver::~XPlaneVideoReceiver()
 void XPlaneVideoReceiver::frameAvailableInternal(const QImage & frame)
 {
     EnterProcStart("XPlaneVideoReceiver::frameAvailableInternal");
-    emit frameAvailable(frame);
+    emit frameAvailable(frame, _videoConnectionId);
 }
 
 XPlaneVideoReceiverWorker::XPlaneVideoReceiverWorker(QObject *parent, bool verticalMirror, QHostAddress addr, quint16 port): QObject(parent)
@@ -111,7 +113,7 @@ void XPlaneVideoReceiverWorker::readVideoData()
                 if (_verticalMirror)
                     rgb32Image = rgb32Image.mirrored(false, true);
 
-                emit frameAvailable(rgb32Image);
+                emit workerFrameAvailable(rgb32Image);
             };
 
             _tcpBuffer.remove(0, sizeof(XPLANE_PACKET));

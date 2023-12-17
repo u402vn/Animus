@@ -4,9 +4,11 @@
 #include <QByteArray>
 #include "EnterProc.h"
 
-MUSV2VideoReceiver::MUSV2VideoReceiver(QObject *parent, bool verticalMirror, int udpReceivePort) : QObject(parent)
+MUSV2VideoReceiver::MUSV2VideoReceiver(QObject *parent, quint32 videoConnectionId, bool verticalMirror, int udpReceivePort) : QObject(parent)
 {
     EnterProcStart("MUSV2VideoReceiver::MUSV2VideoReceiver");
+
+    _videoConnectionId = videoConnectionId;
     _socket = new QLocalSocket(this);
 
     connect(_socket, &QLocalSocket::readyRead, this, &MUSV2VideoReceiver::onReadyRead);

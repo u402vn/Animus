@@ -5,11 +5,13 @@
 #include <QLibrary>
 #include "EnterProc.h"
 
-YurionVideoReceiver::YurionVideoReceiver(QObject *parent, bool verticalMirror, int udpReceivePort) : QObject(parent)
+YurionVideoReceiver::YurionVideoReceiver(QObject *parent, quint32 videoConnectionId, bool verticalMirror, int udpReceivePort) : QObject(parent)
 {
     EnterProcStart("UrionVideoReceiver::UrionVideoReceiver");
+    _videoConnectionId = videoConnectionId;
+
     _worker = new YurionVideoReceiverWorker(nullptr, verticalMirror, udpReceivePort);
-    connect(_worker, &YurionVideoReceiverWorker::frameAvailable, this, &YurionVideoReceiver::frameAvailableInternal, Qt::QueuedConnection);
+    connect(_worker, &YurionVideoReceiverWorker::workerFrameAvailable, this, &YurionVideoReceiver::frameAvailableInternal, Qt::QueuedConnection);
     _thread = new QThread;
     _worker->moveToThread(_thread);
     connect(_thread, &QThread::started, _worker, &YurionVideoReceiverWorker::process);
@@ -39,7 +41,7 @@ void YurionVideoReceiver::setResolution(int width, int height)
 void YurionVideoReceiver::frameAvailableInternal(const QImage & frame)
 {
     EnterProcStart("UrionVideoReceiver::frameAvailableInternal");
-    emit frameAvailable(frame);
+    emit frameAvailable(frame, _videoConnectionId);
 }
 
 
@@ -285,7 +287,7 @@ void YurionVideoReceiverWorker::extractImageFromRawDataFrame(const QByteArray &r
         QImage rgb32Image = _resultImage->convertToFormat(QImage::Format_RGB32);
         if (_verticalMirror)
             rgb32Image = rgb32Image.mirrored(false, true);
-        emit frameAvailable(rgb32Image);
+        emit workerFrameAvailable(rgb32Image);
     }
     else
         qDebug() << "YURION Error. Decoding Error. VideoInformation: " << udf->VideoInformation << ". DecodeResult: " << decodeResult;

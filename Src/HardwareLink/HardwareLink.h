@@ -104,7 +104,6 @@ private:
     int _snapshotSeriesTimer;
     int _sendCamPositionTimer;
 
-    CamAssemblyPreferences *_camAssemblyPreferences;
     AutomaticTracerMode _camTracerMode;
 
     WorldGPSCoord _bombingPlacePos;
@@ -153,7 +152,7 @@ public:
     void setCamSpeed(float roll, float pitch, float yaw);
     void setCamZoom(float zoom);
     void setCamMotorStatus(bool enabled);
-    virtual void selectActiveCam(int camId);
+    virtual void setActiveOpticalSystemId(quint32 camId);
     void parkCamera();
     void setCamColorMode(int colorMode);
     void setLaserActivation(bool active);
@@ -181,7 +180,7 @@ private slots:
     void processCamTelemetryPendingDatagrams();
     void processExtTelemetryPendingDatagrams();
     void readSerialPortMUSVData();
-    virtual void videoFrameReceivedInternal(const QImage &frame);
+    virtual void videoFrameReceivedInternal(const QImage &frame, quint32 videoConnectionId);
     void doActivateCatapult();
 
     void onTelemetryDelayLineDequeue(const TelemetryDataFrame &value);

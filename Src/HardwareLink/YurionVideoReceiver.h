@@ -58,7 +58,7 @@ public slots:
     void process();
     void processVideoPendingDatagrams();
 signals:
-    void frameAvailable(const QImage &frame);
+    void workerFrameAvailable(const QImage &frame);
 };
 
 class YurionVideoReceiver final : public QObject
@@ -66,8 +66,9 @@ class YurionVideoReceiver final : public QObject
     Q_OBJECT
     QThread *_thread;
     YurionVideoReceiverWorker *_worker;
+    quint32 _videoConnectionId;
 public:    
-    explicit YurionVideoReceiver(QObject *parent, bool verticalMirror, int udpReceivePort);
+    explicit YurionVideoReceiver(QObject *parent, quint32 videoConnectionId, bool verticalMirror, int udpReceivePort);
     ~YurionVideoReceiver();
 
     void setVideoForwarding(const QString &udpForwardingAddress, quint32 udpForwardingPort);
@@ -75,7 +76,7 @@ public:
 private slots:
     void frameAvailableInternal(const QImage &frame);
 signals:
-    void frameAvailable(const QImage &frame);
+    void frameAvailable(const QImage &frame, quint32 videoConnectionId);
 };
 
 #endif // YURIONVIDEORECEIVER_H

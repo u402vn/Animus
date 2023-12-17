@@ -4,11 +4,12 @@
 
 void CalibrationImageVideoReceiver::timerEvent(QTimerEvent *event)
 {
-    emit frameAvailable(_staticImage);
+    emit frameAvailable(_staticImage, _videoConnectionId);
 }
 
-CalibrationImageVideoReceiver::CalibrationImageVideoReceiver(QObject *parent, const QString &selectedImage, const QString &defaultImage) : QObject(parent)
+CalibrationImageVideoReceiver::CalibrationImageVideoReceiver(QObject *parent, quint32 videoConnectionId, const QString &selectedImage, const QString &defaultImage) : QObject(parent)
 {
+    _videoConnectionId = videoConnectionId;
     QImage staticImage(selectedImage);
     if (staticImage.isNull())
     {

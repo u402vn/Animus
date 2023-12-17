@@ -1,9 +1,10 @@
 #include "CameraFrameGrabber.h"
 #include <QImage>
 
-CameraFrameGrabber::CameraFrameGrabber(QObject *parent, bool verticalMirror) :  QAbstractVideoSurface(parent)
+CameraFrameGrabber::CameraFrameGrabber(QObject *parent, quint32 videoConnectionId, bool verticalMirror) :  QAbstractVideoSurface(parent)
 {
     _verticalMirror = verticalMirror;
+    _videoConnectionId = videoConnectionId;
 }
 
 QList<QVideoFrame::PixelFormat> CameraFrameGrabber::supportedPixelFormats(QAbstractVideoBuffer::HandleType handleType) const
@@ -74,7 +75,7 @@ bool CameraFrameGrabber::present(const QVideoFrame &frame)
     QImage outImage = _verticalMirror ? image.mirrored(false, true) : image.copy();
 
     cloneFrame.unmap();
-    emit frameAvailable(outImage);
+    emit frameAvailable(outImage, _videoConnectionId);
 
     return true;
 }

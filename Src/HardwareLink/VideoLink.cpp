@@ -11,7 +11,11 @@
 
 VideoLink::VideoLink(QObject *parent) : QObject(parent)
 {
+    _opticalSystemId = 0;
+    _activeVideoConnectionId = 0;
 
+    ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
+    _camAssemblyPreferences = applicationSettings.getCurrentCamAssemblyPreferences();
 }
 
 VideoLink::~VideoLink()
@@ -49,7 +53,7 @@ QObject *VideoLink::openVideoConnection(int connectionId)
         QByteArray camName = videoConnectionSetting->VideoFrameSourceCameraName->value().toLocal8Bit();
         auto camera = new QCamera(camName, this);
 
-        auto cameraFrameGrabber = new CameraFrameGrabber(camera, mirroring);
+        auto cameraFrameGrabber = new CameraFrameGrabber(camera, connectionId, mirroring);
 
         if (forceSetResolution)
         {
@@ -70,7 +74,7 @@ QObject *VideoLink::openVideoConnection(int connectionId)
     } // case VideoFrameTrafficSources::USBCamera
     case VideoFrameTrafficSources::Yurion:
     {
-        auto yurionVideoReceiver = new YurionVideoReceiver(this, mirroring, videoConnectionSetting->VideoFrameSourceYurionUDPPort->value());
+        auto yurionVideoReceiver = new YurionVideoReceiver(this, connectionId, mirroring, videoConnectionSetting->VideoFrameSourceYurionUDPPort->value());
         if (applicationSettings.EnableForwarding.value())
             yurionVideoReceiver->setVideoForwarding(applicationSettings.VideoForwardingAddress, applicationSettings.VideoForwardingPort);
         if (forceSetResolution)
@@ -82,7 +86,7 @@ QObject *VideoLink::openVideoConnection(int connectionId)
     } // case VideoFrameTrafficSources::Yurion
     case VideoFrameTrafficSources::XPlane:
     {
-        auto xPlaneVideoReceiver = new XPlaneVideoReceiver(this, mirroring,
+        auto xPlaneVideoReceiver = new XPlaneVideoReceiver(this, connectionId, mirroring,
                                                            QHostAddress(videoConnectionSetting->VideoFrameSourceXPlaneAddress->value()),
                                                            static_cast<quint16>(videoConnectionSetting->VideoFrameSourceXPlanePort->value()));
         connect(xPlaneVideoReceiver, &XPlaneVideoReceiver::frameAvailable, this, &VideoLink::videoFrameReceivedInternal);
@@ -91,7 +95,7 @@ QObject *VideoLink::openVideoConnection(int connectionId)
     } // case VideoFrameTrafficSources::XPlane
     case VideoFrameTrafficSources::CalibrationImage:
     {
-        auto calibrationImageVideoReceiver = new CalibrationImageVideoReceiver(this, videoConnectionSetting->CalibrationImagePath->value(), DefaultCalibrationImagePath);
+        auto calibrationImageVideoReceiver = new CalibrationImageVideoReceiver(this, connectionId, videoConnectionSetting->CalibrationImagePath->value(), DefaultCalibrationImagePath);
         connect(calibrationImageVideoReceiver, &CalibrationImageVideoReceiver::frameAvailable, this, &VideoLink::videoFrameReceivedInternal);
         videoSource = calibrationImageVideoReceiver;
         break;
@@ -99,19 +103,19 @@ QObject *VideoLink::openVideoConnection(int connectionId)
     case VideoFrameTrafficSources::VideoFile:
     {
         QString filePath = videoConnectionSetting->VideoFilePath->value();
-        videoSource = openVideoSourceWithURL(QUrl::fromLocalFile(filePath), mirroring);
+        videoSource = openVideoSourceWithURL(connectionId, QUrl::fromLocalFile(filePath), mirroring);
         break;
     } // case VideoFrameTrafficSources::VideoFile
     case VideoFrameTrafficSources::RTSP:
     {
-        auto rtspVideoReceiver = new RTSPVideoReceiver(this, mirroring, QUrl(videoConnectionSetting->RTSPUrl->value()));
+        auto rtspVideoReceiver = new RTSPVideoReceiver(this, connectionId, mirroring, QUrl(videoConnectionSetting->RTSPUrl->value()));
         connect(rtspVideoReceiver, &RTSPVideoReceiver::frameAvailable, this, &VideoLink::videoFrameReceivedInternal, Qt::DirectConnection);
         videoSource = rtspVideoReceiver;
         break;
     }
     case VideoFrameTrafficSources::MUSV2:
     {
-        auto musv2VideoReceiver = new MUSV2VideoReceiver(this, mirroring, videoConnectionSetting->VideoFrameSourceMUSV2UDPPort->value());
+        auto musv2VideoReceiver = new MUSV2VideoReceiver(this, connectionId, mirroring, videoConnectionSetting->VideoFrameSourceMUSV2UDPPort->value());
         videoSource = musv2VideoReceiver;
         break;
     }
@@ -123,10 +127,10 @@ QObject *VideoLink::openVideoConnection(int connectionId)
     return videoSource;
 }    
 
-QObject *VideoLink::openVideoSourceWithURL(const QUrl &url, bool useVerticalFrameMirrororing)
+QObject *VideoLink::openVideoSourceWithURL(quint32 videoConnectionId, const QUrl &url, bool useVerticalFrameMirrororing)
 {
     auto player = new QMediaPlayer(this);
-    auto frameGrabber = new CameraFrameGrabber(player, useVerticalFrameMirrororing);
+    auto frameGrabber = new CameraFrameGrabber(player, videoConnectionId, useVerticalFrameMirrororing);
 
     player->setMedia(url);
     player->setVideoOutput(frameGrabber);
@@ -146,7 +150,6 @@ QObject *VideoLink::openVideoSourceWithURL(const QUrl &url, bool useVerticalFram
     return frameGrabber;
 }
 
-
 void VideoLink::closeVideoSource()
 {
     return;
@@ -163,10 +166,27 @@ void VideoLink::closeVideoSource()
     //_videoSources.clear();
 }
 
-void VideoLink::selectActiveCam(int camId)
+void VideoLink::setActiveOpticalSystemId(quint32 camId)
 {
     _opticalSystemId = camId;
     //todo process forceSetResolution???
+
+    _activeVideoConnectionId = _camAssemblyPreferences->opticalDevice(_opticalSystemId)->videoConnectionId();
+}
+
+quint32 VideoLink::activeOpticalSystemId()
+{
+    return _opticalSystemId;
+}
+
+quint32 VideoLink::activeVideoConnectionId()
+{
+    return _activeVideoConnectionId;
+}
+
+CamAssemblyPreferences *VideoLink::camAssemblyPreferences()
+{
+    return _camAssemblyPreferences;
 }
 
 void VideoLink::usbCameraError(QCamera::Error value)
@@ -184,7 +204,7 @@ SimpleVideoLink::~SimpleVideoLink()
 
 }
 
-void SimpleVideoLink::videoFrameReceivedInternal(const QImage &frame)
+void SimpleVideoLink::videoFrameReceivedInternal(const QImage &frame, quint32 videoConnectionId)
 {
     emit videoFrameReceived(frame);
 }

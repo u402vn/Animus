@@ -18,7 +18,7 @@ public:
 public slots:
     void startProcessing();
 signals:
-    void frameAvailable(const QImage &frame);
+    void workerFrameAvailable(const QImage &frame);
 };
 
 class RTSPVideoReceiver : public QObject
@@ -26,13 +26,14 @@ class RTSPVideoReceiver : public QObject
     Q_OBJECT
 
     QThread * _thread;
+    quint32 _videoConnectionId;
 public:
-    explicit RTSPVideoReceiver(QObject *parent, bool verticalMirror, const QUrl url);
+    explicit RTSPVideoReceiver(QObject *parent, quint32 videoConnectionId, bool verticalMirror, const QUrl url);
     ~RTSPVideoReceiver();
 private slots:
     void frameAvailableInternal(const QImage &frame);
 signals:
-    void frameAvailable(const QImage &frame);
+    void frameAvailable(const QImage &frame, quint32 videoConnectionId);
 };
 
 #endif // RTSPVIDEORECEIVER_H

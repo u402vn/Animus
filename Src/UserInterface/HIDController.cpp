@@ -127,6 +127,7 @@ HIDMapItem *HIDController::makeHIDMapItem(HIDButton prefIndex, void (HIDControll
     _HIDMap.append(item);
     if (forceUseKeyboard)
         _forcedKeyboardHIDMapItems.append(item);
+    return item;
 }
 
 void HIDController::setCamZoomRange(quint32 camZoomMin, quint32 camZoomMax)

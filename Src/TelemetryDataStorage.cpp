@@ -46,7 +46,7 @@ TelemetryDataStorage::TelemetryDataStorage(QObject *parent, const QString &sessi
 
     _videoRecorder = new PartitionedVideoRecorder(this);
 
-    _mediaPlayerFrameGraber = new CameraFrameGrabber(this, false);
+    _mediaPlayerFrameGraber = new CameraFrameGrabber(this, 0, false);
     connect(_mediaPlayerFrameGraber, &CameraFrameGrabber::frameAvailable, this, &TelemetryDataStorage::videoFrameReceivedInternal, Qt::QueuedConnection);
     _mediaPlayer = new QMediaPlayer(this);
     _mediaPlayer->setVideoOutput(_mediaPlayerFrameGraber);

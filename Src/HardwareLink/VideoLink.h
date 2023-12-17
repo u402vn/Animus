@@ -5,19 +5,19 @@
 #include <QCamera>
 #include <QUrl>
 #include <QMap>
+#include "CamPreferences.h"
 
 class VideoLink : public QObject
 {
     Q_OBJECT
 private:
-
+    quint32 _opticalSystemId;
+    quint32 _activeVideoConnectionId;
+    CamAssemblyPreferences *_camAssemblyPreferences;
 protected:
     QMap<int, QObject*> _videoSources;
-    quint32 _opticalSystemId;
-
     QObject *openVideoConnection(int connectionId);
-
-    QObject *openVideoSourceWithURL(const QUrl &url, bool useVerticalFrameMirrororing);
+    QObject *openVideoSourceWithURL(quint32 videoConnectionId, const QUrl &url, bool useVerticalFrameMirrororing);
 public:
     explicit VideoLink(QObject *parent);
     ~VideoLink();
@@ -26,9 +26,13 @@ public:
     void openVideoSource();
     void closeVideoSource();
 
-    virtual void selectActiveCam(int camId);
+    virtual void setActiveOpticalSystemId(quint32 camId);
+
+    quint32 activeOpticalSystemId();
+    quint32 activeVideoConnectionId();
+    CamAssemblyPreferences *camAssemblyPreferences();
 private slots:
-    virtual void videoFrameReceivedInternal(const QImage &frame) = 0;
+    virtual void videoFrameReceivedInternal(const QImage &frame, quint32 videoConnectionId) = 0;
     void usbCameraError(QCamera::Error value);
 };
 
@@ -39,7 +43,7 @@ public:
     explicit SimpleVideoLink(QObject *parent);
     ~SimpleVideoLink();
 private slots:
-    void videoFrameReceivedInternal(const QImage &frame);
+    void videoFrameReceivedInternal(const QImage &frame, quint32 videoConnectionId);
 signals:
     void videoFrameReceived(const QImage &frame);
 };

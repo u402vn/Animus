@@ -98,8 +98,9 @@ class MUSV2VideoReceiver final : public QObject
 {
     Q_OBJECT
     QLocalSocket *_socket;
+    quint32 _videoConnectionId;
 public:
-    explicit MUSV2VideoReceiver(QObject *parent, bool verticalMirror, int udpReceivePort);
+    explicit MUSV2VideoReceiver(QObject *parent, quint32 videoConnectionId, bool verticalMirror, int udpReceivePort);
     ~MUSV2VideoReceiver();
 private slots:
     void onReadyRead();

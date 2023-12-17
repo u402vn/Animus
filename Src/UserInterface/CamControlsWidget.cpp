@@ -237,7 +237,7 @@ void CamControlsWidget::createCamViewControls()
     _grpCamButtons->addButton(btnCam1, OPTYCAL_SYSTEM_1);
     _grpCamButtons->addButton(btnCam2, OPTYCAL_SYSTEM_2);
     _grpCamButtons->addButton(btnCam3, OPTYCAL_SYSTEM_3);
-    connect(_grpCamButtons, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this, &CamControlsWidget::onActiveCamClicked, Qt::DirectConnection);
+    connect(_grpCamButtons, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this, &CamControlsWidget::onActiveOpticalSystemClicked, Qt::DirectConnection);
 
     _imageTuner = new VideoImageTuner(_btnLiveViewSettings);
     _imageTuner->resize(DEFAULT_BUTTON_WIDTH * 0.75, _imageTuner->height());
@@ -655,10 +655,10 @@ void CamControlsWidget::onLaserActivationClicked()
     _btnLaserActivation->click();
 }
 
-void CamControlsWidget::onActiveCamClicked(int id)
+void CamControlsWidget::onActiveOpticalSystemClicked(quint32 id)
 {
-    EnterProcStart("CamControlsWidget::activeCamClicked");
-    _hardwareLink->selectActiveCam(id);
+    EnterProcStart("CamControlsWidget::onActiveOpticalSystemClicked");
+    _hardwareLink->setActiveOpticalSystemId(id);
 }
 
 void CamControlsWidget::onChangeColorMode(int colorMode)
