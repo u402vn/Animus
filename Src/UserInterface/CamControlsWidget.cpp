@@ -209,6 +209,10 @@ void CamControlsWidget::createCamViewControls()
                                            &CamControlsWidget::onEnableStabilizationClick_Internal, &CamControlsWidget::onEnableStabilizationMenuClick);
     _btnEnableStabilization->setChecked(applicationSettings.SoftwareStabilizationEnabled);
     onEnableStabilizationClick_Internal();
+
+    _btnEnableStabilization->setVisible(false); //???todo place on the form in nice position
+
+
     _btnLiveViewSettings = createButton(tr("Live View Settings"), false, ":/liveviewsettings.png",
                                         &CamControlsWidget::onLiveViewSettingsClick, &CamControlsWidget::onLiveViewSettingsClick);
 
@@ -226,11 +230,13 @@ void CamControlsWidget::createCamViewControls()
 
     auto btnCam1 = createButton(tr("Camera 1"), true, ":/camera1.png", nullptr);
     auto btnCam2 = createButton(tr("Camera 2"), true, ":/camera2.png", nullptr);
+    auto btnCam3 = createButton(tr("Camera 3"), true, ":/camera2.png", nullptr);
     btnCam1->setChecked(true);
 
     _grpCamButtons = new QButtonGroup(this);
     _grpCamButtons->addButton(btnCam1, OPTYCAL_SYSTEM_1);
     _grpCamButtons->addButton(btnCam2, OPTYCAL_SYSTEM_2);
+    _grpCamButtons->addButton(btnCam3, OPTYCAL_SYSTEM_3);
     connect(_grpCamButtons, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this, &CamControlsWidget::onActiveCamClicked, Qt::DirectConnection);
 
     _imageTuner = new VideoImageTuner(_btnLiveViewSettings);
@@ -240,10 +246,16 @@ void CamControlsWidget::createCamViewControls()
 
     //append buttons to grid
     int row = _mainLayout->rowCount();
+    /*
     _mainLayout->addWidget(_btnEnableStabilization,    row, 1, 1, 1, Qt::AlignLeft);
     _mainLayout->addWidget(_btnLiveViewSettings,       row, 2, 1, 1, Qt::AlignLeft);
     _mainLayout->addWidget(btnCam1,                    row, 3, 1, 1, Qt::AlignLeft);
     _mainLayout->addWidget(btnCam2,                    row, 4, 1, 1, Qt::AlignLeft);
+    */
+    _mainLayout->addWidget(_btnLiveViewSettings,       row, 1, 1, 1, Qt::AlignLeft);
+    _mainLayout->addWidget(btnCam1,                    row, 2, 1, 1, Qt::AlignLeft);
+    _mainLayout->addWidget(btnCam2,                    row, 3, 1, 1, Qt::AlignLeft);
+    _mainLayout->addWidget(btnCam3,                    row, 4, 1, 1, Qt::AlignLeft);
     _mainLayout->setRowStretch(row, 0);
 }
 

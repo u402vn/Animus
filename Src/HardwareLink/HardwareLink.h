@@ -90,7 +90,7 @@ private:
     double _fixedCamPitch, _fixedCamRoll, _fixedCamYaw;
     double _fixedCamZoom;
     double _expectedCamZoom;
-    quint32 _opticalSystemId;
+
 
     bool _camConnectionOn, _telemetryConnectionOn;
     unsigned long long _prevCamConnectionByteCounter, _prevTelemetryConnectionByteCounter;
@@ -153,7 +153,7 @@ public:
     void setCamSpeed(float roll, float pitch, float yaw);
     void setCamZoom(float zoom);
     void setCamMotorStatus(bool enabled);
-    void selectActiveCam(int camId);
+    virtual void selectActiveCam(int camId);
     void parkCamera();
     void setCamColorMode(int colorMode);
     void setLaserActivation(bool active);

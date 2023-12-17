@@ -312,21 +312,24 @@ CamAssemblyPreferences *ApplicationSettings::getCurrentCamAssemblyPreferences()
                                                    cameraSettings->MagnifierSourceSizeA, cameraSettings->MagnifierScaleA,
                                                    cameraSettings->CamViewAnglesHorizontalA, cameraSettings->CamViewAnglesVerticalA,
                                                    cameraSettings->CamAutomaticTracerSpeedMultipliersA, cameraSettings->CamManualSpeedMultipliersA,
-                                                   cameraSettings->CamViewSizeForceSetA, cameraSettings->UseVerticalFrameMirrororingA);
+                                                   cameraSettings->CamViewSizeForceSetA, cameraSettings->UseVerticalFrameMirrororingA,
+                                                   cameraSettings->DeviceLinkIdA);
         _camAssemblyPreferences->initOpticalDevice(2,
                                                    cameraSettings->CamViewSizeHorizontalB, cameraSettings->CamViewSizeVerticalB,
                                                    cameraSettings->CamZoomMinB, cameraSettings->CamZoomMaxB,
                                                    cameraSettings->MagnifierSourceSizeB, cameraSettings->MagnifierScaleB,
                                                    cameraSettings->CamViewAnglesHorizontalB, cameraSettings->CamViewAnglesVerticalB,
                                                    cameraSettings->CamAutomaticTracerSpeedMultipliersB, cameraSettings->CamManualSpeedMultipliersB,
-                                                   cameraSettings->CamViewSizeForceSetB, cameraSettings->UseVerticalFrameMirrororingB);
+                                                   cameraSettings->CamViewSizeForceSetB, cameraSettings->UseVerticalFrameMirrororingB,
+                                                   cameraSettings->DeviceLinkIdB);
         _camAssemblyPreferences->initOpticalDevice(3,
                                                    cameraSettings->CamViewSizeHorizontalC, cameraSettings->CamViewSizeVerticalC,
                                                    cameraSettings->CamZoomMinC, cameraSettings->CamZoomMaxC,
                                                    cameraSettings->MagnifierSourceSizeC, cameraSettings->MagnifierScaleC,
                                                    cameraSettings->CamViewAnglesHorizontalC, cameraSettings->CamViewAnglesVerticalC,
                                                    cameraSettings->CamAutomaticTracerSpeedMultipliersC, cameraSettings->CamManualSpeedMultipliersC,
-                                                   cameraSettings->CamViewSizeForceSetC, cameraSettings->UseVerticalFrameMirrororingC);
+                                                   cameraSettings->CamViewSizeForceSetC, cameraSettings->UseVerticalFrameMirrororingC,
+                                                   cameraSettings->DeviceLinkIdC);
     }
 
     return _camAssemblyPreferences;

@@ -23,6 +23,7 @@ class OpticalDevicePreferences final : public QObject
     QList<double> _manualSpeedMultipliers;
     bool _forceSetResolution;
     bool _useVerticalFrameMirrororing;
+    quint32 _videoConnectionId;
 
     quint32 zoomIndex(quint32 zoom);
 public:
@@ -32,10 +33,9 @@ public:
     void init(qint32 farmeWidth, qint32 frameHeight,
               quint32 zoomMinValue, quint32 zoomMaxValue,
               quint32 magnifierSize, qreal magnifierScale,
-              const QList<double> &fovHorizontalAngles,
-              const QList<double> &fovVerticalAngles,
-              const QList<double> &automaticTracerSpeedMultipliers,
-              const QList<double> &manualSpeedMultipliers, bool forceSetResolution, bool useVerticalFrameMirrororing);
+              const QList<double> &fovHorizontalAngles, const QList<double> &fovVerticalAngles,
+              const QList<double> &automaticTracerSpeedMultipliers, const QList<double> &manualSpeedMultipliers,
+              bool forceSetResolution, bool useVerticalFrameMirrororing, quint32 videoConnectionId);
 
     double fovHorizontalAngle(qint32 zoom);
     double fovVerticalAngle(qint32 zoom);
@@ -49,6 +49,8 @@ public:
     quint32 zoomMax();
     bool forceSetResolution();
     bool useVerticalFrameMirrororing();
+
+    quint32 videoConnectionId();
 
     quint32 magnifierSize();
     qreal magnifierScale();
@@ -77,7 +79,7 @@ public:
                  const QList<double> &fovVerticalAngles,
                  const QList<double> &automaticTracerSpeedMultipliers,
                  const QList<double> &manualSpeedMultipliers,
-                 bool forceSetResolution, bool useVerticalFrameMirrororing);
+                 bool forceSetResolution, bool useVerticalFrameMirrororing, quint32 videoConnectionId);
     OpticalDevicePreferences *opticalDevice(qint32 opticalDeviceId);
 
     double encoderAutomaticTracerMultiplier();

@@ -4,19 +4,29 @@
 #include <QObject>
 #include <QCamera>
 #include <QUrl>
+#include <QMap>
 
 class VideoLink : public QObject
 {
     Q_OBJECT
 private:
-    QObject * _videoSource;
+
+protected:
+    QMap<int, QObject*> _videoSources;
+    quint32 _opticalSystemId;
+
+    QObject *openVideoConnection(int connectionId);
+
+    QObject *openVideoSourceWithURL(const QUrl &url, bool useVerticalFrameMirrororing);
 public:
     explicit VideoLink(QObject *parent);
     ~VideoLink();
 
-    void openVideoSourceWithURL(const QUrl &url, bool useVerticalFrameMirrororing);
+
     void openVideoSource();
     void closeVideoSource();
+
+    virtual void selectActiveCam(int camId);
 private slots:
     virtual void videoFrameReceivedInternal(const QImage &frame) = 0;
     void usbCameraError(QCamera::Error value);

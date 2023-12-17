@@ -561,7 +561,9 @@ void HardwareLink::selectActiveCam(int camId)
     EnterProc("HardwareLink::selectActiveCam");
     auto description = QString("selectActiveCam: %1").arg(camId);
     sendCommand(_commandBuilder->SelectActiveCamCommand(camId), description);
-    _opticalSystemId = camId;
+
+    VideoLink::selectActiveCam(camId);
+    //_opticalSystemId = camId;
 }
 
 void HardwareLink::parkCamera()
@@ -917,6 +919,17 @@ void HardwareLink::processTelemetryPendingDatagramsUnknownFormat()
 
 void HardwareLink::videoFrameReceivedInternal(const QImage &frame)
 {
+    auto videoConnectionId = _camAssemblyPreferences->opticalDevice(_opticalSystemId)->videoConnectionId();
+    auto s = _videoSources.value(videoConnectionId, nullptr);
+    if (s == nullptr)
+        return;
+
+    QObject *activeVideoSource = qobject_cast<QObject*>(s);
+    QObject *senderVideoSource = qobject_cast<QObject*>(sender());
+
+    if (senderVideoSource != activeVideoSource)
+        return;
+
     _camConnectionByteCounter += frame.byteCount();
     _videoFrameNumber++;
     _videoFrame = frame;
