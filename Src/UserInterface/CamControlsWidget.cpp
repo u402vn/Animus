@@ -210,11 +210,11 @@ void CamControlsWidget::createCamViewControls()
     _btnEnableStabilization->setChecked(applicationSettings.SoftwareStabilizationEnabled);
     onEnableStabilizationClick_Internal();
 
-    _btnEnableStabilization->setVisible(false); //???todo place on the form in nice position
+    //_btnEnableStabilization->setVisible(false); //???todo place on the form in nice position
 
 
-    _btnLiveViewSettings = createButton(tr("Live View Settings"), false, ":/liveviewsettings.png",
-                                        &CamControlsWidget::onLiveViewSettingsClick, &CamControlsWidget::onLiveViewSettingsClick);
+    //_btnLiveViewSettings = createButton(tr("Live View Settings"), false, ":/liveviewsettings.png",
+    //                                    &CamControlsWidget::onLiveViewSettingsClick, &CamControlsWidget::onLiveViewSettingsClick);
 
     _stabilizationTypeMenu = new QMenu(tr("Stabilization Type"), this);
     _stabilizationTypeGroup = new QActionGroup(this);
@@ -228,9 +228,9 @@ void CamControlsWidget::createCamViewControls()
         ++i;
     }
 
-    auto btnCam1 = createButton(tr("Camera 1"), true, ":/camera1.png", nullptr);
-    auto btnCam2 = createButton(tr("Camera 2"), true, ":/camera2.png", nullptr);
-    auto btnCam3 = createButton(tr("Camera 3"), true, ":/camera2.png", nullptr);
+    auto btnCam1 = createButton(tr("Camera 1"), true, ":/camera1.png", nullptr, onLiveViewSettingsClick);
+    auto btnCam2 = createButton(tr("Camera 2"), true, ":/camera2.png", nullptr, onLiveViewSettingsClick);
+    auto btnCam3 = createButton(tr("Camera 3"), true, ":/camera2.png", nullptr, onLiveViewSettingsClick);
     btnCam1->setChecked(true);
 
     _grpCamButtons = new QButtonGroup(this);
@@ -239,7 +239,7 @@ void CamControlsWidget::createCamViewControls()
     _grpCamButtons->addButton(btnCam3, OPTYCAL_SYSTEM_3);
     connect(_grpCamButtons, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this, &CamControlsWidget::onActiveOpticalSystemClicked, Qt::DirectConnection);
 
-    _imageTuner = new VideoImageTuner(_btnLiveViewSettings);
+    _imageTuner = new VideoImageTuner(btnCam1);
     _imageTuner->resize(DEFAULT_BUTTON_WIDTH * 0.75, _imageTuner->height());
     connect(_imageTuner, &VideoImageTuner::tuneImageChange, this, &CamControlsWidget::tuneImageChangeInternal, Qt::DirectConnection);
     connect(_imageTuner, &VideoImageTuner::changeColorMode, this, &CamControlsWidget::onChangeColorMode, Qt::DirectConnection);
@@ -252,7 +252,7 @@ void CamControlsWidget::createCamViewControls()
     _mainLayout->addWidget(btnCam1,                    row, 3, 1, 1, Qt::AlignLeft);
     _mainLayout->addWidget(btnCam2,                    row, 4, 1, 1, Qt::AlignLeft);
     */
-    _mainLayout->addWidget(_btnLiveViewSettings,       row, 1, 1, 1, Qt::AlignLeft);
+    _mainLayout->addWidget(_btnEnableStabilization,    row, 1, 1, 1, Qt::AlignLeft);
     _mainLayout->addWidget(btnCam1,                    row, 2, 1, 1, Qt::AlignLeft);
     _mainLayout->addWidget(btnCam2,                    row, 3, 1, 1, Qt::AlignLeft);
     _mainLayout->addWidget(btnCam3,                    row, 4, 1, 1, Qt::AlignLeft);
@@ -457,7 +457,9 @@ void CamControlsWidget::initWidgets()
 
 void CamControlsWidget::onLiveViewSettingsClick()
 {
-    _imageTuner->activate();
+    auto btnCamN = qobject_cast<QPushButtonEx *>(sender());
+    auto buttonId = _grpCamButtons->id(btnCamN);
+    _imageTuner->activate(buttonId);
 }
 
 void CamControlsWidget::tuneImageChangeInternal(qreal brightness, qreal contrast, qreal gamma, bool grayscale)
@@ -658,6 +660,9 @@ void CamControlsWidget::onLaserActivationClicked()
 void CamControlsWidget::onActiveOpticalSystemClicked(quint32 id)
 {
     EnterProcStart("CamControlsWidget::onActiveOpticalSystemClicked");
+    if (_hardwareLink->activeOpticalSystemId() == id)
+        _imageTuner->activate(id);
+
     _hardwareLink->setActiveOpticalSystemId(id);
 }
 

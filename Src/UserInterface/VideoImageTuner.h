@@ -28,7 +28,7 @@ public:
     ~VideoImageTuner();
 
     void setTuneImageSettings(qreal brightness, qreal contrast, qreal gamma);
-    void activate();
+    void activate(quint32 opticalSystemId);
     void changeCamMode(int delta);
 private slots:
     void onSliderValueChanged(int value);

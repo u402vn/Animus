@@ -30,7 +30,7 @@ class CamControlsWidget final : public QWidget
 private:
     Q_OBJECT
 
-    HardwareLink * _hardwareLink;
+    HardwareLink *_hardwareLink;
 
     CameraControlModes _camControlMode;
     quint32 _opticalSystemId;
@@ -66,7 +66,6 @@ private:
     QActionGroup *_stabilizationTypeGroup;
     QMenu *_stabilizationTypeMenu;
 
-    QPushButtonEx *_btnLiveViewSettings;
     QButtonGroup *_grpCamButtons;
 
     QDoubleSpinBox *_sbSnapshotSeriesInterval;

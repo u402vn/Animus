@@ -52,14 +52,13 @@ void VideoImageTuner::setTuneImageSettings(qreal brightness, qreal contrast, qre
     _gammaSlider->setValue(gamma * SLIDER_MIDDLE_VALUE + SLIDER_MIDDLE_VALUE);
 }
 
-void VideoImageTuner::activate()
+void VideoImageTuner::activate(quint32 opticalSystemId)
 {
     QWidget *parentWidget = (QWidget *)parent();
     QRect desktopGeometry = CommonWidgetUtils::getDesktopAvailableGeometry();
     QPoint parentLeftBottom = parentWidget->mapToGlobal(QPoint(0, parentWidget->height()));
     adjustSize();
-    if (parentLeftBottom.x() + width() > desktopGeometry.right()
-            || parentLeftBottom.y() + height() > desktopGeometry.bottom())
+    if (parentLeftBottom.x() + width() > desktopGeometry.right() || parentLeftBottom.y() + height() > desktopGeometry.bottom())
     {
         QPoint parentTopRight = parentWidget->mapToGlobal(QPoint(parentWidget->width(), 0));
         parentTopRight -= QPoint(width(), height());
