@@ -105,6 +105,8 @@ BombingWidget::BombingWidget(QWidget *parent, HardwareLink *hardwareLink, Artill
 
     _weatherView = nullptr;
 
+    _coordCalulationHistoryMs = 1000; //???
+
     MarkerStorage& markerStorage = MarkerStorage::Instance();
 
     connect(&markerStorage, &MarkerStorage::onMapMarkerDeleted, this, &BombingWidget::onMapMarkerDeleted);
@@ -127,6 +129,35 @@ BombingWidget::~BombingWidget()
         delete _weatherView;
 }
 
+void BombingWidget::addNewMarker(const QList<WorldGPSCoord> &coords, bool showEditor)
+{
+    double latSum = 0;
+    double lonSum = 0;
+    double hmslSum = 0;
+    quint32 correctCount = 0;
+
+    foreach (auto oneCoord, coords)
+        if (!oneCoord.isIncorrect())
+        {
+            latSum += oneCoord.lat;
+            lonSum += oneCoord.lon;
+            hmslSum += oneCoord.hmsl;
+            correctCount++;
+        }
+
+    WorldGPSCoord coord;
+    if (correctCount == 0)
+        coord.setIncorrect();
+    else
+    {
+        coord.lat = latSum / correctCount;
+        coord.lon = lonSum / correctCount;
+        coord.hmsl = hmslSum / correctCount;
+    }
+
+    addNewMarker(coord, showEditor);
+}
+
 void BombingWidget::addNewMarker(const WorldGPSCoord &coord, bool showEditor)
 {
     if (coord.isIncorrect())
@@ -147,19 +178,52 @@ void BombingWidget::addNewMarker(const WorldGPSCoord &coord, bool showEditor)
 void BombingWidget::onNewMarkerForUAVClicked()
 {
     EnterProc("BombingWidget::onAddNewMarkerForUAVClicked");
-    addNewMarker(getUavCoordsFromTelemetry(_telemetryFrame), true);
+
+    QList<WorldGPSCoord> coords;
+    coords.append(getUavCoordsFromTelemetry(_telemetryFrame));
+
+    if (_coordCalulationHistoryMs > 0)
+    {
+        auto frames = _telemetryDataStorage->getLastTelemetryDataFrames(_coordCalulationHistoryMs);
+        foreach (auto frame, frames)
+            coords.append(getUavCoordsFromTelemetry(frame));
+    }
+
+    addNewMarker(coords, false);
 }
 
 void BombingWidget::onNewMarkerForLaserClicked()
 {
     EnterProc("BombingWidget::onAddNewMarkerForLaserClicked");
-    addNewMarker(getRangefinderCoordsFromTelemetry(_telemetryFrame), false);
+
+    QList<WorldGPSCoord> coords;
+    coords.append(getRangefinderCoordsFromTelemetry(_telemetryFrame));
+
+    if (_coordCalulationHistoryMs > 0)
+    {
+        auto frames = _telemetryDataStorage->getLastTelemetryDataFrames(_coordCalulationHistoryMs);
+        foreach (auto frame, frames)
+            coords.append(getRangefinderCoordsFromTelemetry(frame));
+    }
+
+    addNewMarker(coords, false);
 }
 
 void BombingWidget::onNewMarkerForTargetClicked()
 {
     EnterProc("BombingWidget::onNewMarkerForTargetClicked");
-    addNewMarker(getTrackedTargetCoordsFromTelemetry(_telemetryFrame), false);
+
+    QList<WorldGPSCoord> coords;
+    coords.append(getTrackedTargetCoordsFromTelemetry(_telemetryFrame));
+
+    if (_coordCalulationHistoryMs > 0)
+    {
+        auto frames = _telemetryDataStorage->getLastTelemetryDataFrames(_coordCalulationHistoryMs);
+        foreach (auto frame, frames)
+            coords.append(getTrackedTargetCoordsFromTelemetry(frame));
+    }
+
+    addNewMarker(coords, false);
 }
 
 void BombingWidget::onDropBombClicked()

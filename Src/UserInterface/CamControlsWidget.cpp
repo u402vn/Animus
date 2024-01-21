@@ -210,12 +210,6 @@ void CamControlsWidget::createCamViewControls()
     _btnEnableStabilization->setChecked(applicationSettings.SoftwareStabilizationEnabled);
     onEnableStabilizationClick_Internal();
 
-    //_btnEnableStabilization->setVisible(false); //???todo place on the form in nice position
-
-
-    //_btnLiveViewSettings = createButton(tr("Live View Settings"), false, ":/liveviewsettings.png",
-    //                                    &CamControlsWidget::onLiveViewSettingsClick, &CamControlsWidget::onLiveViewSettingsClick);
-
     _stabilizationTypeMenu = new QMenu(tr("Stabilization Type"), this);
     _stabilizationTypeGroup = new QActionGroup(this);
 
@@ -246,12 +240,6 @@ void CamControlsWidget::createCamViewControls()
 
     //append buttons to grid
     int row = _mainLayout->rowCount();
-    /*
-    _mainLayout->addWidget(_btnEnableStabilization,    row, 1, 1, 1, Qt::AlignLeft);
-    _mainLayout->addWidget(_btnLiveViewSettings,       row, 2, 1, 1, Qt::AlignLeft);
-    _mainLayout->addWidget(btnCam1,                    row, 3, 1, 1, Qt::AlignLeft);
-    _mainLayout->addWidget(btnCam2,                    row, 4, 1, 1, Qt::AlignLeft);
-    */
     _mainLayout->addWidget(_btnEnableStabilization,    row, 1, 1, 1, Qt::AlignLeft);
     _mainLayout->addWidget(btnCam1,                    row, 2, 1, 1, Qt::AlignLeft);
     _mainLayout->addWidget(btnCam2,                    row, 3, 1, 1, Qt::AlignLeft);

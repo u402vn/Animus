@@ -150,6 +150,7 @@ UAVSimMainWindow::UAVSimMainWindow(QWidget *parent) : QMainWindow(parent)
     initWidgets();
 
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
+    auto videoConnectionSetting = applicationSettings.installedCameraSettings()->videoConnectionSetting(1);
     auto cameraSettings = applicationSettings.installedCameraSettings();
 
     QTemporaryDir temporaryDir;
@@ -165,13 +166,13 @@ UAVSimMainWindow::UAVSimMainWindow(QWidget *parent) : QMainWindow(parent)
                                        applicationSettings.UAVTelemetryUDPPort,
                                        videoFileName,
                                        Sim_Yurion,
-                                       cameraSettings->VideoFrameSourceYurionUDPPort,
+                                       videoConnectionSetting->VideoFrameSourceYurionUDPPort->value(),
                                        cameraSettings->CameraControlMode
                                        );
 
-    qDebug() << "UAV Telemetry UDP Port" << applicationSettings.UAVTelemetryUDPPort;
-    qDebug() << "Video URION Port" << cameraSettings->VideoFrameSourceYurionUDPPort;
-    qDebug() << "Video X-Plane Port" << cameraSettings->VideoFrameSourceXPlanePort;
+    qDebug() << "UAV Telemetry UDP Port" << applicationSettings.UAVTelemetryUDPPort;    
+    qDebug() << "Video URION Port" << videoConnectionSetting->VideoFrameSourceYurionUDPPort;
+    qDebug() << "Video X-Plane Port" << videoConnectionSetting->VideoFrameSourceXPlanePort;
     qDebug() << "Commands Port" << applicationSettings.CommandUDPPort;
 
     int port = applicationSettings.CommandUDPPort;

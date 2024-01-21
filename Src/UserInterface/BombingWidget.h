@@ -21,7 +21,6 @@ class QMarkerListWidget final : public QListWidget
 
     Q_OBJECT
     TelemetryDataFrame _telemetryFrame;
-
     GPSCoordSelector * _gpsCoordSelector;
 
     void keyPressEvent(QKeyEvent *event);
@@ -86,7 +85,7 @@ class BombingWidget final : public QWidget
     ArtillerySpotter *_artillerySpotter;
 
     TelemetryDataStorage *_telemetryDataStorage;
-
+    quint32 _coordCalulationHistoryMs;
     TelemetryDataFrame _telemetryFrame;
 
     QString _highlightedMarkerGUID;
@@ -94,6 +93,7 @@ class BombingWidget final : public QWidget
     void initWidgets();
 
     void loadTargetMapMarkers();
+    void addNewMarker(const QList<WorldGPSCoord> &coords, bool showEditor);
     void addNewMarker(const WorldGPSCoord &coord, bool showEditor);
 public:
     explicit BombingWidget(QWidget *parent, HardwareLink *hardwareLink, ArtillerySpotter *artillerySpotter,

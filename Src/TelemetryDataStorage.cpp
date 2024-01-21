@@ -205,7 +205,7 @@ void TelemetryDataStorage::flushTelemetryDataFrames()
         insertQuery.addBindValue(telemetryFrame.TrackedTargetRectHeight);
         insertQuery.addBindValue(telemetryFrame.CalculatedTrackedTargetGPSLat);
         insertQuery.addBindValue(telemetryFrame.CalculatedTrackedTargetGPSLon);
-        insertQuery.addBindValue(telemetryFrame.CalculatedTrackedTargetGPSHmsl);        
+        insertQuery.addBindValue(telemetryFrame.CalculatedTrackedTargetGPSHmsl);
         insertQuery.addBindValue(telemetryFrame.CalculatedTrackedTargetSpeed);
         insertQuery.addBindValue(telemetryFrame.CalculatedTrackedTargetDirection);
         insertQuery.addBindValue(telemetryFrame.TelemetryFrameNumber);
@@ -536,6 +536,19 @@ int TelemetryDataStorage::getTelemetryDataFrameCount() const
 const QVector<TelemetryDataFrame> &TelemetryDataStorage::getTelemetryDataFrames()
 {
     return _telemetryFrames;
+}
+
+const QList<TelemetryDataFrame> TelemetryDataStorage::getLastTelemetryDataFrames(quint32 mseconds)
+{
+    QList<TelemetryDataFrame> selectedFrames;
+    auto lastTime = _telemetryFrames.last().SessionTimeMs;
+    int i = _telemetryFrames.count() - 1;
+    while ( (i > 0) && ( (lastTime - _telemetryFrames[i].SessionTimeMs) <= mseconds) )
+    {
+        selectedFrames.prepend(_telemetryFrames[i]);
+        i--;
+    }
+    return selectedFrames;
 }
 
 void TelemetryDataStorage::onDataReceived(const TelemetryDataFrame &telemetryFrame, const QImage &videoFrame)
