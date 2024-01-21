@@ -70,224 +70,224 @@
 <context>
     <name>ApplicationSettings</name>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="226"/>
+        <location filename="../ApplicationSettings.cpp" line="227"/>
         <source>Zoom Out</source>
         <translation>Отдалить</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="227"/>
+        <location filename="../ApplicationSettings.cpp" line="228"/>
         <source>Zoom In</source>
         <translation>Приблизить</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="266"/>
+        <location filename="../ApplicationSettings.cpp" line="267"/>
         <source>Start New Session</source>
         <translation>Начать новую сессию</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="267"/>
+        <location filename="../ApplicationSettings.cpp" line="268"/>
         <source>Display Only Mode</source>
         <translation>Перейти в режим отображения</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="269"/>
+        <location filename="../ApplicationSettings.cpp" line="270"/>
         <source>Change map and video positions</source>
         <translation>Сменить позиции карты и видео</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="268"/>
+        <location filename="../ApplicationSettings.cpp" line="269"/>
         <source>Open Select Sessions Window</source>
         <translation>Открыть окно выбора сессий</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="141"/>
+        <location filename="../ApplicationSettings.cpp" line="142"/>
         <source>Target Marker Sizes</source>
         <translation>Размеры маркеров целей</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="228"/>
+        <location filename="../ApplicationSettings.cpp" line="229"/>
         <source>Map Zoom Out</source>
         <translation>Уменьшить масштаб карты</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="229"/>
+        <location filename="../ApplicationSettings.cpp" line="230"/>
         <source>Map Zoom In</source>
         <translation>Увеличить масштаб карты</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="230"/>
+        <location filename="../ApplicationSettings.cpp" line="231"/>
         <source>Follow The Plane</source>
         <translation>Следовать за самолетом</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="232"/>
+        <location filename="../ApplicationSettings.cpp" line="233"/>
         <source>Change Active Camera</source>
         <translation>Изменить активную камеру</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="233"/>
+        <location filename="../ApplicationSettings.cpp" line="234"/>
         <source>Stabilization On/Off</source>
         <translation>Стабилизация Вкл/Выкл</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="234"/>
+        <location filename="../ApplicationSettings.cpp" line="235"/>
         <source>Cam Drivers Off</source>
         <translation>Выключить приводы камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="235"/>
+        <location filename="../ApplicationSettings.cpp" line="236"/>
         <source>Activate Landing Position</source>
         <translation>Активировать посадочную позицию</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="236"/>
+        <location filename="../ApplicationSettings.cpp" line="237"/>
         <source>Activate Begining Position</source>
         <translation>Активировать начальную позицию</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="237"/>
+        <location filename="../ApplicationSettings.cpp" line="238"/>
         <source>Activate Vertical Position</source>
         <translation>Активировать вертикальную позицию</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="238"/>
+        <location filename="../ApplicationSettings.cpp" line="239"/>
         <source>Color Mode +</source>
         <translation>Цветовой режим +</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="239"/>
+        <location filename="../ApplicationSettings.cpp" line="240"/>
         <source>Color Mode -</source>
         <translation>Цветовой режим -</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="240"/>
+        <location filename="../ApplicationSettings.cpp" line="241"/>
         <source>Laser Activation</source>
         <translation>Активация лазера</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="242"/>
+        <location filename="../ApplicationSettings.cpp" line="243"/>
         <source>Bombing Sight</source>
         <translation>Бомбовый прицел</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="243"/>
+        <location filename="../ApplicationSettings.cpp" line="244"/>
         <source>Screenshot</source>
         <translation>Скриншот</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="244"/>
+        <location filename="../ApplicationSettings.cpp" line="245"/>
         <source>Snapshot</source>
         <translation>Снимок</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="245"/>
+        <location filename="../ApplicationSettings.cpp" line="246"/>
         <source>Snapshot Series</source>
         <translation>Серия снимков</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="247"/>
+        <location filename="../ApplicationSettings.cpp" line="248"/>
         <source>Target Unlock</source>
         <translation>Отмена цели</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="248"/>
+        <location filename="../ApplicationSettings.cpp" line="249"/>
         <source>Target Lock In Cursor</source>
         <translation>Захват цели в курсоре</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="249"/>
+        <location filename="../ApplicationSettings.cpp" line="250"/>
         <source>Magnifier</source>
         <translation>Экранная лупа</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="251"/>
+        <location filename="../ApplicationSettings.cpp" line="252"/>
         <source>Camera Recording</source>
         <translation>Запись камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="252"/>
+        <location filename="../ApplicationSettings.cpp" line="253"/>
         <source>Automatic Tracer</source>
         <translation>Автоматическое подслеживание</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="253"/>
+        <location filename="../ApplicationSettings.cpp" line="254"/>
         <source>Drop Bomb</source>
         <translation>Сбросить бомбу</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="254"/>
+        <location filename="../ApplicationSettings.cpp" line="255"/>
         <source>Send Hit Coordinates</source>
         <translation>Отправить координаты</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="255"/>
+        <location filename="../ApplicationSettings.cpp" line="256"/>
         <source>Send Weather</source>
         <translation>Отправить погоду</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="257"/>
+        <location filename="../ApplicationSettings.cpp" line="258"/>
         <source>Normal Flight Mode</source>
         <translation>Режим нормального полёта</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="258"/>
+        <location filename="../ApplicationSettings.cpp" line="259"/>
         <source>Patrol Moving Target Mode</source>
         <translation>Режим патрулирования подвижной цели</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="259"/>
+        <location filename="../ApplicationSettings.cpp" line="260"/>
         <source>Patrol Static Target Mode</source>
         <translation>Режим патрулирования статичной цели</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="260"/>
+        <location filename="../ApplicationSettings.cpp" line="261"/>
         <source>Manual Flight Mode</source>
         <translation>Режим ручного управления</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="262"/>
+        <location filename="../ApplicationSettings.cpp" line="263"/>
         <source>New Marker (Target)</source>
         <translation>Новый маркер (Цель)</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="263"/>
+        <location filename="../ApplicationSettings.cpp" line="264"/>
         <source>New Marker (Laser)</source>
         <translation>Новый маркер (Лазер)</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="264"/>
+        <location filename="../ApplicationSettings.cpp" line="265"/>
         <source>New Marker (UAV)</source>
         <translation>Новый маркер (БЛА)</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="272"/>
+        <location filename="../ApplicationSettings.cpp" line="273"/>
         <source>Application Settings Editor</source>
         <translation>Редактор настроек приложения</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="270"/>
+        <location filename="../ApplicationSettings.cpp" line="271"/>
         <source>Data Console</source>
         <translation>Консоль данных</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="271"/>
+        <location filename="../ApplicationSettings.cpp" line="272"/>
         <source>Emulator Console</source>
         <translation>Консоль Эмулятора</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="273"/>
+        <location filename="../ApplicationSettings.cpp" line="274"/>
         <source>Help Viewer</source>
         <translation>Просмотр справки</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="379"/>
+        <location filename="../ApplicationSettings.cpp" line="383"/>
         <source>
   Key %1</source>
         <translation>
   Клавиша %1</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="381"/>
+        <location filename="../ApplicationSettings.cpp" line="385"/>
         <source>
   Button# %1</source>
         <translation>
@@ -869,6 +869,21 @@ Are you sure you want to deleted it?</source>
         <source>Drop Bomb</source>
         <translation type="vanished">Сбросить бомбу</translation>
     </message>
+    <message>
+        <location filename="../UserInterface/BombingWidget.cpp" line="225"/>
+        <source>Current</source>
+        <translation>Текущая</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/BombingWidget.cpp" line="226"/>
+        <source>1 second</source>
+        <translation>1 секунда</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/BombingWidget.cpp" line="227"/>
+        <source>3 seconds</source>
+        <translation>3 секунды</translation>
+    </message>
 </context>
 <context>
     <name>CamCalibratorView</name>
@@ -984,24 +999,28 @@ Are you sure you want to deleted it?</source>
         <translation type="vanished">Вертикальная позиция</translation>
     </message>
     <message>
-        <location filename="../UserInterface/CamControlsWidget.cpp" line="212"/>
         <source>Live View Settings</source>
-        <translation>Настройки отображения</translation>
+        <translation type="vanished">Настройки отображения</translation>
     </message>
     <message>
-        <location filename="../UserInterface/CamControlsWidget.cpp" line="215"/>
+        <location filename="../UserInterface/CamControlsWidget.cpp" line="213"/>
         <source>Stabilization Type</source>
         <translation>Тип стабилизации</translation>
     </message>
     <message>
-        <location filename="../UserInterface/CamControlsWidget.cpp" line="227"/>
+        <location filename="../UserInterface/CamControlsWidget.cpp" line="225"/>
         <source>Camera 1</source>
         <translation>Камера 1</translation>
     </message>
     <message>
-        <location filename="../UserInterface/CamControlsWidget.cpp" line="228"/>
+        <location filename="../UserInterface/CamControlsWidget.cpp" line="226"/>
         <source>Camera 2</source>
         <translation>Камера 2</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface/CamControlsWidget.cpp" line="227"/>
+        <source>Camera 3</source>
+        <translation>Камера 3</translation>
     </message>
     <message>
         <source>Screenshot</source>
@@ -1343,95 +1362,95 @@ Do you really want to turn it to begining position?</source>
 <context>
     <name>CameraSettingsNode</name>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="529"/>
+        <location filename="../ApplicationSettings.cpp" line="533"/>
         <source>Description</source>
         <translation>Описание</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="581"/>
-        <location filename="../ApplicationSettings.cpp" line="599"/>
-        <location filename="../ApplicationSettings.cpp" line="618"/>
+        <location filename="../ApplicationSettings.cpp" line="585"/>
+        <location filename="../ApplicationSettings.cpp" line="603"/>
+        <location filename="../ApplicationSettings.cpp" line="622"/>
         <source>Vertical Mirroring</source>
         <translation>Вертикальное отражение</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="534"/>
+        <location filename="../ApplicationSettings.cpp" line="538"/>
         <source>Digital Zoom</source>
         <translation>Цифровое увеличение</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="530"/>
+        <location filename="../ApplicationSettings.cpp" line="534"/>
         <source>Phisycal Lens Count</source>
         <translation>Количество объективов</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="536"/>
+        <location filename="../ApplicationSettings.cpp" line="540"/>
         <source>Use Gimbal Telemetry Only</source>
         <translation>Использовать только телеметрию подвеса</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="541"/>
+        <location filename="../ApplicationSettings.cpp" line="545"/>
         <source>Value of Fixed Camera Pich</source>
         <translation>Значение тангажа фиксированной камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="542"/>
+        <location filename="../ApplicationSettings.cpp" line="546"/>
         <source>Value of Fixed Camera Roll</source>
         <translation>Значение крена фиксированной камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="543"/>
+        <location filename="../ApplicationSettings.cpp" line="547"/>
         <source>Value of Fixed Camera Zoom</source>
         <translation>Значение зума фиксированной камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="545"/>
+        <location filename="../ApplicationSettings.cpp" line="549"/>
         <source>Maximum Value of Camera Pitch</source>
         <translation>Максимальное значение тангажа  камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="546"/>
+        <location filename="../ApplicationSettings.cpp" line="550"/>
         <source>Minimum Value of Camera Pitch</source>
         <translation>Минимальное значение тангажа  камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="548"/>
+        <location filename="../ApplicationSettings.cpp" line="552"/>
         <source>Maximum Value of Camera Roll</source>
         <translation>Максимальное значение крена  камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="549"/>
+        <location filename="../ApplicationSettings.cpp" line="553"/>
         <source>Minimum Value of Camera Roll</source>
         <translation>Минимальное значение крена  камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="567"/>
-        <location filename="../ApplicationSettings.cpp" line="585"/>
-        <location filename="../ApplicationSettings.cpp" line="604"/>
+        <location filename="../ApplicationSettings.cpp" line="571"/>
+        <location filename="../ApplicationSettings.cpp" line="589"/>
+        <location filename="../ApplicationSettings.cpp" line="608"/>
         <source>Device Link</source>
-        <translation type="unfinished"></translation>
+        <translation>Свзяь с устройством</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="568"/>
-        <location filename="../ApplicationSettings.cpp" line="586"/>
-        <location filename="../ApplicationSettings.cpp" line="605"/>
+        <location filename="../ApplicationSettings.cpp" line="572"/>
+        <location filename="../ApplicationSettings.cpp" line="590"/>
+        <location filename="../ApplicationSettings.cpp" line="609"/>
         <source>Maximum Value of Camera Zoom</source>
         <translation>Максимальное значение зума  камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="569"/>
-        <location filename="../ApplicationSettings.cpp" line="587"/>
-        <location filename="../ApplicationSettings.cpp" line="606"/>
+        <location filename="../ApplicationSettings.cpp" line="573"/>
+        <location filename="../ApplicationSettings.cpp" line="591"/>
+        <location filename="../ApplicationSettings.cpp" line="610"/>
         <source>Minimum Value of Camera Zoom</source>
         <translation>Минимальное значение зума  камеры</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="750"/>
+        <location filename="../ApplicationSettings.cpp" line="754"/>
         <source>Unnamed video source</source>
         <translation>Безымяный источник видео</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="769"/>
+        <location filename="../ApplicationSettings.cpp" line="773"/>
         <source>%1
 %2
 %3</source>
@@ -1440,113 +1459,113 @@ Do you really want to turn it to begining position?</source>
 %3</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="551"/>
+        <location filename="../ApplicationSettings.cpp" line="555"/>
         <source>Automatic Tracer Multiplier</source>
         <translation>Коэффициент автоподслеживания</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="553"/>
+        <location filename="../ApplicationSettings.cpp" line="557"/>
         <source>Value of Camera Yaw in Landing Position</source>
         <translation>Значение рысканья  камеры в посадочной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="554"/>
+        <location filename="../ApplicationSettings.cpp" line="558"/>
         <source>Value of Camera Pich in Landing Position</source>
         <translation>Значение тангажа  камеры в посадочной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="555"/>
+        <location filename="../ApplicationSettings.cpp" line="559"/>
         <source>Value of Camera Roll in Landing Position</source>
         <translation>Значение крена  камеры в посадочной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="570"/>
-        <location filename="../ApplicationSettings.cpp" line="588"/>
-        <location filename="../ApplicationSettings.cpp" line="607"/>
+        <location filename="../ApplicationSettings.cpp" line="574"/>
+        <location filename="../ApplicationSettings.cpp" line="592"/>
+        <location filename="../ApplicationSettings.cpp" line="611"/>
         <source>Value of Camera Zoom in Landing Position</source>
         <translation>Значение зума  камеры в посадочной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="556"/>
+        <location filename="../ApplicationSettings.cpp" line="560"/>
         <source>Use special command</source>
         <translation>Использовать специальную команду</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="558"/>
+        <location filename="../ApplicationSettings.cpp" line="562"/>
         <source>Value of Camera Yaw in Begining Position</source>
         <translation>Значение рысканья  камеры в начальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="559"/>
+        <location filename="../ApplicationSettings.cpp" line="563"/>
         <source>Value of Camera Pich in Begining Position</source>
         <translation>Значение тангажа  камеры в начальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="560"/>
+        <location filename="../ApplicationSettings.cpp" line="564"/>
         <source>Value of Camera Roll in Begining Position</source>
         <translation>Значение крена  камеры в начальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="571"/>
-        <location filename="../ApplicationSettings.cpp" line="589"/>
-        <location filename="../ApplicationSettings.cpp" line="608"/>
+        <location filename="../ApplicationSettings.cpp" line="575"/>
+        <location filename="../ApplicationSettings.cpp" line="593"/>
+        <location filename="../ApplicationSettings.cpp" line="612"/>
         <source>Value of Camera Zoom in Begining Position</source>
         <translation>Значение зума  камеры в начальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="562"/>
+        <location filename="../ApplicationSettings.cpp" line="566"/>
         <source>Value of Camera Yaw in Vertical Position</source>
         <translation>Значение рысканья  камеры в вертикальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="563"/>
+        <location filename="../ApplicationSettings.cpp" line="567"/>
         <source>Value of Camera Pich in Vertical Position</source>
         <translation>Значение тангажа  камеры в вертикальной позиции</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="564"/>
+        <location filename="../ApplicationSettings.cpp" line="568"/>
         <source>Value of Camera Roll in Vertical Position</source>
         <translation>Значение крена  камеры в вертикальной позиции</translation>
-    </message>
-    <message>
-        <location filename="../ApplicationSettings.cpp" line="572"/>
-        <location filename="../ApplicationSettings.cpp" line="590"/>
-        <location filename="../ApplicationSettings.cpp" line="609"/>
-        <source>Value of Camera Zoom in Vertical Position</source>
-        <translation>Значение зума  камеры в вертикальной позиции</translation>
-    </message>
-    <message>
-        <location filename="../ApplicationSettings.cpp" line="573"/>
-        <location filename="../ApplicationSettings.cpp" line="591"/>
-        <location filename="../ApplicationSettings.cpp" line="610"/>
-        <source>Camera Scale Coefficient</source>
-        <translation>Коэффициент масштабирования для камеры</translation>
     </message>
     <message>
         <location filename="../ApplicationSettings.cpp" line="576"/>
         <location filename="../ApplicationSettings.cpp" line="594"/>
         <location filename="../ApplicationSettings.cpp" line="613"/>
-        <source>Automatic Tracer Speed Multiplier</source>
-        <translation>Множитель скорости автоподслеживания</translation>
+        <source>Value of Camera Zoom in Vertical Position</source>
+        <translation>Значение зума  камеры в вертикальной позиции</translation>
     </message>
     <message>
         <location filename="../ApplicationSettings.cpp" line="577"/>
         <location filename="../ApplicationSettings.cpp" line="595"/>
         <location filename="../ApplicationSettings.cpp" line="614"/>
+        <source>Camera Scale Coefficient</source>
+        <translation>Коэффициент масштабирования для камеры</translation>
+    </message>
+    <message>
+        <location filename="../ApplicationSettings.cpp" line="580"/>
+        <location filename="../ApplicationSettings.cpp" line="598"/>
+        <location filename="../ApplicationSettings.cpp" line="617"/>
+        <source>Automatic Tracer Speed Multiplier</source>
+        <translation>Множитель скорости автоподслеживания</translation>
+    </message>
+    <message>
+        <location filename="../ApplicationSettings.cpp" line="581"/>
+        <location filename="../ApplicationSettings.cpp" line="599"/>
+        <location filename="../ApplicationSettings.cpp" line="618"/>
         <source>Manual Moving Speed Multipliers</source>
         <translation>Множитель скорости ручного перемещения</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="582"/>
-        <location filename="../ApplicationSettings.cpp" line="600"/>
-        <location filename="../ApplicationSettings.cpp" line="619"/>
+        <location filename="../ApplicationSettings.cpp" line="586"/>
+        <location filename="../ApplicationSettings.cpp" line="604"/>
+        <location filename="../ApplicationSettings.cpp" line="623"/>
         <source>Magnifier Source Size</source>
         <translation>Исходный размер лупы</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="583"/>
-        <location filename="../ApplicationSettings.cpp" line="601"/>
-        <location filename="../ApplicationSettings.cpp" line="620"/>
+        <location filename="../ApplicationSettings.cpp" line="587"/>
+        <location filename="../ApplicationSettings.cpp" line="605"/>
+        <location filename="../ApplicationSettings.cpp" line="624"/>
         <source>Magnifier Scale</source>
         <translation>Масштабирование лупы</translation>
     </message>
@@ -1559,30 +1578,30 @@ Do you really want to turn it to begining position?</source>
         <translation type="vanished">Коэффициент масштабирования скорости камеры</translation>
     </message>
     <message>
+        <location filename="../ApplicationSettings.cpp" line="582"/>
+        <location filename="../ApplicationSettings.cpp" line="600"/>
+        <location filename="../ApplicationSettings.cpp" line="619"/>
+        <source>Horizontal View Size of Camera</source>
+        <translation>Горизонтальное разрешение камеры</translation>
+    </message>
+    <message>
+        <location filename="../ApplicationSettings.cpp" line="583"/>
+        <location filename="../ApplicationSettings.cpp" line="601"/>
+        <location filename="../ApplicationSettings.cpp" line="620"/>
+        <source>Vertical View Size of Camera</source>
+        <translation>Вертикальное разрешение камеры</translation>
+    </message>
+    <message>
         <location filename="../ApplicationSettings.cpp" line="578"/>
         <location filename="../ApplicationSettings.cpp" line="596"/>
         <location filename="../ApplicationSettings.cpp" line="615"/>
-        <source>Horizontal View Size of Camera</source>
-        <translation>Горизонтальное разрешение камеры</translation>
+        <source>Horizontal View Angle of Camera</source>
+        <translation>Горизонтальный угол обзора камеры</translation>
     </message>
     <message>
         <location filename="../ApplicationSettings.cpp" line="579"/>
         <location filename="../ApplicationSettings.cpp" line="597"/>
         <location filename="../ApplicationSettings.cpp" line="616"/>
-        <source>Vertical View Size of Camera</source>
-        <translation>Вертикальное разрешение камеры</translation>
-    </message>
-    <message>
-        <location filename="../ApplicationSettings.cpp" line="574"/>
-        <location filename="../ApplicationSettings.cpp" line="592"/>
-        <location filename="../ApplicationSettings.cpp" line="611"/>
-        <source>Horizontal View Angle of Camera</source>
-        <translation>Горизонтальный угол обзора камеры</translation>
-    </message>
-    <message>
-        <location filename="../ApplicationSettings.cpp" line="575"/>
-        <location filename="../ApplicationSettings.cpp" line="593"/>
-        <location filename="../ApplicationSettings.cpp" line="612"/>
         <source>Vertical View Angle of Camera</source>
         <translation>Вертикальный угол обзора камеры</translation>
     </message>
@@ -3704,22 +3723,22 @@ Y:%6%7</translation>
 <context>
     <name>QMarkerListWidget</name>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="454"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="542"/>
         <source>Deactivate</source>
         <translation>Деактивировать</translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="454"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="542"/>
         <source>Activate</source>
         <translation>Активировать</translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="455"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="543"/>
         <source>Change</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../UserInterface/BombingWidget.cpp" line="456"/>
+        <location filename="../UserInterface/BombingWidget.cpp" line="544"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
@@ -4183,7 +4202,7 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>TelemetryDataStorage</name>
     <message>
-        <location filename="../TelemetryDataStorage.cpp" line="744"/>
+        <location filename="../TelemetryDataStorage.cpp" line="757"/>
         <source>Recording video...</source>
         <translation>Запись видео...</translation>
     </message>
@@ -4191,33 +4210,33 @@ Are you sure you want to deleted it?</source>
 <context>
     <name>VideoConnectionSettings</name>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="818"/>
+        <location filename="../ApplicationSettings.cpp" line="822"/>
         <source>Unknown camera</source>
         <translation>Неизвестная камера</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="825"/>
+        <location filename="../ApplicationSettings.cpp" line="829"/>
         <source>URL: %1:%2</source>
         <translation>URL: %1:%2</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="830"/>
+        <location filename="../ApplicationSettings.cpp" line="834"/>
         <source>Port: %1</source>
         <translation>Порт: %1</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="835"/>
-        <location filename="../ApplicationSettings.cpp" line="840"/>
+        <location filename="../ApplicationSettings.cpp" line="839"/>
+        <location filename="../ApplicationSettings.cpp" line="844"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="845"/>
+        <location filename="../ApplicationSettings.cpp" line="849"/>
         <source>URL: %1</source>
         <translation>URL: %1</translation>
     </message>
     <message>
-        <location filename="../ApplicationSettings.cpp" line="850"/>
+        <location filename="../ApplicationSettings.cpp" line="854"/>
         <source>UDP Port: %1</source>
         <translation>UDP порт: %1</translation>
     </message>

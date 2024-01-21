@@ -386,6 +386,7 @@ public:
     ApplicationPreferenceBool SoftwareStabilizationEnabled;
     ApplicationPreferenceEnum<StabilizationType> VideoStabilizationType;
     ApplicationPreferenceEnum<ArtillerySpotterState> LastTargetArtillerySpotterState;
+    ApplicationPreferenceInt CoordCalulationHistoryMs;
 
     ApplicationPreferenceBool AskAboutQuitOnSaveSettings;
     ApplicationPreferenceBool AskAboutQuitOnCloseApp;

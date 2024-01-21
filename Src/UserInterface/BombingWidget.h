@@ -85,7 +85,6 @@ class BombingWidget final : public QWidget
     ArtillerySpotter *_artillerySpotter;
 
     TelemetryDataStorage *_telemetryDataStorage;
-    quint32 _coordCalulationHistoryMs;
     TelemetryDataFrame _telemetryFrame;
 
     QString _highlightedMarkerGUID;
@@ -106,6 +105,7 @@ private slots:
     void onMapMarkerHighlightedChanged(const QString &markerGUID, bool isHighlighted);
     void onMapMarkerCoordChanged(const QString &markerGUID, const WorldGPSCoord &coord);
     void onMessageExchangeInformation(const QString &information, bool isEroor);
+    void onNewMarkerButtonRightClicked();
 public slots:
     void onDropBombClicked();
     void onSendHitCoordinatesClicked();

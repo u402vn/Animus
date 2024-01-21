@@ -26,18 +26,22 @@ void BombingWidget::initWidgets()
     auto btnNewMarkerForTarget = CommonWidgetUtils::createButton(this, NO_CAPTION, applicationSettings.hidUIHint(hidbtnNewMarkerForTarget),
                                                                  false, QUARTER_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT, ":/newtargetmarker_T.png");
     connect(btnNewMarkerForTarget, &QPushButton::clicked, this, &BombingWidget::onNewMarkerForTargetClicked);
+    connect(btnNewMarkerForTarget, &QPushButtonEx::onRightClick, this, &BombingWidget::onNewMarkerButtonRightClicked);
 
-    QPushButton *btnNewMarkerForLaser = nullptr;
+
+    QPushButtonEx *btnNewMarkerForLaser = nullptr;
     if (applicationSettings.isLaserRangefinderLicensed())
     {
         btnNewMarkerForLaser = CommonWidgetUtils::createButton(this, NO_CAPTION, applicationSettings.hidUIHint(hidbtnNewMarkerForLaser),
                                                                false, QUARTER_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT, ":/newtargetmarker_L.png");
         connect(btnNewMarkerForLaser, &QPushButton::clicked, this, &BombingWidget::onNewMarkerForLaserClicked);
+        connect(btnNewMarkerForLaser, &QPushButtonEx::onRightClick, this, &BombingWidget::onNewMarkerButtonRightClicked);
     }
 
     auto btnNewMarkerForUAV = CommonWidgetUtils::createButton(this, NO_CAPTION, applicationSettings.hidUIHint(hidbtnNewMarkerForUAV),
                                                               false, QUARTER_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT, ":/newtargetmarker_B.png");
     connect(btnNewMarkerForUAV, &QPushButton::clicked, this, &BombingWidget::onNewMarkerForUAVClicked);
+    connect(btnNewMarkerForUAV, &QPushButtonEx::onRightClick, this, &BombingWidget::onNewMarkerButtonRightClicked);
 
     QPushButton *btnDropBomb = nullptr;
     if (applicationSettings.isBombingTabLicensed())
@@ -104,8 +108,6 @@ BombingWidget::BombingWidget(QWidget *parent, HardwareLink *hardwareLink, Artill
     EnterProc("BombingWidget::BombingWidget");
 
     _weatherView = nullptr;
-
-    _coordCalulationHistoryMs = 1000; //???
 
     MarkerStorage& markerStorage = MarkerStorage::Instance();
 
@@ -182,9 +184,10 @@ void BombingWidget::onNewMarkerForUAVClicked()
     QList<WorldGPSCoord> coords;
     coords.append(getUavCoordsFromTelemetry(_telemetryFrame));
 
-    if (_coordCalulationHistoryMs > 0)
+    ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
+    if (applicationSettings.CoordCalulationHistoryMs > 0)
     {
-        auto frames = _telemetryDataStorage->getLastTelemetryDataFrames(_coordCalulationHistoryMs);
+        auto frames = _telemetryDataStorage->getLastTelemetryDataFrames(applicationSettings.CoordCalulationHistoryMs);
         foreach (auto frame, frames)
             coords.append(getUavCoordsFromTelemetry(frame));
     }
@@ -199,14 +202,34 @@ void BombingWidget::onNewMarkerForLaserClicked()
     QList<WorldGPSCoord> coords;
     coords.append(getRangefinderCoordsFromTelemetry(_telemetryFrame));
 
-    if (_coordCalulationHistoryMs > 0)
+    ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
+    if (applicationSettings.CoordCalulationHistoryMs > 0)
     {
-        auto frames = _telemetryDataStorage->getLastTelemetryDataFrames(_coordCalulationHistoryMs);
+        auto frames = _telemetryDataStorage->getLastTelemetryDataFrames(applicationSettings.CoordCalulationHistoryMs);
         foreach (auto frame, frames)
             coords.append(getRangefinderCoordsFromTelemetry(frame));
     }
 
     addNewMarker(coords, false);
+}
+
+void BombingWidget::onNewMarkerButtonRightClicked()
+{
+    ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
+    quint32 delayMs = applicationSettings.CoordCalulationHistoryMs;
+
+    QMenu menu;
+
+    QActionGroup calulationHistoryTimeGroup(this);
+
+    CommonWidgetUtils::createCheckableMenuGroupAction(tr("Current"), delayMs == 0, &calulationHistoryTimeGroup, &menu, 0);
+    CommonWidgetUtils::createCheckableMenuGroupAction(tr("1 second"), delayMs == 1000, &calulationHistoryTimeGroup, &menu, 1000);
+    CommonWidgetUtils::createCheckableMenuGroupAction(tr("3 seconds"), delayMs == 3000, &calulationHistoryTimeGroup, &menu, 3000);
+
+    menu.exec(QCursor::pos());
+
+    auto acDelayAction = calulationHistoryTimeGroup.checkedAction();
+    applicationSettings.CoordCalulationHistoryMs = acDelayAction->data().toInt();
 }
 
 void BombingWidget::onNewMarkerForTargetClicked()
@@ -216,9 +239,10 @@ void BombingWidget::onNewMarkerForTargetClicked()
     QList<WorldGPSCoord> coords;
     coords.append(getTrackedTargetCoordsFromTelemetry(_telemetryFrame));
 
-    if (_coordCalulationHistoryMs > 0)
+    ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
+    if (applicationSettings.CoordCalulationHistoryMs > 0)
     {
-        auto frames = _telemetryDataStorage->getLastTelemetryDataFrames(_coordCalulationHistoryMs);
+        auto frames = _telemetryDataStorage->getLastTelemetryDataFrames(applicationSettings.CoordCalulationHistoryMs);
         foreach (auto frame, frames)
             coords.append(getTrackedTargetCoordsFromTelemetry(frame));
     }
