@@ -408,14 +408,14 @@ void CameraSettingsEditor::initBindings()
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
     auto cameraSettings = applicationSettings.cameraPreferences(_camIdx);
 
-    _association.addBinding(&(cameraSettings->UserDescription),                   _edtCamDescription);
+    _association.addBinding(&(cameraSettings->UserDescription),                     _edtCamDescription);
     _association.addBinding(&(cameraSettings->PhisycalLensCount),                   _cbOpticalDevicesCount);
 
 
     if (_isPhotographyLicensed)
     {
-        _association.addBinding(&(cameraSettings->IsOnboardRecording),                  _chkOnboardRecording);
-        _association.addBinding(&(cameraSettings->IsSnapshot),                          _chkSnapshot);
+        _association.addBinding(&(cameraSettings->IsOnboardRecording),              _chkOnboardRecording);
+        _association.addBinding(&(cameraSettings->IsSnapshot),                      _chkSnapshot);
     }
 
     _association.addBinding(&(cameraSettings->CameraSuspensionType),                _gbCameraType);

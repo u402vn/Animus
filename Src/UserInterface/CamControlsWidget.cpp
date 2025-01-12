@@ -203,6 +203,7 @@ void CamControlsWidget::createCamZoomControls()
 void CamControlsWidget::createCamViewControls()
 {
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
+    auto cameraSettings = currCameraSettings();
 
     //create buttons
     _btnEnableStabilization = createButton(applicationSettings.hidUIHint(hidbtnEnableSoftwareStab), true, ":/stabilization.png",
@@ -222,10 +223,14 @@ void CamControlsWidget::createCamViewControls()
         ++i;
     }
 
-    auto btnCam1 = createButton(tr("Camera 1"), true, ":/camera1.png", nullptr, onLiveViewSettingsClick);
-    auto btnCam2 = createButton(tr("Camera 2"), true, ":/camera2.png", nullptr, onLiveViewSettingsClick);
-    auto btnCam3 = createButton(tr("Camera 3"), true, ":/camera2.png", nullptr, onLiveViewSettingsClick);
+    auto lensCount = cameraSettings->PhisycalLensCount.value();
+    auto btnCam1 = createButton(tr("Camera 1"), true, ":/camera1.png", nullptr, onLiveViewSettingsClick);    
+    auto btnCam2 = createButton(tr("Camera 2"), true, ":/camera2.png", nullptr, onLiveViewSettingsClick);    
+    auto btnCam3 = createButton(tr("Camera 3"), true, ":/camera3.png", nullptr, onLiveViewSettingsClick);
     btnCam1->setChecked(true);
+
+    btnCam2->setVisible(lensCount >= 2);
+    btnCam3->setVisible(lensCount >= 3);
 
     _grpCamButtons = new QButtonGroup(this);
     _grpCamButtons->addButton(btnCam1, OPTYCAL_SYSTEM_1);
