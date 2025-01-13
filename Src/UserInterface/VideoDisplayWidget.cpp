@@ -7,6 +7,8 @@
 #include "Common/CommonUtils.h"
 #include "ApplicationSettings.h"
 
+const int TimeScaleRange = 20;
+
 VideoDisplayWidget::VideoDisplayWidget(QWidget *parent, VoiceInformant *voiceInformant) : QWidget(parent)
 {
     // https://stackoverflow.com/questions/4183492/optimized-line-drawing-in-qt/4186632
@@ -21,7 +23,8 @@ VideoDisplayWidget::VideoDisplayWidget(QWidget *parent, VoiceInformant *voiceInf
 
     _modeDrawBombingSight = modeWithoutLabelsAndTime;
 
-    _dropBombTime = 0;
+    _dropBombTimeReal = 0;
+    _dropBombTimeIndication = 0;
 
     _osdActiveSightNumbers = -1;
 
@@ -281,7 +284,7 @@ QRectF VideoDisplayWidget::alignRect(const QRectF &rect)
     return showedRect;
 }
 
-void VideoDisplayWidget::updatePen(QPainter &painter, const QColor &color)
+void VideoDisplayWidget::updatePen(QPainter &painter, const QColor &color, float fontScale)
 {
     int penWidth = _defaultLineWidth;
     if (!_useFixedLineWidth)
@@ -293,7 +296,7 @@ void VideoDisplayWidget::updatePen(QPainter &painter, const QColor &color)
     painter.setPen(pen);
 
     QFont font = painter.font();
-    font.setPointSize(1.0 + 12.0 * _scale);
+    font.setPointSize(1.0 + 12.0 * _scale * fontScale);
     painter.setFont(font);
 }
 
@@ -559,7 +562,6 @@ void VideoDisplayWidget::drawFrameCenterMark(QPainter &painter)
     }
 }
 
-const int TimeScaleRange = 10;
 
 float getTimeElapsed(float timeSessionStartingPoint, float timeSessionCurrent)
 {
@@ -639,23 +641,24 @@ void VideoDisplayWidget::paintEvent(QPaintEvent *event)
         drawBombingSight_Plane(painter);
 
         float remainingTime = _telemetryFrame.RemainingTimeToDropBomb;
-        bool isRemainingTimeInRange1_10 = (remainingTime > 1) && (remainingTime <= 10);
+        bool isRemainingTimeInRange_Scale = (remainingTime > 1) && (remainingTime <= TimeScaleRange);
         bool isRemainingTimeInRange0_1 = (remainingTime >= 0) && (remainingTime <= 1);
         bool isAzimuthUAVToTargetInRange30 = qAbs(_telemetryFrame.AzimuthUAVToBombingPlace) < 30;
         bool isBombOnTheBoard = _telemetryFrame.BombState == 0;
-        bool isTimeAfterDropInRange0_10 = (_dropBombTime > 0) && (_telemetryFrame.SessionTimeMs - _dropBombTime <= 10000);
+        bool isTimeAfterDropInRange0_10 = (_dropBombTimeReal > 0) && (_telemetryFrame.SessionTimeMs - _dropBombTimeReal <= 10000);
+        bool isDropBombIndicationActive = qAbs(_dropBombTimeIndication - _telemetryFrame.SessionTimeMs) < 2000;
 
         switch (_modeDrawBombingSight)
         {
         case modeWithoutLabelsAndTime:
             if (isBombOnTheBoard)
             {
-                if (isRemainingTimeInRange1_10 && isAzimuthUAVToTargetInRange30)
+                if (isRemainingTimeInRange_Scale && isAzimuthUAVToTargetInRange30)
                     _modeDrawBombingSight = modeWithRunnigTimeScale;
                 else if (isRemainingTimeInRange0_1)
                 {
-                    _modeDrawBombingSight = modeWithLabelDrop;
-                    _voiceInformant->sayMessage(VoiceMessage::DropBomb);
+                    //_modeDrawBombingSight = modeWithLabelDrop;
+                    //_voiceInformant->sayMessage(VoiceMessage::DropBomb);
                 }
             }
             break;
@@ -663,12 +666,13 @@ void VideoDisplayWidget::paintEvent(QPaintEvent *event)
             if (!isBombOnTheBoard)
             {
                 _modeDrawBombingSight = modeWithLabelLapel;
-                _dropBombTime = _telemetryFrame.SessionTimeMs;
+                _dropBombTimeReal = _telemetryFrame.SessionTimeMs;
             }
-            else if (isRemainingTimeInRange1_10 && isAzimuthUAVToTargetInRange30)
+            else if (isRemainingTimeInRange_Scale && isAzimuthUAVToTargetInRange30)
                 _modeDrawBombingSight = modeWithRunnigTimeScale;
             else if (isRemainingTimeInRange0_1)
             {
+                _dropBombTimeIndication = _telemetryFrame.SessionTimeMs;
                 _modeDrawBombingSight = modeWithLabelDrop;
                 _voiceInformant->sayMessage(VoiceMessage::DropBomb);
             }
@@ -677,15 +681,18 @@ void VideoDisplayWidget::paintEvent(QPaintEvent *event)
             if (!isBombOnTheBoard)
             {
                 _modeDrawBombingSight = modeWithLabelLapel;
-                _dropBombTime = _telemetryFrame.SessionTimeMs;
+                _dropBombTimeReal = _telemetryFrame.SessionTimeMs;
             }
-            else if (isRemainingTimeInRange0_1)
+            else if (isDropBombIndicationActive)
             {
                 _modeDrawBombingSight = modeWithLabelDrop;
                 //_voiceInformant->SayMessage(VoiceMessage::DropBomb);
             }
             else
+            {
                 _modeDrawBombingSight = modeWithoutLabelsAndTime;
+                _dropBombTimeIndication = 0;
+            }
             break;
         case modeWithLabelLapel:
             if (!isTimeAfterDropInRange0_10 || isBombOnTheBoard)
@@ -705,7 +712,7 @@ void VideoDisplayWidget::paintEvent(QPaintEvent *event)
             break;
         case modeWithLabelDrop:
             drawBombingSight_TimeScale(painter, remainingTime, true);
-            drawBombingSight_NumberValues(painter, tr("DROP"));
+            drawBombingSight_NumberValues(painter, tr("DROP BOMB"));
             break;
         case modeWithLabelLapel:
             drawBombingSight_TimeScale(painter, remainingTime, false);
@@ -722,6 +729,8 @@ inline bool IsDistanceToBombingPlaceCorrect(const TelemetryDataFrame &telemetryF
 
 void VideoDisplayWidget::drawBombingSight_NumberValues(QPainter &painter, QString modeLabel)
 {
+
+
     QPointF viewCenter = _osdRect.center();
 
     int width = _osdRect.width();
@@ -742,7 +751,9 @@ void VideoDisplayWidget::drawBombingSight_NumberValues(QPainter &painter, QStrin
 
     QPoint actionPoint(viewCenter.x(), viewCenter.y() + 0.47 * height);
 
+    updatePen(painter, Qt::red, 3);
     CommonWidgetUtils::drawText(painter, actionPoint, Qt::AlignVCenter | Qt::AlignHCenter, modeLabel, false);
+    updatePen(painter, _osdLinesColor);
 }
 
 void VideoDisplayWidget::drawBombingSight_DrawDirection(QPainter &painter)
@@ -874,7 +885,7 @@ void VideoDisplayWidget::drawBombingSight_TimeScale(QPainter &painter, float rem
     float numberOffsetX = 20 * scale;
     float dashSize = 10 * scale;
 
-    for (int i = 0; i <= 10; i++)
+    for (int i = 0; i <= TimeScaleRange; i++)
     {
         int posY = bottomPoint.y() + i * (topPoint.y() - bottomPoint.y()) / TimeScaleRange;
         painter.drawLine(x - dashSize, posY, x, posY);

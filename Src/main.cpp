@@ -76,6 +76,8 @@ int main(int argc, char *argv[])
     //qputenv("OPENCV_FFMPEG_CAPTURE_OPTIONS", "timeout;3000");
     //qputenv("OPENCV_FFMPEG_CAPTURE_OPTIONS", "rtsp_transport;udp");
 
+    //qputenv("QT_MEDIA_BACKEND", "windows");
+
     QApplication app(argc, argv);
 
     auto logDir = app.applicationDirPath() + "\\Logs";

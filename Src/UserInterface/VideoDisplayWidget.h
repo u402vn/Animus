@@ -75,7 +75,7 @@ class VideoDisplayWidget final : public QWidget
         modeWithLabelLapel
     } _modeDrawBombingSight;
 
-    quint32 _dropBombTime;
+    quint32 _dropBombTimeReal, _dropBombTimeIndication;
 
     QMenu *_menu;
     QAction *_acShowBombingSight;
@@ -96,7 +96,7 @@ class VideoDisplayWidget final : public QWidget
     inline QPointF alignPoint(const QPointF &point);
     inline QRectF alignRect(const QRectF &rect);
 
-    void updatePen(QPainter &painter, const QColor &color);
+    void updatePen(QPainter &painter, const QColor &color, float fontScale = 1.0);
 
     void drawMagnifier(QPainter &painter);
     void drawBluredBorders(QPainter &painter);
