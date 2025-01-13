@@ -39,6 +39,8 @@ class DashboardWidget final: public QWidget
                             RowCalculatedTrackedTargetGPSLat, RowCalculatedTrackedTargetGPSLon, RowCalculatedTrackedTargetGPSHmsl,
                             RowTrackedTargetCenterX, RowTrackedTargetCenterY, RowTrackedTargetRectWidth, RowTrackedTargetRectHeight,
                             RowTrackedTargetState,
+                            RowBombingPlacePosLat, RowBombingPlacePosLon, RowBombingPlacePosHmsl,
+                            RowDistanceToBombingPlace, RowAzimuthToBombingPlace, RowRemainingTimeToDropBomb,
                             //insert items before this line. Don't change the order of the items
                             RowLast
                            };

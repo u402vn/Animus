@@ -75,6 +75,8 @@ class VideoDisplayWidget final : public QWidget
         modeWithLabelLapel
     } _modeDrawBombingSight;
 
+    void setModeDrawBombingSight(modeDrawBombingSight value);
+
     quint32 _dropBombTimeReal, _dropBombTimeIndication;
 
     QMenu *_menu;

@@ -83,6 +83,9 @@ DashboardWidget::DashboardWidget(QWidget *parent) : QWidget(parent)
     auto submenuTarget = new CheckableMenu(tr("Target"), this);
     _menu->addMenu(submenuTarget);
 
+    auto submenuBombingPlace = new CheckableMenu(tr("Bombing Place"), this);
+    _menu->addMenu(submenuBombingPlace);
+
     auto submenuWeather = new CheckableMenu(tr("Weather"), this);
     _menu->addMenu(submenuWeather);
 
@@ -127,6 +130,13 @@ DashboardWidget::DashboardWidget(QWidget *parent) : QWidget(parent)
     addParameter(RowTrackedTargetRectWidth, tr("Target Rectangle Width"), submenuTarget);
     addParameter(RowTrackedTargetRectHeight, tr("Target Rectangle Height"), submenuTarget);
     addParameter(RowTrackedTargetState, tr("Target State"), submenuTarget);
+
+    addParameter(RowBombingPlacePosLat, tr("Place Pos Latitude"), submenuBombingPlace);
+    addParameter(RowBombingPlacePosLon, tr("Place Pos Longitude"), submenuBombingPlace);
+    addParameter(RowBombingPlacePosHmsl, tr("Place Pos Altitude"), submenuBombingPlace);
+    addParameter(RowDistanceToBombingPlace, tr("Distance To Bombing Place"), submenuBombingPlace);
+    addParameter(RowAzimuthToBombingPlace, tr("Azimuth To Bombing Place"), submenuBombingPlace);
+    addParameter(RowRemainingTimeToDropBomb, tr("Remaining Time To Drop"), submenuBombingPlace);
 
     addParameter(RowWindDirection, tr("Wind Direction"), submenuWeather);
     addParameter(RowWindSpeed, tr("Wind Speed"), submenuWeather);
@@ -211,6 +221,12 @@ void DashboardWidget::processTelemetry(const TelemetryDataFrame &telemetryDataFr
     setTelemetryTableRowDouble(RowTrackedTargetState, telemetryDataFrame.TrackedTargetState, 0);
     setTelemetryTableRowDouble(RowCalculatedGroundLevel, telemetryDataFrame.CalculatedGroundLevel, 1);
     setTelemetryTableRowDouble(RowOpticalSystem, telemetryDataFrame.OpticalSystemId, 0);
+    setTelemetryTableRowDoubleOrIncorrect(RowBombingPlacePosLat, telemetryDataFrame.BombingPlacePosLat, 6, INCORRECT_COORDINATE);
+    setTelemetryTableRowDoubleOrIncorrect(RowBombingPlacePosLon, telemetryDataFrame.BombingPlacePosLon, 6, INCORRECT_COORDINATE);
+    setTelemetryTableRowDoubleOrIncorrect(RowBombingPlacePosHmsl, telemetryDataFrame.BombingPlacePosHmsl, 1, INCORRECT_COORDINATE);
+    setTelemetryTableRowDouble(RowDistanceToBombingPlace, telemetryDataFrame.DistanceToBombingPlace, 1);
+    setTelemetryTableRowDouble(RowAzimuthToBombingPlace, telemetryDataFrame.AzimuthToBombingPlace, 1);
+    setTelemetryTableRowDouble(RowRemainingTimeToDropBomb, telemetryDataFrame.RemainingTimeToDropBomb, 1);
 }
 
 void DashboardWidget::onActivateCatapultClicked()

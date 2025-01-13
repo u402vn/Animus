@@ -21,7 +21,7 @@ VideoDisplayWidget::VideoDisplayWidget(QWidget *parent, VoiceInformant *voiceInf
 
     _voiceInformant = voiceInformant;
 
-    _modeDrawBombingSight = modeWithoutLabelsAndTime;
+    setModeDrawBombingSight(modeWithoutLabelsAndTime);
 
     _dropBombTimeReal = 0;
     _dropBombTimeIndication = 0;
@@ -241,6 +241,15 @@ void VideoDisplayWidget::onChangeBombingSightClicked()
 
     if (_osdActiveSightNumbers >= count)
         _osdActiveSightNumbers =-1;
+}
+
+void VideoDisplayWidget::setModeDrawBombingSight(VideoDisplayWidget::modeDrawBombingSight value)
+{
+    if (_modeDrawBombingSight != value)
+    {
+        qDebug() << "Change Bombing Sight from " << _modeDrawBombingSight << " to " << value;
+        _modeDrawBombingSight = value;
+    }
 }
 
 void VideoDisplayWidget::updateDrawParams()
@@ -645,60 +654,44 @@ void VideoDisplayWidget::paintEvent(QPaintEvent *event)
         bool isRemainingTimeInRange0_1 = (remainingTime >= 0) && (remainingTime <= 1);
         bool isAzimuthUAVToTargetInRange30 = qAbs(_telemetryFrame.AzimuthUAVToBombingPlace) < 30;
         bool isBombOnTheBoard = _telemetryFrame.BombState == 0;
+        if (!isBombOnTheBoard && (_dropBombTimeReal == 0) )
+            _dropBombTimeReal = _telemetryFrame.SessionTimeMs;
         bool isTimeAfterDropInRange0_10 = (_dropBombTimeReal > 0) && (_telemetryFrame.SessionTimeMs - _dropBombTimeReal <= 10000);
-        bool isDropBombIndicationActive = qAbs(_dropBombTimeIndication - _telemetryFrame.SessionTimeMs) < 2000;
 
-        switch (_modeDrawBombingSight)
-        {
-        case modeWithoutLabelsAndTime:
-            if (isBombOnTheBoard)
+        qint32 dt = _dropBombTimeIndication - _telemetryFrame.SessionTimeMs;
+        bool isDropBombIndicationActive = qAbs(dt) < 2000;
+
+        if (isTimeAfterDropInRange0_10)
+            setModeDrawBombingSight(modeWithLabelLapel);
+        else
+            switch (_modeDrawBombingSight)
             {
+            case modeWithoutLabelsAndTime:
                 if (isRemainingTimeInRange_Scale && isAzimuthUAVToTargetInRange30)
-                    _modeDrawBombingSight = modeWithRunnigTimeScale;
-                else if (isRemainingTimeInRange0_1)
+                    setModeDrawBombingSight(modeWithRunnigTimeScale);
+                break;
+            case modeWithRunnigTimeScale:
+                if (isRemainingTimeInRange0_1)
                 {
-                    //_modeDrawBombingSight = modeWithLabelDrop;
-                    //_voiceInformant->sayMessage(VoiceMessage::DropBomb);
+                    _dropBombTimeIndication = _telemetryFrame.SessionTimeMs;
+                    setModeDrawBombingSight(modeWithLabelDrop);
+                    _voiceInformant->sayMessage(VoiceMessage::DropBomb);
                 }
-            }
-            break;
-        case modeWithRunnigTimeScale:
-            if (!isBombOnTheBoard)
-            {
-                _modeDrawBombingSight = modeWithLabelLapel;
-                _dropBombTimeReal = _telemetryFrame.SessionTimeMs;
-            }
-            else if (isRemainingTimeInRange_Scale && isAzimuthUAVToTargetInRange30)
-                _modeDrawBombingSight = modeWithRunnigTimeScale;
-            else if (isRemainingTimeInRange0_1)
-            {
-                _dropBombTimeIndication = _telemetryFrame.SessionTimeMs;
-                _modeDrawBombingSight = modeWithLabelDrop;
-                _voiceInformant->sayMessage(VoiceMessage::DropBomb);
-            }
-            break;
-        case modeWithLabelDrop:
-            if (!isBombOnTheBoard)
-            {
-                _modeDrawBombingSight = modeWithLabelLapel;
-                _dropBombTimeReal = _telemetryFrame.SessionTimeMs;
-            }
-            else if (isDropBombIndicationActive)
-            {
-                _modeDrawBombingSight = modeWithLabelDrop;
-                //_voiceInformant->SayMessage(VoiceMessage::DropBomb);
-            }
-            else
-            {
-                _modeDrawBombingSight = modeWithoutLabelsAndTime;
-                _dropBombTimeIndication = 0;
-            }
-            break;
-        case modeWithLabelLapel:
-            if (!isTimeAfterDropInRange0_10 || isBombOnTheBoard)
-                _modeDrawBombingSight = modeWithoutLabelsAndTime;
-            break;
-        };
+                else if ( !(isRemainingTimeInRange_Scale && isAzimuthUAVToTargetInRange30) )
+                    setModeDrawBombingSight(modeWithoutLabelsAndTime);
+                break;
+            case modeWithLabelDrop:
+                if (!isDropBombIndicationActive)
+                {
+                    setModeDrawBombingSight(modeWithoutLabelsAndTime);
+                    _dropBombTimeIndication = 0;
+                }
+                break;
+            case modeWithLabelLapel:
+                if (!isTimeAfterDropInRange0_10)
+                    setModeDrawBombingSight(modeWithoutLabelsAndTime);
+                break;
+            };
 
         switch (_modeDrawBombingSight)
         {
@@ -729,8 +722,6 @@ inline bool IsDistanceToBombingPlaceCorrect(const TelemetryDataFrame &telemetryF
 
 void VideoDisplayWidget::drawBombingSight_NumberValues(QPainter &painter, QString modeLabel)
 {
-
-
     QPointF viewCenter = _osdRect.center();
 
     int width = _osdRect.width();
@@ -749,9 +740,8 @@ void VideoDisplayWidget::drawBombingSight_NumberValues(QPainter &painter, QStrin
     QPoint modePoint(viewCenter.x() + 0.35 * width, viewCenter.y() + 0.47 * height);
     CommonWidgetUtils::drawText(painter, modePoint, Qt::AlignVCenter | Qt::AlignHCenter, tr("M"), false);
 
-    QPoint actionPoint(viewCenter.x(), viewCenter.y() + 0.47 * height);
-
     updatePen(painter, Qt::red, 3);
+    QPoint actionPoint(viewCenter.x(), viewCenter.y() + 0.42 * height);
     CommonWidgetUtils::drawText(painter, actionPoint, Qt::AlignVCenter | Qt::AlignHCenter, modeLabel, false);
     updatePen(painter, _osdLinesColor);
 }
@@ -891,7 +881,7 @@ void VideoDisplayWidget::drawBombingSight_TimeScale(QPainter &painter, float rem
         painter.drawLine(x - dashSize, posY, x, posY);
     }
 
-    if (isEnabledTimeScale && remainingTime > 0 && remainingTime <= TimeScaleRange)
+    if (isEnabledTimeScale && (remainingTime > 0) && (remainingTime <= TimeScaleRange) )
     {
         int markerY = topPoint.y() - remainingTime * (topPoint.y() - bottomPoint.y()) / TimeScaleRange;
         int penWidth = painter.pen().width();
