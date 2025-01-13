@@ -618,6 +618,7 @@ void CheckableMenu::setVisible(bool visible)
         return;
     }
     QMenu::setVisible(visible);
+    //QMenu::setVisible(true);
 }
 
 //-------------------------------------- Spoiler --------------------------------------
