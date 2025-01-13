@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets network serialport sql
+QT       += core gui widgets network serialport sql multimediawidgets
 
 TARGET = UAVSimulator
 TEMPLATE = app
@@ -32,7 +32,8 @@ SOURCES +=\
         Common/CommonData.cpp \
         Common/CommonWidgets.cpp \
         HardwareLink/lz4.c \
-        TelemetryDataFrame.cpp
+        TelemetryDataFrame.cpp \
+        ConstantNames.cpp
 
 
 HEADERS  +=\
@@ -45,7 +46,8 @@ HEADERS  +=\
         Common/CommonData.h \
         Common/CommonWidgets.h \
         HardwareLink/lz4.h \
-        TelemetryDataFrame.h
+        TelemetryDataFrame.h \
+        ConstantNames.h
 
 RESOURCES += \
     UAVSimulator/TestFiles/TestFiles.qrc
