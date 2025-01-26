@@ -218,7 +218,10 @@ HIDSettingsEditor::HIDSettingsEditor(QWidget *parent) :
         addHIDButtonBinding(hidbtnCamRecording,                         rowIndex);
     addHIDButtonBinding(hidbtnAutomaticTracer,                          rowIndex);
     if (applicationSettings.isBombingTabLicensed())
-        addHIDButtonBinding(hidbtnDropBomb,                             rowIndex);
+    {
+        addHIDButtonBinding(hidbtnDropBomb05,                           rowIndex);
+        addHIDButtonBinding(hidbtnDropBomb10,                           rowIndex);
+    }
 
     addHIDButtonBinding(hidbtnSendHitCoordinates,                       rowIndex);
     addHIDButtonBinding(hidbtnSendWeather,                              rowIndex);

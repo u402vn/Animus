@@ -214,6 +214,10 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
 
     auto cbCommandProtocol = new QComboBoxExt(this, ConstantNames::CommandProtocolCaptions());
 
+    auto chkSpecialBombDropSystem = new QCheckBox(tr("Special bomb drop system"), this);
+    auto naeBombDropSystemTCP = new NetworkAddressEditor(this, &_association, &applicationSettings.BombDropSystemTCPAddress, &applicationSettings.BombDropSystemTCPPort);
+
+
     auto spoilerDataSending = makeSessionsSpoilerGrid(tr("Data Sending"), this);
     auto dataSendingLayout = spoilerDataSending->gridLayout();
 
@@ -235,6 +239,9 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     dataSendingLayout->addWidget(lblCommandProtocol,              row, 0, 1, 1);
     dataSendingLayout->addWidget(cbCommandProtocol,               row, 1, 1, 1);
     row++;
+
+    dataSendingLayout->addWidget(chkSpecialBombDropSystem,     row, 0, 1, 4);
+
 
     // Init Data Forwarding section
     SpoilerGrid *spoilerDataForwarding = nullptr;
@@ -405,6 +412,7 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     _association.addBinding(&applicationSettings.CommandTransport,                  gbCmdTransport);
     _association.addBinding(&applicationSettings.CommandSerialPortName,             cbCmdSerialPortName);
     _association.addBinding(&applicationSettings.CommandProtocol,                   cbCommandProtocol);
+    _association.addBinding(&applicationSettings.SpecialBombDropSystem,             chkSpecialBombDropSystem);
 
     _association.addBinding(&applicationSettings.ObjectTrackerType,                 cmbObjectTrackerType);
     _association.addBinding(&applicationSettings.ShowExternalTrackerRectangle,      chkShowExternalTrackerRectangle);

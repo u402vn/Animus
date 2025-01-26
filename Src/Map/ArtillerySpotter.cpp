@@ -25,6 +25,8 @@ void ArtillerySpotter::timerEvent(QTimerEvent *event)
 
     EnterProcStart("ArtillerySpotter::timerEvent");
 
+    if (_reconnectTimerId != event->timerId())
+        return;
     if (!_enabled)
         return;
     if (_tcpSocket.state() == QAbstractSocket::UnconnectedState)
@@ -238,7 +240,6 @@ void ArtillerySpotter::readSocketData()
 
         while (static_cast<quint32>(_tcpBuffer.size()) >= sizeof(ReceiptData))
         {
-
             receiptData = reinterpret_cast<ReceiptData*>(_tcpBuffer.data());
 
             BinaryContent messageContent;

@@ -107,7 +107,8 @@ private slots:
     void onMessageExchangeInformation(const QString &information, bool isEroor);
     void onNewMarkerButtonRightClicked();
 public slots:
-    void onDropBombClicked();
+    void onDropBombClicked05();
+    void onDropBombClicked10();
     void onSendHitCoordinatesClicked();
     void onSendWeatherClicked();
     void onNewMarkerForTargetClicked();

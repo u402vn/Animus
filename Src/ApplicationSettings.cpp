@@ -251,7 +251,10 @@ void ApplicationSettings::ensureHIDButtonPrefsLoaded()
 
     addHIDButtonPrefs(hidbtnCamRecording, "CamControls/CamRecordingKey", "",  "CamControls/CamRecordingJoystickButton", -1, tr("Camera Recording"));
     addHIDButtonPrefs(hidbtnAutomaticTracer, "CamControls/AutomaticTracerKey", "T",  "CamControls/AutomaticTracerJoystickButton", -1, tr("Automatic Tracer"));
-    addHIDButtonPrefs(hidbtnDropBomb,  "CamControls/DropBombKey", "", "CamControls/DropBombJoystickButton", -1, tr("Drop Bomb"));
+    addHIDButtonPrefs(hidbtnDropBomb05,  "CamControls/DropBombKey05", "", "CamControls/DropBombJoystickButton05", -1, tr("Drop Bomb 0.5"));
+    addHIDButtonPrefs(hidbtnDropBomb10,  "CamControls/DropBombKey", "", "CamControls/DropBombJoystickButton", -1, tr("Drop Bomb 1"));
+
+
     addHIDButtonPrefs(hidbtnSendHitCoordinates,  "CamControls/SendHitCoordinatesKey", "", "CamControls/SendHitCoordinatesJoystickButton", -1, tr("Send Hit Coordinates"));
     addHIDButtonPrefs(hidbtnSendWeather,  "CamControls/SendWeatherKey", "", "CamControls/SendWeatherJoystickButton", -1, tr("Send Weather"));
 

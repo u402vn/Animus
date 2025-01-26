@@ -101,7 +101,8 @@ HIDController::HIDController(QObject *parent) : QObject(parent)
 
     makeHIDMapItem(hidbtnCamRecording,       &HIDController::onCamRecordingClicked,                 nullptr, false);
     makeHIDMapItem(hidbtnAutomaticTracer,    &HIDController::onEnableAutomaticTracerClicked,        nullptr, false);
-    makeHIDMapItem(hidbtnDropBomb,           &HIDController::onDropBombClicked,                     nullptr, true);
+    makeHIDMapItem(hidbtnDropBomb05,         &HIDController::onDropBombClicked05,                   nullptr, true);
+    makeHIDMapItem(hidbtnDropBomb10,         &HIDController::onDropBombClicked10,                   nullptr, true);
     makeHIDMapItem(hidbtnSendHitCoordinates, &HIDController::onSendHitCoordinatesClicked,           nullptr, false);
     makeHIDMapItem(hidbtnSendWeather,        &HIDController::onSendWeatherClicked,                  nullptr, false);
 

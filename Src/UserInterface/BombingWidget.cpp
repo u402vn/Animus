@@ -43,12 +43,16 @@ void BombingWidget::initWidgets()
     connect(btnNewMarkerForUAV, &QPushButton::clicked, this, &BombingWidget::onNewMarkerForUAVClicked);
     connect(btnNewMarkerForUAV, &QPushButtonEx::onRightClick, this, &BombingWidget::onNewMarkerButtonRightClicked);
 
-    QPushButton *btnDropBomb = nullptr;
+    QPushButton *btnDropBomb05 = nullptr;
+    QPushButton *btnDropBomb10 = nullptr;
     if (applicationSettings.isBombingTabLicensed())
     {
-        btnDropBomb = CommonWidgetUtils::createButton(this, applicationSettings.hidCaption(hidbtnDropBomb), applicationSettings.hidUIHint(hidbtnDropBomb),
+        btnDropBomb05 = CommonWidgetUtils::createButton(this, applicationSettings.hidCaption(hidbtnDropBomb05), applicationSettings.hidUIHint(hidbtnDropBomb05),
                                                       false,  QWIDGETSIZE_MAX, DEFAULT_BUTTON_HEIGHT, NO_ICON);
-        connect(btnDropBomb, &QPushButton::clicked, this, &BombingWidget::onDropBombClicked);
+        connect(btnDropBomb05, &QPushButton::clicked, this, &BombingWidget::onDropBombClicked05);
+        btnDropBomb10 = CommonWidgetUtils::createButton(this, applicationSettings.hidCaption(hidbtnDropBomb10), applicationSettings.hidUIHint(hidbtnDropBomb10),
+                                                      false,  QWIDGETSIZE_MAX, DEFAULT_BUTTON_HEIGHT, NO_ICON);
+        connect(btnDropBomb10, &QPushButton::clicked, this, &BombingWidget::onDropBombClicked10);
     }
 
     auto btnSendHitCoordinates = CommonWidgetUtils::createButton(this, applicationSettings.hidCaption(hidbtnSendHitCoordinates), applicationSettings.hidUIHint(hidbtnSendHitCoordinates),
@@ -82,22 +86,26 @@ void BombingWidget::initWidgets()
     mainSplitter->addWidget(markerWidget);
 
     row = 0;
+
+    mainLayout->addWidget(btnSendHitCoordinates,                                       row, 1, 1, 2);
+    mainLayout->addWidget(btnSendWeather,                                              row, 3, 1, 2);
+    row++;
+
     mainLayout->addWidget(mainSplitter,                                                row, 1, 1, 4);
     row++;
 
-    if (btnDropBomb != nullptr)
+    if (btnDropBomb05 != nullptr)
     {
-        mainLayout->addWidget(CommonWidgetUtils::createSeparator(this),                row, 1, 1, 3);
-        mainLayout->setRowMinimumHeight(row, 0.5 * DEFAULT_BUTTON_HEIGHT);
-        row++;
+        //mainLayout->addWidget(CommonWidgetUtils::createSeparator(this),                row, 1, 1, 3);
+        //mainLayout->setRowMinimumHeight(row, 0.5 * DEFAULT_BUTTON_HEIGHT);
+        //row++;
 
-        mainLayout->addWidget(btnDropBomb,                                             row, 1, 1, 4);
+        mainLayout->addWidget(btnDropBomb05,                                             row, 1, 1, 2);
+        mainLayout->addWidget(btnDropBomb10,                                             row, 3, 1, 2);
         row++;
     }
 
-    mainLayout->addWidget(btnSendHitCoordinates,                                       row, 1, 1, 2);
-    mainLayout->addWidget(btnSendWeather,                                           row, 3, 1, 2);
-    row++;
+
 }
 
 BombingWidget::BombingWidget(QWidget *parent, HardwareLink *hardwareLink, ArtillerySpotter *artillerySpotter, TelemetryDataStorage *telemetryDataStorage) : QWidget(parent),
@@ -250,10 +258,16 @@ void BombingWidget::onNewMarkerForTargetClicked()
     addNewMarker(coords, false);
 }
 
-void BombingWidget::onDropBombClicked()
+void BombingWidget::onDropBombClicked05()
 {
-    EnterProc("BombingWidget::onDropBombClicked");
+    EnterProc("BombingWidget::onDropBombClicked05");
     _hardwareLink->dropBomb(1);
+}
+
+void BombingWidget::onDropBombClicked10()
+{
+    EnterProc("BombingWidget::onDropBombClicked10");
+    _hardwareLink->dropBomb(2);
 }
 
 void BombingWidget::onSendHitCoordinatesClicked()

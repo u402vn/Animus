@@ -487,6 +487,7 @@ void VideoDisplayWidget::drawFrameCenterMark(QPainter &painter)
     }
     case OSDScreenCenterMarks::CrossAndRulers:
     {
+        r = width * 0.30;
         QVector<QLineF> markLines;
         markLines.append(QLineF(x - r,   y,       x + r,   y    ));
         markLines.append(QLineF(x,       y - r,   x,       y + r));

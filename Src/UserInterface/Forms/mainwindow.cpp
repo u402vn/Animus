@@ -39,10 +39,10 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
                                             applicationSettings.OVRGimbalIndicatorSize,
                                             applicationSettings.isLaserRangefinderLicensed());
     connect(_dataStorage, &TelemetryDataStorage::workModeChanged, this, &MainWindow::workModeChanged);
-    connect(_dataStorage, &TelemetryDataStorage::storedDataReceived, this, &MainWindow::storedDataReceived, Qt::DirectConnection);
+    connect(_dataStorage, &TelemetryDataStorage::storedDataReceived, this, &MainWindow::storedDataReceived);
 
     _hardwareLink = new HardwareLink(this);
-    connect(_hardwareLink, &HardwareLink::dataReceived, this, &MainWindow::hardwareLinkDataReceived, Qt::DirectConnection);
+    connect(_hardwareLink, &HardwareLink::dataReceived, this, &MainWindow::hardwareLinkDataReceived);
     connect(_hardwareLink, &HardwareLink::onClientCommandSent, _dataStorage, &TelemetryDataStorage::onClientCommandSent);
 
 
@@ -64,7 +64,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     _imageProcessor->setStabilizationType(applicationSettings.VideoStabilizationType);
 
     connect(_hardwareLink, &HardwareLink::onHardwareLinkStateChanged, this, &MainWindow::onHardwareLinkStateChanged);
-    connect(_imageProcessor, &ImageProcessor::onDataProcessed, this, &MainWindow::onDataReceived, Qt::DirectConnection);
+    connect(_imageProcessor, &ImageProcessor::onDataProcessed, this, &MainWindow::onDataReceived);
     connect(_imageProcessor, &ImageProcessor::onDataProcessed, _dataStorage, &TelemetryDataStorage::onDataReceived);
 
     _voiceInformant = new VoiceInformant(this);
@@ -349,53 +349,54 @@ void MainWindow::initHidController(CamAssemblyPreferences *camAssemblyPreference
     _hidController = new HIDController(this);
     auto camPreferences = camAssemblyPreferences->opticalDevice(OPTYCAL_SYSTEM_1);
     _hidController->setCamZoomRange(camPreferences->zoomMin(), camPreferences->zoomMax()); //???
-    connect(_hidController, &HIDController::onOpenApplicationSettingsEditorClicked, this,               &MainWindow::onOpenApplicationSettingsEditorClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onOpenDataConsoleClicked,               this,               &MainWindow::onOpenDataConsoleClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onOpenEmulatorConsoleClicked,           this,               &MainWindow::onOpenEmulatorConsoleClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onOpenHelpViewerClicked,                this,               &MainWindow::onOpenHelpViewerClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onForceStartNewSessionClicked,          this,               &MainWindow::onForceStartNewSessionClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onForceDisplayOnlyClicked,              this,               &MainWindow::onForceDisplayOnlyClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onChangeVideo2MapClicked,               this,               &MainWindow::onChangeVideo2MapCicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onSelectSessionsClicked,                this,               &MainWindow::onSelectSessionsClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onRelativeCamPositionChange,            _camControlsWidget, &CamControlsWidget::onRelativeCamPositionChange, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onAbsoluteCamZoomChange,                _camControlsWidget, &CamControlsWidget::onAbsoluteCamZoomChange, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onCamMovingSpeedChange,                 _camControlsWidget, &CamControlsWidget::onManualCamMovingSpeedChange, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onChangeActiveCamClicked,               _camControlsWidget, &CamControlsWidget::onChangeActiveCamClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onEnableSoftwareStabClicked,            _camControlsWidget, &CamControlsWidget::onEnableSoftwareStabilizationClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onCamDriversOffClicked,                 _camControlsWidget, &CamControlsWidget::onCamDriversOffClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onCamLandingPosClicked,                 _camControlsWidget, &CamControlsWidget::onCamLandingPosClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onCamBeginingPosClicked,                _camControlsWidget, &CamControlsWidget::onCamBeginingPosClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onCamVerticalPosClicked,                _camControlsWidget, &CamControlsWidget::onCamVerticalPosClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onColorModeUpClicked,                   _camControlsWidget, &CamControlsWidget::onColorModeUpClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onColorModeDownClicked,                 _camControlsWidget, &CamControlsWidget::onColorModeDownClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onLaserActivationClicked,               _camControlsWidget, &CamControlsWidget::onLaserActivationClicked, Qt::DirectConnection);
+    connect(_hidController, &HIDController::onOpenApplicationSettingsEditorClicked, this,               &MainWindow::onOpenApplicationSettingsEditorClicked);
+    connect(_hidController, &HIDController::onOpenDataConsoleClicked,               this,               &MainWindow::onOpenDataConsoleClicked);
+    connect(_hidController, &HIDController::onOpenEmulatorConsoleClicked,           this,               &MainWindow::onOpenEmulatorConsoleClicked);
+    connect(_hidController, &HIDController::onOpenHelpViewerClicked,                this,               &MainWindow::onOpenHelpViewerClicked);
+    connect(_hidController, &HIDController::onForceStartNewSessionClicked,          this,               &MainWindow::onForceStartNewSessionClicked);
+    connect(_hidController, &HIDController::onForceDisplayOnlyClicked,              this,               &MainWindow::onForceDisplayOnlyClicked);
+    connect(_hidController, &HIDController::onChangeVideo2MapClicked,               this,               &MainWindow::onChangeVideo2MapCicked);
+    connect(_hidController, &HIDController::onSelectSessionsClicked,                this,               &MainWindow::onSelectSessionsClicked);
+    connect(_hidController, &HIDController::onRelativeCamPositionChange,            _camControlsWidget, &CamControlsWidget::onRelativeCamPositionChange);
+    connect(_hidController, &HIDController::onAbsoluteCamZoomChange,                _camControlsWidget, &CamControlsWidget::onAbsoluteCamZoomChange);
+    connect(_hidController, &HIDController::onCamMovingSpeedChange,                 _camControlsWidget, &CamControlsWidget::onManualCamMovingSpeedChange);
+    connect(_hidController, &HIDController::onChangeActiveCamClicked,               _camControlsWidget, &CamControlsWidget::onChangeActiveCamClicked);
+    connect(_hidController, &HIDController::onEnableSoftwareStabClicked,            _camControlsWidget, &CamControlsWidget::onEnableSoftwareStabilizationClicked);
+    connect(_hidController, &HIDController::onCamDriversOffClicked,                 _camControlsWidget, &CamControlsWidget::onCamDriversOffClicked);
+    connect(_hidController, &HIDController::onCamLandingPosClicked,                 _camControlsWidget, &CamControlsWidget::onCamLandingPosClicked);
+    connect(_hidController, &HIDController::onCamBeginingPosClicked,                _camControlsWidget, &CamControlsWidget::onCamBeginingPosClicked);
+    connect(_hidController, &HIDController::onCamVerticalPosClicked,                _camControlsWidget, &CamControlsWidget::onCamVerticalPosClicked);
+    connect(_hidController, &HIDController::onColorModeUpClicked,                   _camControlsWidget, &CamControlsWidget::onColorModeUpClicked);
+    connect(_hidController, &HIDController::onColorModeDownClicked,                 _camControlsWidget, &CamControlsWidget::onColorModeDownClicked);
+    connect(_hidController, &HIDController::onLaserActivationClicked,               _camControlsWidget, &CamControlsWidget::onLaserActivationClicked);
 
-    connect(_hidController, &HIDController::onMapZoomInClicked,                     _mapView,           &MapView::onMapZoomInClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onMapZoomOutClicked,                    _mapView,           &MapView::onMapZoomOutClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onMapMoveClicked,                       _mapView,           &MapView::onMapMoveClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onFollowThePlaneClicked,                _mapView,           &MapView::onFollowThePlaneClicked, Qt::DirectConnection);
+    connect(_hidController, &HIDController::onMapZoomInClicked,                     _mapView,           &MapView::onMapZoomInClicked);
+    connect(_hidController, &HIDController::onMapZoomOutClicked,                    _mapView,           &MapView::onMapZoomOutClicked);
+    connect(_hidController, &HIDController::onMapMoveClicked,                       _mapView,           &MapView::onMapMoveClicked);
+    connect(_hidController, &HIDController::onFollowThePlaneClicked,                _mapView,           &MapView::onFollowThePlaneClicked);
 
-    connect(_hidController, &HIDController::onScreenshotClicked,                    _camControlsWidget, &CamControlsWidget::onScreenshotClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onSnapshotClicked,                      _camControlsWidget, &CamControlsWidget::onSnapshotClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onSnapshotSeriesClicked,                _camControlsWidget, &CamControlsWidget::onSnapshotSeriesClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onTargetUnlockClicked,                  _camControlsWidget, &CamControlsWidget::onTargetUnlockClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onCamRecordingClicked,                  _camControlsWidget, &CamControlsWidget::onCamRecordingClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onEnableAutomaticTracerClicked,         _camControlsWidget, &CamControlsWidget::onEnableAutomaticTracerClicked, Qt::DirectConnection);
+    connect(_hidController, &HIDController::onScreenshotClicked,                    _camControlsWidget, &CamControlsWidget::onScreenshotClicked);
+    connect(_hidController, &HIDController::onSnapshotClicked,                      _camControlsWidget, &CamControlsWidget::onSnapshotClicked);
+    connect(_hidController, &HIDController::onSnapshotSeriesClicked,                _camControlsWidget, &CamControlsWidget::onSnapshotSeriesClicked);
+    connect(_hidController, &HIDController::onTargetUnlockClicked,                  _camControlsWidget, &CamControlsWidget::onTargetUnlockClicked);
+    connect(_hidController, &HIDController::onCamRecordingClicked,                  _camControlsWidget, &CamControlsWidget::onCamRecordingClicked);
+    connect(_hidController, &HIDController::onEnableAutomaticTracerClicked,         _camControlsWidget, &CamControlsWidget::onEnableAutomaticTracerClicked);
     if (_bombingWidget != nullptr)
     {
-        connect(_hidController, &HIDController::onDropBombClicked,                  _bombingWidget,     &BombingWidget::onDropBombClicked, Qt::DirectConnection);
-        connect(_hidController, &HIDController::onSendHitCoordinatesClicked,        _bombingWidget,     &BombingWidget::onSendHitCoordinatesClicked, Qt::DirectConnection);
-        connect(_hidController, &HIDController::onSendWeatherClicked,               _bombingWidget,     &BombingWidget::onSendWeatherClicked, Qt::DirectConnection);
-        connect(_hidController, &HIDController::onNewMarkerForTargetClicked,        _bombingWidget,     &BombingWidget::onNewMarkerForTargetClicked, Qt::DirectConnection);
-        connect(_hidController, &HIDController::onNewMarkerForLaserClicked,         _bombingWidget,     &BombingWidget::onNewMarkerForLaserClicked, Qt::DirectConnection);
-        connect(_hidController, &HIDController::onNewMarkerForUAVClicked,           _bombingWidget,     &BombingWidget::onNewMarkerForUAVClicked, Qt::DirectConnection);
+        connect(_hidController, &HIDController::onDropBombClicked05,                _bombingWidget,     &BombingWidget::onDropBombClicked05);
+        connect(_hidController, &HIDController::onDropBombClicked10,                _bombingWidget,     &BombingWidget::onDropBombClicked10);
+        connect(_hidController, &HIDController::onSendHitCoordinatesClicked,        _bombingWidget,     &BombingWidget::onSendHitCoordinatesClicked);
+        connect(_hidController, &HIDController::onSendWeatherClicked,               _bombingWidget,     &BombingWidget::onSendWeatherClicked);
+        connect(_hidController, &HIDController::onNewMarkerForTargetClicked,        _bombingWidget,     &BombingWidget::onNewMarkerForTargetClicked);
+        connect(_hidController, &HIDController::onNewMarkerForLaserClicked,         _bombingWidget,     &BombingWidget::onNewMarkerForLaserClicked);
+        connect(_hidController, &HIDController::onNewMarkerForUAVClicked,           _bombingWidget,     &BombingWidget::onNewMarkerForUAVClicked);
     }
-    connect(_hidController, &HIDController::onChangeBombingSightClicked,            _videoWidget,       &VideoDisplayWidget::onChangeBombingSightClicked, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onTargetLockCursorSpeedChange,          _videoWidget,       &VideoDisplayWidget::onTargetLockCursorSpeedChange, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onTargetLockInCursorClick,              _videoWidget,       &VideoDisplayWidget::onTargetLockInCursorClick, Qt::DirectConnection);
-    connect(_hidController, &HIDController::onMagnifierClick,                       _videoWidget,       &VideoDisplayWidget::onMagnifierClick, Qt::DirectConnection);
+    connect(_hidController, &HIDController::onChangeBombingSightClicked,            _videoWidget,       &VideoDisplayWidget::onChangeBombingSightClicked);
+    connect(_hidController, &HIDController::onTargetLockCursorSpeedChange,          _videoWidget,       &VideoDisplayWidget::onTargetLockCursorSpeedChange);
+    connect(_hidController, &HIDController::onTargetLockInCursorClick,              _videoWidget,       &VideoDisplayWidget::onTargetLockInCursorClick);
+    connect(_hidController, &HIDController::onMagnifierClick,                       _videoWidget,       &VideoDisplayWidget::onMagnifierClick);
 
-    connect(_camControlsWidget, &CamControlsWidget::doSetZoomFromUI,                _hidController,     &HIDController::doSetZoomFromUI, Qt::DirectConnection);
+    connect(_camControlsWidget, &CamControlsWidget::doSetZoomFromUI,                _hidController,     &HIDController::doSetZoomFromUI);
 }
 
 void MainWindow::addTabWidgets()

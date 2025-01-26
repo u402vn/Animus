@@ -124,7 +124,8 @@ signals:
 
     void onChangeBombingSightClicked();
 
-    void onDropBombClicked();
+    void onDropBombClicked05();
+    void onDropBombClicked10();
     void onSendHitCoordinatesClicked();
     void onSendWeatherClicked();
     void onNewMarkerForTargetClicked();
