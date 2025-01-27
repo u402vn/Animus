@@ -336,6 +336,9 @@ public:
     ApplicationPreferenceInt CommandUDPPort;
     ApplicationPreferenceString CommandUDPAddress;
     ApplicationPreferenceString CommandSerialPortName;
+    ApplicationPreferenceBool SpecialBombDropSystem;
+    ApplicationPreferenceString BombDropSystemTCPAddress;
+    ApplicationPreferenceInt BombDropSystemTCPPort;
     ApplicationPreferenceEnum<UAVTelemetrySourceTypes> UAVTelemetrySourceType;
     ApplicationPreferenceEnum<UAVTelemetryDataFormats> TelemetryDataFormat;
     ApplicationPreferenceInt UAVTelemetryUDPPort;

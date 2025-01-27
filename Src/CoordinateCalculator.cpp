@@ -61,8 +61,7 @@ CoordinateCalculator::CoordinateCalculator(QObject *parent, HeightMapContainer *
 {
     ApplicationSettings& applicationSettings = ApplicationSettings::Instance();
     _ballisticMacro = applicationSettings.BallisticMacro;
-    _useLaserRangefinderForGroundLevelCalculation =
-            applicationSettings.UseLaserRangefinderForGroundLevelCalculation && applicationSettings.isLaserRangefinderLicensed();
+    _useLaserRangefinderForGroundLevelCalculation = applicationSettings.UseLaserRangefinderForGroundLevelCalculation && applicationSettings.isLaserRangefinderLicensed();
     _useBombCaclulation = applicationSettings.isBombingTabLicensed();
 
     _trackedTargetSpeed = 0;

@@ -137,6 +137,13 @@ struct DataExchangePackage final
         VideoFrameNumber = 0;
         SessionTimeMs = 0;
     }
+
+    void init(const TelemetryDataFrame &telemetryDataFrame)
+    {
+        VideoFrameNumber = telemetryDataFrame.VideoFrameNumber;
+        TelemetryFrameNumber = telemetryDataFrame.TelemetryFrameNumber;
+        SessionTimeMs = telemetryDataFrame.SessionTimeMs;
+    }
 };
 
 struct WeatherDataItem final

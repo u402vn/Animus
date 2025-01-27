@@ -28,6 +28,7 @@
 #include "UserInterface/VideoDisplayWidget.h"
 #include "ImageProcessor/ImageProcessor.h"
 #include "HardwareLink/HardwareLink.h"
+#include "HardwareLink/BombingController.h"
 #include "UserInterface/Forms/HelpViewer.h"
 #include "UserInterface/Forms/DataConsole.h"
 #include "UserInterface/Forms/EmulatorConsole.h"
@@ -87,6 +88,7 @@ private:
 
     HardwareLink *_hardwareLink;
     ArtillerySpotter *_artillerySpotter;
+    BombingController *_bombingController;
 
     DataConsole *_dataConsole;
     EmulatorConsole *_emulatorConsole;

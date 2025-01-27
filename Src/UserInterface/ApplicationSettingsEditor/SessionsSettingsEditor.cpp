@@ -217,31 +217,31 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     auto chkSpecialBombDropSystem = new QCheckBox(tr("Special bomb drop system"), this);
     auto naeBombDropSystemTCP = new NetworkAddressEditor(this, &_association, &applicationSettings.BombDropSystemTCPAddress, &applicationSettings.BombDropSystemTCPPort);
 
+    auto spoilerCommandSending = makeSessionsSpoilerGrid(tr("Command Sending"), this);
+    auto commandSendingLayout = spoilerCommandSending->gridLayout();
 
-    auto spoilerDataSending = makeSessionsSpoilerGrid(tr("Data Sending"), this);
-    auto dataSendingLayout = spoilerDataSending->gridLayout();
-
-    dataSendingLayout->addWidget(rbCmdUdpTransport,               row, 0, 1, 1);
-    dataSendingLayout->addWidget(naeCommandUDP,                   row, 1, 1, 2);
+    commandSendingLayout->addWidget(rbCmdUdpTransport,               row, 0, 1, 1);
+    commandSendingLayout->addWidget(naeCommandUDP,                   row, 1, 1, 2);
     row++;
 
-    dataSendingLayout->addWidget(rbCmdSerialTransport,            row, 0, 1, 1);
-    dataSendingLayout->addWidget(cbCmdSerialPortName,             row, 1, 1, 1);
+    commandSendingLayout->addWidget(rbCmdSerialTransport,            row, 0, 1, 1);
+    commandSendingLayout->addWidget(cbCmdSerialPortName,             row, 1, 1, 1);
     row++;
 
-    dataSendingLayout->addWidget(CommonWidgetUtils::createSeparator(this),     row, 0, 1, 4);
+    commandSendingLayout->addWidget(CommonWidgetUtils::createSeparator(this),     row, 0, 1, 4);
     row++;
 
-    dataSendingLayout->addWidget(lblCommandSendingInterval,       row, 0, 1, 1);
-    dataSendingLayout->addWidget(sbCommandSendingInterval,        row, 1, 1, 1);
+    commandSendingLayout->addWidget(lblCommandSendingInterval,       row, 0, 1, 1);
+    commandSendingLayout->addWidget(sbCommandSendingInterval,        row, 1, 1, 1);
     row++;
 
-    dataSendingLayout->addWidget(lblCommandProtocol,              row, 0, 1, 1);
-    dataSendingLayout->addWidget(cbCommandProtocol,               row, 1, 1, 1);
+    commandSendingLayout->addWidget(lblCommandProtocol,              row, 0, 1, 1);
+    commandSendingLayout->addWidget(cbCommandProtocol,               row, 1, 1, 1);
     row++;
 
-    dataSendingLayout->addWidget(chkSpecialBombDropSystem,     row, 0, 1, 4);
-
+    commandSendingLayout->addWidget(chkSpecialBombDropSystem,        row, 0, 1, 4);
+    commandSendingLayout->addWidget(naeBombDropSystemTCP,            row, 1, 1, 2);
+    row++;
 
     // Init Data Forwarding section
     SpoilerGrid *spoilerDataForwarding = nullptr;
@@ -360,7 +360,7 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
     videoSourceSettingsGrid->addWidget(spoilerDataReception,            row, 0, 1, 4);
     row++;
 
-    videoSourceSettingsGrid->addWidget(spoilerDataSending,              row, 0, 1, 4);
+    videoSourceSettingsGrid->addWidget(spoilerCommandSending,              row, 0, 1, 4);
     row++;
 
     if (spoilerDataForwarding != nullptr)
@@ -416,7 +416,6 @@ SessionsSettingsEditor::SessionsSettingsEditor(QWidget *parent):
 
     _association.addBinding(&applicationSettings.ObjectTrackerType,                 cmbObjectTrackerType);
     _association.addBinding(&applicationSettings.ShowExternalTrackerRectangle,      chkShowExternalTrackerRectangle);
-
 }
 
 void SessionsSettingsEditor::onCurrentCameraChanged(int index)

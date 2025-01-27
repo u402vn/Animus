@@ -53,6 +53,13 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
         connect(_artillerySpotter, &ArtillerySpotter::onArtillerySpotterDataExchange, _dataStorage, &TelemetryDataStorage::onArtillerySpotterDataExchange);
     }
 
+    _bombingController =  new BombingController(this);
+    if (applicationSettings.SpecialBombDropSystem)
+    {
+        _bombingController->openSocket(QHostAddress(applicationSettings.BombDropSystemTCPAddress), applicationSettings.BombDropSystemTCPPort);
+    }
+
+
     auto heightMapContainer = new HeightMapContainer(this, applicationSettings.DatabaseHeightMap);
     //???? get from map tile container
 
@@ -429,7 +436,7 @@ void MainWindow::addTabWidgets()
     connect(_dashboardWidget, &DashboardWidget::activateCatapult,           _hardwareLink,     &HardwareLink::activateCatapult);
 
     _bombingWidget = applicationSettings.isBombingTabLicensed() || applicationSettings.isTargetTabLicensed() ?
-                new BombingWidget(_tabTools, _hardwareLink, _artillerySpotter, _dataStorage) : nullptr;
+                new BombingWidget(_tabTools, _hardwareLink, _artillerySpotter, _bombingController, _dataStorage) : nullptr;
 
     _patrolWidget = applicationSettings.isPatrolTabLicensed() ?
                 new PatrolWidget(_tabTools) : nullptr;

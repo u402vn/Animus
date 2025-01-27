@@ -9,9 +9,7 @@ void ArtillerySpotter::processDataExchange(const QString &contentHEX, const QStr
     EnterProcStart("ArtillerySpotter::processDataExchange");
 
     DataExchangePackage dataPackage;
-    dataPackage.SessionTimeMs = _telemetryDataFrame.SessionTimeMs;
-    dataPackage.VideoFrameNumber = _telemetryDataFrame.VideoFrameNumber;
-    dataPackage.TelemetryFrameNumber = _telemetryDataFrame.TelemetryFrameNumber;
+    dataPackage.init(_telemetryDataFrame);
     dataPackage.ContentHEX = contentHEX;
     dataPackage.Description = description;
     emit onArtillerySpotterDataExchange(dataPackage, direction);
@@ -42,7 +40,7 @@ ArtillerySpotter::ArtillerySpotter(QObject *parent) : QObject(parent)
     _enabled = false;
     _messageId = 0;
 
-    connect(&_tcpSocket, &QTcpSocket::readyRead, this, &ArtillerySpotter::readSocketData, Qt::ANIMUS_CONNECTION_TYPE);
+    connect(&_tcpSocket, &QTcpSocket::readyRead, this, &ArtillerySpotter::readSocketData);
 
     _reconnectTimerId = startTimer(2000); // reconnect to socket
 }
@@ -168,7 +166,7 @@ void ArtillerySpotter::sendMarkers(const QList<MapMarker *> *markers)
 
     _tcpSocket.write(messageContent.toByteArray());
 
-    _sentMessages.insert(header.messageId, header.codeMessage);
+    //_sentMessages.insert(header.messageId, header.codeMessage);
 
     processDataExchange(messageContent.toHex(), "Send Markers", DataExchangePackageDirection::Outgoing);
     emit onMessageExchangeInformation(tr("Targets information sent successfully (# %1)").arg(header.messageId), false);
@@ -223,7 +221,7 @@ void ArtillerySpotter::sendWeather(const QVector<WeatherDataItem> *weatherDataCo
 
     _tcpSocket.write(messageContent.toByteArray());
 
-    _sentMessages.insert(header.messageId, header.codeMessage);
+    //_sentMessages.insert(header.messageId, header.codeMessage);
 
     processDataExchange(messageContent.toHex(), "Send Weather", DataExchangePackageDirection::Outgoing);
     emit onMessageExchangeInformation(tr("Weather information sent successfully (# %1)").arg(header.messageId), false);

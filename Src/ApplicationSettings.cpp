@@ -73,6 +73,11 @@ ApplicationSettings::ApplicationSettings() : ApplicationSettingsRoot(),
     CommandUDPPort(this, "Sessions/CommandUDPPort", 45562),
     CommandUDPAddress(this, "Sessions/CommandUDPAddress", "127.0.0.1"),
     CommandSerialPortName(this, "Sessions/CommandSerialPortName", getDefaultSerialPortName()),
+
+    SpecialBombDropSystem(this, "Sessions/SpecialBombDropSystem", false),
+    BombDropSystemTCPAddress(this, "Sessions/BombDropSystemTCPAddress", "192.168.1.101"),
+    BombDropSystemTCPPort(this, "Sessions/BombDropSystemTCPPort", 46000),
+
     UAVTelemetrySourceType(this, "Sessions/UAVTelemetrySourceType", UAVTelemetrySourceTypes::UDPChannel),
     TelemetryDataFormat(this, "Sessions/TelemetryDataFormat", UAVTelemetryDataFormats::UAVTelemetryFormatV4),
     UAVTelemetryUDPPort(this, "Sessions/TelemetryUDPPort", 45560),

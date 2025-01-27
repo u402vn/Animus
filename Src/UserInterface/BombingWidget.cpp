@@ -108,9 +108,11 @@ void BombingWidget::initWidgets()
 
 }
 
-BombingWidget::BombingWidget(QWidget *parent, HardwareLink *hardwareLink, ArtillerySpotter *artillerySpotter, TelemetryDataStorage *telemetryDataStorage) : QWidget(parent),
+BombingWidget::BombingWidget(QWidget *parent, HardwareLink *hardwareLink, ArtillerySpotter *artillerySpotter,
+                             BombingController *bombingController, TelemetryDataStorage *telemetryDataStorage) : QWidget(parent),
     _hardwareLink(hardwareLink),
     _artillerySpotter(artillerySpotter),
+    _bombingController(bombingController),
     _telemetryDataStorage(telemetryDataStorage)
 {
     EnterProc("BombingWidget::BombingWidget");
@@ -125,6 +127,7 @@ BombingWidget::BombingWidget(QWidget *parent, HardwareLink *hardwareLink, Artill
     connect(&markerStorage, &MarkerStorage::onMapMarkerCoordChanged, this, &BombingWidget::onMapMarkerCoordChanged);
 
     connect(_artillerySpotter, &ArtillerySpotter::onMessageExchangeInformation, this, &BombingWidget::onMessageExchangeInformation);
+    connect(_bombingController, &BombingController::onMessageExchangeInformation, this, &BombingWidget::onMessageExchangeInformation);
 
     initWidgets();
 
@@ -262,12 +265,14 @@ void BombingWidget::onDropBombClicked05()
 {
     EnterProc("BombingWidget::onDropBombClicked05");
     _hardwareLink->dropBomb(1);
+    _bombingController->sendDropCommand(true, 1, _telemetryFrame);
 }
 
 void BombingWidget::onDropBombClicked10()
 {
     EnterProc("BombingWidget::onDropBombClicked10");
     _hardwareLink->dropBomb(2);
+    _bombingController->sendDropCommand(true, 2, _telemetryFrame);
 }
 
 void BombingWidget::onSendHitCoordinatesClicked()
@@ -371,7 +376,7 @@ void BombingWidget::onMapMarkerCoordChanged(const QString &markerGUID, const Wor
 }
 
 void BombingWidget::onMessageExchangeInformation(const QString &information, bool isEroor)
-{\
+{
     CommonWidgetUtils::showInfoDialogAutoclose(isEroor ?  QMessageBox::Critical : QMessageBox::Information,  information, 3000);
 }
 

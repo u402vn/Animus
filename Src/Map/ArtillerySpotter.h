@@ -6,7 +6,6 @@
 #include <QList>
 #include <QTcpSocket>
 #include <QHostAddress>
-#include <QMap>
 #include "MarkerStorageItems.h"
 #include "TelemetryDataFrame.h"
 
@@ -23,7 +22,7 @@ class ArtillerySpotter : public QObject
 
     quint32 _messageId;
 
-    QMap<int, int> _sentMessages;
+    //QMap<int, int> _sentMessages;
 
     TelemetryDataFrame _telemetryDataFrame;
 

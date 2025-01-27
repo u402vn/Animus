@@ -7,8 +7,10 @@
 #include <QListWidget>
 #include <QStyledItemDelegate>
 #include "HardwareLink/HardwareLink.h"
+#include "HardwareLink/BombingController.h"
 #include "PFD.h"
 #include "UserInterface/GPSCoordSelector.h"
+#include "TelemetryDataFrame.h"
 #include "TelemetryDataStorage.h"
 #include "Forms/WeatherView.h"
 #include "Map/ArtillerySpotter.h"
@@ -83,6 +85,7 @@ class BombingWidget final : public QWidget
 
     HardwareLink *_hardwareLink;
     ArtillerySpotter *_artillerySpotter;
+    BombingController *_bombingController;
 
     TelemetryDataStorage *_telemetryDataStorage;
     TelemetryDataFrame _telemetryFrame;
@@ -95,7 +98,7 @@ class BombingWidget final : public QWidget
     void addNewMarker(const QList<WorldGPSCoord> &coords, bool showEditor);
     void addNewMarker(const WorldGPSCoord &coord, bool showEditor);
 public:
-    explicit BombingWidget(QWidget *parent, HardwareLink *hardwareLink, ArtillerySpotter *artillerySpotter,
+    explicit BombingWidget(QWidget *parent, HardwareLink *hardwareLink, ArtillerySpotter *artillerySpotter, BombingController *bombingController,
                            TelemetryDataStorage *telemetryDataStorage);
     ~BombingWidget();
     void processTelemetry(const TelemetryDataFrame &telemetryDataFrame);
